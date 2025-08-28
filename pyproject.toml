@@ -9,11 +9,11 @@ description = "Python wrapper for cryo-EM software"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
-    {name = "Nathan Levinzon", email = "nate.levinzon@utah.edu"},
-    {name = "Shen Lab Team"}
+    {name = "Nathan Levinzon", email = "nathan.levinzon@utah.edu"},
+    {name = "Shen Lab Team", email = "shenlab@utah.edu"}
 ]
 maintainers = [
-    {name = "Nate Levinzon", email = "nate.levinzon@utah.edu"}
+    {name = "Nathan Levinzon", email = "nathan.levinzon@utah.edu"}
 ]
 keywords = ["cryo-em", "electron-microscopy", "structural-biology", "python-wrapper"]
 classifiers = [
@@ -168,46 +168,4 @@ exclude_lines = [
     "@(abc\\.)?abstractmethod",
 ]
 
-[tool.pre-commit]
-repos = [
-    {
-        repo = "https://github.com/pre-commit/pre-commit-hooks",
-        rev = "v4.4.0",
-        hooks = [
-            {id = "trailing-whitespace"},
-            {id = "end-of-file-fixer"},
-            {id = "check-yaml"},
-            {id = "check-added-large-files"},
-            {id = "check-merge-conflict"},
-        ],
-    },
-    {
-        repo = "https://github.com/psf/black",
-        rev = "23.3.0",
-        hooks = [{id = "black"}],
-    },
-    {
-        repo = "https://github.com/pycqa/isort",
-        rev = "5.12.0",
-        hooks = [{id = "isort"}],
-    },
-    {
-        repo = "https://github.com/pycqa/flake8",
-        rev = "6.0.0",
-        hooks = [{id = "flake8"}],
-    },
-]
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = py38, py39, py310, py311, py312
-isolated_build = True
-
-[testenv]
-deps =
-    pytest>=6.0.0
-    pytest-cov>=3.0.0
-commands =
-    pytest {posargs:tests}
-"""
