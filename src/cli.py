@@ -508,7 +508,7 @@ All interactions are logged to cryodl.log in the current directory.
         # Display random quote
         quote = self.load_random_quote()
         if quote:
-            print(f"\nCryoDL Reminds You: \"{quote}\"")
+            print(f"\nCryoDL Reminds You: {quote}")
 
         print("Goodbye!")
         return True
@@ -520,7 +520,7 @@ All interactions are logged to cryodl.log in the current directory.
         # Display random quote
         quote = self.load_random_quote()
         if quote:
-            print(f"\nCryoDL Reminds You: \"{quote}\"")
+            print(f"\nCryoDL Reminds You: {quote}")
 
         print("Goodbye!")
         return True
@@ -533,7 +533,7 @@ All interactions are logged to cryodl.log in the current directory.
         # Display random quote
         quote = self.load_random_quote()
         if quote:
-            print(f"\nCryoDL Reminds You: \"{quote}\"")
+            print(f"\nCryoDL Reminds You: {quote}")
 
         print("Goodbye!")
         return True
