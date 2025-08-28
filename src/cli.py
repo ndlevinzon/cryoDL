@@ -450,105 +450,105 @@ All interactions are logged to cryodl.log in the current directory.
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
-        def do_model_angelo(self, arg):
-            """Run ModelAngelo for protein structure prediction.
+    def do_model_angelo(self, arg):
+        """Run ModelAngelo for protein structure prediction.
 
-            Usage: model_angelo [--local]
-            Example: model_angelo --local
-            """
-            self.log_command("model_angelo", arg)
-            try:
-                # Check if model_angelo is configured
-                model_angelo_path = self.config_manager.get("dependencies.model_angelo.path")
-                if not model_angelo_path:
-                    error_msg = "ModelAngelo path not configured. Use 'add_dependency model_angelo <path>' first."
-                    print(error_msg, file=sys.stderr)
-                    self.log_error(error_msg)
-                    return
+        Usage: model_angelo [--local]
+        Example: model_angelo --local
+        """
+        self.log_command("model_angelo", arg)
+        try:
+            # Check if model_angelo is configured
+            model_angelo_path = self.config_manager.get("dependencies.model_angelo.path")
+            if not model_angelo_path:
+                error_msg = "ModelAngelo path not configured. Use 'add_dependency model_angelo <path>' first."
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
 
-                # Validate model_angelo path
-                if not self.config_manager.validate_dependency_path("model_angelo"):
-                    error_msg = f"ModelAngelo not found at: {model_angelo_path}"
-                    print(error_msg, file=sys.stderr)
-                    self.log_error(error_msg)
-                    return
+            # Validate model_angelo path
+            if not self.config_manager.validate_dependency_path("model_angelo"):
+                error_msg = f"ModelAngelo not found at: {model_angelo_path}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
 
-                # Parse arguments
-                args = arg.split()
-                is_local = "--local" in args
+            # Parse arguments
+            args = arg.split()
+            is_local = "--local" in args
 
-                # Prompt for input files
-                print("ModelAngelo Setup:")
-                print("-" * 20)
+            # Prompt for input files
+            print("ModelAngelo Setup:")
+            print("-" * 20)
 
-                # Get MRC file path
-                mrc_file = input("Enter path to .mrc file: ").strip()
-                if not mrc_file:
-                    error_msg = "MRC file path is required"
-                    print(error_msg, file=sys.stderr)
-                    self.log_error(error_msg)
-                    return
+            # Get MRC file path
+            mrc_file = input("Enter path to .mrc file: ").strip()
+            if not mrc_file:
+                error_msg = "MRC file path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
 
-                # Validate MRC file exists
-                mrc_path = Path(mrc_file)
-                if not mrc_path.exists():
-                    error_msg = f"MRC file not found: {mrc_file}"
-                    print(error_msg, file=sys.stderr)
-                    self.log_error(error_msg)
-                    return
+            # Validate MRC file exists
+            mrc_path = Path(mrc_file)
+            if not mrc_path.exists():
+                error_msg = f"MRC file not found: {mrc_file}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
 
-                # Get FASTA file path
-                fasta_file = input("Enter path to protein FASTA file: ").strip()
-                if not fasta_file:
-                    error_msg = "FASTA file path is required"
-                    print(error_msg, file=sys.stderr)
-                    self.log_error(error_msg)
-                    return
+            # Get FASTA file path
+            fasta_file = input("Enter path to protein FASTA file: ").strip()
+            if not fasta_file:
+                error_msg = "FASTA file path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
 
-                # Validate FASTA file exists
-                fasta_path = Path(fasta_file)
-                if not fasta_path.exists():
-                    error_msg = f"FASTA file not found: {fasta_file}"
-                    print(error_msg, file=sys.stderr)
-                    self.log_error(error_msg)
-                    return
+            # Validate FASTA file exists
+            fasta_path = Path(fasta_file)
+            if not fasta_path.exists():
+                error_msg = f"FASTA file not found: {fasta_file}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
 
-                # Generate output directory name based on MRC file
-                mrc_stem = mrc_path.stem
-                output_dir = f"model_angelo_output_{mrc_stem}"
+            # Generate output directory name based on MRC file
+            mrc_stem = mrc_path.stem
+            output_dir = f"model_angelo_output_{mrc_stem}"
 
-                # Build ModelAngelo command
-                model_angelo_cmd = f"{model_angelo_path} {mrc_file} {fasta_file} --output {output_dir}"
+            # Build ModelAngelo command
+            model_angelo_cmd = f"{model_angelo_path} {mrc_file} {fasta_file} --output {output_dir}"
 
-                if is_local:
-                    # Run locally
-                    output = f"Running ModelAngelo locally:\n{model_angelo_cmd}"
-                    print(output)
-                    self.log_output(output)
+            if is_local:
+                # Run locally
+                output = f"Running ModelAngelo locally:\n{model_angelo_cmd}"
+                print(output)
+                self.log_output(output)
 
-                    # Execute the command
-                    import subprocess
-                    try:
-                        result = subprocess.run(model_angelo_cmd, shell=True, capture_output=True, text=True)
-                        if result.returncode == 0:
-                            success_msg = f"ModelAngelo completed successfully. Output in: {output_dir}"
-                            print(success_msg)
-                            self.log_output(success_msg)
-                        else:
-                            error_msg = f"ModelAngelo failed with return code {result.returncode}"
-                            print(error_msg, file=sys.stderr)
-                            print(f"Error output: {result.stderr}", file=sys.stderr)
-                            self.log_error(error_msg)
-                    except Exception as e:
-                        error_msg = f"Error running ModelAngelo: {e}"
+                # Execute the command
+                import subprocess
+                try:
+                    result = subprocess.run(model_angelo_cmd, shell=True, capture_output=True, text=True)
+                    if result.returncode == 0:
+                        success_msg = f"ModelAngelo completed successfully. Output in: {output_dir}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                    else:
+                        error_msg = f"ModelAngelo failed with return code {result.returncode}"
                         print(error_msg, file=sys.stderr)
+                        print(f"Error output: {result.stderr}", file=sys.stderr)
                         self.log_error(error_msg)
-                else:
-                    # Generate and submit SLURM job
-                    job_name = f"model_angelo_{mrc_stem}"
+                except Exception as e:
+                    error_msg = f"Error running ModelAngelo: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+            else:
+                # Generate and submit SLURM job
+                job_name = f"model_angelo_{mrc_stem}"
 
-                    # Create SLURM script content
-                    slurm_script = f"""#!/bin/bash
+                # Create SLURM script content
+                slurm_script = f"""#!/bin/bash
     #SBATCH --job-name={job_name}
     #SBATCH --output={job_name}_%j.out
     #SBATCH --error={job_name}_%j.err
@@ -559,24 +559,24 @@ All interactions are logged to cryodl.log in the current directory.
     #SBATCH --mem={self.config_manager.get('slurm.mem', '16G')}
     """
 
-                    # Add optional SLURM parameters if configured
-                    partition = self.config_manager.get('slurm.partition')
-                    if partition:
-                        slurm_script += f"#SBATCH --partition={partition}\n"
+                # Add optional SLURM parameters if configured
+                partition = self.config_manager.get('slurm.partition')
+                if partition:
+                    slurm_script += f"#SBATCH --partition={partition}\n"
 
-                    qos = self.config_manager.get('slurm.qos')
-                    if qos:
-                        slurm_script += f"#SBATCH --qos={qos}\n"
+                qos = self.config_manager.get('slurm.qos')
+                if qos:
+                    slurm_script += f"#SBATCH --qos={qos}\n"
 
-                    account = self.config_manager.get('slurm.account')
-                    if account:
-                        slurm_script += f"#SBATCH --account={account}\n"
+                account = self.config_manager.get('slurm.account')
+                if account:
+                    slurm_script += f"#SBATCH --account={account}\n"
 
-                    gres_gpu = self.config_manager.get('slurm.gres_gpu')
-                    if gres_gpu:
-                        slurm_script += f"#SBATCH --gres=gpu:{gres_gpu}\n"
+                gres_gpu = self.config_manager.get('slurm.gres_gpu')
+                if gres_gpu:
+                    slurm_script += f"#SBATCH --gres=gpu:{gres_gpu}\n"
 
-                    slurm_script += f"""
+                slurm_script += f"""
     set -euo pipefail
     set -x
      
@@ -589,71 +589,71 @@ All interactions are logged to cryodl.log in the current directory.
     echo "ModelAngelo job completed"
     """
 
-                    # Write SLURM script to file
-                    slurm_script_path = f"{job_name}.slurm"
-                    with open(slurm_script_path, 'w') as f:
-                        f.write(slurm_script)
+                # Write SLURM script to file
+                slurm_script_path = f"{job_name}.slurm"
+                with open(slurm_script_path, 'w') as f:
+                    f.write(slurm_script)
 
-                    # Show job summary and ask for confirmation
-                    print(f"\nJob Summary:")
-                    print(f"  Job Name: {job_name}")
-                    print(f"  MRC File: {mrc_file}")
-                    print(f"  FASTA File: {fasta_file}")
-                    print(f"  Output Directory: {output_dir}")
-                    print(f"  SLURM Script: {slurm_script_path}")
-                    print(f"  Time Limit: {self.config_manager.get('slurm.time', '24:00:00')}")
-                    print(f"  Nodes: {self.config_manager.get('slurm.nodes', 1)}")
-                    print(f"  CPUs per Task: {self.config_manager.get('slurm.cpus_per_task', 4)}")
-                    print(f"  Memory: {self.config_manager.get('slurm.mem', '16G')}")
+                # Show job summary and ask for confirmation
+                print(f"\nJob Summary:")
+                print(f"  Job Name: {job_name}")
+                print(f"  MRC File: {mrc_file}")
+                print(f"  FASTA File: {fasta_file}")
+                print(f"  Output Directory: {output_dir}")
+                print(f"  SLURM Script: {slurm_script_path}")
+                print(f"  Time Limit: {self.config_manager.get('slurm.time', '24:00:00')}")
+                print(f"  Nodes: {self.config_manager.get('slurm.nodes', 1)}")
+                print(f"  CPUs per Task: {self.config_manager.get('slurm.cpus_per_task', 4)}")
+                print(f"  Memory: {self.config_manager.get('slurm.mem', '16G')}")
 
-                    gres_gpu = self.config_manager.get('slurm.gres_gpu')
-                    if gres_gpu:
-                        print(f"  GPUs: {gres_gpu}")
+                gres_gpu = self.config_manager.get('slurm.gres_gpu')
+                if gres_gpu:
+                    print(f"  GPUs: {gres_gpu}")
 
-                    partition = self.config_manager.get('slurm.partition')
-                    if partition:
-                        print(f"  Partition: {partition}")
+                partition = self.config_manager.get('slurm.partition')
+                if partition:
+                    print(f"  Partition: {partition}")
 
-                    # Ask for confirmation
-                    while True:
-                        confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
-                        if confirm in ['Y', 'YES', 'y', 'yes']:
-                            break
-                        elif confirm in ['N', 'NO', 'n', 'no']:
-                            print("Job submission cancelled.")
-                            self.log_output("Job submission cancelled by user")
-                            return
-                        else:
-                            print("Please enter Y or N.")
+                # Ask for confirmation
+                while True:
+                    confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    if confirm in ['Y', 'YES', 'y', 'yes']:
+                        break
+                    elif confirm in ['N', 'NO', 'n', 'no']:
+                        print("Job submission cancelled.")
+                        self.log_output("Job submission cancelled by user")
+                        return
+                    else:
+                        print("Please enter Y or N.")
 
-                    # Submit job
+                # Submit job
 
-                    try:
-                        import subprocess
-                        result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
-                                                text=True)
+                try:
+                    import subprocess
+                    result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
+                                            text=True)
 
-                        if result.returncode == 0:
-                            job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
-                            success_msg = f"ModelAngelo job submitted successfully. Job ID: {job_id}"
-                            print(success_msg)
-                            self.log_output(success_msg)
-                            print(f"SLURM script saved as: {slurm_script_path}")
-                            print(f"Job output will be in: {job_name}_<job_id>.out")
-                            print(f"Job errors will be in: {job_name}_<job_id>.err")
-                        else:
-                            error_msg = f"Failed to submit SLURM job: {result.stderr}"
-                            print(error_msg, file=sys.stderr)
-                            self.log_error(error_msg)
-                    except Exception as e:
-                        error_msg = f"Error submitting SLURM job: {e}"
+                    if result.returncode == 0:
+                        job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
+                        success_msg = f"ModelAngelo job submitted successfully. Job ID: {job_id}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                        print(f"SLURM script saved as: {slurm_script_path}")
+                        print(f"Job output will be in: {job_name}_<job_id>.out")
+                        print(f"Job errors will be in: {job_name}_<job_id>.err")
+                    else:
+                        error_msg = f"Failed to submit SLURM job: {result.stderr}"
                         print(error_msg, file=sys.stderr)
                         self.log_error(error_msg)
+                except Exception as e:
+                    error_msg = f"Error submitting SLURM job: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
 
-            except Exception as e:
-                error_msg = f"Error in model_angelo command: {e}"
-                print(error_msg, file=sys.stderr)
-                self.log_error(error_msg)
+        except Exception as e:
+            error_msg = f"Error in model_angelo command: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
 
     def do_clear(self, arg):
         """Clear the screen."""
