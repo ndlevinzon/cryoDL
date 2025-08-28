@@ -594,7 +594,40 @@ All interactions are logged to cryodl.log in the current directory.
                     with open(slurm_script_path, 'w') as f:
                         f.write(slurm_script)
 
+                    # Show job summary and ask for confirmation
+                    print(f"\nJob Summary:")
+                    print(f"  Job Name: {job_name}")
+                    print(f"  MRC File: {mrc_file}")
+                    print(f"  FASTA File: {fasta_file}")
+                    print(f"  Output Directory: {output_dir}")
+                    print(f"  SLURM Script: {slurm_script_path}")
+                    print(f"  Time Limit: {self.config_manager.get('slurm.time', '24:00:00')}")
+                    print(f"  Nodes: {self.config_manager.get('slurm.nodes', 1)}")
+                    print(f"  CPUs per Task: {self.config_manager.get('slurm.cpus_per_task', 4)}")
+                    print(f"  Memory: {self.config_manager.get('slurm.mem', '16G')}")
+
+                    gres_gpu = self.config_manager.get('slurm.gres_gpu')
+                    if gres_gpu:
+                        print(f"  GPUs: {gres_gpu}")
+
+                    partition = self.config_manager.get('slurm.partition')
+                    if partition:
+                        print(f"  Partition: {partition}")
+
+                    # Ask for confirmation
+                    while True:
+                        confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                        if confirm in ['Y', 'YES']:
+                            break
+                        elif confirm in ['N', 'NO']:
+                            print("Job submission cancelled.")
+                            self.log_output("Job submission cancelled by user")
+                            return
+                        else:
+                            print("Please enter Y or N.")
+
                     # Submit job
+
                     try:
                         import subprocess
                         result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
