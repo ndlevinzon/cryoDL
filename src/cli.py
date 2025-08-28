@@ -19,11 +19,6 @@ from .config_manager import ConfigManager
 class CryoDLShell(cmd.Cmd):
     """Interactive shell for cryoDL configuration management."""
 
-    intro = """
-=== cryoDL Interactive Configuration Manager ===
-Type 'help' for available commands, 'quit' to exit.
-All interactions are logged to cryodl.log in the current directory.
-"""
     prompt = "cryodl> "
 
     def __init__(self, config_manager: ConfigManager, log_file: str = "cryodl.log"):
@@ -31,6 +26,34 @@ All interactions are logged to cryodl.log in the current directory.
         self.config_manager = config_manager
         self.log_file = log_file
         self.setup_logging()
+        self.intro = self.load_banner()
+
+    def load_banner(self):
+        """Load and return the ASCII banner."""
+        try:
+            banner_path = Path(__file__).parent / "resources" / "big_ascii_banner.txt"
+            if banner_path.exists():
+                with open(banner_path, 'r', encoding='utf-8') as f:
+                    banner = f.read().strip()
+                return f"""
+{banner}
+
+=== cryoDL Interactive Configuration Manager ===
+Type 'help' for available commands, 'quit' to exit.
+All interactions are logged to {self.log_file} in the current directory.
+"""
+            else:
+                return """
+=== cryoDL Interactive Configuration Manager ===
+Type 'help' for available commands, 'quit' to exit.
+All interactions are logged to cryodl.log in the current directory.
+"""
+        except Exception:
+            return """
+=== cryoDL Interactive Configuration Manager ===
+Type 'help' for available commands, 'quit' to exit.
+All interactions are logged to cryodl.log in the current directory.
+"""
 
     def setup_logging(self):
         """Set up logging to file."""
