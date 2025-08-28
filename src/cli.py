@@ -35,7 +35,7 @@ class CryoDLShell(cmd.Cmd):
             if banner_path.exists():
                 with open(banner_path, 'r', encoding='utf-8') as f:
                     banner = f.read().strip()
-                return f"""\n
+                return f"""
 {banner}
 
 Type 'help' for available commands, 'quit' to exit.
