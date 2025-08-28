@@ -1,0 +1,213 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryodl"
+version = "0.1.0"
+description = "Python wrapper for cryo-EM software"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Nathan Levinzon", email = "nate.levinzon@utah.edu"},
+    {name = "Shen Lab Team"}
+]
+maintainers = [
+    {name = "Nate Levinzon", email = "nate.levinzon@utah.edu"}
+]
+keywords = ["cryo-em", "electron-microscopy", "structural-biology", "python-wrapper"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.8"
+dependencies = [
+    # Core dependencies - currently none as we use only standard library
+    # Uncomment as needed when adding external dependencies
+    # "numpy>=1.21.0",
+    # "pandas>=1.3.0",
+    # "matplotlib>=3.5.0",
+    # "scipy>=1.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0.0",
+    "pytest-cov>=3.0.0",
+    "black>=21.0.0",
+    "flake8>=3.9.0",
+    "mypy>=0.910",
+    "pre-commit>=2.15.0",
+    "tox>=3.24.0",
+]
+docs = [
+    "sphinx>=4.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "myst-parser>=0.15.0",
+]
+test = [
+    "pytest>=6.0.0",
+    "pytest-cov>=3.0.0",
+    "pytest-mock>=3.6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/shenlab/cryoDL"
+Documentation = "https://cryodl.readthedocs.io/"
+Repository = "https://github.com/shenlab/cryoDL.git"
+"Bug Tracker" = "https://github.com/shenlab/cryoDL/issues"
+"Source Code" = "https://github.com/shenlab/cryoDL"
+
+[project.scripts]
+cryodl = "src.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+"src" = ["resources/*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["src"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "tests.*",
+]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.pre-commit]
+repos = [
+    {
+        repo = "https://github.com/pre-commit/pre-commit-hooks",
+        rev = "v4.4.0",
+        hooks = [
+            {id = "trailing-whitespace"},
+            {id = "end-of-file-fixer"},
+            {id = "check-yaml"},
+            {id = "check-added-large-files"},
+            {id = "check-merge-conflict"},
+        ],
+    },
+    {
+        repo = "https://github.com/psf/black",
+        rev = "23.3.0",
+        hooks = [{id = "black"}],
+    },
+    {
+        repo = "https://github.com/pycqa/isort",
+        rev = "5.12.0",
+        hooks = [{id = "isort"}],
+    },
+    {
+        repo = "https://github.com/pycqa/flake8",
+        rev = "6.0.0",
+        hooks = [{id = "flake8"}],
+    },
+]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py38, py39, py310, py311, py312
+isolated_build = True
+
+[testenv]
+deps =
+    pytest>=6.0.0
+    pytest-cov>=3.0.0
+commands =
+    pytest {posargs:tests}
+"""
