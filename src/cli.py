@@ -577,17 +577,15 @@ All interactions are logged to cryodl.log in the current directory.
                     slurm_script += f"#SBATCH --gres=gpu:{gres_gpu}\n"
 
                 slurm_script += f"""
-    set -euo pipefail
-    set -x
-     
-    module purge
-    module load model-angelo/1.0.1
+# Load any required modules (uncomment and modify as needed)
+# module load cuda/11.8
+# module load python/3.9
 
-    # Run ModelAngelo
-    {model_angelo_cmd}
+# Run ModelAngelo
+{model_angelo_cmd}
 
-    echo "ModelAngelo job completed"
-    """
+echo "ModelAngelo job completed"
+"""
 
                 # Write SLURM script to file
                 slurm_script_path = f"{job_name}.slurm"
