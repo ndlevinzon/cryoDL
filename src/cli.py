@@ -15,12 +15,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python cli.py init                    # Initialize default configuration
-  python cli.py get paths.project_root  # Get project root path
-  python cli.py set settings.max_threads 8  # Set max threads to 8
-  python cli.py add-dependency relion /usr/local/relion/bin/relion 4.0
-  python cli.py list-dependencies       # List all dependencies
-  python cli.py validate-dependencies   # Validate all dependency paths
+  cryodl init                           # Initialize default configuration
+  cryodl get paths.project_root         # Get project root path
+  cryodl set settings.max_threads 8     # Set max threads to 8
+  cryodl add-dependency relion /usr/local/relion/bin/relion 4.0
+  cryodl list-dependencies              # List all dependencies
+  cryodl validate-dependencies          # Validate all dependency paths
+  cryodl slurm generate --job-name my_job  # Generate SLURM header
+  cryodl slurm show                     # Show SLURM configuration
         """
     )
 
