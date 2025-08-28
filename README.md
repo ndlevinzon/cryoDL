@@ -13,37 +13,84 @@
 
 ### Installation
 
+#### Option 1: Install from source (recommended for development)
+
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/ndlevinzon/cryoDL
 cd cryoDL
 ```
 
-2. The project uses only Python standard library modules, so no additional installation is required.
+2. Install in development mode:
+```bash
+pip install -e .
+```
+
+#### Option 2: Install with conda
+
+1. Create and activate a conda environment:
+```bash
+conda create -n cryodl python=3.8
+conda activate cryodl
+```
+
+2. Install the package:
+```bash
+pip install -e .
+```
+
+#### Option 3: Install with pip (when published to PyPI)
+
+```bash
+pip install cryodl
+```
+
+After installation, you can use the `cryodl` command directly from anywhere in your terminal!
+
+#### Quick Installation Scripts
+
+For Linux/macOS:
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+For Windows:
+```cmd
+install.bat
+```
 
 ### Basic Usage
 
+After installation, you can use the `cryodl` command directly:
+
 1. Initialize the configuration:
 ```bash
-python src/cli.py init
+cryodl init
 ```
 
 2. Add your cryo-EM software dependencies:
 ```bash
-python src/cli.py add-dependency relion /usr/local/relion/bin/relion 4.0
-python src/cli.py add-dependency cryosparc /opt/cryosparc 4.0.0
-python src/cli.py add-dependency topaz /path/to/topaz 0.2.5
-python src/cli.py add-dependency model_angelo /path/to/model_angelo 1.0.0
+cryodl add-dependency relion /usr/local/relion/bin/relion 4.0
+cryodl add-dependency cryosparc /opt/cryosparc 4.0.0
+cryodl add-dependency topaz /path/to/topaz 0.2.5
+cryodl add-dependency model_angelo /path/to/model_angelo 1.0.0
 ```
 
 3. Validate your dependencies:
 ```bash
-python src/cli.py validate-dependencies
+cryodl validate-dependencies
 ```
 
 4. View your configuration:
 ```bash
-python src/cli.py show
+cryodl show
+```
+
+5. Generate SLURM headers:
+```bash
+cryodl slurm generate --job-name model_angelo
+cryodl slurm generate --job-name topaz --nodes 2 --gres-gpu 2
 ```
 
 ## Configuration Manager
@@ -83,16 +130,16 @@ enabled_deps = config.get_enabled_dependencies()
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `init` | Initialize default configuration | `python src/cli.py init` |
-| `get` | Get configuration value | `python src/cli.py get paths.project_root` |
-| `set` | Set configuration value | `python src/cli.py set settings.max_threads 8` |
-| `add-dependency` | Add/update dependency | `python src/cli.py add-dependency relion /path/to/relion 4.0` |
-| `list-dependencies` | List all dependencies | `python src/cli.py list-dependencies` |
-| `validate-dependencies` | Validate dependency paths | `python src/cli.py validate-dependencies` |
-| `show` | Show full configuration | `python src/cli.py show` |
-| `reset` | Reset to defaults | `python src/cli.py reset` |
-| `export` | Export configuration | `python src/cli.py export config_backup.json` |
-| `import` | Import configuration | `python src/cli.py import config_backup.json` |
+| `init` | Initialize default configuration | `cryodl init` |
+| `get` | Get configuration value | `cryodl get paths.project_root` |
+| `set` | Set configuration value | `cryodl set settings.max_threads 8` |
+| `add-dependency` | Add/update dependency | `cryodl add-dependency relion /path/to/relion 4.0` |
+| `list-dependencies` | List all dependencies | `cryodl list-dependencies` |
+| `validate-dependencies` | Validate dependency paths | `cryodl validate-dependencies` |
+| `show` | Show full configuration | `cryodl show` |
+| `reset` | Reset to defaults | `cryodl reset` |
+| `export` | Export configuration | `cryodl export config_backup.json` |
+| `import` | Import configuration | `cryodl import config_backup.json` |
 
 ## Configuration Structure
 

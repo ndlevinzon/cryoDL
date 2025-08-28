@@ -6,7 +6,7 @@ Command-line interface for cryoDL configuration manager.
 import argparse
 import sys
 from pathlib import Path
-from config_manager import ConfigManager
+from .config_manager import ConfigManager
 
 
 def main():
