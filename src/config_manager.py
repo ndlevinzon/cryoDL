@@ -42,26 +42,6 @@ class ConfigManager:
                 "temp_dir": str(self.project_root / "temp")
             },
             "dependencies": {
-                "relion": {
-                    "path": "",
-                    "version": "",
-                    "enabled": False
-                },
-                "cryosparc": {
-                    "path": "",
-                    "version": "",
-                    "enabled": False
-                },
-                "eman2": {
-                    "path": "",
-                    "version": "",
-                    "enabled": False
-                },
-                "cisTEM": {
-                    "path": "",
-                    "version": "",
-                    "enabled": False
-                },
                 "topaz": {
                     "path": "",
                     "version": "",
@@ -79,10 +59,6 @@ class ConfigManager:
                 "gpu_enabled": False,
                 "debug_mode": False,
                 "log_level": "INFO"
-            },
-            "api_keys": {
-                "cryosparc_license": "",
-                "relion_license": ""
             },
             "slurm": {
                 "job_name": "cryodl_job",
@@ -431,8 +407,6 @@ def main():
     config_manager.set("settings.gpu_enabled", True)
 
     # Example: Update dependency paths
-    config_manager.update_dependency_path("relion", "/usr/local/relion/bin/relion", "4.0")
-    config_manager.update_dependency_path("cryosparc", "/opt/cryosparc", "4.0.0")
     config_manager.update_dependency_path("topaz", "/path/to/topaz", "0.2.5")
     config_manager.update_dependency_path("model_angelo", "/path/to/model_angelo", "1.0.0")
 
