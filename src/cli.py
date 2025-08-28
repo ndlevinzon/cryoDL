@@ -487,21 +487,56 @@ All interactions are logged to cryodl.log in the current directory.
         self.log_command("help", arg)
         super().do_help(arg)
 
+    def load_random_quote(self):
+        """Load and return a random quote from quotes.txt."""
+        try:
+            quotes_path = Path(__file__).parent / "resources" / "quotes.txt"
+            if quotes_path.exists():
+                with open(quotes_path, 'r', encoding='utf-8') as f:
+                    quotes = [line.strip() for line in f if line.strip()]
+                if quotes:
+                    import random
+                    return random.choice(quotes)
+            return None
+        except Exception:
+            return None
+
     def do_quit(self, arg):
         """Exit the interactive shell."""
         self.log_command("quit", arg)
-        self.logger.info("=== cryoDL Interactive Session Ended ===")
+
+        # Display random quote
+        quote = self.load_random_quote()
+        if quote:
+            print(f"\nCryoDL Reminds You: \"{quote}\"")
+
         print("Goodbye!")
         return True
 
     def do_exit(self, arg):
         """Exit the interactive shell."""
-        return self.do_quit(arg)
+        self.log_command("exit", arg)
+
+        # Display random quote
+        quote = self.load_random_quote()
+        if quote:
+            print(f"\nCryoDL Reminds You: \"{quote}\"")
+
+        print("Goodbye!")
+        return True
 
     def do_EOF(self, arg):
         """Handle Ctrl+D (EOF)."""
         print()  # New line after Ctrl+D
-        return self.do_quit(arg)
+        self.log_command("EOF", arg)
+
+        # Display random quote
+        quote = self.load_random_quote()
+        if quote:
+            print(f"\nCryoDL Reminds You: \"{quote}\"")
+
+        print("Goodbye!")
+        return True
 
     def default(self, line):
         """Handle unknown commands."""
