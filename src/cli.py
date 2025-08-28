@@ -35,10 +35,9 @@ class CryoDLShell(cmd.Cmd):
             if banner_path.exists():
                 with open(banner_path, 'r', encoding='utf-8') as f:
                     banner = f.read().strip()
-                return f"""
+                return f"""\n
 {banner}
 
-=== cryoDL Interactive Configuration Manager ===
 Type 'help' for available commands, 'quit' to exit.
 All interactions are logged to {self.log_file} in the current directory.
 """
