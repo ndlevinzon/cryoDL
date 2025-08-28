@@ -65,6 +65,39 @@ Examples:
     import_parser = subparsers.add_parser('import', help='Import configuration from file')
     import_parser.add_argument('path', help='Import file path')
 
+    # SLURM commands
+    slurm_parser = subparsers.add_parser('slurm', help='SLURM header management')
+    slurm_subparsers = slurm_parser.add_subparsers(dest='slurm_command', help='SLURM commands')
+
+    # Generate SLURM header
+    slurm_gen_parser = slurm_subparsers.add_parser('generate', help='Generate SLURM header')
+    slurm_gen_parser.add_argument('--job-name', help='Override job name')
+    slurm_gen_parser.add_argument('--output', help='Save header to file')
+    slurm_gen_parser.add_argument('--nodes', type=int, help='Number of nodes')
+    slurm_gen_parser.add_argument('--ntasks', type=int, help='Number of tasks')
+    slurm_gen_parser.add_argument('--cpus-per-task', type=int, help='CPUs per task')
+    slurm_gen_parser.add_argument('--gres-gpu', type=int, help='Number of GPUs')
+    slurm_gen_parser.add_argument('--time', help='Time limit (HH:MM:SS)')
+    slurm_gen_parser.add_argument('--mem', help='Memory limit')
+
+    # Show SLURM config
+    slurm_subparsers.add_parser('show', help='Show SLURM configuration')
+
+    # Update SLURM config
+    slurm_update_parser = slurm_subparsers.add_parser('update', help='Update SLURM configuration')
+    slurm_update_parser.add_argument('--job-name', help='Job name')
+    slurm_update_parser.add_argument('--nodes', type=int, help='Number of nodes')
+    slurm_update_parser.add_argument('--ntasks', type=int, help='Number of tasks')
+    slurm_update_parser.add_argument('--cpus-per-task', type=int, help='CPUs per task')
+    slurm_update_parser.add_argument('--gres-gpu', type=int, help='Number of GPUs')
+    slurm_update_parser.add_argument('--time', help='Time limit (HH:MM:SS)')
+    slurm_update_parser.add_argument('--partition', help='Partition name')
+    slurm_update_parser.add_argument('--qos', help='Quality of service')
+    slurm_update_parser.add_argument('--account', help='Account name')
+    slurm_update_parser.add_argument('--mem', help='Memory limit')
+    slurm_update_parser.add_argument('--output', help='Output file pattern')
+    slurm_update_parser.add_argument('--error', help='Error file pattern')
+
     args = parser.parse_args()
 
     if not args.command:
@@ -144,6 +177,76 @@ Examples:
         elif args.command == 'import':
             config_manager.import_config(args.path)
             print(f"Configuration imported from {args.path}")
+
+        elif args.command == 'slurm':
+            if not args.slurm_command:
+                slurm_parser.print_help()
+                return
+
+            if args.slurm_command == 'generate':
+                # Collect override parameters
+                overrides = {}
+                if args.nodes is not None:
+                    overrides['nodes'] = args.nodes
+                if args.ntasks is not None:
+                    overrides['ntasks'] = args.ntasks
+                if args.cpus_per_task is not None:
+                    overrides['cpus_per_task'] = args.cpus_per_task
+                if args.gres_gpu is not None:
+                    overrides['gres_gpu'] = args.gres_gpu
+                if args.time:
+                    overrides['time'] = args.time
+                if args.mem:
+                    overrides['mem'] = args.mem
+
+                header = config_manager.generate_slurm_header(args.job_name, **overrides)
+
+                if args.output:
+                    config_manager.save_slurm_header(args.output, args.job_name, **overrides)
+                    print(f"SLURM header saved to {args.output}")
+                else:
+                    print(header)
+
+            elif args.slurm_command == 'show':
+                slurm_config = config_manager.get_slurm_config()
+                print("\nSLURM Configuration:")
+                print("-" * 30)
+                for key, value in slurm_config.items():
+                    print(f"{key:20}: {value}")
+
+            elif args.slurm_command == 'update':
+                # Collect update parameters
+                updates = {}
+                if args.job_name:
+                    updates['job_name'] = args.job_name
+                if args.nodes is not None:
+                    updates['nodes'] = args.nodes
+                if args.ntasks is not None:
+                    updates['ntasks'] = args.ntasks
+                if args.cpus_per_task is not None:
+                    updates['cpus_per_task'] = args.cpus_per_task
+                if args.gres_gpu is not None:
+                    updates['gres_gpu'] = args.gres_gpu
+                if args.time:
+                    updates['time'] = args.time
+                if args.partition:
+                    updates['partition'] = args.partition
+                if args.qos:
+                    updates['qos'] = args.qos
+                if args.account:
+                    updates['account'] = args.account
+                if args.mem:
+                    updates['mem'] = args.mem
+                if args.output:
+                    updates['output'] = args.output
+                if args.error:
+                    updates['error'] = args.error
+
+                if updates:
+                    config_manager.update_slurm_config(**updates)
+                    print("SLURM configuration updated")
+                else:
+                    print("No SLURM parameters provided for update")
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
