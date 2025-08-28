@@ -617,9 +617,9 @@ All interactions are logged to cryodl.log in the current directory.
                     # Ask for confirmation
                     while True:
                         confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
-                        if confirm in ['Y', 'YES']:
+                        if confirm in ['Y', 'YES', 'y', 'yes']:
                             break
-                        elif confirm in ['N', 'NO']:
+                        elif confirm in ['N', 'NO', 'n', 'no']:
                             print("Job submission cancelled.")
                             self.log_output("Job submission cancelled by user")
                             return
