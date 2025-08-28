@@ -518,7 +518,7 @@ All interactions are logged to cryodl.log in the current directory.
             output_dir = f"model_angelo_output_{mrc_stem}"
 
             # Build ModelAngelo command
-            model_angelo_cmd = f"{model_angelo_path} {mrc_file} {fasta_file} --output {output_dir}"
+            model_angelo_cmd = f"{model_angelo_path} -v {mrc_file} -pf {fasta_file} -o {output_dir} --device 0"
 
             if is_local:
                 # Run locally
@@ -549,14 +549,14 @@ All interactions are logged to cryodl.log in the current directory.
 
                 # Create SLURM script content
                 slurm_script = f"""#!/bin/bash
-    #SBATCH --job-name={job_name}
-    #SBATCH --output={job_name}_%j.out
-    #SBATCH --error={job_name}_%j.err
-    #SBATCH --time={self.config_manager.get('slurm.time', '24:00:00')}
-    #SBATCH --nodes={self.config_manager.get('slurm.nodes', 1)}
-    #SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
-    #SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
-    #SBATCH --mem={self.config_manager.get('slurm.mem', '16G')}
+#SBATCH --job-name={job_name}
+#SBATCH --output={job_name}_%j.out
+#SBATCH --error={job_name}_%j.err
+#SBATCH --time={self.config_manager.get('slurm.time', '24:00:00')}
+#SBATCH --nodes={self.config_manager.get('slurm.nodes', 1)}
+#SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
+#SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
+#SBATCH --mem={self.config_manager.get('slurm.mem', '16G')}
     """
 
                 # Add optional SLURM parameters if configured
@@ -577,9 +577,13 @@ All interactions are logged to cryodl.log in the current directory.
                     slurm_script += f"#SBATCH --gres=gpu:{gres_gpu}\n"
 
                 slurm_script += f"""
+set -euo pipefail
+set -x
+
 # Load any required modules (uncomment and modify as needed)
-# module load cuda/11.8
-# module load python/3.9
+module purge
+module load model-angelo/1.0.1
+
 
 # Run ModelAngelo
 {model_angelo_cmd}
