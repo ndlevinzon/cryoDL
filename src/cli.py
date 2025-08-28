@@ -19,7 +19,7 @@ from .config_manager import ConfigManager
 class CryoDLShell(cmd.Cmd):
     """Interactive shell for cryoDL configuration management."""
 
-    prompt = "cryodl> "
+    prompt = "cryoDL> "
 
     def __init__(self, config_manager: ConfigManager, log_file: str = "cryodl.log"):
         super().__init__()

@@ -43,14 +43,14 @@ class ConfigManager:
             },
             "dependencies": {
                 "topaz": {
-                    "path": "",
-                    "version": "",
-                    "enabled": False
+                    "path": "/uufs/chpc.utah.edu/sys/installdir/r8/topaz/0.3.7/bin/topaz",
+                    "version": "3.0.7",
+                    "enabled": True
                 },
                 "model_angelo": {
-                    "path": "",
-                    "version": "",
-                    "enabled": False
+                    "path": "/uufs/chpc.utah.edu/sys/installdir/model-angelo/1.0.1/bin/model_angelo",
+                    "version": "1.0.1",
+                    "enabled": True
                 }
             },
             "settings": {
