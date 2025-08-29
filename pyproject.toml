@@ -10,7 +10,7 @@ readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
     {name = "Nathan Levinzon", email = "nate.levinzon@utah.edu"},
-    {name = "Shen Lab Team", website = "https://shen.biochem.utah.edu/"}
+    {name = "Shen Lab Team"}
 ]
 maintainers = [
     {name = "Nathan Levinzon", email = "nate.levinzon@utah.edu"}
