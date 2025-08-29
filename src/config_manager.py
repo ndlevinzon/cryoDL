@@ -5,6 +5,11 @@ from pathlib import Path
 from typing import Dict, Any, Optional, Union
 import logging
 
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
+
 
 class ConfigManager:
     """
@@ -27,12 +32,15 @@ class ConfigManager:
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
 
+        # Load project metadata from pyproject.toml
+        self.project_metadata = self._load_project_metadata()
+
         # Default configuration structure
         self.default_config = {
             "project_info": {
-                "name": "cryoDL",
-                "version": "0.1.0",
-                "description": "Python wrapper for cryo-EM software"
+                "name": self.project_metadata["name"],
+                "version": self.project_metadata["version"],
+                "description": self.project_metadata["description"]
             },
             "paths": {
                 "project_root": str(self.project_root),
@@ -84,6 +92,55 @@ class ConfigManager:
 
         # Load or create configuration
         self.config = self.load_config()
+
+    def _load_project_metadata(self) -> Dict[str, Any]:
+        """
+        Load project metadata from pyproject.toml file.
+
+        Returns:
+            Dictionary containing project metadata (name, version, description)
+        """
+        pyproject_path = self.project_root / "pyproject.toml"
+
+        if not pyproject_path.exists():
+            self.logger.warning(f"pyproject.toml not found at {pyproject_path}")
+            return {
+                "name": "cryoDL",
+                "version": "0.1.0",
+                "description": "Python wrapper for cryo-EM software"
+            }
+
+        try:
+            with open(pyproject_path, 'rb') as f:
+                pyproject_data = tomllib.load(f)
+
+            project_data = pyproject_data.get('project', {})
+
+            metadata = {
+                "name": project_data.get('name', 'cryoDL'),
+                "version": project_data.get('version', '0.1.0'),
+                "description": project_data.get('description', 'Python wrapper for cryo-EM software')
+            }
+
+            self.logger.info(f"Loaded project metadata from pyproject.toml: {metadata}")
+            return metadata
+
+        except Exception as e:
+            self.logger.error(f"Error reading pyproject.toml: {e}")
+            return {
+                "name": "cryoDL",
+                "version": "0.1.0",
+                "description": "Python wrapper for cryo-EM software"
+            }
+
+    def get_project_metadata(self) -> Dict[str, Any]:
+        """
+        Get the current project metadata from pyproject.toml.
+
+        Returns:
+            Dictionary containing project metadata (name, version, description)
+        """
+        return self.project_metadata.copy()
 
     def load_config(self) -> Dict[str, Any]:
         """
