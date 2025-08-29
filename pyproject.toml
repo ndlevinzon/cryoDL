@@ -4,22 +4,22 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cryodl"
-version = "0.1.0"
-description = "Python wrapper for cryo-EM software"
+version = "0.3.0"
+description = "Python Wrapper for Cryo-EM Deep Learning Software"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
-    {name = "Nathan Levinzon", email = "nathan.levinzon@utah.edu"},
-    {name = "Shen Lab Team", email = "shenlab@utah.edu"}
+    {name = "Nathan Levinzon", email = "nate.levinzon@utah.edu"},
+    {name = "Shen Lab Team", website = "https://shen.biochem.utah.edu/"}
 ]
 maintainers = [
-    {name = "Nathan Levinzon", email = "nathan.levinzon@utah.edu"}
+    {name = "Nathan Levinzon", email = "nate.levinzon@utah.edu"}
 ]
 keywords = ["cryo-em", "electron-microscopy", "structural-biology", "python-wrapper"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
@@ -63,11 +63,11 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/shenlab/cryoDL"
+Homepage = "https://github.com/ndlevinzon/cryoDL"
 Documentation = "https://cryodl.readthedocs.io/"
-Repository = "https://github.com/shenlab/cryoDL.git"
-"Bug Tracker" = "https://github.com/shenlab/cryoDL/issues"
-"Source Code" = "https://github.com/shenlab/cryoDL"
+Repository = "https://github.com/ndlevinzon/cryoDL.git"
+"Bug Tracker" = "https://github.com/ndlevinzon/cryoDL/issues"
+"Source Code" = "https://github.com/ndlevinzon/cryoDL"
 
 [project.scripts]
 cryodl = "src.cli:main"

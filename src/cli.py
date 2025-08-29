@@ -1263,6 +1263,88 @@ echo "Topaz cross-validation job completed"
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
+    def do_analyze_cv(self, arg):
+        """Analyze cross-validation results.
+
+        Usage: analyze_cv [cv_directory] [n_values] [k_folds]
+        Example: analyze_cv saved_models/EMPIAR-10025/cv 250,300,350,400,450,500 5
+        """
+        self.log_command("analyze_cv", arg)
+        try:
+            # Parse arguments
+            args = arg.split()
+
+            if len(args) >= 1:
+                cv_dir = args[0]
+            else:
+                cv_dir = input("Enter cross-validation directory path: ").strip()
+
+            if len(args) >= 2:
+                n_values_str = args[1]
+                n_values = [int(x.strip()) for x in n_values_str.split(',')]
+            else:
+                n_values_input = input("Enter N values (comma-separated, default: 250,300,350,400,450,500): ").strip()
+                if n_values_input:
+                    n_values = [int(x.strip()) for x in n_values_input.split(',')]
+                else:
+                    n_values = [250, 300, 350, 400, 450, 500]
+
+            if len(args) >= 3:
+                k_folds = int(args[2])
+            else:
+                k_folds_input = input("Enter number of folds (default: 5): ").strip()
+                k_folds = int(k_folds_input) if k_folds_input else 5
+
+            # Validate inputs
+            cv_path = Path(cv_dir)
+            if not cv_path.exists():
+                error_msg = f"Cross-validation directory not found: {cv_dir}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            print(f"Analyzing cross-validation results from: {cv_dir}")
+            print(f"N values: {n_values}")
+            print(f"K folds: {k_folds}")
+
+            # Run analysis
+            try:
+                from .topaz_analysis import analyze_cross_validation
+
+                analysis_results = analyze_cross_validation(
+                    cv_dir=cv_dir,
+                    n_values=n_values,
+                    k_folds=k_folds,
+                    output_dir=cv_dir,
+                    save_plots=True,
+                    show_plots=False
+                )
+
+                print(f"\n=== Cross-validation Analysis Complete ===")
+                print(f"Best N value: {analysis_results['best_n']}")
+                print(f"Best number of epochs: {analysis_results['best_epoch']}")
+                print(f"Best AUPRC: {analysis_results['best_auprc']:.4f}")
+                print(f"Recommendation: {analysis_results['recommendations']['recommendation']}")
+                print(f"Analysis results saved to: {cv_dir}")
+
+                self.log_output(
+                    f"Cross-validation analysis completed. Best N: {analysis_results['best_n']}, Best epochs: {analysis_results['best_epoch']}")
+
+            except ImportError as e:
+                error_msg = f"Could not import analysis module: {e}"
+                print(error_msg, file=sys.stderr)
+                print("Please install analysis dependencies: pip install numpy pandas matplotlib pillow seaborn")
+                self.log_error(error_msg)
+            except Exception as e:
+                error_msg = f"Cross-validation analysis failed: {e}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+
+        except Exception as e:
+            error_msg = f"Error in analyze_cv command: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
     def do_clear(self, arg):
         """Clear the screen."""
         self.log_command("clear", arg)
