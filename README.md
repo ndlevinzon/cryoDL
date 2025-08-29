@@ -284,6 +284,7 @@ Additionally, we are grateful for the following open-source projects that we bui
 
 ### Topaz and Topaz Denoise
 <details><summary>Citation</summary><p>
+	
 ```bibtex
 @Article{Bepler2019,
 author={Bepler, Tristan
@@ -317,6 +318,7 @@ url={https://doi.org/10.1038/s41467-020-18952-1}
 
 ### Model-Angelo
 <details><summary>Citation</summary><p>
+	
 ```bibtex
 @article{jamali2024automated,
 	author = {Kiarash Jamali and Lukas Kall and Rui Zhang and Alan Brown and Dari Kimanius and Sjors Scheres},
