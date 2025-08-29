@@ -107,8 +107,8 @@ class ConfigManager:
                 - description (str): Project description
 
         Example:
-            >>> metadata = config_manager._load_project_metadata()
-            >>> print(metadata['version'])
+            metadata = config_manager._load_project_metadata()
+            print(metadata['version'])
             '0.3.0'
         """
         pyproject_path = self.project_root / "pyproject.toml"
@@ -157,8 +157,8 @@ class ConfigManager:
                 - description (str): Project description
 
         Example:
-            >>> metadata = config_manager.get_project_metadata()
-            >>> print(f"Version: {metadata['version']}")
+            metadata = config_manager.get_project_metadata()
+            print(f"Version: {metadata['version']}")
             Version: 0.3.0
         """
         return self.project_metadata.copy()
@@ -174,8 +174,8 @@ class ConfigManager:
                 with sections for project_info, paths, dependencies, settings, and slurm.
 
         Example:
-            >>> config = config_manager.load_config()
-            >>> print(config['project_info']['version'])
+            config = config_manager.load_config()
+            print(config['project_info']['version'])
             '0.3.0'
         """
         if self.config_path.exists():
@@ -202,8 +202,8 @@ class ConfigManager:
                 with all required sections initialized.
 
         Example:
-            >>> config = config_manager.create_default_config()
-            >>> print(config['settings']['max_threads'])
+            config = config_manager.create_default_config()
+            print(config['settings']['max_threads'])
             4
         """
         # Create necessary directories
@@ -230,10 +230,10 @@ class ConfigManager:
             IOError: If the file cannot be written to.
 
         Example:
-            >>> config_manager.save_config()
-            >>> # Or save a specific config
-            >>> custom_config = {'settings': {'max_threads': 8}}
-            >>> config_manager.save_config(custom_config)
+            config_manager.save_config()
+            # Or save a specific config
+            custom_config = {'settings': {'max_threads': 8}}
+            config_manager.save_config(custom_config)
         """
         if config is None:
             config = self.config
@@ -260,9 +260,9 @@ class ConfigManager:
             Any: The configuration value if found, otherwise the default value.
 
         Example:
-            >>> config_manager.get('settings.max_threads')
+            config_manager.get('settings.max_threads')
             4
-            >>> config_manager.get('nonexistent.key', 'default')
+            config_manager.get('nonexistent.key', 'default')
             'default'
         """
         keys = key.split('.')
@@ -286,8 +286,8 @@ class ConfigManager:
             value (Any): Value to set for the configuration key.
 
         Example:
-            >>> config_manager.set('settings.max_threads', 8)
-            >>> config_manager.set('new_section.new_key', 'new_value')
+            config_manager.set('settings.max_threads', 8)
+            config_manager.set('new_section.new_key', 'new_value')
         """
         keys = key.split('.')
         config = self.config
@@ -315,8 +315,8 @@ class ConfigManager:
             version (str, optional): Version of the dependency. Defaults to empty string.
 
         Example:
-            >>> config_manager.update_dependency_path('topaz', '/usr/local/bin/topaz', '0.3.7')
-            >>> config_manager.update_dependency_path('model_angelo', '/path/to/model_angelo')
+            config_manager.update_dependency_path('topaz', '/usr/local/bin/topaz', '0.3.7')
+            config_manager.update_dependency_path('model_angelo', '/path/to/model_angelo')
         """
         if dependency not in self.config["dependencies"]:
             self.logger.warning(f"Unknown dependency: {dependency}")
@@ -342,9 +342,9 @@ class ConfigManager:
             bool: True if the dependency path exists and is accessible, False otherwise.
 
         Example:
-            >>> config_manager.validate_dependency_path('topaz')
+            config_manager.validate_dependency_path('topaz')
             True
-            >>> config_manager.validate_dependency_path('nonexistent')
+            config_manager.validate_dependency_path('nonexistent')
             False
         """
         if dependency not in self.config["dependencies"]:
@@ -370,8 +370,8 @@ class ConfigManager:
                 - enabled (bool): Whether the dependency is enabled
 
         Example:
-            >>> deps = config_manager.list_dependencies()
-            >>> print(deps['topaz']['path'])
+            deps = config_manager.list_dependencies()
+            print(deps['topaz']['path'])
             '/usr/local/bin/topaz'
         """
         return self.config["dependencies"]
@@ -387,8 +387,8 @@ class ConfigManager:
                 with their configuration details (path, version, enabled status).
 
         Example:
-            >>> enabled_deps = config_manager.get_enabled_dependencies()
-            >>> print(list(enabled_deps.keys()))
+            enabled_deps = config_manager.get_enabled_dependencies()
+            print(list(enabled_deps.keys()))
             ['topaz', 'model_angelo']
         """
         return {
@@ -404,8 +404,8 @@ class ConfigManager:
         settings that have been made.
 
         Example:
-            >>> config_manager.reset_config()
-            >>> # Configuration is now reset to defaults
+            config_manager.reset_config()
+            # Configuration is now reset to defaults
         """
         self.config = self.default_config.copy()
         self.save_config()
@@ -425,8 +425,8 @@ class ConfigManager:
             IOError: If the file cannot be written to.
 
         Example:
-            >>> config_manager.export_config('config_backup.json')
-            >>> config_manager.export_config(Path('backups/config_2024.json'))
+            config_manager.export_config('config_backup.json')
+            config_manager.export_config(Path('backups/config_2024.json'))
         """
         export_path = Path(export_path)
         try:
@@ -452,8 +452,8 @@ class ConfigManager:
             json.JSONDecodeError: If the file contains invalid JSON.
 
         Example:
-            >>> config_manager.import_config('config_backup.json')
-            >>> config_manager.import_config(Path('backups/config_2024.json'))
+            config_manager.import_config('config_backup.json')
+            config_manager.import_config(Path('backups/config_2024.json'))
         """
         import_path = Path(import_path)
         try:
@@ -492,8 +492,8 @@ class ConfigManager:
             str: Complete SLURM header as a string with all directives.
 
         Example:
-            >>> header = config_manager.generate_slurm_header('my_job', nodes=2, gres_gpu=2)
-            >>> print(header)
+            header = config_manager.generate_slurm_header('my_job', nodes=2, gres_gpu=2)
+            print(header)
             #!/bin/bash
             #SBATCH --job-name=my_job
             #SBATCH --nodes=2
@@ -583,8 +583,8 @@ class ConfigManager:
                 - comment (str): Comment for the configuration
 
         Example:
-            >>> config_manager.update_slurm_config(nodes=2, gres_gpu=2, time='12:00:00')
-            >>> config_manager.update_slurm_config(partition='gpu', account='my_account')
+            config_manager.update_slurm_config(nodes=2, gres_gpu=2, time='12:00:00')
+            config_manager.update_slurm_config(partition='gpu', account='my_account')
         """
         if "slurm" not in self.config:
             self.config["slurm"] = {}
@@ -607,10 +607,10 @@ class ConfigManager:
                 partition, qos, account, mem, output, error, and other SLURM settings.
 
         Example:
-            >>> slurm_config = config_manager.get_slurm_config()
-            >>> print(slurm_config['nodes'])
+            slurm_config = config_manager.get_slurm_config()
+            print(slurm_config['nodes'])
             1
-            >>> print(slurm_config['time'])
+            print(slurm_config['time'])
             '06:00:00'
         """
         return self.config.get("slurm", {})
@@ -632,8 +632,8 @@ class ConfigManager:
             IOError: If the file cannot be written to.
 
         Example:
-            >>> config_manager.save_slurm_header('my_job.slurm', 'my_job', nodes=2)
-            >>> config_manager.save_slurm_header(Path('jobs/batch_job.slurm'))
+            config_manager.save_slurm_header('my_job.slurm', 'my_job', nodes=2)
+            config_manager.save_slurm_header(Path('jobs/batch_job.slurm'))
         """
         output_path = Path(output_path)
         header_content = self.generate_slurm_header(job_name, **kwargs)
@@ -654,12 +654,12 @@ def main():
     configuration values, updating dependency paths, and validating dependencies.
 
     Example:
-        >>> python config_manager.py
-        Project root: /path/to/project
-        Max threads: 8
-        Enabled dependencies: ['topaz', 'model_angelo']
-        topaz path valid: True
-        model_angelo path valid: False
+        python config_manager.py
+            Project root: /path/to/project
+            Max threads: 8
+            Enabled dependencies: ['topaz', 'model_angelo']
+            topaz path valid: True
+            model_angelo path valid: False
     """
     # Initialize config manager
     config_manager = ConfigManager()

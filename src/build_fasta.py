@@ -43,7 +43,7 @@ class FastaBuilder:
                 Defaults to 1.0.
 
         Example:
-            >>> builder = FastaBuilder(timeout=60, max_retries=5)
+            builder = FastaBuilder(timeout=60, max_retries=5)
         """
         self.rcsb_base_url = "https://data.rcsb.org/rest/v1/core"
         self.timeout = timeout
@@ -62,9 +62,9 @@ class FastaBuilder:
             bool: True if the PDB ID is valid, False otherwise.
 
         Example:
-            >>> builder.validate_pdb_id("1ABC")
+            builder.validate_pdb_id("1ABC")
             True
-            >>> builder.validate_pdb_id("INVALID")
+            builder.validate_pdb_id("INVALID")
             False
         """
         if not pdb_id or len(pdb_id) != 4:
@@ -83,8 +83,8 @@ class FastaBuilder:
             Optional[Dict]: Dictionary containing PDB information, or None if failed.
 
         Example:
-            >>> info = builder.fetch_pdb_info("1ABC")
-            >>> print(info.get("title", "No title available"))
+            info = builder.fetch_pdb_info("1ABC")
+            print(info.get("title", "No title available"))
         """
         if not self.validate_pdb_id(pdb_id):
             logger.error(f"Invalid PDB ID format: {pdb_id}")
@@ -115,8 +115,8 @@ class FastaBuilder:
             Optional[List[Dict]]: List of polymer entity dictionaries, or None if failed.
 
         Example:
-            >>> entities = builder.fetch_polymer_entities("1ABC")
-            >>> for entity in entities:
+            entities = builder.fetch_polymer_entities("1ABC")
+            for entity in entities:
             ...     print(f"Entity {entity.get('entity_id')}: {entity.get('title', 'No title')}")
         """
         if not self.validate_pdb_id(pdb_id):
@@ -159,8 +159,8 @@ class FastaBuilder:
             Optional[str]: FASTA sequence string, or None if failed.
 
         Example:
-            >>> sequence = builder.fetch_fasta_sequence("1ABC", "1")
-            >>> if sequence:
+            sequence = builder.fetch_fasta_sequence("1ABC", "1")
+            if sequence:
             ...     print(sequence[:100])  # First 100 characters
         """
         if not self.validate_pdb_id(pdb_id):
@@ -203,9 +203,9 @@ class FastaBuilder:
             Optional[Dict]: Dictionary containing entity information, or None if failed.
 
         Example:
-            >>> info = builder.get_entity_info("1ABC", "1")
-            >>> print(f"Title: {info.get('title', 'No title')}")
-            >>> print(f"Type: {info.get('entity', {}).get('type', 'Unknown')}")
+            info = builder.get_entity_info("1ABC", "1")
+            print(f"Title: {info.get('title', 'No title')}")
+            print(f"Type: {info.get('entity', {}).get('type', 'Unknown')}")
         """
         if not self.validate_pdb_id(pdb_id):
             logger.error(f"Invalid PDB ID format: {pdb_id}")
@@ -238,8 +238,8 @@ class FastaBuilder:
             Tuple[bool, str]: (success, message) indicating operation result.
 
         Example:
-            >>> success, message = builder.build_fasta_from_pdb("1ABC", "protein.fasta")
-            >>> print(message)
+            success, message = builder.build_fasta_from_pdb("1ABC", "protein.fasta")
+            print(message)
         """
         if not self.validate_pdb_id(pdb_id):
             return False, f"Invalid PDB ID format: {pdb_id}"
@@ -300,9 +300,9 @@ class FastaBuilder:
             Tuple[bool, str]: (success, message) indicating operation result.
 
         Example:
-            >>> pdb_list = ["1ABC", "2DEF", "3GHI"]
-            >>> success, message = builder.build_fasta_from_multiple_pdbs(pdb_list, "my_proteins.fasta")
-            >>> print(message)
+            pdb_list = ["1ABC", "2DEF", "3GHI"]
+            success, message = builder.build_fasta_from_multiple_pdbs(pdb_list, "my_proteins.fasta")
+            print(message)
         """
         if not pdb_ids:
             return False, "No PDB IDs provided"
@@ -383,8 +383,8 @@ class FastaBuilder:
             Tuple[bool, str]: (success, message) containing entity information.
 
         Example:
-            >>> success, info = builder.list_pdb_entities("1ABC")
-            >>> print(info)
+            success, info = builder.list_pdb_entities("1ABC")
+            print(info)
         """
         if not self.validate_pdb_id(pdb_id):
             return False, f"Invalid PDB ID format: {pdb_id}"

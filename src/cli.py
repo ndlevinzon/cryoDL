@@ -45,8 +45,8 @@ class CryoDLShell(cmd.Cmd):
                 interactions. Defaults to "cryodl.log".
 
         Example:
-            >>> config_manager = ConfigManager()
-            >>> shell = CryoDLShell(config_manager, "my_session.log")
+            config_manager = ConfigManager()
+            shell = CryoDLShell(config_manager, "my_session.log")
         """
         super().__init__()
         self.config_manager = config_manager
@@ -66,8 +66,8 @@ class CryoDLShell(cmd.Cmd):
                 instructions for using the CLI.
 
         Example:
-            >>> banner = shell.load_banner()
-            >>> print(banner)
+            banner = shell.load_banner()
+            print(banner)
             [ASCII art banner with version info]
         """
         # Get version info from config manager
@@ -106,8 +106,8 @@ All interactions are logged to cryodl.log in the current directory.
         appends to the log file.
 
         Example:
-            >>> shell.setup_logging()
-            >>> # All subsequent commands will be logged to the log file
+            shell.setup_logging()
+            # All subsequent commands will be logged to the log file
         """
         # Create a custom formatter
         formatter = logging.Formatter(
@@ -140,8 +140,8 @@ All interactions are logged to cryodl.log in the current directory.
                 Defaults to empty string.
 
         Example:
-            >>> shell.log_command("get", "settings.max_threads")
-            >>> # Logs: "Command: get settings.max_threads"
+            shell.log_command("get", "settings.max_threads")
+            # Logs: "Command: get settings.max_threads"
         """
         full_command = f"{command} {args}".strip()
         self.logger.info(f"Command: {full_command}")
@@ -155,8 +155,8 @@ All interactions are logged to cryodl.log in the current directory.
             output (str): The output text to log.
 
         Example:
-            >>> shell.log_output("Configuration loaded successfully")
-            >>> # Logs: "Output: Configuration loaded successfully"
+            shell.log_output("Configuration loaded successfully")
+            # Logs: "Output: Configuration loaded successfully"
         """
         if output.strip():
             self.logger.info(f"Output: {output.strip()}")
@@ -170,8 +170,8 @@ All interactions are logged to cryodl.log in the current directory.
             error (str): The error message to log.
 
         Example:
-            >>> shell.log_error("Configuration file not found")
-            >>> # Logs: "Error: Configuration file not found"
+            shell.log_error("Configuration file not found")
+            # Logs: "Error: Configuration file not found"
         """
         self.logger.error(f"Error: {error}")
 
@@ -189,8 +189,8 @@ All interactions are logged to cryodl.log in the current directory.
             init [--force]
 
         Example:
-            >>> init
-            >>> init --force
+            init
+            init --force
         """
         self.log_command("init", arg)
         try:
@@ -222,9 +222,9 @@ All interactions are logged to cryodl.log in the current directory.
             get <key>
 
         Example:
-            >>> get paths.project_root
-            >>> get settings.max_threads
-            >>> get dependencies.topaz.path
+            get paths.project_root
+            get settings.max_threads
+            get dependencies.topaz.path
         """
         self.log_command("get", arg)
         try:
@@ -259,9 +259,9 @@ All interactions are logged to cryodl.log in the current directory.
             set <key> <value>
 
         Example:
-            >>> set settings.max_threads 8
-            >>> set settings.gpu_enabled true
-            >>> set new_section.new_key new_value
+            set settings.max_threads 8
+            set settings.gpu_enabled true
+            set new_section.new_key new_value
         """
         self.log_command("set", arg)
         try:
@@ -294,9 +294,9 @@ All interactions are logged to cryodl.log in the current directory.
             add_dependency <name> <path> [version]
 
         Example:
-            >>> add_dependency topaz /usr/local/bin/topaz 0.3.7
-            >>> add_dependency model_angelo /path/to/model_angelo 1.0.1
-            >>> add_dependency relion /usr/local/relion/bin/relion
+            add_dependency topaz /usr/local/bin/topaz 0.3.7
+            add_dependency model_angelo /path/to/model_angelo 1.0.1
+            add_dependency relion /usr/local/relion/bin/relion
         """
         self.log_command("add_dependency", arg)
         try:
@@ -330,8 +330,8 @@ All interactions are logged to cryodl.log in the current directory.
             arg (str): Not used.
 
         Example:
-            >>> list_dependencies
-            >>> # Shows all dependencies with their status
+            list_dependencies
+            # Shows all dependencies with their status
         """
         self.log_command("list_dependencies", arg)
         try:
@@ -362,8 +362,8 @@ All interactions are logged to cryodl.log in the current directory.
             arg (str): Not used.
 
         Example:
-            >>> validate_dependencies
-            >>> # Shows validation status for all dependencies
+            validate_dependencies
+            # Shows validation status for all dependencies
         """
         self.log_command("validate_dependencies", arg)
         try:
@@ -401,8 +401,8 @@ All interactions are logged to cryodl.log in the current directory.
             arg (str): Not used.
 
         Example:
-            >>> show
-            >>> # Displays the entire configuration as JSON
+            show
+            # Displays the entire configuration as JSON
         """
         self.log_command("show", arg)
         try:
@@ -425,8 +425,8 @@ All interactions are logged to cryodl.log in the current directory.
             arg (str): Not used.
 
         Example:
-            >>> reset
-            >>> # Configuration is reset to default values
+            reset
+            # Configuration is reset to default values
         """
         self.log_command("reset", arg)
         try:
@@ -453,8 +453,8 @@ All interactions are logged to cryodl.log in the current directory.
             export <path>
 
         Example:
-            >>> export config_backup.json
-            >>> export backups/config_2024.json
+            export config_backup.json
+            export backups/config_2024.json
         """
         self.log_command("export", arg)
         try:
@@ -486,8 +486,8 @@ All interactions are logged to cryodl.log in the current directory.
             import <path>
 
         Example:
-            >>> import config_backup.json
-            >>> import backups/config_2024.json
+            import config_backup.json
+            import backups/config_2024.json
         """
         self.log_command("import", arg)
         try:
@@ -526,8 +526,8 @@ All interactions are logged to cryodl.log in the current directory.
             slurm_generate [--job-name <name>] [--output <file>] [--nodes <n>] [--ntasks <n>] [--cpus-per-task <n>] [--gres-gpu <n>] [--time <time>] [--mem <mem>]
 
         Example:
-            >>> slurm_generate --job-name model_angelo --nodes 2 --gres-gpu 2
-            >>> slurm_generate --output my_job.slurm --time 12:00:00
+            slurm_generate --job-name model_angelo --nodes 2 --gres-gpu 2
+            slurm_generate --output my_job.slurm --time 12:00:00
         """
         self.log_command("slurm_generate", arg)
         try:
@@ -590,8 +590,8 @@ All interactions are logged to cryodl.log in the current directory.
             arg (str): Not used.
 
         Example:
-            >>> slurm_show
-            >>> # Shows all SLURM configuration parameters
+            slurm_show
+            # Shows all SLURM configuration parameters
         """
         self.log_command("slurm_show", arg)
         try:
@@ -631,8 +631,8 @@ All interactions are logged to cryodl.log in the current directory.
             slurm_update [--job-name <name>] [--nodes <n>] [--ntasks <n>] [--cpus-per-task <n>] [--gres-gpu <n>] [--time <time>] [--partition <partition>] [--qos <qos>] [--account <account>] [--mem <mem>] [--output <pattern>] [--error <pattern>]
 
         Example:
-            >>> slurm_update --nodes 2 --gres-gpu 2 --time 12:00:00
-            >>> slurm_update --partition gpu --account my_account
+            slurm_update --nodes 2 --gres-gpu 2 --time 12:00:00
+            slurm_update --partition gpu --account my_account
         """
         self.log_command("slurm_update", arg)
         try:
@@ -715,10 +715,10 @@ All interactions are logged to cryodl.log in the current directory.
             fasta --list <pdb_id>
 
         Example:
-            >>> fasta 1ABC
-            >>> fasta 1ABC --output my_protein.fasta
-            >>> fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
-            >>> fasta --list 1ABC
+            fasta 1ABC
+            fasta 1ABC --output my_protein.fasta
+            fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
+            fasta --list 1ABC
         """
         self.log_command("fasta", arg)
         try:
@@ -844,8 +844,8 @@ All interactions are logged to cryodl.log in the current directory.
             model_angelo [--local]
 
         Example:
-            >>> model_angelo
-            >>> model_angelo --local
+            model_angelo
+            model_angelo --local
         """
         self.log_command("model_angelo", arg)
         try:
@@ -1069,9 +1069,9 @@ echo "ModelAngelo job completed"
             preprocess, model, postprocess, cross
 
         Example:
-            >>> topaz preprocess --local
-            >>> topaz preprocess
-            >>> topaz cross
+            topaz preprocess --local
+            topaz preprocess
+            topaz cross
         """
         self.log_command("topaz", arg)
         try:
@@ -1131,7 +1131,7 @@ echo "ModelAngelo job completed"
             is_local (bool): If True, run locally; if False, submit to SLURM.
 
         Example:
-            >>> shell._run_topaz_preprocess('/usr/local/bin/topaz', True)
+            shell._run_topaz_preprocess('/usr/local/bin/topaz', True)
         """
         try:
             print("Topaz Preprocess Setup:")
@@ -1372,7 +1372,7 @@ echo "Topaz preprocess job completed"
             is_local (bool): If True, run locally; if False, submit to SLURM.
 
         Example:
-            >>> shell._run_topaz_cross('/usr/local/bin/topaz', True)
+            shell._run_topaz_cross('/usr/local/bin/topaz', True)
         """
         try:
             print("Topaz Cross-Validation Setup:")
@@ -1708,9 +1708,9 @@ echo "Topaz cross-validation job completed"
             analyze_cv [cv_directory] [n_values] [k_folds]
 
         Example:
-            >>> analyze_cv saved_models/EMPIAR-10025/cv 250,300,350,400,450,500 5
-            >>> analyze_cv
-            >>> # Prompts for parameters interactively
+            analyze_cv saved_models/EMPIAR-10025/cv 250,300,350,400,450,500 5
+            analyze_cv
+            # Prompts for parameters interactively
         """
         self.log_command("analyze_cv", arg)
         try:
@@ -1797,7 +1797,7 @@ echo "Topaz cross-validation job completed"
             arg (str): Not used.
 
         Example:
-            >>> clear
+            clear
         """
         self.log_command("clear", arg)
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -1812,8 +1812,8 @@ echo "Topaz cross-validation job completed"
             arg (str): Not used.
 
         Example:
-            >>> pwd
-            >>> # Shows current working directory
+            pwd
+            # Shows current working directory
         """
         self.log_command("pwd", arg)
         output = os.getcwd()
@@ -1832,8 +1832,8 @@ echo "Topaz cross-validation job completed"
             ls [path]
 
         Example:
-            >>> ls
-            >>> ls /path/to/directory
+            ls
+            ls /path/to/directory
         """
         self.log_command("ls", arg)
         try:
@@ -1864,8 +1864,8 @@ echo "Topaz cross-validation job completed"
             help [command]
 
         Example:
-            >>> help
-            >>> help model_angelo
+            help
+            help model_angelo
         """
         self.log_command("help", arg)
         super().do_help(arg)
@@ -1880,8 +1880,8 @@ echo "Topaz cross-validation job completed"
             str: A randomly selected quote, or None if no quotes are available.
 
         Example:
-            >>> quote = shell.load_random_quote()
-            >>> print(quote)
+            quote = shell.load_random_quote()
+            print(quote)
             "Some inspiring quote about science..."
         """
         try:
@@ -1909,8 +1909,8 @@ echo "Topaz cross-validation job completed"
             version
 
         Example:
-            >>> version
-            >>> # Shows version information
+            version
+            # Shows version information
         """
         self.log_command("version", arg)
         try:
@@ -1940,8 +1940,8 @@ Description: {metadata['description']}
             quit
 
         Example:
-            >>> quit
-            >>> # Exits the shell with a farewell message
+            quit
+            # Exits the shell with a farewell message
         """
         self.log_command("quit", arg)
 
@@ -1966,8 +1966,8 @@ Description: {metadata['description']}
             exit
 
         Example:
-            >>> exit
-            >>> # Exits the shell with a farewell message
+            exit
+            # Exits the shell with a farewell message
         """
         self.log_command("exit", arg)
 
@@ -1989,8 +1989,8 @@ Description: {metadata['description']}
             arg (str): Not used.
 
         Example:
-            >>> # Press Ctrl+D
-            >>> # Exits the shell with a farewell message
+            # Press Ctrl+D
+            # Exits the shell with a farewell message
         """
         print()  # New line after Ctrl+D
         self.log_command("EOF", arg)
@@ -2013,8 +2013,8 @@ Description: {metadata['description']}
             line (str): The unrecognized command line.
 
         Example:
-            >>> unknown_command
-            >>> # Shows error message and suggests using help
+            unknown_command
+            # Shows error message and suggests using help
         """
         self.log_command("unknown", line)
         print(f"Unknown command: {line}")
@@ -2028,8 +2028,8 @@ Description: {metadata['description']}
         to press Enter to get a new prompt without executing any command.
 
         Example:
-            >>> [press Enter]
-            >>> # Shows new prompt without executing anything
+            [press Enter]
+            # Shows new prompt without executing anything
         """
         pass  # Do nothing for empty lines
 
@@ -2044,8 +2044,8 @@ def main():
         --log-file: Specify custom log file path (default: cryodl.log)
 
     Example:
-        >>> python cli.py
-        >>> python cli.py --log-file my_session.log
+        python cli.py
+        python cli.py --log-file my_session.log
 
     Raises:
         SystemExit: On successful completion or error conditions.
