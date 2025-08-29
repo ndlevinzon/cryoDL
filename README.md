@@ -1,5 +1,7 @@
 # cryoDL: A Pypeline for CryoEM Deep Learning Utilities
-<img src="docs/frenchie_cryoem.png" width="300" alt="Project hero">
+<p align="center">
+  <img src="docs/frenchie_cryoem.png" width="300" alt="Project Hero">
+</p>
 
 ## Features
 
