@@ -674,3 +674,66 @@ code {
 .container * {
     color: #333333 !important;
 }
+
+/* Fix example code blocks */
+.example {
+    color: #333333 !important;
+}
+
+.example .highlight {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+}
+
+.example .highlight pre {
+    color: #333333 !important;
+    background-color: transparent !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Fix usage sections */
+.usage {
+    color: #333333 !important;
+}
+
+.usage .highlight {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+}
+
+.usage .highlight pre {
+    color: #333333 !important;
+    background-color: transparent !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Fix any literal blocks in examples and usage */
+.example .literal-block,
+.usage .literal-block {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+    color: #333333 !important;
+}
+
+/* Fix any code blocks that might be rendered as text */
+.example code,
+.usage code {
+    background-color: #f8f9fa !important;
+    color: #333333 !important;
+    border: 1px solid #e9ecef !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+}
