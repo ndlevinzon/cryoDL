@@ -266,3 +266,62 @@ This project is licensed under the terms specified in the LICENSE file.
 ## Support
 
 For issues and questions, please open an issue on the project repository.
+
+## Citation
+
+If you use CryoDL in your research, please cite:
+
+```bibtex
+@software{cryoDL2025,
+  title={CryoDL: A Pypeline for CryoEM Deep Learning Utilities},
+  author={Levinzon, Nate and Shen, Peter},
+  year={2025},
+  url={https://github.com/ndlevinzon/cryoDL}
+}
+```
+
+Additionally, we are grateful for the following open-source projects that we build on top of:
+
+### Topaz and Topaz Denoise
+```bibtex
+@Article{Bepler2019,
+author={Bepler, Tristan
+and Morin, Andrew
+and Rapp, Micah
+and Brasch, Julia
+and Shapiro, Lawrence
+and Noble, Alex J.
+and Berger, Bonnie},
+title={Positive-unlabeled convolutional neural networks for particle picking in cryo-electron micrographs},
+journal={Nature Methods},
+year={2019},
+issn={1548-7105},
+doi={10.1038/s41592-019-0575-8},
+url={https://doi.org/10.1038/s41592-019-0575-8}
+}
+
+@Article{Bepler2020_topazdenoise,
+author={Bepler, Tristan
+and Kelley, Kotaro
+and Noble, Alex J.
+and Berger, Bonnie},
+title={Topaz-Denoise: general deep denoising models for cryoEM and cryoET},
+journal={Nature Communications},
+year={2020},
+issn={2041-1723},
+doi={10.1038/s41467-020-18952-1},
+url={https://doi.org/10.1038/s41467-020-18952-1}
+}
+```
+
+### Model-Angelo
+```bibtex
+@article{jamali2024automated,
+	author = {Kiarash Jamali and Lukas Kall and Rui Zhang and Alan Brown and Dari Kimanius and Sjors Scheres},
+	title = {Automated model building and protein identification in cryo-EM maps},
+	year = {2024},
+	doi = {10.1038/s41586-024-07215-4},
+	URL = {https://www.nature.com/articles/s41586-024-07215-4},
+	journal = {Nature}
+}
+```
