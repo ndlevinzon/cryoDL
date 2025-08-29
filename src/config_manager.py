@@ -94,11 +94,22 @@ class ConfigManager:
         self.config = self.load_config()
 
     def _load_project_metadata(self) -> Dict[str, Any]:
-        """
-        Load project metadata from pyproject.toml file.
+        """Load project metadata from pyproject.toml file.
+
+        Reads the project name, version, and description from the pyproject.toml
+        file located in the project root directory. If the file is not found or
+        cannot be read, returns default values.
 
         Returns:
-            Dictionary containing project metadata (name, version, description)
+            Dict[str, Any]: Dictionary containing project metadata with keys:
+                - name (str): Project name
+                - version (str): Project version
+                - description (str): Project description
+
+        Example:
+            >>> metadata = config_manager._load_project_metadata()
+            >>> print(metadata['version'])
+            '0.3.0'
         """
         pyproject_path = self.project_root / "pyproject.toml"
 
@@ -134,20 +145,38 @@ class ConfigManager:
             }
 
     def get_project_metadata(self) -> Dict[str, Any]:
-        """
-        Get the current project metadata from pyproject.toml.
+        """Get the current project metadata from pyproject.toml.
+
+        Returns a copy of the project metadata that was loaded during initialization.
+        This includes the project name, version, and description from pyproject.toml.
 
         Returns:
-            Dictionary containing project metadata (name, version, description)
+            Dict[str, Any]: Dictionary containing project metadata with keys:
+                - name (str): Project name
+                - version (str): Project version
+                - description (str): Project description
+
+        Example:
+            >>> metadata = config_manager.get_project_metadata()
+            >>> print(f"Version: {metadata['version']}")
+            Version: 0.3.0
         """
         return self.project_metadata.copy()
 
     def load_config(self) -> Dict[str, Any]:
-        """
-        Load configuration from file or create default if not exists.
+        """Load configuration from file or create default if not exists.
+
+        Attempts to load the configuration from the config.json file. If the file
+        doesn't exist or is corrupted, creates a new default configuration file.
 
         Returns:
-            Dictionary containing configuration
+            Dict[str, Any]: Dictionary containing the loaded or created configuration
+                with sections for project_info, paths, dependencies, settings, and slurm.
+
+        Example:
+            >>> config = config_manager.load_config()
+            >>> print(config['project_info']['version'])
+            '0.3.0'
         """
         if self.config_path.exists():
             try:
@@ -163,11 +192,19 @@ class ConfigManager:
             return self.create_default_config()
 
     def create_default_config(self) -> Dict[str, Any]:
-        """
-        Create and save default configuration.
+        """Create and save default configuration.
+
+        Creates the necessary directories and saves a default configuration file
+        with project metadata, paths, dependencies, settings, and SLURM configuration.
 
         Returns:
-            Dictionary containing default configuration
+            Dict[str, Any]: Dictionary containing the default configuration structure
+                with all required sections initialized.
+
+        Example:
+            >>> config = config_manager.create_default_config()
+            >>> print(config['settings']['max_threads'])
+            4
         """
         # Create necessary directories
         for path_key, path_value in self.default_config["paths"].items():
@@ -179,11 +216,24 @@ class ConfigManager:
         return self.default_config
 
     def save_config(self, config: Optional[Dict[str, Any]] = None) -> None:
-        """
-        Save configuration to file.
+        """Save configuration to file.
+
+        Saves the configuration dictionary to the config.json file in JSON format
+        with proper indentation. If no config is provided, saves the current
+        configuration.
 
         Args:
-            config: Configuration to save. If None, saves current config.
+            config (Optional[Dict[str, Any]]): Configuration dictionary to save.
+                If None, saves the current configuration.
+
+        Raises:
+            IOError: If the file cannot be written to.
+
+        Example:
+            >>> config_manager.save_config()
+            >>> # Or save a specific config
+            >>> custom_config = {'settings': {'max_threads': 8}}
+            >>> config_manager.save_config(custom_config)
         """
         if config is None:
             config = self.config
@@ -197,15 +247,23 @@ class ConfigManager:
             raise
 
     def get(self, key: str, default: Any = None) -> Any:
-        """
-        Get configuration value using dot notation (e.g., 'paths.output_dir').
+        """Get configuration value using dot notation.
+
+        Retrieves a configuration value using dot notation to access nested
+        dictionary keys. If the key doesn't exist, returns the default value.
 
         Args:
-            key: Configuration key in dot notation
-            default: Default value if key not found
+            key (str): Configuration key in dot notation (e.g., 'paths.output_dir').
+            default (Any): Default value to return if key is not found.
 
         Returns:
-            Configuration value
+            Any: The configuration value if found, otherwise the default value.
+
+        Example:
+            >>> config_manager.get('settings.max_threads')
+            4
+            >>> config_manager.get('nonexistent.key', 'default')
+            'default'
         """
         keys = key.split('.')
         value = self.config
@@ -218,12 +276,18 @@ class ConfigManager:
             return default
 
     def set(self, key: str, value: Any) -> None:
-        """
-        Set configuration value using dot notation.
+        """Set configuration value using dot notation.
+
+        Sets a configuration value using dot notation to access nested dictionary
+        keys. Creates intermediate dictionaries if they don't exist.
 
         Args:
-            key: Configuration key in dot notation
-            value: Value to set
+            key (str): Configuration key in dot notation (e.g., 'settings.max_threads').
+            value (Any): Value to set for the configuration key.
+
+        Example:
+            >>> config_manager.set('settings.max_threads', 8)
+            >>> config_manager.set('new_section.new_key', 'new_value')
         """
         keys = key.split('.')
         config = self.config
@@ -239,13 +303,20 @@ class ConfigManager:
         self.logger.info(f"Set config key '{key}' to '{value}'")
 
     def update_dependency_path(self, dependency: str, path: str, version: str = "") -> None:
-        """
-        Update dependency path and version.
+        """Update dependency path and version.
+
+        Updates the path and version for a specified dependency in the configuration.
+        If the dependency doesn't exist in the configuration, logs a warning.
+        The dependency is automatically enabled if a path is provided.
 
         Args:
-            dependency: Name of the dependency (e.g., 'relion', 'cryosparc')
-            path: Path to the dependency executable or directory
-            version: Version of the dependency
+            dependency (str): Name of the dependency (e.g., 'topaz', 'model_angelo').
+            path (str): Path to the dependency executable or directory.
+            version (str, optional): Version of the dependency. Defaults to empty string.
+
+        Example:
+            >>> config_manager.update_dependency_path('topaz', '/usr/local/bin/topaz', '0.3.7')
+            >>> config_manager.update_dependency_path('model_angelo', '/path/to/model_angelo')
         """
         if dependency not in self.config["dependencies"]:
             self.logger.warning(f"Unknown dependency: {dependency}")
@@ -259,14 +330,22 @@ class ConfigManager:
         self.logger.info(f"Updated {dependency} path: {path}")
 
     def validate_dependency_path(self, dependency: str) -> bool:
-        """
-        Validate if a dependency path exists and is accessible.
+        """Validate if a dependency path exists and is accessible.
+
+        Checks if the specified dependency exists in the configuration and if its
+        path points to an existing file or directory.
 
         Args:
-            dependency: Name of the dependency
+            dependency (str): Name of the dependency to validate.
 
         Returns:
-            True if path is valid, False otherwise
+            bool: True if the dependency path exists and is accessible, False otherwise.
+
+        Example:
+            >>> config_manager.validate_dependency_path('topaz')
+            True
+            >>> config_manager.validate_dependency_path('nonexistent')
+            False
         """
         if dependency not in self.config["dependencies"]:
             return False
@@ -278,20 +357,39 @@ class ConfigManager:
         return Path(path).exists()
 
     def list_dependencies(self) -> Dict[str, Dict[str, Any]]:
-        """
-        Get all configured dependencies.
+        """Get all configured dependencies.
+
+        Returns a dictionary containing all dependencies configured in the system,
+        including their paths, versions, and enabled status.
 
         Returns:
-            Dictionary of dependencies with their paths and status
+            Dict[str, Dict[str, Any]]: Dictionary where keys are dependency names and
+                values are dictionaries containing:
+                - path (str): Path to the dependency
+                - version (str): Version of the dependency
+                - enabled (bool): Whether the dependency is enabled
+
+        Example:
+            >>> deps = config_manager.list_dependencies()
+            >>> print(deps['topaz']['path'])
+            '/usr/local/bin/topaz'
         """
         return self.config["dependencies"]
 
     def get_enabled_dependencies(self) -> Dict[str, Dict[str, Any]]:
-        """
-        Get only enabled dependencies.
+        """Get only enabled dependencies.
+
+        Returns a filtered dictionary containing only the dependencies that are
+        currently enabled in the configuration.
 
         Returns:
-            Dictionary of enabled dependencies
+            Dict[str, Dict[str, Any]]: Dictionary containing only enabled dependencies
+                with their configuration details (path, version, enabled status).
+
+        Example:
+            >>> enabled_deps = config_manager.get_enabled_dependencies()
+            >>> print(list(enabled_deps.keys()))
+            ['topaz', 'model_angelo']
         """
         return {
             name: info for name, info in self.config["dependencies"].items()
@@ -299,19 +397,36 @@ class ConfigManager:
         }
 
     def reset_config(self) -> None:
-        """
-        Reset configuration to default values.
+        """Reset configuration to default values.
+
+        Resets the current configuration to the default values and saves the
+        changes to the configuration file. This will overwrite any custom
+        settings that have been made.
+
+        Example:
+            >>> config_manager.reset_config()
+            >>> # Configuration is now reset to defaults
         """
         self.config = self.default_config.copy()
         self.save_config()
         self.logger.info("Configuration reset to defaults")
 
     def export_config(self, export_path: Union[str, Path]) -> None:
-        """
-        Export configuration to a different location.
+        """Export configuration to a different location.
+
+        Exports the current configuration to a specified file path in JSON format.
+        This is useful for backing up configurations or sharing them between
+        different environments.
 
         Args:
-            export_path: Path where to export the configuration
+            export_path (Union[str, Path]): Path where to export the configuration file.
+
+        Raises:
+            IOError: If the file cannot be written to.
+
+        Example:
+            >>> config_manager.export_config('config_backup.json')
+            >>> config_manager.export_config(Path('backups/config_2024.json'))
         """
         export_path = Path(export_path)
         try:
@@ -323,11 +438,22 @@ class ConfigManager:
             raise
 
     def import_config(self, import_path: Union[str, Path]) -> None:
-        """
-        Import configuration from a file.
+        """Import configuration from a file.
+
+        Imports a configuration from a specified file path and replaces the current
+        configuration. The imported configuration is then saved to the main
+        configuration file.
 
         Args:
-            import_path: Path to the configuration file to import
+            import_path (Union[str, Path]): Path to the configuration file to import.
+
+        Raises:
+            IOError: If the file cannot be read.
+            json.JSONDecodeError: If the file contains invalid JSON.
+
+        Example:
+            >>> config_manager.import_config('config_backup.json')
+            >>> config_manager.import_config(Path('backups/config_2024.json'))
         """
         import_path = Path(import_path)
         try:
@@ -341,15 +467,38 @@ class ConfigManager:
             raise
 
     def generate_slurm_header(self, job_name: Optional[str] = None, **kwargs) -> str:
-        """
-        Generate SLURM header from configuration.
+        """Generate SLURM header from configuration.
+
+        Generates a SLURM job script header using the current SLURM configuration
+        settings. Allows overriding specific parameters for the job.
 
         Args:
-            job_name: Override job name if provided
-            **kwargs: Additional SLURM parameters to override
+            job_name (Optional[str]): Override job name if provided. If None, uses
+                the default job name from configuration.
+            **kwargs: Additional SLURM parameters to override. Valid parameters include:
+                - nodes (int): Number of nodes
+                - ntasks (int): Number of tasks
+                - cpus_per_task (int): CPUs per task
+                - gres_gpu (int): Number of GPUs
+                - time (str): Time limit (HH:MM:SS)
+                - partition (str): Partition name
+                - qos (str): Quality of service
+                - account (str): Account name
+                - mem (str): Memory limit
+                - output (str): Output file pattern
+                - error (str): Error file pattern
 
         Returns:
-            SLURM header as string
+            str: Complete SLURM header as a string with all directives.
+
+        Example:
+            >>> header = config_manager.generate_slurm_header('my_job', nodes=2, gres_gpu=2)
+            >>> print(header)
+            #!/bin/bash
+            #SBATCH --job-name=my_job
+            #SBATCH --nodes=2
+            #SBATCH --gres=gpu:2
+            ...
         """
         slurm_config = self.config.get("slurm", {}).copy()
 
@@ -407,11 +556,35 @@ class ConfigManager:
         return "\n".join(header_lines)
 
     def update_slurm_config(self, **kwargs) -> None:
-        """
-        Update SLURM configuration parameters.
+        """Update SLURM configuration parameters.
+
+        Updates the SLURM configuration section with new parameter values and
+        saves the changes to the configuration file.
 
         Args:
-            **kwargs: SLURM parameters to update
+            **kwargs: SLURM parameters to update. Valid parameters include:
+                - job_name (str): Default job name
+                - nodes (int): Number of nodes
+                - ntasks (int): Number of tasks
+                - cpus_per_task (int): CPUs per task
+                - gres_gpu (int): Number of GPUs
+                - time (str): Time limit (HH:MM:SS)
+                - partition (str): Partition name
+                - qos (str): Quality of service
+                - account (str): Account name
+                - mem (str): Memory limit
+                - output (str): Output file pattern
+                - error (str): Error file pattern
+                - mail_type (str): Mail notification type
+                - mail_user (str): Mail notification user
+                - exclude (str): Nodes to exclude
+                - dependency (str): Job dependencies
+                - array (str): Array job specification
+                - comment (str): Comment for the configuration
+
+        Example:
+            >>> config_manager.update_slurm_config(nodes=2, gres_gpu=2, time='12:00:00')
+            >>> config_manager.update_slurm_config(partition='gpu', account='my_account')
         """
         if "slurm" not in self.config:
             self.config["slurm"] = {}
@@ -423,22 +596,44 @@ class ConfigManager:
         self.logger.info(f"Updated SLURM configuration: {list(kwargs.keys())}")
 
     def get_slurm_config(self) -> Dict[str, Any]:
-        """
-        Get current SLURM configuration.
+        """Get current SLURM configuration.
+
+        Returns the current SLURM configuration dictionary containing all
+        SLURM-related settings.
 
         Returns:
-            Dictionary containing SLURM configuration
+            Dict[str, Any]: Dictionary containing all SLURM configuration parameters
+                including job_name, nodes, ntasks, cpus_per_task, gres_gpu, time,
+                partition, qos, account, mem, output, error, and other SLURM settings.
+
+        Example:
+            >>> slurm_config = config_manager.get_slurm_config()
+            >>> print(slurm_config['nodes'])
+            1
+            >>> print(slurm_config['time'])
+            '06:00:00'
         """
         return self.config.get("slurm", {})
 
     def save_slurm_header(self, output_path: Union[str, Path], job_name: Optional[str] = None, **kwargs) -> None:
-        """
-        Save SLURM header to a file.
+        """Save SLURM header to a file.
+
+        Generates a SLURM header using the current configuration and saves it to
+        a specified file path. This is useful for creating SLURM job scripts.
 
         Args:
-            output_path: Path where to save the SLURM header
-            job_name: Override job name if provided
-            **kwargs: Additional SLURM parameters to override
+            output_path (Union[str, Path]): Path where to save the SLURM header file.
+            job_name (Optional[str]): Override job name if provided. If None, uses
+                the default job name from configuration.
+            **kwargs: Additional SLURM parameters to override. See generate_slurm_header
+                for valid parameters.
+
+        Raises:
+            IOError: If the file cannot be written to.
+
+        Example:
+            >>> config_manager.save_slurm_header('my_job.slurm', 'my_job', nodes=2)
+            >>> config_manager.save_slurm_header(Path('jobs/batch_job.slurm'))
         """
         output_path = Path(output_path)
         header_content = self.generate_slurm_header(job_name, **kwargs)
@@ -453,8 +648,18 @@ class ConfigManager:
 
 
 def main():
-    """
-    Example usage of the ConfigManager.
+    """Example usage of the ConfigManager.
+
+    Demonstrates basic usage of the ConfigManager class including setting
+    configuration values, updating dependency paths, and validating dependencies.
+
+    Example:
+        >>> python config_manager.py
+        Project root: /path/to/project
+        Max threads: 8
+        Enabled dependencies: ['topaz', 'model_angelo']
+        topaz path valid: True
+        model_angelo path valid: False
     """
     # Initialize config manager
     config_manager = ConfigManager()
