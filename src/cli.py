@@ -943,6 +943,326 @@ echo "Topaz preprocess job completed"
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
+    def _run_topaz_cross(self, topaz_path, is_local):
+        """Run Topaz cross-validation command."""
+        try:
+            print("Topaz Cross-Validation Setup:")
+            print("-" * 30)
+
+            # Prompt for input parameters
+            raw_micrographs = input("Enter path to raw micrographs directory: ").strip()
+            if not raw_micrographs:
+                error_msg = "Raw micrographs directory path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Validate micrographs directory exists
+            micrographs_path = Path(raw_micrographs)
+            if not micrographs_path.exists():
+                error_msg = f"Micrographs directory not found: {raw_micrographs}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Get particle coordinates file (required for cross-validation)
+            raw_particles = input("Enter path to particle coordinates file: ").strip()
+            if not raw_particles:
+                error_msg = "Particle coordinates file is required for cross-validation"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            particles_path = Path(raw_particles)
+            if not particles_path.exists():
+                error_msg = f"Particle coordinates file not found: {raw_particles}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Get output directory
+            output_dir = input("Enter output directory name (default: topaz_cross_output): ").strip()
+            if not output_dir:
+                output_dir = "topaz_cross_output"
+
+            # Get pixel size for downsampling
+            pixel_size = input("Enter pixel size for downsampling in Å/px (default: 8): ").strip()
+            if not pixel_size:
+                pixel_size = "8"
+            else:
+                try:
+                    float(pixel_size)  # Validate it's a number
+                except ValueError:
+                    error_msg = "Pixel size must be a number"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Get number of test micrographs to hold out
+            test_micrographs = input("Enter number of test micrographs to hold out (default: 10): ").strip()
+            if not test_micrographs:
+                test_micrographs = "10"
+            else:
+                try:
+                    int(test_micrographs)  # Validate it's a number
+                except ValueError:
+                    error_msg = "Number of test micrographs must be a number"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Get number of folds for cross-validation
+            k_folds = input("Enter number of folds for cross-validation (default: 5): ").strip()
+            if not k_folds:
+                k_folds = "5"
+            else:
+                try:
+                    int(k_folds)  # Validate it's a number
+                except ValueError:
+                    error_msg = "Number of folds must be a number"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Get N values for cross-validation (comma-separated)
+            n_values_input = input(
+                "Enter N values for cross-validation (comma-separated, default: 250,300,350,400,450,500): ").strip()
+            if not n_values_input:
+                n_values = [250, 300, 350, 400, 450, 500]
+            else:
+                try:
+                    n_values = [int(x.strip()) for x in n_values_input.split(',')]
+                except ValueError:
+                    error_msg = "N values must be comma-separated numbers"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Create output directories
+            proc_root = Path(output_dir)
+            proc_micrographs = proc_root / "micrographs"
+            model_dir = proc_root / "saved_models"
+            data_dir = proc_root / "data"
+            cross_dir = model_dir / "cv"
+
+            # Build Topaz commands
+            preprocess_cmd = f"{topaz_path} preprocess -v -s {pixel_size} -o {proc_micrographs} {raw_micrographs}/*.mrc"
+            convert_cmd = f"{topaz_path} convert -s {pixel_size} -o {proc_root}/particles.txt {raw_particles}"
+            split_cmd = f"{topaz_path} train_test_split -n {test_micrographs} --image-dir {proc_micrographs}/micrographs/ {proc_root}/particles.txt"
+
+            if is_local:
+                # Run locally
+                print(f"\nRunning Topaz cross-validation locally:")
+                print(f"Preprocess command: {preprocess_cmd}")
+                print(f"Convert command: {convert_cmd}")
+                print(f"Train-test split command: {split_cmd}")
+                print(f"Cross-validation with {k_folds} folds and N values: {n_values}")
+
+                # Create directories
+                proc_micrographs.mkdir(parents=True, exist_ok=True)
+                model_dir.mkdir(parents=True, exist_ok=True)
+                data_dir.mkdir(parents=True, exist_ok=True)
+                cross_dir.mkdir(parents=True, exist_ok=True)
+
+                # Execute commands
+                import subprocess
+                try:
+                    # Step 1: Preprocess
+                    print("\nStep 1: Preprocessing micrographs...")
+                    result = subprocess.run(preprocess_cmd, shell=True, capture_output=True, text=True)
+                    if result.returncode != 0:
+                        error_msg = f"Topaz preprocess failed with return code {result.returncode}"
+                        print(error_msg, file=sys.stderr)
+                        print(f"Error output: {result.stderr}", file=sys.stderr)
+                        self.log_error(error_msg)
+                        return
+
+                    # Step 2: Convert particle coordinates
+                    print("Step 2: Converting particle coordinates...")
+                    result = subprocess.run(convert_cmd, shell=True, capture_output=True, text=True)
+                    if result.returncode != 0:
+                        error_msg = f"Topaz convert failed with return code {result.returncode}"
+                        print(error_msg, file=sys.stderr)
+                        print(f"Error output: {result.stderr}", file=sys.stderr)
+                        self.log_error(error_msg)
+                        return
+
+                    # Step 3: Train-test split
+                    print("Step 3: Performing train-test split...")
+                    result = subprocess.run(split_cmd, shell=True, capture_output=True, text=True)
+                    if result.returncode != 0:
+                        error_msg = f"Topaz train_test_split failed with return code {result.returncode}"
+                        print(error_msg, file=sys.stderr)
+                        print(f"Error output: {result.stderr}", file=sys.stderr)
+                        self.log_error(error_msg)
+                        return
+
+                    # Step 4: Cross-validation training
+                    print("Step 4: Running cross-validation training...")
+                    for n in n_values:
+                        for fold in range(int(k_folds)):
+                            train_cmd = f"{topaz_path} train -n {n} --num-workers=8 --train-images {proc_root}/image_list_train.txt --train-targets {proc_root}/particles_train.txt -k {k_folds} --fold {fold} -o {cross_dir}/model_n{n}_fold{fold}_training.txt"
+                            print(f"Training model with N={n}, fold={fold}...")
+                            result = subprocess.run(train_cmd, shell=True, capture_output=True, text=True)
+                            if result.returncode != 0:
+                                error_msg = f"Topaz train failed for N={n}, fold={fold} with return code {result.returncode}"
+                                print(error_msg, file=sys.stderr)
+                                print(f"Error output: {result.stderr}", file=sys.stderr)
+                                self.log_error(error_msg)
+                            else:
+                                print(f"✓ Completed training for N={n}, fold={fold}")
+
+                    success_msg = f"Topaz cross-validation completed successfully. Output in: {cross_dir}"
+                    print(success_msg)
+                    self.log_output(success_msg)
+
+                except Exception as e:
+                    error_msg = f"Error running Topaz cross-validation: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+            else:
+                # Generate and submit SLURM job
+                job_name = "topaz_cross"
+
+                # Create SLURM script content
+                slurm_script = f"""#!/bin/bash
+#SBATCH --job-name={job_name}
+#SBATCH --output={job_name}_%j.out
+#SBATCH --error={job_name}_%j.err
+#SBATCH --time={self.config_manager.get('slurm.time', '24:00:00')}
+#SBATCH --nodes={self.config_manager.get('slurm.nodes', 1)}
+#SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
+#SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
+#SBATCH --mem={self.config_manager.get('slurm.mem', '16G')}
+
+set -euo pipefail
+set -x
+
+module purge
+module load topaz/0.2.5
+
+# Be explicit about threads to avoid oversubscription
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+
+cd "${{SLURM_SUBMIT_DIR}}"
+echo "WORKDIR: ${{SLURM_SUBMIT_DIR}}"
+nvidia-smi || true
+
+# Paths
+RAW_MICROS="{raw_micrographs}"
+RAW_PARTS="{raw_particles}"
+PROC_ROOT="{output_dir}"
+PROC_MICROS="${{PROC_ROOT}}/micrographs"
+MODEL_DIR="${{PROC_ROOT}}/saved_models"
+DATA_DIR="${{PROC_ROOT}}/data"
+CROSS_DIR="${{MODEL_DIR}}/cv"
+
+# Make Directories for Preprocessing, Model, and Data
+mkdir -p "${{PROC_MICROS}}" "${{MODEL_DIR}}" "${{DATA_DIR}}" "${{CROSS_DIR}}"
+
+# Preprocess (downsample to {pixel_size} Å/px)
+srun -u {topaz_path} preprocess -v -s {pixel_size} \\
+  -o "${{PROC_MICROS}}/" \\
+  "${{RAW_MICROS}}"/*.mrc
+
+# Scale particle coordinates to match downsampling
+srun -u {topaz_path} convert -s {pixel_size} \\
+  -o "${{PROC_ROOT}}/particles.txt" \\
+  "${{RAW_PARTS}}"
+
+# Train-test split
+srun -u {topaz_path} train_test_split -n {test_micrographs} --image-dir "${{PROC_MICROS}}/micrographs/" \\
+  "${{PROC_ROOT}}/particles.txt"
+
+# Cross-validation training
+K={k_folds}
+N_VALUES=({', '.join(map(str, n_values))})
+
+# iterate possible values of N
+for N in "${{N_VALUES[@]}}"; do
+    # iterate each fold
+    for ((fold=0;fold<K;fold++)); do
+        # where to write results
+        PATH="${{CROSS_DIR}}/model_n${{N}}_fold${{fold}}_training.txt"
+        echo ${{PATH}}
+        # run the training command
+        srun -u {topaz_path} train -n ${{N}} --num-workers=8 \\
+                       --train-images ${{PROC_ROOT}}/image_list_train.txt \\
+                       --train-targets ${{PROC_ROOT}}/particles_train.txt \\
+                       -k ${{K}} \\
+                       --fold ${{fold}} \\
+                       -o ${{PATH}}
+    done
+done
+
+echo "Topaz cross-validation job completed"
+"""
+
+                # Write SLURM script to file
+                slurm_script_path = f"{job_name}.slurm"
+                with open(slurm_script_path, 'w') as f:
+                    f.write(slurm_script)
+
+                # Show job summary and ask for confirmation
+                print(f"\nJob Summary:")
+                print(f"  Job Name: {job_name}")
+                print(f"  Raw Micrographs: {raw_micrographs}")
+                print(f"  Particle Coordinates: {raw_particles}")
+                print(f"  Output Directory: {output_dir}")
+                print(f"  Pixel Size: {pixel_size} Å/px")
+                print(f"  Test Micrographs: {test_micrographs}")
+                print(f"  Cross-validation Folds: {k_folds}")
+                print(f"  N Values: {n_values}")
+                print(f"  SLURM Script: {slurm_script_path}")
+                print(f"  Time Limit: 06:00:00")
+                print(f"  Nodes: 1")
+                print(f"  CPUs per Task: 4")
+                print(f"  Memory: 96G")
+                print(f"  GPUs: 1")
+                print(f"  Partition: notchpeak-gpu")
+
+                # Ask for confirmation
+                while True:
+                    confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    if confirm in ['Y', 'YES', 'y', 'yes']:
+                        break
+                    elif confirm in ['N', 'NO', 'n', 'no']:
+                        print("Job submission cancelled.")
+                        self.log_output("Job submission cancelled by user")
+                        return
+                    else:
+                        print("Please enter Y or N.")
+
+                # Submit job
+                try:
+                    import subprocess
+                    result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
+                                            text=True)
+
+                    if result.returncode == 0:
+                        job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
+                        success_msg = f"Topaz cross-validation job submitted successfully. Job ID: {job_id}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                        print(f"SLURM script saved as: {slurm_script_path}")
+                        print(f"Job output will be in: slurm-<job_id>.out-<node>")
+                        print(f"Job errors will be in: slurm-<job_id>.err-<node>")
+                    else:
+                        error_msg = f"Failed to submit SLURM job: {result.stderr}"
+                        print(error_msg, file=sys.stderr)
+                        self.log_error(error_msg)
+                except Exception as e:
+                    error_msg = f"Error submitting SLURM job: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+
+        except Exception as e:
+            error_msg = f"Error in topaz cross-validation: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
     def do_clear(self, arg):
         """Clear the screen."""
         self.log_command("clear", arg)
