@@ -40,6 +40,7 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinx_copybutton',
     'sphinx.ext.autosummary',
+    'myst_parser',  # Enable MyST parser for Markdown support
 ]
 
 # Add any paths that contain templates here, relative to this directory.
