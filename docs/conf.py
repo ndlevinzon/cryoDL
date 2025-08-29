@@ -77,6 +77,17 @@ html_theme_options = {
     'prev_next_buttons_location': 'bottom',
     'style_external_links': True,
     'style_nav_header_background': '#2980B9',
+    'canonical_url': '',
+    'analytics_id': '',
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'navigation_depth': 4,
+    'includehidden': True,
+    'titles_only': False,
+    'github_url': '',
+    'show_sourcelink': True,
+    'show_sphinx': True,
+    'show_copyright': True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
