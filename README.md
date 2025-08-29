@@ -283,6 +283,7 @@ If you use CryoDL in your research, please cite:
 Additionally, we are grateful for the following open-source projects that we build on top of:
 
 ### Topaz and Topaz Denoise
+<details><summary>Citation</summary><p>
 ```bibtex
 @Article{Bepler2019,
 author={Bepler, Tristan
@@ -299,7 +300,6 @@ issn={1548-7105},
 doi={10.1038/s41592-019-0575-8},
 url={https://doi.org/10.1038/s41592-019-0575-8}
 }
-
 @Article{Bepler2020_topazdenoise,
 author={Bepler, Tristan
 and Kelley, Kotaro
@@ -313,8 +313,10 @@ doi={10.1038/s41467-020-18952-1},
 url={https://doi.org/10.1038/s41467-020-18952-1}
 }
 ```
+</p></details>
 
 ### Model-Angelo
+<details><summary>Citation</summary><p>
 ```bibtex
 @article{jamali2024automated,
 	author = {Kiarash Jamali and Lukas Kall and Rui Zhang and Alan Brown and Dari Kimanius and Sjors Scheres},
@@ -325,3 +327,4 @@ url={https://doi.org/10.1038/s41467-020-18952-1}
 	journal = {Nature}
 }
 ```
+</p></details>
