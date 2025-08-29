@@ -695,6 +695,141 @@ All interactions are logged to cryodl.log in the current directory.
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
+    def do_fasta(self, arg):
+        """Build FASTA files from PDB IDs using RCSB PDB database.
+
+        Retrieves FASTA sequences from the RCSB PDB database and saves them to
+        indexed files for use in cryo-EM workflows. Supports single and multiple
+        PDB IDs.
+
+        Args:
+            arg (str): PDB ID(s) and options. Can include:
+                pdb_id: Single PDB ID (e.g., "1ABC")
+                --multiple: Process multiple PDB IDs
+                --list: List entities in PDB entry
+                --output filename: Specify output filename
+
+        Usage:
+            fasta <pdb_id> [--output filename]
+            fasta --multiple <pdb_id1> <pdb_id2> ... [--output filename]
+            fasta --list <pdb_id>
+
+        Example:
+            >>> fasta 1ABC
+            >>> fasta 1ABC --output my_protein.fasta
+            >>> fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
+            >>> fasta --list 1ABC
+        """
+        self.log_command("fasta", arg)
+        try:
+            # Import the FastaBuilder
+            try:
+                from .build_fasta import FastaBuilder
+            except ImportError as e:
+                error_msg = f"Could not import FastaBuilder module: {e}"
+                print(error_msg, file=sys.stderr)
+                print("Please install network dependencies: pip install requests")
+                self.log_error(error_msg)
+                return
+
+            # Parse arguments
+            args = arg.split()
+            if not args:
+                print("Error: PDB ID is required. Usage: fasta <pdb_id> [options]")
+                print("Use 'fasta --help' for more information")
+                self.log_error("Missing PDB ID argument")
+                return
+
+            # Check for special options
+            if args[0] == "--list":
+                if len(args) < 2:
+                    print("Error: PDB ID required for --list option")
+                    self.log_error("Missing PDB ID for --list option")
+                    return
+
+                pdb_id = args[1].upper()
+                print(f"Fetching entity information for PDB ID: {pdb_id}")
+
+                builder = FastaBuilder()
+                success, message = builder.list_pdb_entities(pdb_id)
+
+                if success:
+                    print(message)
+                    self.log_output(f"Successfully listed entities for {pdb_id}")
+                else:
+                    print(f"Error: {message}", file=sys.stderr)
+                    self.log_error(f"Failed to list entities for {pdb_id}: {message}")
+
+                return
+
+            elif args[0] == "--multiple":
+                if len(args) < 2:
+                    print("Error: At least one PDB ID required for --multiple option")
+                    self.log_error("Missing PDB IDs for --multiple option")
+                    return
+
+                # Extract PDB IDs and output file
+                pdb_ids = []
+                output_file = None
+
+                i = 1
+                while i < len(args):
+                    if args[i] == "--output" and i + 1 < len(args):
+                        output_file = args[i + 1]
+                        i += 2
+                    else:
+                        pdb_ids.append(args[i].upper())
+                        i += 1
+
+                if not pdb_ids:
+                    print("Error: No PDB IDs provided")
+                    self.log_error("No PDB IDs provided for --multiple option")
+                    return
+
+                print(f"Processing multiple PDB IDs: {', '.join(pdb_ids)}")
+                if output_file:
+                    print(f"Output file: {output_file}")
+
+                builder = FastaBuilder()
+                success, message = builder.build_fasta_from_multiple_pdbs(pdb_ids, output_file)
+
+                if success:
+                    print(message)
+                    self.log_output(f"Successfully created FASTA file from multiple PDB IDs: {', '.join(pdb_ids)}")
+                else:
+                    print(f"Error: {message}", file=sys.stderr)
+                    self.log_error(f"Failed to create FASTA file from multiple PDB IDs: {message}")
+
+                return
+
+            else:
+                # Single PDB ID mode
+                pdb_id = args[0].upper()
+                output_file = None
+
+                # Check for output file option
+                if len(args) >= 3 and args[1] == "--output":
+                    output_file = args[2]
+
+                print(f"Fetching FASTA sequence for PDB ID: {pdb_id}")
+                if output_file:
+                    print(f"Output file: {output_file}")
+
+                builder = FastaBuilder()
+                success, message = builder.build_fasta_from_pdb(pdb_id, output_file)
+
+                if success:
+                    print(message)
+                    self.log_output(f"Successfully created FASTA file for {pdb_id}")
+                else:
+                    print(f"Error: {message}", file=sys.stderr)
+                    self.log_error(f"Failed to create FASTA file for {pdb_id}: {message}")
+
+        except Exception as e:
+            error_msg = f"Error in fasta command: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
     def do_model_angelo(self, arg):
         """Run ModelAngelo for protein structure prediction.
 
