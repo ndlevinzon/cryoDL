@@ -30,6 +30,9 @@ class CryoDLShell(cmd.Cmd):
 
     def load_banner(self):
         """Load and return the ASCII banner."""
+        # Get version info from config manager
+        metadata = self.config_manager.get_project_metadata()
+        version_info = f"Version {metadata['version']}"
         try:
             banner_path = Path(__file__).parent / "resources" / "big_ascii_banner.txt"
             if banner_path.exists():
@@ -37,6 +40,7 @@ class CryoDLShell(cmd.Cmd):
                     banner = f.read().strip()
                 return f"""
 {banner}
+{version_info}
 
 Type 'help' for available commands, 'quit' to exit.
 All interactions are logged to {self.log_file} in the current directory.
@@ -1395,6 +1399,27 @@ echo "Topaz cross-validation job completed"
             return None
         except Exception:
             return None
+
+    def do_version(self, arg):
+        """Display version information.
+
+        Usage: version
+        """
+        self.log_command("version", arg)
+        try:
+            metadata = self.config_manager.get_project_metadata()
+            version_info = f"""
+cryoDL Version Information:
+Name: {metadata['name']}
+Version: {metadata['version']}
+Description: {metadata['description']}
+    """
+            print(version_info)
+            self.log_output(version_info)
+        except Exception as e:
+            error_msg = f"Error getting version info: {e}"
+            print(error_msg)
+            self.log_error(error_msg)
 
     def do_quit(self, arg):
         """Exit the interactive shell."""
