@@ -1,3 +1,7 @@
+[![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
+[![License: GPL-3.0-only](https://img.shields.io/badge/License-GPL--3.0--only-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![PyPI version](https://badge.fury.io/py/yagwip.svg)](https://badge.fury.io/py/yagwip)
+
 # cryoDL: A Pypeline for CryoEM Deep Learning Utilities
 <p align="center">
   <img src="docs/frenchie_cryoem.png" width="300" alt="Project Hero">
