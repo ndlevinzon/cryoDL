@@ -13,13 +13,12 @@ This directory contains the Sphinx documentation for the cryoDL project.
 
 2. **Build HTML documentation:**
    ```bash
-   cd docs
-   make html
+   sphinx-build -b html docs docs/_build/html
    ```
 
 3. **View documentation:**
    ```bash
-   make serve
+   sphinx-build -b serve docs docs/_build/serve
    ```
    Then open http://localhost:8000 in your browser.
 
@@ -29,7 +28,7 @@ For a complete documentation build:
 
 ```bash
 cd docs
-make full
+sphinx-build -b full docs docs/_build/html
 ```
 
 This will:
@@ -64,15 +63,15 @@ docs/
 
 ## Available Make Targets
 
-- `make html` - Build HTML documentation
-- `make pdf` - Build PDF documentation
-- `make all` - Build all documentation formats
-- `make clean` - Clean build directory
-- `make serve` - Serve documentation locally
-- `make linkcheck` - Check for broken links
-- `make spelling` - Run spell check
-- `make api` - Update API documentation
-- `make full` - Complete build process
+- `html` - Build HTML documentation
+- `pdf` - Build PDF documentation
+- `all` - Build all documentation formats
+- `clean` - Clean build directory
+- `serve` - Serve documentation locally
+- `linkcheck` - Check for broken links
+- `spelling` - Run spell check
+- `api` - Update API documentation
+- `full` - Complete build process
 
 ## Configuration
 
@@ -95,7 +94,7 @@ To update API documentation:
 
 ```bash
 cd docs
-make api
+sphinx-build -b api docs docs/_build/html
 ```
 
 ## Customization
@@ -166,7 +165,7 @@ sphinx-autobuild . _build/html
 To check spelling:
 
 ```bash
-make spelling
+sphinx-build -b spelling docs docs/_build/html
 ```
 
 ### Link Checking
@@ -174,7 +173,7 @@ make spelling
 To check for broken links:
 
 ```bash
-make linkcheck
+sphinx-build -b linkcheck docs docs/_build/html
 ```
 
 ## Troubleshooting
@@ -199,16 +198,16 @@ make html SPHINXOPTS="-v"
 If you encounter build issues:
 
 ```bash
-make clean
-make html
+sphinx-build -b clean
+sphinx-build -b html
 ```
 
 ## Contributing to Documentation
 
 1. **Edit RST files** in the docs directory
 2. **Update API docs** by modifying docstrings in source code
-3. **Test changes** with `make html`
-4. **Check links** with `make linkcheck`
+3. **Test changes** with `sphinx-build -b html`
+4. **Check links** with `sphinx-build -b linkcheck`
 5. **Submit pull request** with documentation changes
 
 ### Documentation Standards
@@ -225,7 +224,7 @@ make html
 
 To deploy to GitHub Pages:
 
-1. Build documentation: `make html`
+1. Build documentation: `sphinx-build -b html`
 2. Copy `_build/html/` contents to `docs/` branch
 3. Configure GitHub Pages to serve from `docs/` branch
 
@@ -239,7 +238,7 @@ To deploy to GitHub Pages:
 
 For manual deployment to any web server:
 
-1. Build documentation: `make html`
+1. Build documentation: `sphinx-build -b html`
 2. Upload `_build/html/` contents to web server
 3. Configure web server to serve static files
 
