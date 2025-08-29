@@ -657,6 +657,292 @@ echo "ModelAngelo job completed"
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
+    def do_topaz(self, arg):
+        """Run Topaz for particle picking and analysis.
+
+        Usage: topaz <command> [--local]
+        Commands: preprocess, model, postprocess
+        Examples:
+          topaz preprocess --local
+          topaz preprocess
+        """
+        self.log_command("topaz", arg)
+        try:
+            # Check if topaz is configured
+            topaz_path = self.config_manager.get("dependencies.topaz.path")
+            if not topaz_path:
+                error_msg = "Topaz path not configured. Use 'add_dependency topaz <path>' first."
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Validate topaz path
+            if not self.config_manager.validate_dependency_path("topaz"):
+                error_msg = f"Topaz not found at: {topaz_path}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Parse arguments
+            args = arg.split()
+            if not args:
+                print("Error: Topaz command required. Usage: topaz <command> [--local]")
+                print("Available commands: preprocess, model, postprocess")
+                self.log_error("Missing topaz command")
+                return
+
+            command = args[0]
+            is_local = "--local" in args
+
+            if command == "preprocess":
+                self._run_topaz_preprocess(topaz_path, is_local)
+            elif command == "model":
+                print("Topaz model command not yet implemented")
+                self.log_output("Topaz model command not yet implemented")
+            elif command == "postprocess":
+                print("Topaz postprocess command not yet implemented")
+                self.log_output("Topaz postprocess command not yet implemented")
+            else:
+                error_msg = f"Unknown topaz command: {command}"
+                print(error_msg, file=sys.stderr)
+                print("Available commands: preprocess, model, postprocess")
+                self.log_error(error_msg)
+
+        except Exception as e:
+            error_msg = f"Error in topaz command: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
+    def _run_topaz_preprocess(self, topaz_path, is_local):
+        """Run Topaz preprocess command."""
+        try:
+            print("Topaz Preprocess Setup:")
+            print("-" * 25)
+
+            # Prompt for input parameters
+            raw_micrographs = input("Enter path to raw micrographs directory: ").strip()
+            if not raw_micrographs:
+                error_msg = "Raw micrographs directory path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Validate micrographs directory exists
+            micrographs_path = Path(raw_micrographs)
+            if not micrographs_path.exists():
+                error_msg = f"Micrographs directory not found: {raw_micrographs}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Get particle coordinates file (optional)
+            raw_particles = input(
+                "Enter path to particle coordinates file (optional, press Enter to skip): ").strip()
+            particles_path = None
+            if raw_particles:
+                particles_path = Path(raw_particles)
+                if not particles_path.exists():
+                    error_msg = f"Particle coordinates file not found: {raw_particles}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Get output directory
+            output_dir = input("Enter output directory name (default: topaz_preprocess_output): ").strip()
+            if not output_dir:
+                output_dir = "topaz_preprocess_output"
+
+            # Get pixel size for downsampling
+            pixel_size = input("Enter pixel size for downsampling in Å/px (default: 8): ").strip()
+            if not pixel_size:
+                pixel_size = "8"
+            else:
+                try:
+                    float(pixel_size)  # Validate it's a number
+                except ValueError:
+                    error_msg = "Pixel size must be a number"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Create output directories
+            proc_root = Path(output_dir)
+            proc_micrographs = proc_root / "micrographs"
+            model_dir = proc_root / "saved_models"
+            data_dir = proc_root / "data"
+
+            # Build Topaz preprocess command
+            preprocess_cmd = f"{topaz_path} preprocess -v -s {pixel_size} -o {proc_micrographs} {raw_micrographs}/*.mrc"
+
+            # Build convert command if particles file provided
+            convert_cmd = None
+            if particles_path:
+                convert_cmd = f"{topaz_path} convert -s {pixel_size} -o {proc_root}/particles.txt {raw_particles}"
+
+            if is_local:
+                # Run locally
+                print(f"\nRunning Topaz preprocess locally:")
+                print(f"Preprocess command: {preprocess_cmd}")
+                if convert_cmd:
+                    print(f"Convert command: {convert_cmd}")
+
+                # Create directories
+                proc_micrographs.mkdir(parents=True, exist_ok=True)
+                model_dir.mkdir(parents=True, exist_ok=True)
+                data_dir.mkdir(parents=True, exist_ok=True)
+
+                # Execute preprocess command
+                import subprocess
+                try:
+                    result = subprocess.run(preprocess_cmd, shell=True, capture_output=True, text=True)
+                    if result.returncode == 0:
+                        success_msg = f"Topaz preprocess completed successfully. Output in: {proc_micrographs}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                    else:
+                        error_msg = f"Topaz preprocess failed with return code {result.returncode}"
+                        print(error_msg, file=sys.stderr)
+                        print(f"Error output: {result.stderr}", file=sys.stderr)
+                        self.log_error(error_msg)
+                        return
+
+                    # Execute convert command if provided
+                    if convert_cmd:
+                        result = subprocess.run(convert_cmd, shell=True, capture_output=True, text=True)
+                        if result.returncode == 0:
+                            success_msg = f"Topaz convert completed successfully. Output in: {proc_root}/particles.txt"
+                            print(success_msg)
+                            self.log_output(success_msg)
+                        else:
+                            error_msg = f"Topaz convert failed with return code {result.returncode}"
+                            print(error_msg, file=sys.stderr)
+                            print(f"Error output: {result.stderr}", file=sys.stderr)
+                            self.log_error(error_msg)
+
+                except Exception as e:
+                    error_msg = f"Error running Topaz: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+            else:
+                # Generate and submit SLURM job
+                job_name = "topaz_preprocess"
+
+                # Create SLURM script content
+                slurm_script = f"""#!/bin/bash
+#SBATCH --job-name={job_name}
+#SBATCH --output={job_name}_%j.out
+#SBATCH --error={job_name}_%j.err
+#SBATCH --time={self.config_manager.get('slurm.time', '24:00:00')}
+#SBATCH --nodes={self.config_manager.get('slurm.nodes', 1)}
+#SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
+#SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
+#SBATCH --mem={self.config_manager.get('slurm.mem', '16G')}
+
+set -euo pipefail
+set -x
+
+module purge
+module load topaz/0.2.5
+
+# Be explicit about threads to avoid oversubscription
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+
+cd "${{SLURM_SUBMIT_DIR}}"
+echo "WORKDIR: ${{SLURM_SUBMIT_DIR}}"
+nvidia-smi || true
+
+# Paths
+RAW_MICROS="{raw_micrographs}"
+PROC_ROOT="{output_dir}"
+PROC_MICROS="${{PROC_ROOT}}/micrographs"
+MODEL_DIR="${{PROC_ROOT}}/saved_models"
+DATA_DIR="${{PROC_ROOT}}/data"
+
+# Make Directories for Preprocessing, Model, and Data
+mkdir -p "${{PROC_MICROS}}" "${{MODEL_DIR}}" "${{DATA_DIR}}"
+
+# Preprocess (downsample to {pixel_size} Å/px)
+srun -u {topaz_path} preprocess -v -s {pixel_size} \\
+  -o "${{PROC_MICROS}}/" \\
+  "${{RAW_MICROS}}"/*.mrc
+"""
+
+                # Add convert command if particles file provided
+                if particles_path:
+                    slurm_script += f"""
+# Scale particle coordinates to match downsampling
+srun -u {topaz_path} convert -s {pixel_size} \\
+  -o "${{PROC_ROOT}}/particles.txt" \\
+  "{raw_particles}"
+"""
+
+                slurm_script += """
+echo "Topaz preprocess job completed"
+"""
+
+                # Write SLURM script to file
+                slurm_script_path = f"{job_name}.slurm"
+                with open(slurm_script_path, 'w') as f:
+                    f.write(slurm_script)
+
+                # Show job summary and ask for confirmation
+                print(f"\nJob Summary:")
+                print(f"  Job Name: {job_name}")
+                print(f"  Raw Micrographs: {raw_micrographs}")
+                if particles_path:
+                    print(f"  Particle Coordinates: {raw_particles}")
+                print(f"  Output Directory: {output_dir}")
+                print(f"  Pixel Size: {pixel_size} Å/px")
+                print(f"  SLURM Script: {slurm_script_path}")
+                print(f"  Time Limit: 06:00:00")
+                print(f"  Nodes: 1")
+                print(f"  CPUs per Task: 4")
+                print(f"  Memory: 96G")
+                print(f"  GPUs: 1")
+                print(f"  Partition: notchpeak-gpu")
+
+                # Ask for confirmation
+                while True:
+                    confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    if confirm in ['Y', 'YES', 'y', 'yes']:
+                        break
+                    elif confirm in ['N', 'NO', 'n', 'no']:
+                        print("Job submission cancelled.")
+                        self.log_output("Job submission cancelled by user")
+                        return
+                    else:
+                        print("Please enter Y or N.")
+
+                # Submit job
+                try:
+                    import subprocess
+                    result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
+                                            text=True)
+
+                    if result.returncode == 0:
+                        job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
+                        success_msg = f"Topaz preprocess job submitted successfully. Job ID: {job_id}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                        print(f"SLURM script saved as: {slurm_script_path}")
+                        print(f"Job output will be in: slurm-<job_id>.out-<node>")
+                        print(f"Job errors will be in: slurm-<job_id>.err-<node>")
+                    else:
+                        error_msg = f"Failed to submit SLURM job: {result.stderr}"
+                        print(error_msg, file=sys.stderr)
+                        self.log_error(error_msg)
+                except Exception as e:
+                    error_msg = f"Error submitting SLURM job: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+
+        except Exception as e:
+            error_msg = f"Error in topaz preprocess: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
     def do_clear(self, arg):
         """Clear the screen."""
         self.log_command("clear", arg)
