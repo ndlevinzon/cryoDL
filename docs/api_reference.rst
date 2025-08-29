@@ -21,6 +21,11 @@ Core Modules
    :undoc-members:
    :show-inheritance:
 
+.. automodule:: src.build_fasta
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Configuration Manager
 --------------------
 
@@ -128,6 +133,8 @@ Analysis Commands
 
 .. automethod:: src.cli.CryoDLShell.do_analyze_cv
 
+.. automethod:: src.cli.CryoDLShell.do_fasta
+
 Utility Commands
 ~~~~~~~~~~~~~~~
 
@@ -156,6 +163,33 @@ The :mod:`src.topaz_analysis` module provides analysis functions for Topaz resul
 .. autofunction:: src.topaz_analysis.analyze_cross_validation
 
 .. autofunction:: src.topaz_analysis.plot_training_curves
+
+FASTA Sequence Builder
+--------------------
+
+The :class:`FastaBuilder` class provides functionality to fetch FASTA sequences from the RCSB PDB database.
+
+.. autoclass:: src.build_fasta.FastaBuilder
+   :members:
+   :special-members: __init__
+
+   .. automethod:: __init__
+
+   .. automethod:: validate_pdb_id
+
+   .. automethod:: fetch_pdb_info
+
+   .. automethod:: fetch_polymer_entities
+
+   .. automethod:: fetch_fasta_sequence
+
+   .. automethod:: get_entity_info
+
+   .. automethod:: build_fasta_from_pdb
+
+   .. automethod:: build_fasta_from_multiple_pdbs
+
+   .. automethod:: list_pdb_entities
 
 Data Structures
 --------------
