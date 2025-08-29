@@ -1,0 +1,325 @@
+/* Custom CSS for cryoDL documentation */
+
+/* Custom color scheme */
+:root {
+    --cryodl-primary: #2980B9;
+    --cryodl-secondary: #3498DB;
+    --cryodl-accent: #E74C3C;
+    --cryodl-success: #27AE60;
+    --cryodl-warning: #F39C12;
+    --cryodl-info: #17A2B8;
+}
+
+/* Header styling */
+.wy-side-nav-search {
+    background-color: var(--cryodl-primary);
+}
+
+.wy-side-nav-search input[type=text] {
+    border-color: var(--cryodl-secondary);
+}
+
+/* Navigation styling */
+.wy-nav-side {
+    background: #f8f9fa;
+}
+
+.wy-menu-vertical a {
+    color: #333;
+}
+
+.wy-menu-vertical a:hover {
+    background-color: var(--cryodl-secondary);
+    color: white;
+}
+
+.wy-menu-vertical li.current > a {
+    background-color: var(--cryodl-primary);
+    color: white;
+}
+
+/* Code blocks */
+.highlight {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+.highlight pre {
+    background-color: transparent;
+}
+
+/* Inline code */
+code {
+    background-color: #f8f9fa;
+    color: var(--cryodl-accent);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+/* Command examples */
+.cryodl-command {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    margin: 10px 0;
+}
+
+.cryodl-command::before {
+    content: "cryoDL> ";
+    color: var(--cryodl-success);
+    font-weight: bold;
+}
+
+/* Output examples */
+.cryodl-output {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--cryodl-info);
+    padding: 10px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* Warning boxes */
+.warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-left: 4px solid var(--cryodl-warning);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.warning::before {
+    content: "⚠️ Warning: ";
+    font-weight: bold;
+    color: var(--cryodl-warning);
+}
+
+/* Info boxes */
+.info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    border-left: 4px solid var(--cryodl-info);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.info::before {
+    content: "ℹ️ Info: ";
+    font-weight: bold;
+    color: var(--cryodl-info);
+}
+
+/* Success boxes */
+.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-left: 4px solid var(--cryodl-success);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.success::before {
+    content: "✅ Success: ";
+    font-weight: bold;
+    color: var(--cryodl-success);
+}
+
+/* Error boxes */
+.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-left: 4px solid var(--cryodl-accent);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.error::before {
+    content: "❌ Error: ";
+    font-weight: bold;
+    color: var(--cryodl-accent);
+}
+
+/* API documentation styling */
+.autoclass {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.automethod {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: white;
+    border-left: 3px solid var(--cryodl-secondary);
+    border-radius: 3px;
+}
+
+/* Table styling */
+.wy-table-responsive table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.wy-table-responsive th {
+    background-color: var(--cryodl-primary);
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.wy-table-responsive td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.wy-table-responsive tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    background-color: var(--cryodl-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: var(--cryodl-secondary);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-success {
+    background-color: var(--cryodl-success);
+}
+
+.btn-warning {
+    background-color: var(--cryodl-warning);
+}
+
+.btn-danger {
+    background-color: var(--cryodl-accent);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .wy-nav-side {
+        width: 100%;
+        position: relative;
+    }
+
+    .wy-nav-content {
+        margin-left: 0;
+    }
+
+    .cryodl-command {
+        font-size: 0.8em;
+        overflow-x: auto;
+    }
+}
+
+/* Print styles */
+@media print {
+    .wy-nav-side,
+    .wy-nav-top {
+        display: none;
+    }
+
+    .wy-nav-content {
+        margin-left: 0;
+    }
+
+    .cryodl-command,
+    .cryodl-output {
+        background-color: white;
+        border: 1px solid #ccc;
+    }
+}
+
+/* Syntax highlighting for different languages */
+.highlight-bash {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+.highlight-python {
+    background-color: #2b5b84;
+    color: #f8f8f2;
+}
+
+.highlight-json {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+}
+
+/* Custom admonitions */
+.admonition {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.admonition-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.admonition.note {
+    background-color: #d1ecf1;
+    border-left: 4px solid var(--cryodl-info);
+}
+
+.admonition.warning {
+    background-color: #fff3cd;
+    border-left: 4px solid var(--cryodl-warning);
+}
+
+.admonition.tip {
+    background-color: #d4edda;
+    border-left: 4px solid var(--cryodl-success);
+}
+
+.admonition.danger {
+    background-color: #f8d7da;
+    border-left: 4px solid var(--cryodl-accent);
+}
+
+/* Footer styling */
+.wy-nav-content footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    color: #666;
+}
+
+/* Breadcrumb styling */
+.wy-breadcrumbs {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.wy-breadcrumbs a {
+    color: var(--cryodl-primary);
+}
+
+.wy-breadcrumbs a:hover {
+    color: var(--cryodl-secondary);
+}

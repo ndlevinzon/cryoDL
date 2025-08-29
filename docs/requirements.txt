@@ -1,0 +1,45 @@
+# Documentation dependencies for cryoDL
+# These packages are required to build the Sphinx documentation
+
+# Core Sphinx
+sphinx>=4.0.0
+
+# Sphinx theme
+sphinx-rtd-theme>=1.0.0
+
+# Sphinx extensions
+sphinx-copybutton>=0.5.0
+sphinx-autodoc-typehints>=1.12.0
+sphinx-paramlinks>=0.5.0
+
+# Markdown support
+myst-parser>=0.18.0
+
+# Code highlighting
+pygments>=2.10.0
+
+# Optional: PDF generation
+# sphinx-latex-builder>=1.0.0
+
+# Optional: Spell checking
+# sphinxcontrib-spelling>=7.0.0
+
+# Optional: Link checking
+# sphinx-linkcheck>=1.0.0
+
+# Development dependencies
+# These are optional but recommended for documentation development
+
+# Code formatting
+black>=21.0.0
+flake8>=3.9.0
+
+# Type checking
+mypy>=0.910
+
+# Testing
+pytest>=6.0.0
+pytest-cov>=2.12.0
+
+# Documentation testing
+sphinx-testing>=1.0.0
