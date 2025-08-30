@@ -257,12 +257,16 @@ All interactions are logged to cryodl.log in the current directory.
             arg (str): The configuration key and value in format "key value".
 
         Usage:
-            set <key> <value>
+            .. code-block:: bash
+
+                set <key> <value>
 
         Example:
-            set settings.max_threads 8
-            set settings.gpu_enabled true
-            set new_section.new_key new_value
+            .. code-block:: bash
+
+                set settings.max_threads 8
+                set settings.gpu_enabled true
+                set new_section.new_key new_value
         """
         self.log_command("set", arg)
         try:
