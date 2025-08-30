@@ -1,5 +1,5 @@
 API Reference
-============
+=============
 
 This section provides detailed API documentation for the cryoDL package, automatically generated from the source code.
 
@@ -10,21 +10,25 @@ Core Modules
    :members:
    :undoc-members:
    :show-inheritance:
+   :no-index:
 
 .. automodule:: src.cli
    :members:
    :undoc-members:
    :show-inheritance:
+   :no-index:
 
 .. automodule:: src.topaz_analysis
    :members:
    :undoc-members:
    :show-inheritance:
+   :no-index:
 
 .. automodule:: src.build_fasta
    :members:
    :undoc-members:
    :show-inheritance:
+   :no-index:
 
 Configuration Manager
 --------------------

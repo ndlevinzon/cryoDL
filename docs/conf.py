@@ -147,21 +147,11 @@ html_theme_options = {
     'sticky_navigation': True,
     'includehidden': True,
     'logo_only': False,
-    'display_version': True,
     'prev_next_buttons_location': 'bottom',
     'style_external_links': True,
     'style_nav_header_background': '#2980B9',
     'canonical_url': '',
     'analytics_id': '',
-    'collapse_navigation': False,
-    'sticky_navigation': True,
-    'navigation_depth': 4,
-    'includehidden': True,
-    'titles_only': False,
-    'github_url': '',
-    'show_sourcelink': True,
-    'show_sphinx': True,
-    'show_copyright': True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -271,6 +261,7 @@ intersphinx_mapping = {
     'numpy': ('https://numpy.org/doc/stable/', None),
     'pandas': ('https://pandas.pydata.org/docs/', None),
     'matplotlib': ('https://matplotlib.org/stable/', None),
+    'typing': ('https://docs.python.org/3/library/typing.html', None),
 }
 
 # Todo settings
@@ -279,16 +270,17 @@ todo_include_todos = True
 # Autosummary settings
 autosummary_generate = True
 
-extensions += ["pydoctor.sphinx_ext.build_apidocs"]
+# Pydoctor configuration - commented out due to integration issues
+# extensions += ["pydoctor.sphinx_ext.build_apidocs"]
 
-pydoctor_args = [
-    "--project-name=cryoDL",
-    "--docformat=google",                 # or numpy
-    "--add-package=../src/",        # path from docs/ to your package
-    "--html-output=api",
-    "--theme=readthedocs",
-    "--intersphinx=https://docs.python.org/3/objects.inv",
-]
+# pydoctor_args = [
+#     "--project-name=cryoDL",
+#     "--docformat=google",
+#     "--add-package=../src/",
+#     "--html-output=api",
+#     "--theme=readthedocs",
+#     "--intersphinx=https://docs.python.org/3/objects.inv",
+# ]
 
 # -- Custom CSS for better styling -------------------------------------------
 
