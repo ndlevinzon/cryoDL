@@ -13,7 +13,6 @@
 import os
 import sys
 import re
-
 sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
@@ -25,49 +24,50 @@ author = 'cryoDL Team'
 # The full version, including alpha/beta/rc tags
 release = '0.1.0'
 
-
 # -- General configuration ---------------------------------------------------
 
 # --- Autodoc hook: turn "Usage:" and "Examples:" text into code blocks automatically -------
-def _usage_examples_to_codeblock(app, what, name, obj, options, lines):
-    """
-    Convert 'Usage:' and 'Examples:' sections in raw Google-style docstrings into proper code blocks.
-    """
-    out, i = [], 0
-    while i < len(lines):
-        line = lines[i]
-        line_lower = line.strip().lower()
+# DISABLED: This transformer was causing issues with Napoleon processing
+# def _usage_examples_to_codeblock(app, what, name, obj, options, lines):
+#     """
+#     Convert 'Usage:' and 'Examples:' sections in raw Google-style docstrings into proper code blocks.
+#     """
+#     out, i = [], 0
+#     while i < len(lines):
+#         line = lines[i]
+#         line_lower = line.strip().lower()
+#
+#         if line_lower in ["usage:", "examples:"]:
+#             # Keep the original section header
+#             out.append(line)
+#             out.append("")
+#             i += 1
+#
+#             # Collect following non-empty lines until a blank line or a new section header
+#             code_lines = []
+#             while i < len(lines):
+#                 nxt = lines[i]
+#                 if not nxt.strip():
+#                     break
+#                 if re.match(r"^[A-Z][A-Za-z0-9 _-]*:\s*$", nxt.strip()):  # next section
+#                     break
+#                 code_lines.append(nxt.rstrip())
+#                 i += 1
+#
+#             # If we have code lines, format them as a code block
+#             if code_lines:
+#                 out.append(".. code-block:: bash")
+#                 out.append("")
+#                 for code_line in code_lines:
+#                     out.append("    " + code_line)
+#                 out.append("")
+#             continue
+#
+#         out.append(line)
+#         i += 1
+#
+#     lines[:] = out
 
-        if line_lower in ["usage:", "examples:"]:
-            # Keep the original section header
-            out.append(line)
-            out.append("")
-            i += 1
-
-            # Collect following non-empty lines until a blank line or a new section header
-            code_lines = []
-            while i < len(lines):
-                nxt = lines[i]
-                if not nxt.strip():
-                    break
-                if re.match(r"^[A-Z][A-Za-z0-9 _-]*:\s*$", nxt.strip()):  # next section
-                    break
-                code_lines.append(nxt.rstrip())
-                i += 1
-
-            # If we have code lines, format them as a code block
-            if code_lines:
-                out.append(".. code-block:: bash")
-                out.append("")
-                for code_line in code_lines:
-                    out.append("    " + code_line)
-                out.append("")
-            continue
-
-        out.append(line)
-        i += 1
-
-    lines[:] = out
 
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -240,7 +240,6 @@ todo_include_todos = True
 # Autosummary settings
 autosummary_generate = True
 
-
 # Pydoctor configuration - commented out due to integration issues
 # extensions += ["pydoctor.sphinx_ext.build_apidocs"]
 
@@ -257,8 +256,8 @@ autosummary_generate = True
 
 def setup(app):
     app.add_css_file('custom.css')
-    # Enable the docstring transformer for Usage and Examples sections:
-    app.connect('autodoc-process-docstring', _usage_examples_to_codeblock)
+    # DISABLED: Docstring transformer was causing issues with Napoleon processing
+    # app.connect('autodoc-process-docstring', _usage_examples_to_codeblock)
 
 
 
