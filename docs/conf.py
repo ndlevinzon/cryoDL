@@ -13,6 +13,7 @@
 import os
 import sys
 import re
+
 sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
@@ -24,79 +25,49 @@ author = 'cryoDL Team'
 # The full version, including alpha/beta/rc tags
 release = '0.1.0'
 
+
 # -- General configuration ---------------------------------------------------
 
-# --- Autodoc hook: turn "Usage:" text into a code block automatically -------
-def _usage_to_codeblock(app, what, name, obj, options, lines):
+# --- Autodoc hook: turn "Usage:" and "Examples:" text into code blocks automatically -------
+def _usage_examples_to_codeblock(app, what, name, obj, options, lines):
     """
-    Convert a 'Usage:' section in raw Google-style docstrings into:
-
-        Usage:
-            .. code-block:: bash
-
-                <your-usage-lines>
-
-    No changes to source docstrings required.
+    Convert 'Usage:' and 'Examples:' sections in raw Google-style docstrings into proper code blocks.
     """
     out, i = [], 0
     while i < len(lines):
         line = lines[i]
-        if line.strip().lower() == "usage:":
-            out.append("Usage:")
-            out.append("")
-            out.append(".. code-block:: bash")
+        line_lower = line.strip().lower()
+
+        if line_lower in ["usage:", "examples:"]:
+            # Keep the original section header
+            out.append(line)
             out.append("")
             i += 1
-            # Collect following non-empty lines until a blank line or a new section header (e.g. "Args:")
+
+            # Collect following non-empty lines until a blank line or a new section header
+            code_lines = []
             while i < len(lines):
                 nxt = lines[i]
                 if not nxt.strip():
                     break
                 if re.match(r"^[A-Z][A-Za-z0-9 _-]*:\s*$", nxt.strip()):  # next section
                     break
-                out.append("    " + nxt.rstrip())
+                code_lines.append(nxt.rstrip())
                 i += 1
-            out.append("")
+
+            # If we have code lines, format them as a code block
+            if code_lines:
+                out.append(".. code-block:: bash")
+                out.append("")
+                for code_line in code_lines:
+                    out.append("    " + code_line)
+                out.append("")
             continue
+
         out.append(line)
         i += 1
+
     lines[:] = out
-
-def _example_to_codeblock(app, what, name, obj, options, lines):
-    """
-    Convert a 'Usage:' section in raw Google-style docstrings into:
-
-        Usage:
-            .. code-block:: bash
-
-                <your-usage-lines>
-
-    No changes to source docstrings required.
-    """
-    out, i = [], 0
-    while i < len(lines):
-        line = lines[i]
-        if line.strip().lower() == "example:":
-            out.append("Example:")
-            out.append("")
-            out.append(".. code-block:: bash")
-            out.append("")
-            i += 1
-            # Collect following non-empty lines until a blank line or a new section header (e.g. "Args:")
-            while i < len(lines):
-                nxt = lines[i]
-                if not nxt.strip():
-                    break
-                if re.match(r"^[A-Z][A-Za-z0-9 _-]*:\s*$", nxt.strip()):  # next section
-                    break
-                out.append("    " + nxt.rstrip())
-                i += 1
-            out.append("")
-            continue
-        out.append(line)
-        i += 1
-    lines[:] = out
-
 
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -232,13 +203,12 @@ autodoc_default_options = {
 }
 
 # Napoleon settings for Google-style docstrings
-# Napoleon settings for Google-style docstrings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
 napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True
 napoleon_include_special_with_doc = True
-napoleon_use_admonition_for_examples = True
+napoleon_use_admonition_for_examples = False  # Don't use admonitions for examples
 napoleon_use_admonition_for_notes = True
 napoleon_use_admonition_for_references = True
 napoleon_use_ivar = True
@@ -249,7 +219,7 @@ napoleon_preprocess_types = True
 napoleon_type_aliases = None
 napoleon_attr_annotations = True
 
-# Alias "Usage" and singular "Example" to the built-in Examples section
+# Custom sections for Napoleon
 napoleon_custom_sections = [
     ("Usage", "Examples"),
     ("Example", "Examples"),
@@ -270,6 +240,7 @@ todo_include_todos = True
 # Autosummary settings
 autosummary_generate = True
 
+
 # Pydoctor configuration - commented out due to integration issues
 # extensions += ["pydoctor.sphinx_ext.build_apidocs"]
 
@@ -286,9 +257,8 @@ autosummary_generate = True
 
 def setup(app):
     app.add_css_file('custom.css')
-    # and also enable the docstring transformer:
-    app.connect('autodoc-process-docstring', _usage_to_codeblock)
-    app.connect('autodoc-process-docstring', _example_to_codeblock)
+    # Enable the docstring transformer for Usage and Examples sections:
+    app.connect('autodoc-process-docstring', _usage_examples_to_codeblock)
 
 
 
