@@ -279,6 +279,17 @@ todo_include_todos = True
 # Autosummary settings
 autosummary_generate = True
 
+extensions += ["pydoctor.sphinx_ext.build_apidocs"]
+
+pydoctor_args = [
+    "--project-name=cryoDL",
+    "--docformat=google",                 # or numpy
+    "--add-package=../src/",        # path from docs/ to your package
+    "--html-output=api",
+    "--theme=readthedocs",
+    "--intersphinx=https://docs.python.org/3/objects.inv",
+]
+
 # -- Custom CSS for better styling -------------------------------------------
 
 def setup(app):

@@ -164,4 +164,12 @@ exclude_lines = [
     "@(abc\\.)?abstractmethod",
 ]
 
+[tool.pydoctor]
+project-name = "cryoDL"
+docformat = "google"               # or "numpy"
+add-package = ["src/"]       # your package path
+html-output = "docs/api"
+theme = "readthedocs"
+intersphinx = ["https://docs.python.org/3/objects.inv"]
+
 
