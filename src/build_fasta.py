@@ -32,7 +32,9 @@ class FastaBuilder:
         retry_delay (float): Delay between retry attempts in seconds
     """
 
-    def __init__(self, timeout: int = 30, max_retries: int = 3, retry_delay: float = 1.0):
+    def __init__(
+        self, timeout: int = 30, max_retries: int = 3, retry_delay: float = 1.0
+    ):
         """Initialize the FastaBuilder.
 
         Args:
@@ -102,7 +104,9 @@ class FastaBuilder:
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
                 else:
-                    logger.error(f"Failed to fetch PDB info for {pdb_id} after {self.max_retries} attempts")
+                    logger.error(
+                        f"Failed to fetch PDB info for {pdb_id} after {self.max_retries} attempts"
+                    )
                     return None
 
     def fetch_polymer_entities(self, pdb_id: str) -> Optional[List[Dict]]:
@@ -145,7 +149,9 @@ class FastaBuilder:
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
                 else:
-                    logger.error(f"Failed to fetch polymer entities for {pdb_id} after {self.max_retries} attempts")
+                    logger.error(
+                        f"Failed to fetch polymer entities for {pdb_id} after {self.max_retries} attempts"
+                    )
                     return None
 
     def fetch_fasta_sequence(self, pdb_id: str, entity_id: str) -> Optional[str]:
@@ -176,7 +182,11 @@ class FastaBuilder:
                 data = response.json()
 
                 # Extract sequence from response
-                sequence = data.get("entity", {}).get("polymer_seq", {}).get("one_letter_code", "")
+                sequence = (
+                    data.get("entity", {})
+                    .get("polymer_seq", {})
+                    .get("one_letter_code", "")
+                )
                 if sequence:
                     return sequence
                 else:
@@ -184,12 +194,15 @@ class FastaBuilder:
                     return None
 
             except requests.exceptions.RequestException as e:
-                logger.warning(f"Attempt {attempt + 1} failed for {pdb_id} entity {entity_id}: {e}")
+                logger.warning(
+                    f"Attempt {attempt + 1} failed for {pdb_id} entity {entity_id}: {e}"
+                )
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
                 else:
                     logger.error(
-                        f"Failed to fetch sequence for {pdb_id} entity {entity_id} after {self.max_retries} attempts")
+                        f"Failed to fetch sequence for {pdb_id} entity {entity_id} after {self.max_retries} attempts"
+                    )
                     return None
 
     def get_entity_info(self, pdb_id: str, entity_id: str) -> Optional[Dict]:
@@ -219,15 +232,20 @@ class FastaBuilder:
                 response.raise_for_status()
                 return response.json()
             except requests.exceptions.RequestException as e:
-                logger.warning(f"Attempt {attempt + 1} failed for {pdb_id} entity {entity_id}: {e}")
+                logger.warning(
+                    f"Attempt {attempt + 1} failed for {pdb_id} entity {entity_id}: {e}"
+                )
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
                 else:
                     logger.error(
-                        f"Failed to fetch entity info for {pdb_id} entity {entity_id} after {self.max_retries} attempts")
+                        f"Failed to fetch entity info for {pdb_id} entity {entity_id} after {self.max_retries} attempts"
+                    )
                     return None
 
-    def build_fasta_from_pdb(self, pdb_id: str, output_file: str = None) -> Tuple[bool, str]:
+    def build_fasta_from_pdb(
+        self, pdb_id: str, output_file: str = None
+    ) -> Tuple[bool, str]:
         """Build a FASTA file from a single PDB ID.
 
         Args:
@@ -254,20 +272,24 @@ class FastaBuilder:
             output_file = f"{pdb_id}_protein.fasta"
 
         try:
-            with open(output_file, 'w') as f:
+            with open(output_file, "w") as f:
                 for entity in entities:
                     entity_id = entity.get("entity_id", "1")
 
                     # Get entity information
                     entity_info = self.get_entity_info(pdb_id, entity_id)
                     if not entity_info:
-                        logger.warning(f"Could not fetch info for {pdb_id} entity {entity_id}")
+                        logger.warning(
+                            f"Could not fetch info for {pdb_id} entity {entity_id}"
+                        )
                         continue
 
                     # Get sequence
                     sequence = self.fetch_fasta_sequence(pdb_id, entity_id)
                     if not sequence:
-                        logger.warning(f"No sequence found for {pdb_id} entity {entity_id}")
+                        logger.warning(
+                            f"No sequence found for {pdb_id} entity {entity_id}"
+                        )
                         continue
 
                     # Extract title and other metadata
@@ -279,7 +301,7 @@ class FastaBuilder:
 
                     # Write sequence in 80-character lines
                     for i in range(0, len(sequence), 80):
-                        f.write(sequence[i:i + 80] + "\n")
+                        f.write(sequence[i : i + 80] + "\n")
                     f.write("\n")
 
             return True, f"Successfully created FASTA file: {output_file}"
@@ -288,8 +310,9 @@ class FastaBuilder:
             logger.error(f"Error writing FASTA file: {e}")
             return False, f"Error writing FASTA file: {e}"
 
-    def build_fasta_from_multiple_pdbs(self, pdb_ids: List[str], output_file: str = "combined_protein.fasta") -> Tuple[
-        bool, str]:
+    def build_fasta_from_multiple_pdbs(
+        self, pdb_ids: List[str], output_file: str = "combined_protein.fasta"
+    ) -> Tuple[bool, str]:
         """Build a FASTA file from multiple PDB IDs.
 
         Args:
@@ -316,7 +339,7 @@ class FastaBuilder:
         failed_pdbs = []
 
         try:
-            with open(output_file, 'w') as f:
+            with open(output_file, "w") as f:
                 for pdb_id in pdb_ids:
                     logger.info(f"Processing PDB ID: {pdb_id}")
 
@@ -341,15 +364,21 @@ class FastaBuilder:
                             continue
 
                         # Extract title and other metadata
-                        title = entity_info.get("title", f"Unknown protein from {pdb_id}")
-                        entity_type = entity_info.get("entity", {}).get("type", "Unknown")
+                        title = entity_info.get(
+                            "title", f"Unknown protein from {pdb_id}"
+                        )
+                        entity_type = entity_info.get("entity", {}).get(
+                            "type", "Unknown"
+                        )
 
                         # Write FASTA entry
-                        f.write(f">pdb|{pdb_id}|entity_{entity_id}|{entity_type}|{title}\n")
+                        f.write(
+                            f">pdb|{pdb_id}|entity_{entity_id}|{entity_type}|{title}\n"
+                        )
 
                         # Write sequence in 80-character lines
                         for i in range(0, len(sequence), 80):
-                            f.write(sequence[i:i + 80] + "\n")
+                            f.write(sequence[i : i + 80] + "\n")
                         f.write("\n")
 
                         pdb_success = True
@@ -362,7 +391,9 @@ class FastaBuilder:
             # Prepare result message
             message_parts = [f"Successfully created FASTA file: {output_file}"]
             if successful_pdbs:
-                message_parts.append(f"Successfully processed: {', '.join(successful_pdbs)}")
+                message_parts.append(
+                    f"Successfully processed: {', '.join(successful_pdbs)}"
+                )
             if failed_pdbs:
                 message_parts.append(f"Failed to process: {', '.join(failed_pdbs)}")
 
@@ -401,7 +432,12 @@ class FastaBuilder:
 
         # Build information string
         title = pdb_info.get("title", "No title available")
-        info_lines = [f"PDB ID: {pdb_id}", f"Title: {title}", f"Number of polymer entities: {len(entities)}", ""]
+        info_lines = [
+            f"PDB ID: {pdb_id}",
+            f"Title: {title}",
+            f"Number of polymer entities: {len(entities)}",
+            "",
+        ]
 
         for i, entity in enumerate(entities, 1):
             entity_id = entity.get("entity_id", "1")
@@ -436,53 +472,39 @@ Examples:
   python build_fasta.py 1ABC my_protein.fasta   # Create custom filename
   python build_fasta.py --multiple 1ABC 2DEF 3GHI combined.fasta
   python build_fasta.py --list 1ABC             # List entities in PDB
-        """
+        """,
+    )
+
+    parser.add_argument("pdb_ids", nargs="+", help="PDB ID(s) to process")
+
+    parser.add_argument(
+        "--multiple",
+        action="store_true",
+        help="Process multiple PDB IDs into a single FASTA file",
     )
 
     parser.add_argument(
-        'pdb_ids',
-        nargs='+',
-        help='PDB ID(s) to process'
+        "--list", action="store_true", help="List polymer entities in PDB entry"
     )
 
-    parser.add_argument(
-        '--multiple',
-        action='store_true',
-        help='Process multiple PDB IDs into a single FASTA file'
-    )
+    parser.add_argument("--output", "-o", help="Output file name (optional)")
 
     parser.add_argument(
-        '--list',
-        action='store_true',
-        help='List polymer entities in PDB entry'
-    )
-
-    parser.add_argument(
-        '--output',
-        '-o',
-        help='Output file name (optional)'
-    )
-
-    parser.add_argument(
-        '--timeout',
+        "--timeout",
         type=int,
         default=30,
-        help='Request timeout in seconds (default: 30)'
+        help="Request timeout in seconds (default: 30)",
     )
 
     parser.add_argument(
-        '--retries',
-        type=int,
-        default=3,
-        help='Maximum retry attempts (default: 3)'
+        "--retries", type=int, default=3, help="Maximum retry attempts (default: 3)"
     )
 
     args = parser.parse_args()
 
     # Set up logging
     logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
+        level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
     )
 
     # Create FastaBuilder instance
@@ -501,7 +523,9 @@ Examples:
     elif args.multiple:
         # Process multiple PDB IDs
         output_file = args.output or "combined_protein.fasta"
-        success, message = builder.build_fasta_from_multiple_pdbs(args.pdb_ids, output_file)
+        success, message = builder.build_fasta_from_multiple_pdbs(
+            args.pdb_ids, output_file
+        )
         print(message)
         sys.exit(0 if success else 1)
 

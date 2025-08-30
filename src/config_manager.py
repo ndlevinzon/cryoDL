@@ -26,7 +26,9 @@ class ConfigManager:
             config_path: Path to config.json file. If None, uses default location.
         """
         self.project_root = Path(__file__).parent.parent
-        self.config_path = Path(config_path) if config_path else self.project_root / "config.json"
+        self.config_path = (
+            Path(config_path) if config_path else self.project_root / "config.json"
+        )
 
         # Setup logging
         logging.basicConfig(level=logging.INFO)
@@ -40,33 +42,33 @@ class ConfigManager:
             "project_info": {
                 "name": self.project_metadata["name"],
                 "version": self.project_metadata["version"],
-                "description": self.project_metadata["description"]
+                "description": self.project_metadata["description"],
             },
             "paths": {
                 "project_root": str(self.project_root),
                 "src_dir": str(self.project_root / "src"),
                 "docs_dir": str(self.project_root / "docs"),
                 "output_dir": str(self.project_root / "output"),
-                "temp_dir": str(self.project_root / "temp")
+                "temp_dir": str(self.project_root / "temp"),
             },
             "dependencies": {
                 "topaz": {
                     "path": "/uufs/chpc.utah.edu/sys/installdir/r8/topaz/0.3.7/bin/topaz",
                     "version": "3.0.7",
-                    "enabled": True
+                    "enabled": True,
                 },
                 "model_angelo": {
                     "path": "/uufs/chpc.utah.edu/sys/installdir/model-angelo/1.0.1/bin/model_angelo",
                     "version": "1.0.1",
-                    "enabled": True
-                }
+                    "enabled": True,
+                },
             },
             "settings": {
                 "max_threads": 4,
                 "memory_limit_gb": 16,
                 "gpu_enabled": False,
                 "debug_mode": False,
-                "log_level": "INFO"
+                "log_level": "INFO",
             },
             "slurm": {
                 "job_name": "cryodl_job",
@@ -86,8 +88,8 @@ class ConfigManager:
                 "exclude": "",
                 "dependency": "",
                 "array": "",
-                "comment": "SLURM job configuration for cryoDL workflows"
-            }
+                "comment": "SLURM job configuration for cryoDL workflows",
+            },
         }
 
         # Load or create configuration
@@ -118,19 +120,21 @@ class ConfigManager:
             return {
                 "name": "cryoDL",
                 "version": "0.1.0",
-                "description": "Python wrapper for cryo-EM software"
+                "description": "Python wrapper for cryo-EM software",
             }
 
         try:
-            with open(pyproject_path, 'rb') as f:
+            with open(pyproject_path, "rb") as f:
                 pyproject_data = tomllib.load(f)
 
-            project_data = pyproject_data.get('project', {})
+            project_data = pyproject_data.get("project", {})
 
             metadata = {
-                "name": project_data.get('name', 'cryoDL'),
-                "version": project_data.get('version', '0.1.0'),
-                "description": project_data.get('description', 'Python wrapper for cryo-EM software')
+                "name": project_data.get("name", "cryoDL"),
+                "version": project_data.get("version", "0.1.0"),
+                "description": project_data.get(
+                    "description", "Python wrapper for cryo-EM software"
+                ),
             }
 
             self.logger.info(f"Loaded project metadata from pyproject.toml: {metadata}")
@@ -141,7 +145,7 @@ class ConfigManager:
             return {
                 "name": "cryoDL",
                 "version": "0.1.0",
-                "description": "Python wrapper for cryo-EM software"
+                "description": "Python wrapper for cryo-EM software",
             }
 
     def get_project_metadata(self) -> Dict[str, Any]:
@@ -180,7 +184,7 @@ class ConfigManager:
         """
         if self.config_path.exists():
             try:
-                with open(self.config_path, 'r') as f:
+                with open(self.config_path, "r") as f:
                     config = json.load(f)
                 self.logger.info(f"Configuration loaded from {self.config_path}")
                 return config
@@ -208,7 +212,11 @@ class ConfigManager:
         """
         # Create necessary directories
         for path_key, path_value in self.default_config["paths"].items():
-            if path_key != "project_root" and path_key != "src_dir" and path_key != "docs_dir":
+            if (
+                path_key != "project_root"
+                and path_key != "src_dir"
+                and path_key != "docs_dir"
+            ):
                 Path(path_value).mkdir(exist_ok=True)
 
         # Save default config
@@ -239,7 +247,7 @@ class ConfigManager:
             config = self.config
 
         try:
-            with open(self.config_path, 'w') as f:
+            with open(self.config_path, "w") as f:
                 json.dump(config, f, indent=4, sort_keys=True)
             self.logger.info(f"Configuration saved to {self.config_path}")
         except IOError as e:
@@ -265,7 +273,7 @@ class ConfigManager:
             config_manager.get('nonexistent.key', 'default')
             'default'
         """
-        keys = key.split('.')
+        keys = key.split(".")
         value = self.config
 
         try:
@@ -289,7 +297,7 @@ class ConfigManager:
             config_manager.set('settings.max_threads', 8)
             config_manager.set('new_section.new_key', 'new_value')
         """
-        keys = key.split('.')
+        keys = key.split(".")
         config = self.config
 
         # Navigate to the parent of the target key
@@ -302,7 +310,9 @@ class ConfigManager:
         config[keys[-1]] = value
         self.logger.info(f"Set config key '{key}' to '{value}'")
 
-    def update_dependency_path(self, dependency: str, path: str, version: str = "") -> None:
+    def update_dependency_path(
+        self, dependency: str, path: str, version: str = ""
+    ) -> None:
         """Update dependency path and version.
 
         Updates the path and version for a specified dependency in the configuration.
@@ -392,7 +402,8 @@ class ConfigManager:
             ['topaz', 'model_angelo']
         """
         return {
-            name: info for name, info in self.config["dependencies"].items()
+            name: info
+            for name, info in self.config["dependencies"].items()
             if info.get("enabled", False)
         }
 
@@ -430,7 +441,7 @@ class ConfigManager:
         """
         export_path = Path(export_path)
         try:
-            with open(export_path, 'w') as f:
+            with open(export_path, "w") as f:
                 json.dump(self.config, f, indent=4, sort_keys=True)
             self.logger.info(f"Configuration exported to {export_path}")
         except IOError as e:
@@ -457,7 +468,7 @@ class ConfigManager:
         """
         import_path = Path(import_path)
         try:
-            with open(import_path, 'r') as f:
+            with open(import_path, "r") as f:
                 new_config = json.load(f)
             self.config = new_config
             self.save_config()
@@ -519,7 +530,14 @@ class ConfigManager:
             ("nodes", slurm_config.get("nodes", 1)),
             ("ntasks", slurm_config.get("ntasks", 1)),
             ("cpus-per-task", slurm_config.get("cpus_per_task", 4)),
-            ("gres", f"gpu:{slurm_config.get('gres_gpu', 1)}" if slurm_config.get("gres_gpu", 0) > 0 else None),
+            (
+                "gres",
+                (
+                    f"gpu:{slurm_config.get('gres_gpu', 1)}"
+                    if slurm_config.get("gres_gpu", 0) > 0
+                    else None
+                ),
+            ),
             ("time", slurm_config.get("time", "06:00:00")),
             ("partition", slurm_config.get("partition", "notchpeak-gpu")),
             ("qos", slurm_config.get("qos", "notchpeak-gpu")),
@@ -615,7 +633,9 @@ class ConfigManager:
         """
         return self.config.get("slurm", {})
 
-    def save_slurm_header(self, output_path: Union[str, Path], job_name: Optional[str] = None, **kwargs) -> None:
+    def save_slurm_header(
+        self, output_path: Union[str, Path], job_name: Optional[str] = None, **kwargs
+    ) -> None:
         """Save SLURM header to a file.
 
         Generates a SLURM header using the current configuration and saves it to
@@ -639,7 +659,7 @@ class ConfigManager:
         header_content = self.generate_slurm_header(job_name, **kwargs)
 
         try:
-            with open(output_path, 'w') as f:
+            with open(output_path, "w") as f:
                 f.write(header_content)
             self.logger.info(f"SLURM header saved to {output_path}")
         except IOError as e:
@@ -670,12 +690,16 @@ def main():
 
     # Example: Update dependency paths
     config_manager.update_dependency_path("topaz", "/path/to/topaz", "0.2.5")
-    config_manager.update_dependency_path("model_angelo", "/path/to/model_angelo", "1.0.0")
+    config_manager.update_dependency_path(
+        "model_angelo", "/path/to/model_angelo", "1.0.0"
+    )
 
     # Example: Get configuration values
     print(f"Project root: {config_manager.get('paths.project_root')}")
     print(f"Max threads: {config_manager.get('settings.max_threads')}")
-    print(f"Enabled dependencies: {list(config_manager.get_enabled_dependencies().keys())}")
+    print(
+        f"Enabled dependencies: {list(config_manager.get_enabled_dependencies().keys())}"
+    )
 
     # Example: Validate dependency paths
     for dep_name in config_manager.config["dependencies"]:

@@ -29,12 +29,12 @@ except ImportError:
 
 
 def analyze_cross_validation(
-        cv_dir: str,
-        n_values: List[int] = [250, 300, 350, 400, 450, 500],
-        k_folds: int = 5,
-        output_dir: Optional[str] = None,
-        save_plots: bool = True,
-        show_plots: bool = False
+    cv_dir: str,
+    n_values: List[int] = [250, 300, 350, 400, 450, 500],
+    k_folds: int = 5,
+    output_dir: Optional[str] = None,
+    save_plots: bool = True,
+    show_plots: bool = False,
 ) -> Dict:
     """
     Analyze cross-validation results from Topaz training.
@@ -79,11 +79,11 @@ def analyze_cross_validation(
             path = cv_path / f"model_n{n}_fold{fold}_training.txt"
             if path.exists():
                 try:
-                    table = pd.read_csv(path, sep='\t')
-                    table['N'] = n
-                    table['fold'] = fold
+                    table = pd.read_csv(path, sep="\t")
+                    table["N"] = n
+                    table["fold"] = fold
                     # Only keep the validation results
-                    table = table.loc[table['split'] == 'test']
+                    table = table.loc[table["split"] == "test"]
                     tables.append(table)
                     print(f"Loaded results for N={n}, fold={fold}")
                 except Exception as e:
@@ -96,24 +96,28 @@ def analyze_cross_validation(
 
     # Combine all results
     cv_results = pd.concat(tables, axis=0, ignore_index=True)
-    cv_results['auprc'] = cv_results['auprc'].astype(float)
+    cv_results["auprc"] = cv_results["auprc"].astype(float)
 
     print(f"Loaded {len(cv_results)} validation results")
     print(f"Results shape: {cv_results.shape}")
 
     # Calculate mean AUPRC for each condition and each epoch
-    cv_results_mean = cv_results.groupby(['N', 'epoch']).mean().reset_index().drop('fold', axis=1)
+    cv_results_mean = (
+        cv_results.groupby(["N", "epoch"]).mean().reset_index().drop("fold", axis=1)
+    )
 
     # Find best epoch results for each N
-    cv_results_epoch = cv_results_mean.groupby('N').apply(
-        lambda x: x.loc[x['auprc'].idxmax()]
-    ).reset_index(drop=True)
+    cv_results_epoch = (
+        cv_results_mean.groupby("N")
+        .apply(lambda x: x.loc[x["auprc"].idxmax()])
+        .reset_index(drop=True)
+    )
 
     # Find overall best parameters
-    best_row = cv_results_epoch.loc[cv_results_epoch['auprc'].idxmax()]
-    best_n = int(best_row['N'])
-    best_epoch = int(best_row['epoch'])
-    best_auprc = best_row['auprc']
+    best_row = cv_results_epoch.loc[cv_results_epoch["auprc"].idxmax()]
+    best_n = int(best_row["N"])
+    best_epoch = int(best_row["epoch"])
+    best_auprc = best_row["auprc"]
 
     print(f"\nCross-validation Analysis Results:")
     print(f"Best N value: {best_n}")
@@ -126,23 +130,30 @@ def analyze_cross_validation(
     # Plot 1: AUPRC vs Epoch for each N
     plt.figure(figsize=(12, 8))
     for n in n_values:
-        result = cv_results_mean[cv_results_mean['N'] == n]
+        result = cv_results_mean[cv_results_mean["N"] == n]
         if not result.empty:
-            plt.plot(result['epoch'], result['auprc'], '-o', label=f'N={n}', linewidth=2, markersize=6)
+            plt.plot(
+                result["epoch"],
+                result["auprc"],
+                "-o",
+                label=f"N={n}",
+                linewidth=2,
+                markersize=6,
+            )
 
-    plt.xlabel('Epoch', fontsize=12)
-    plt.ylabel('AUPRC', fontsize=12)
-    plt.title('Cross-validation Performance: AUPRC vs Epoch', fontsize=14)
-    plt.legend(loc='best', fontsize=10)
+    plt.xlabel("Epoch", fontsize=12)
+    plt.ylabel("AUPRC", fontsize=12)
+    plt.title("Cross-validation Performance: AUPRC vs Epoch", fontsize=14)
+    plt.legend(loc="best", fontsize=10)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
 
     if save_plots:
         plot_path = output_path / "cv_performance_vs_epoch.png"
-        plt.savefig(plot_path, dpi=300, bbox_inches='tight')
+        plt.savefig(plot_path, dpi=300, bbox_inches="tight")
         print(f"Saved performance plot: {plot_path}")
 
-    plots['performance_vs_epoch'] = plt.gcf()
+    plots["performance_vs_epoch"] = plt.gcf()
 
     if show_plots:
         plt.show()
@@ -151,21 +162,29 @@ def analyze_cross_validation(
 
     # Plot 2: Best AUPRC for each N
     plt.figure(figsize=(10, 6))
-    plt.plot(cv_results_epoch['N'], cv_results_epoch['auprc'], '-o', linewidth=2, markersize=8)
-    plt.axvline(x=best_n, color='red', linestyle='--', alpha=0.7, label=f'Best N={best_n}')
-    plt.xlabel('N (Expected particles per micrograph)', fontsize=12)
-    plt.ylabel('Best AUPRC', fontsize=12)
-    plt.title('Best Cross-validation Performance by N Value', fontsize=14)
+    plt.plot(
+        cv_results_epoch["N"],
+        cv_results_epoch["auprc"],
+        "-o",
+        linewidth=2,
+        markersize=8,
+    )
+    plt.axvline(
+        x=best_n, color="red", linestyle="--", alpha=0.7, label=f"Best N={best_n}"
+    )
+    plt.xlabel("N (Expected particles per micrograph)", fontsize=12)
+    plt.ylabel("Best AUPRC", fontsize=12)
+    plt.title("Best Cross-validation Performance by N Value", fontsize=14)
     plt.legend(fontsize=10)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
 
     if save_plots:
         plot_path = output_path / "cv_best_performance_by_n.png"
-        plt.savefig(plot_path, dpi=300, bbox_inches='tight')
+        plt.savefig(plot_path, dpi=300, bbox_inches="tight")
         print(f"Saved best performance plot: {plot_path}")
 
-    plots['best_performance_by_n'] = plt.gcf()
+    plots["best_performance_by_n"] = plt.gcf()
 
     if show_plots:
         plt.show()
@@ -176,16 +195,16 @@ def analyze_cross_validation(
     plt.figure(figsize=(12, 8))
 
     # Create pivot table for heatmap
-    heatmap_data = cv_results_mean.pivot(index='epoch', columns='N', values='auprc')
+    heatmap_data = cv_results_mean.pivot(index="epoch", columns="N", values="auprc")
 
     # Create heatmap
-    im = plt.imshow(heatmap_data.T, cmap='viridis', aspect='auto', origin='lower')
-    plt.colorbar(im, label='AUPRC')
+    im = plt.imshow(heatmap_data.T, cmap="viridis", aspect="auto", origin="lower")
+    plt.colorbar(im, label="AUPRC")
 
     # Set axis labels
-    plt.xlabel('Epoch', fontsize=12)
-    plt.ylabel('N Value', fontsize=12)
-    plt.title('AUPRC Heatmap: N vs Epoch', fontsize=14)
+    plt.xlabel("Epoch", fontsize=12)
+    plt.ylabel("N Value", fontsize=12)
+    plt.title("AUPRC Heatmap: N vs Epoch", fontsize=14)
 
     # Set tick labels
     plt.xticks(range(len(heatmap_data.index)), heatmap_data.index)
@@ -195,10 +214,10 @@ def analyze_cross_validation(
 
     if save_plots:
         plot_path = output_path / "cv_auprc_heatmap.png"
-        plt.savefig(plot_path, dpi=300, bbox_inches='tight')
+        plt.savefig(plot_path, dpi=300, bbox_inches="tight")
         print(f"Saved heatmap: {plot_path}")
 
-    plots['auprc_heatmap'] = plt.gcf()
+    plots["auprc_heatmap"] = plt.gcf()
 
     if show_plots:
         plt.show()
@@ -217,47 +236,47 @@ def analyze_cross_validation(
 
     # Generate recommendations
     recommendations = {
-        'best_n': best_n,
-        'best_epoch': best_epoch,
-        'best_auprc': best_auprc,
-        'recommendation': f"Train with N={best_n} for at least {best_epoch} epochs. "
-                          f"Consider training longer as performance may continue to improve.",
-        'all_results': cv_results_epoch.to_dict('records')
+        "best_n": best_n,
+        "best_epoch": best_epoch,
+        "best_auprc": best_auprc,
+        "recommendation": f"Train with N={best_n} for at least {best_epoch} epochs. "
+        f"Consider training longer as performance may continue to improve.",
+        "all_results": cv_results_epoch.to_dict("records"),
     }
 
     # Save recommendations to text file
     recommendations_path = output_path / "cv_recommendations.txt"
-    with open(recommendations_path, 'w') as f:
+    with open(recommendations_path, "w") as f:
         f.write("Cross-validation Analysis Recommendations\n")
         f.write("=" * 50 + "\n\n")
         f.write(f"Best N value: {best_n}\n")
         f.write(f"Best number of epochs: {best_epoch}\n")
         f.write(f"Best AUPRC: {best_auprc:.4f}\n\n")
         f.write("Recommendation:\n")
-        f.write(recommendations['recommendation'] + "\n\n")
+        f.write(recommendations["recommendation"] + "\n\n")
         f.write("Detailed Results:\n")
         f.write(cv_results_epoch.to_string())
 
     print(f"Saved recommendations: {recommendations_path}")
 
     return {
-        'cv_results': cv_results,
-        'cv_results_mean': cv_results_mean,
-        'cv_results_epoch': cv_results_epoch,
-        'best_n': best_n,
-        'best_epoch': best_epoch,
-        'best_auprc': best_auprc,
-        'recommendations': recommendations,
-        'plots': plots,
-        'output_dir': str(output_dir)
+        "cv_results": cv_results,
+        "cv_results_mean": cv_results_mean,
+        "cv_results_epoch": cv_results_epoch,
+        "best_n": best_n,
+        "best_epoch": best_epoch,
+        "best_auprc": best_auprc,
+        "recommendations": recommendations,
+        "plots": plots,
+        "output_dir": str(output_dir),
     }
 
 
 def plot_training_curves(
-        training_files: List[str],
-        output_dir: str,
-        save_plots: bool = True,
-        show_plots: bool = False
+    training_files: List[str],
+    output_dir: str,
+    save_plots: bool = True,
+    show_plots: bool = False,
 ) -> None:
     """
     Plot training curves from Topaz training files.
@@ -275,7 +294,7 @@ def plot_training_curves(
     for file_path in training_files:
         try:
             # Load training data
-            data = pd.read_csv(file_path, sep='\t')
+            data = pd.read_csv(file_path, sep="\t")
 
             # Extract model name from file path
             model_name = Path(file_path).stem
@@ -284,43 +303,45 @@ def plot_training_curves(
             plt.figure(figsize=(12, 8))
 
             # Plot training and validation metrics
-            if 'train_auprc' in data.columns and 'test_auprc' in data.columns:
+            if "train_auprc" in data.columns and "test_auprc" in data.columns:
                 plt.subplot(2, 2, 1)
-                plt.plot(data['epoch'], data['train_auprc'], label='Train AUPRC')
-                plt.plot(data['epoch'], data['test_auprc'], label='Test AUPRC')
-                plt.xlabel('Epoch')
-                plt.ylabel('AUPRC')
-                plt.title(f'{model_name} - AUPRC')
+                plt.plot(data["epoch"], data["train_auprc"], label="Train AUPRC")
+                plt.plot(data["epoch"], data["test_auprc"], label="Test AUPRC")
+                plt.xlabel("Epoch")
+                plt.ylabel("AUPRC")
+                plt.title(f"{model_name} - AUPRC")
                 plt.legend()
                 plt.grid(True, alpha=0.3)
 
-            if 'train_loss' in data.columns and 'test_loss' in data.columns:
+            if "train_loss" in data.columns and "test_loss" in data.columns:
                 plt.subplot(2, 2, 2)
-                plt.plot(data['epoch'], data['train_loss'], label='Train Loss')
-                plt.plot(data['epoch'], data['test_loss'], label='Test Loss')
-                plt.xlabel('Epoch')
-                plt.ylabel('Loss')
-                plt.title(f'{model_name} - Loss')
+                plt.plot(data["epoch"], data["train_loss"], label="Train Loss")
+                plt.plot(data["epoch"], data["test_loss"], label="Test Loss")
+                plt.xlabel("Epoch")
+                plt.ylabel("Loss")
+                plt.title(f"{model_name} - Loss")
                 plt.legend()
                 plt.grid(True, alpha=0.3)
 
-            if 'train_precision' in data.columns and 'test_precision' in data.columns:
+            if "train_precision" in data.columns and "test_precision" in data.columns:
                 plt.subplot(2, 2, 3)
-                plt.plot(data['epoch'], data['train_precision'], label='Train Precision')
-                plt.plot(data['epoch'], data['test_precision'], label='Test Precision')
-                plt.xlabel('Epoch')
-                plt.ylabel('Precision')
-                plt.title(f'{model_name} - Precision')
+                plt.plot(
+                    data["epoch"], data["train_precision"], label="Train Precision"
+                )
+                plt.plot(data["epoch"], data["test_precision"], label="Test Precision")
+                plt.xlabel("Epoch")
+                plt.ylabel("Precision")
+                plt.title(f"{model_name} - Precision")
                 plt.legend()
                 plt.grid(True, alpha=0.3)
 
-            if 'train_recall' in data.columns and 'test_recall' in data.columns:
+            if "train_recall" in data.columns and "test_recall" in data.columns:
                 plt.subplot(2, 2, 4)
-                plt.plot(data['epoch'], data['train_recall'], label='Train Recall')
-                plt.plot(data['epoch'], data['test_recall'], label='Test Recall')
-                plt.xlabel('Epoch')
-                plt.ylabel('Recall')
-                plt.title(f'{model_name} - Recall')
+                plt.plot(data["epoch"], data["train_recall"], label="Train Recall")
+                plt.plot(data["epoch"], data["test_recall"], label="Test Recall")
+                plt.xlabel("Epoch")
+                plt.ylabel("Recall")
+                plt.title(f"{model_name} - Recall")
                 plt.legend()
                 plt.grid(True, alpha=0.3)
 
@@ -328,7 +349,7 @@ def plot_training_curves(
 
             if save_plots:
                 plot_path = output_path / f"{model_name}_training_curves.png"
-                plt.savefig(plot_path, dpi=300, bbox_inches='tight')
+                plt.savefig(plot_path, dpi=300, bbox_inches="tight")
                 print(f"Saved training curves: {plot_path}")
 
             if show_plots:
@@ -354,7 +375,7 @@ def main():
             k_folds=5,
             output_dir="analysis_results",
             save_plots=True,
-            show_plots=False
+            show_plots=False,
         )
 
         print(f"\nAnalysis complete!")

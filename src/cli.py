@@ -76,7 +76,7 @@ class CryoDLShell(cmd.Cmd):
         try:
             banner_path = Path(__file__).parent / "resources" / "big_ascii_banner.txt"
             if banner_path.exists():
-                with open(banner_path, 'r', encoding='utf-8') as f:
+                with open(banner_path, "r", encoding="utf-8") as f:
                     banner = f.read().strip()
                 return f"""
 {banner}
@@ -111,17 +111,16 @@ All interactions are logged to cryodl.log in the current directory.
         """
         # Create a custom formatter
         formatter = logging.Formatter(
-            '%(asctime)s - %(levelname)s - %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
+            "%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
         )
 
         # Set up file handler
-        file_handler = logging.FileHandler(self.log_file, mode='a', encoding='utf-8')
+        file_handler = logging.FileHandler(self.log_file, mode="a", encoding="utf-8")
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(formatter)
 
         # Set up logger
-        self.logger = logging.getLogger('cryodl_interactive')
+        self.logger = logging.getLogger("cryodl_interactive")
         self.logger.setLevel(logging.INFO)
         self.logger.addHandler(file_handler)
 
@@ -197,7 +196,9 @@ All interactions are logged to cryodl.log in the current directory.
             force = "--force" in arg
             if force or not self.config_manager.config_path.exists():
                 self.config_manager.create_default_config()
-                output = f"Configuration initialized at {self.config_manager.config_path}"
+                output = (
+                    f"Configuration initialized at {self.config_manager.config_path}"
+                )
                 print(output)
                 self.log_output(output)
             else:
@@ -267,7 +268,10 @@ All interactions are logged to cryodl.log in the current directory.
         try:
             parts = arg.split(None, 1)
             if len(parts) < 2:
-                print("Error: Key and value are required. Usage: set <key> <value>", file=sys.stderr)
+                print(
+                    "Error: Key and value are required. Usage: set <key> <value>",
+                    file=sys.stderr,
+                )
                 self.log_error("Missing key or value argument")
                 return
 
@@ -302,8 +306,10 @@ All interactions are logged to cryodl.log in the current directory.
         try:
             parts = arg.split()
             if len(parts) < 2:
-                print("Error: Name and path are required. Usage: add_dependency <name> <path> [version]",
-                      file=sys.stderr)
+                print(
+                    "Error: Name and path are required. Usage: add_dependency <name> <path> [version]",
+                    file=sys.stderr,
+                )
                 self.log_error("Missing name or path argument")
                 return
 
@@ -338,9 +344,9 @@ All interactions are logged to cryodl.log in the current directory.
             deps = self.config_manager.list_dependencies()
             output = "\nConfigured Dependencies:\n" + "-" * 50 + "\n"
             for name, info in deps.items():
-                status = "✓ Enabled" if info.get('enabled') else "✗ Disabled"
-                path = info.get('path', 'Not set')
-                version = info.get('version', 'Unknown')
+                status = "✓ Enabled" if info.get("enabled") else "✗ Disabled"
+                path = info.get("path", "Not set")
+                version = info.get("version", "Unknown")
                 output += f"{name:12} {status:12} {path}\n"
                 if version:
                     output += f"{'':12} {'':12} Version: {version}\n"
@@ -372,7 +378,9 @@ All interactions are logged to cryodl.log in the current directory.
             for dep_name in self.config_manager.config["dependencies"]:
                 is_valid = self.config_manager.validate_dependency_path(dep_name)
                 status = "✓ Valid" if is_valid else "✗ Invalid"
-                path = self.config_manager.config["dependencies"][dep_name].get("path", "Not set")
+                path = self.config_manager.config["dependencies"][dep_name].get(
+                    "path", "Not set"
+                )
                 output += f"{dep_name:12} {status:8} {path}\n"
                 if not is_valid and path:
                     all_valid = False
@@ -407,6 +415,7 @@ All interactions are logged to cryodl.log in the current directory.
         self.log_command("show", arg)
         try:
             import json
+
             output = json.dumps(self.config_manager.config, indent=4)
             print(output)
             self.log_output(output)
@@ -546,22 +555,22 @@ All interactions are logged to cryodl.log in the current directory.
                     output_file = args[i + 1]
                     i += 2
                 elif args[i] == "--nodes" and i + 1 < len(args):
-                    overrides['nodes'] = int(args[i + 1])
+                    overrides["nodes"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--ntasks" and i + 1 < len(args):
-                    overrides['ntasks'] = int(args[i + 1])
+                    overrides["ntasks"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--cpus-per-task" and i + 1 < len(args):
-                    overrides['cpus_per_task'] = int(args[i + 1])
+                    overrides["cpus_per_task"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--gres-gpu" and i + 1 < len(args):
-                    overrides['gres_gpu'] = int(args[i + 1])
+                    overrides["gres_gpu"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--time" and i + 1 < len(args):
-                    overrides['time'] = args[i + 1]
+                    overrides["time"] = args[i + 1]
                     i += 2
                 elif args[i] == "--mem" and i + 1 < len(args):
-                    overrides['mem'] = args[i + 1]
+                    overrides["mem"] = args[i + 1]
                     i += 2
                 else:
                     i += 1
@@ -569,7 +578,9 @@ All interactions are logged to cryodl.log in the current directory.
             header = self.config_manager.generate_slurm_header(job_name, **overrides)
 
             if output_file:
-                self.config_manager.save_slurm_header(output_file, job_name, **overrides)
+                self.config_manager.save_slurm_header(
+                    output_file, job_name, **overrides
+                )
                 output = f"SLURM header saved to {output_file}"
                 print(output)
                 self.log_output(output)
@@ -643,40 +654,40 @@ All interactions are logged to cryodl.log in the current directory.
             i = 0
             while i < len(args):
                 if args[i] == "--job-name" and i + 1 < len(args):
-                    updates['job_name'] = args[i + 1]
+                    updates["job_name"] = args[i + 1]
                     i += 2
                 elif args[i] == "--nodes" and i + 1 < len(args):
-                    updates['nodes'] = int(args[i + 1])
+                    updates["nodes"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--ntasks" and i + 1 < len(args):
-                    updates['ntasks'] = int(args[i + 1])
+                    updates["ntasks"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--cpus-per-task" and i + 1 < len(args):
-                    updates['cpus_per_task'] = int(args[i + 1])
+                    updates["cpus_per_task"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--gres-gpu" and i + 1 < len(args):
-                    updates['gres_gpu'] = int(args[i + 1])
+                    updates["gres_gpu"] = int(args[i + 1])
                     i += 2
                 elif args[i] == "--time" and i + 1 < len(args):
-                    updates['time'] = args[i + 1]
+                    updates["time"] = args[i + 1]
                     i += 2
                 elif args[i] == "--partition" and i + 1 < len(args):
-                    updates['partition'] = args[i + 1]
+                    updates["partition"] = args[i + 1]
                     i += 2
                 elif args[i] == "--qos" and i + 1 < len(args):
-                    updates['qos'] = args[i + 1]
+                    updates["qos"] = args[i + 1]
                     i += 2
                 elif args[i] == "--account" and i + 1 < len(args):
-                    updates['account'] = args[i + 1]
+                    updates["account"] = args[i + 1]
                     i += 2
                 elif args[i] == "--mem" and i + 1 < len(args):
-                    updates['mem'] = args[i + 1]
+                    updates["mem"] = args[i + 1]
                     i += 2
                 elif args[i] == "--output" and i + 1 < len(args):
-                    updates['output'] = args[i + 1]
+                    updates["output"] = args[i + 1]
                     i += 2
                 elif args[i] == "--error" and i + 1 < len(args):
-                    updates['error'] = args[i + 1]
+                    updates["error"] = args[i + 1]
                     i += 2
                 else:
                     i += 1
@@ -791,14 +802,20 @@ All interactions are logged to cryodl.log in the current directory.
                     print(f"Output file: {output_file}")
 
                 builder = FastaBuilder()
-                success, message = builder.build_fasta_from_multiple_pdbs(pdb_ids, output_file)
+                success, message = builder.build_fasta_from_multiple_pdbs(
+                    pdb_ids, output_file
+                )
 
                 if success:
                     print(message)
-                    self.log_output(f"Successfully created FASTA file from multiple PDB IDs: {', '.join(pdb_ids)}")
+                    self.log_output(
+                        f"Successfully created FASTA file from multiple PDB IDs: {', '.join(pdb_ids)}"
+                    )
                 else:
                     print(f"Error: {message}", file=sys.stderr)
-                    self.log_error(f"Failed to create FASTA file from multiple PDB IDs: {message}")
+                    self.log_error(
+                        f"Failed to create FASTA file from multiple PDB IDs: {message}"
+                    )
 
                 return
 
@@ -823,7 +840,9 @@ All interactions are logged to cryodl.log in the current directory.
                     self.log_output(f"Successfully created FASTA file for {pdb_id}")
                 else:
                     print(f"Error: {message}", file=sys.stderr)
-                    self.log_error(f"Failed to create FASTA file for {pdb_id}: {message}")
+                    self.log_error(
+                        f"Failed to create FASTA file for {pdb_id}: {message}"
+                    )
 
         except Exception as e:
             error_msg = f"Error in fasta command: {e}"
@@ -850,7 +869,9 @@ All interactions are logged to cryodl.log in the current directory.
         self.log_command("model_angelo", arg)
         try:
             # Check if model_angelo is configured
-            model_angelo_path = self.config_manager.get("dependencies.model_angelo.path")
+            model_angelo_path = self.config_manager.get(
+                "dependencies.model_angelo.path"
+            )
             if not model_angelo_path:
                 error_msg = "ModelAngelo path not configured. Use 'add_dependency model_angelo <path>' first."
                 print(error_msg, file=sys.stderr)
@@ -919,14 +940,19 @@ All interactions are logged to cryodl.log in the current directory.
 
                 # Execute the command
                 import subprocess
+
                 try:
-                    result = subprocess.run(model_angelo_cmd, shell=True, capture_output=True, text=True)
+                    result = subprocess.run(
+                        model_angelo_cmd, shell=True, capture_output=True, text=True
+                    )
                     if result.returncode == 0:
                         success_msg = f"ModelAngelo completed successfully. Output in: {output_dir}"
                         print(success_msg)
                         self.log_output(success_msg)
                     else:
-                        error_msg = f"ModelAngelo failed with return code {result.returncode}"
+                        error_msg = (
+                            f"ModelAngelo failed with return code {result.returncode}"
+                        )
                         print(error_msg, file=sys.stderr)
                         print(f"Error output: {result.stderr}", file=sys.stderr)
                         self.log_error(error_msg)
@@ -951,19 +977,19 @@ All interactions are logged to cryodl.log in the current directory.
     """
 
                 # Add optional SLURM parameters if configured
-                partition = self.config_manager.get('slurm.partition')
+                partition = self.config_manager.get("slurm.partition")
                 if partition:
                     slurm_script += f"#SBATCH --partition={partition}\n"
 
-                qos = self.config_manager.get('slurm.qos')
+                qos = self.config_manager.get("slurm.qos")
                 if qos:
                     slurm_script += f"#SBATCH --qos={qos}\n"
 
-                account = self.config_manager.get('slurm.account')
+                account = self.config_manager.get("slurm.account")
                 if account:
                     slurm_script += f"#SBATCH --account={account}\n"
 
-                gres_gpu = self.config_manager.get('slurm.gres_gpu')
+                gres_gpu = self.config_manager.get("slurm.gres_gpu")
                 if gres_gpu:
                     slurm_script += f"#SBATCH --gres=gpu:{gres_gpu}\n"
 
@@ -984,7 +1010,7 @@ echo "ModelAngelo job completed"
 
                 # Write SLURM script to file
                 slurm_script_path = f"{job_name}.slurm"
-                with open(slurm_script_path, 'w') as f:
+                with open(slurm_script_path, "w") as f:
                     f.write(slurm_script)
 
                 # Show job summary and ask for confirmation
@@ -994,25 +1020,31 @@ echo "ModelAngelo job completed"
                 print(f"  FASTA File: {fasta_file}")
                 print(f"  Output Directory: {output_dir}")
                 print(f"  SLURM Script: {slurm_script_path}")
-                print(f"  Time Limit: {self.config_manager.get('slurm.time', '24:00:00')}")
+                print(
+                    f"  Time Limit: {self.config_manager.get('slurm.time', '24:00:00')}"
+                )
                 print(f"  Nodes: {self.config_manager.get('slurm.nodes', 1)}")
-                print(f"  CPUs per Task: {self.config_manager.get('slurm.cpus_per_task', 4)}")
+                print(
+                    f"  CPUs per Task: {self.config_manager.get('slurm.cpus_per_task', 4)}"
+                )
                 print(f"  Memory: {self.config_manager.get('slurm.mem', '16G')}")
 
-                gres_gpu = self.config_manager.get('slurm.gres_gpu')
+                gres_gpu = self.config_manager.get("slurm.gres_gpu")
                 if gres_gpu:
                     print(f"  GPUs: {gres_gpu}")
 
-                partition = self.config_manager.get('slurm.partition')
+                partition = self.config_manager.get("slurm.partition")
                 if partition:
                     print(f"  Partition: {partition}")
 
                 # Ask for confirmation
                 while True:
-                    confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
-                    if confirm in ['Y', 'YES', 'y', 'yes']:
+                    confirm = (
+                        input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    )
+                    if confirm in ["Y", "YES", "y", "yes"]:
                         break
-                    elif confirm in ['N', 'NO', 'n', 'no']:
+                    elif confirm in ["N", "NO", "n", "no"]:
                         print("Job submission cancelled.")
                         self.log_output("Job submission cancelled by user")
                         return
@@ -1023,12 +1055,21 @@ echo "ModelAngelo job completed"
 
                 try:
                     import subprocess
-                    result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
-                                            text=True)
+
+                    result = subprocess.run(
+                        f"sbatch {slurm_script_path}",
+                        shell=True,
+                        capture_output=True,
+                        text=True,
+                    )
 
                     if result.returncode == 0:
-                        job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
-                        success_msg = f"ModelAngelo job submitted successfully. Job ID: {job_id}"
+                        job_id = result.stdout.strip().split()[
+                            -1
+                        ]  # Extract job ID from sbatch output
+                        success_msg = (
+                            f"ModelAngelo job submitted successfully. Job ID: {job_id}"
+                        )
                         print(success_msg)
                         self.log_output(success_msg)
                         print(f"SLURM script saved as: {slurm_script_path}")
@@ -1155,7 +1196,8 @@ echo "ModelAngelo job completed"
 
             # Get particle coordinates file (optional)
             raw_particles = input(
-                "Enter path to particle coordinates file (optional, press Enter to skip): ").strip()
+                "Enter path to particle coordinates file (optional, press Enter to skip): "
+            ).strip()
             particles_path = None
             if raw_particles:
                 particles_path = Path(raw_particles)
@@ -1166,12 +1208,16 @@ echo "ModelAngelo job completed"
                     return
 
             # Get output directory
-            output_dir = input("Enter output directory name (default: topaz_preprocess_output): ").strip()
+            output_dir = input(
+                "Enter output directory name (default: topaz_preprocess_output): "
+            ).strip()
             if not output_dir:
                 output_dir = "topaz_preprocess_output"
 
             # Get pixel size for downsampling
-            pixel_size = input("Enter pixel size for downsampling in Å/px (default: 8): ").strip()
+            pixel_size = input(
+                "Enter pixel size for downsampling in Å/px (default: 8): "
+            ).strip()
             if not pixel_size:
                 pixel_size = "8"
             else:
@@ -1211,8 +1257,11 @@ echo "ModelAngelo job completed"
 
                 # Execute preprocess command
                 import subprocess
+
                 try:
-                    result = subprocess.run(preprocess_cmd, shell=True, capture_output=True, text=True)
+                    result = subprocess.run(
+                        preprocess_cmd, shell=True, capture_output=True, text=True
+                    )
                     if result.returncode == 0:
                         success_msg = f"Topaz preprocess completed successfully. Output in: {proc_micrographs}"
                         print(success_msg)
@@ -1226,7 +1275,9 @@ echo "ModelAngelo job completed"
 
                     # Execute convert command if provided
                     if convert_cmd:
-                        result = subprocess.run(convert_cmd, shell=True, capture_output=True, text=True)
+                        result = subprocess.run(
+                            convert_cmd, shell=True, capture_output=True, text=True
+                        )
                         if result.returncode == 0:
                             success_msg = f"Topaz convert completed successfully. Output in: {proc_root}/particles.txt"
                             print(success_msg)
@@ -1302,7 +1353,7 @@ echo "Topaz preprocess job completed"
 
                 # Write SLURM script to file
                 slurm_script_path = f"{job_name}.slurm"
-                with open(slurm_script_path, 'w') as f:
+                with open(slurm_script_path, "w") as f:
                     f.write(slurm_script)
 
                 # Show job summary and ask for confirmation
@@ -1323,10 +1374,12 @@ echo "Topaz preprocess job completed"
 
                 # Ask for confirmation
                 while True:
-                    confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
-                    if confirm in ['Y', 'YES', 'y', 'yes']:
+                    confirm = (
+                        input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    )
+                    if confirm in ["Y", "YES", "y", "yes"]:
                         break
-                    elif confirm in ['N', 'NO', 'n', 'no']:
+                    elif confirm in ["N", "NO", "n", "no"]:
                         print("Job submission cancelled.")
                         self.log_output("Job submission cancelled by user")
                         return
@@ -1336,11 +1389,18 @@ echo "Topaz preprocess job completed"
                 # Submit job
                 try:
                     import subprocess
-                    result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
-                                            text=True)
+
+                    result = subprocess.run(
+                        f"sbatch {slurm_script_path}",
+                        shell=True,
+                        capture_output=True,
+                        text=True,
+                    )
 
                     if result.returncode == 0:
-                        job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
+                        job_id = result.stdout.strip().split()[
+                            -1
+                        ]  # Extract job ID from sbatch output
                         success_msg = f"Topaz preprocess job submitted successfully. Job ID: {job_id}"
                         print(success_msg)
                         self.log_output(success_msg)
@@ -1410,12 +1470,16 @@ echo "Topaz preprocess job completed"
                 return
 
             # Get output directory
-            output_dir = input("Enter output directory name (default: topaz_cross_output): ").strip()
+            output_dir = input(
+                "Enter output directory name (default: topaz_cross_output): "
+            ).strip()
             if not output_dir:
                 output_dir = "topaz_cross_output"
 
             # Get pixel size for downsampling
-            pixel_size = input("Enter pixel size for downsampling in Å/px (default: 8): ").strip()
+            pixel_size = input(
+                "Enter pixel size for downsampling in Å/px (default: 8): "
+            ).strip()
             if not pixel_size:
                 pixel_size = "8"
             else:
@@ -1428,7 +1492,9 @@ echo "Topaz preprocess job completed"
                     return
 
             # Get number of test micrographs to hold out
-            test_micrographs = input("Enter number of test micrographs to hold out (default: 10): ").strip()
+            test_micrographs = input(
+                "Enter number of test micrographs to hold out (default: 10): "
+            ).strip()
             if not test_micrographs:
                 test_micrographs = "10"
             else:
@@ -1441,7 +1507,9 @@ echo "Topaz preprocess job completed"
                     return
 
             # Get number of folds for cross-validation
-            k_folds = input("Enter number of folds for cross-validation (default: 5): ").strip()
+            k_folds = input(
+                "Enter number of folds for cross-validation (default: 5): "
+            ).strip()
             if not k_folds:
                 k_folds = "5"
             else:
@@ -1455,12 +1523,13 @@ echo "Topaz preprocess job completed"
 
             # Get N values for cross-validation (comma-separated)
             n_values_input = input(
-                "Enter N values for cross-validation (comma-separated, default: 250,300,350,400,450,500): ").strip()
+                "Enter N values for cross-validation (comma-separated, default: 250,300,350,400,450,500): "
+            ).strip()
             if not n_values_input:
                 n_values = [250, 300, 350, 400, 450, 500]
             else:
                 try:
-                    n_values = [int(x.strip()) for x in n_values_input.split(',')]
+                    n_values = [int(x.strip()) for x in n_values_input.split(",")]
                 except ValueError:
                     error_msg = "N values must be comma-separated numbers"
                     print(error_msg, file=sys.stderr)
@@ -1495,10 +1564,13 @@ echo "Topaz preprocess job completed"
 
                 # Execute commands
                 import subprocess
+
                 try:
                     # Step 1: Preprocess
                     print("\nStep 1: Preprocessing micrographs...")
-                    result = subprocess.run(preprocess_cmd, shell=True, capture_output=True, text=True)
+                    result = subprocess.run(
+                        preprocess_cmd, shell=True, capture_output=True, text=True
+                    )
                     if result.returncode != 0:
                         error_msg = f"Topaz preprocess failed with return code {result.returncode}"
                         print(error_msg, file=sys.stderr)
@@ -1508,9 +1580,13 @@ echo "Topaz preprocess job completed"
 
                     # Step 2: Convert particle coordinates
                     print("Step 2: Converting particle coordinates...")
-                    result = subprocess.run(convert_cmd, shell=True, capture_output=True, text=True)
+                    result = subprocess.run(
+                        convert_cmd, shell=True, capture_output=True, text=True
+                    )
                     if result.returncode != 0:
-                        error_msg = f"Topaz convert failed with return code {result.returncode}"
+                        error_msg = (
+                            f"Topaz convert failed with return code {result.returncode}"
+                        )
                         print(error_msg, file=sys.stderr)
                         print(f"Error output: {result.stderr}", file=sys.stderr)
                         self.log_error(error_msg)
@@ -1518,7 +1594,9 @@ echo "Topaz preprocess job completed"
 
                     # Step 3: Train-test split
                     print("Step 3: Performing train-test split...")
-                    result = subprocess.run(split_cmd, shell=True, capture_output=True, text=True)
+                    result = subprocess.run(
+                        split_cmd, shell=True, capture_output=True, text=True
+                    )
                     if result.returncode != 0:
                         error_msg = f"Topaz train_test_split failed with return code {result.returncode}"
                         print(error_msg, file=sys.stderr)
@@ -1532,7 +1610,9 @@ echo "Topaz preprocess job completed"
                         for fold in range(int(k_folds)):
                             train_cmd = f"{topaz_path} train -n {n} --num-workers=8 --train-images {proc_root}/image_list_train.txt --train-targets {proc_root}/particles_train.txt -k {k_folds} --fold {fold} -o {cross_dir}/model_n{n}_fold{fold}_training.txt"
                             print(f"Training model with N={n}, fold={fold}...")
-                            result = subprocess.run(train_cmd, shell=True, capture_output=True, text=True)
+                            result = subprocess.run(
+                                train_cmd, shell=True, capture_output=True, text=True
+                            )
                             if result.returncode != 0:
                                 error_msg = f"Topaz train failed for N={n}, fold={fold} with return code {result.returncode}"
                                 print(error_msg, file=sys.stderr)
@@ -1631,7 +1711,7 @@ echo "Topaz cross-validation job completed"
 
                 # Write SLURM script to file
                 slurm_script_path = f"{job_name}.slurm"
-                with open(slurm_script_path, 'w') as f:
+                with open(slurm_script_path, "w") as f:
                     f.write(slurm_script)
 
                 # Show job summary and ask for confirmation
@@ -1654,10 +1734,12 @@ echo "Topaz cross-validation job completed"
 
                 # Ask for confirmation
                 while True:
-                    confirm = input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
-                    if confirm in ['Y', 'YES', 'y', 'yes']:
+                    confirm = (
+                        input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    )
+                    if confirm in ["Y", "YES", "y", "yes"]:
                         break
-                    elif confirm in ['N', 'NO', 'n', 'no']:
+                    elif confirm in ["N", "NO", "n", "no"]:
                         print("Job submission cancelled.")
                         self.log_output("Job submission cancelled by user")
                         return
@@ -1667,11 +1749,18 @@ echo "Topaz cross-validation job completed"
                 # Submit job
                 try:
                     import subprocess
-                    result = subprocess.run(f"sbatch {slurm_script_path}", shell=True, capture_output=True,
-                                            text=True)
+
+                    result = subprocess.run(
+                        f"sbatch {slurm_script_path}",
+                        shell=True,
+                        capture_output=True,
+                        text=True,
+                    )
 
                     if result.returncode == 0:
-                        job_id = result.stdout.strip().split()[-1]  # Extract job ID from sbatch output
+                        job_id = result.stdout.strip().split()[
+                            -1
+                        ]  # Extract job ID from sbatch output
                         success_msg = f"Topaz cross-validation job submitted successfully. Job ID: {job_id}"
                         print(success_msg)
                         self.log_output(success_msg)
@@ -1724,11 +1813,13 @@ echo "Topaz cross-validation job completed"
 
             if len(args) >= 2:
                 n_values_str = args[1]
-                n_values = [int(x.strip()) for x in n_values_str.split(',')]
+                n_values = [int(x.strip()) for x in n_values_str.split(",")]
             else:
-                n_values_input = input("Enter N values (comma-separated, default: 250,300,350,400,450,500): ").strip()
+                n_values_input = input(
+                    "Enter N values (comma-separated, default: 250,300,350,400,450,500): "
+                ).strip()
                 if n_values_input:
-                    n_values = [int(x.strip()) for x in n_values_input.split(',')]
+                    n_values = [int(x.strip()) for x in n_values_input.split(",")]
                 else:
                     n_values = [250, 300, 350, 400, 450, 500]
 
@@ -1760,23 +1851,28 @@ echo "Topaz cross-validation job completed"
                     k_folds=k_folds,
                     output_dir=cv_dir,
                     save_plots=True,
-                    show_plots=False
+                    show_plots=False,
                 )
 
                 print(f"\n=== Cross-validation Analysis Complete ===")
                 print(f"Best N value: {analysis_results['best_n']}")
                 print(f"Best number of epochs: {analysis_results['best_epoch']}")
                 print(f"Best AUPRC: {analysis_results['best_auprc']:.4f}")
-                print(f"Recommendation: {analysis_results['recommendations']['recommendation']}")
+                print(
+                    f"Recommendation: {analysis_results['recommendations']['recommendation']}"
+                )
                 print(f"Analysis results saved to: {cv_dir}")
 
                 self.log_output(
-                    f"Cross-validation analysis completed. Best N: {analysis_results['best_n']}, Best epochs: {analysis_results['best_epoch']}")
+                    f"Cross-validation analysis completed. Best N: {analysis_results['best_n']}, Best epochs: {analysis_results['best_epoch']}"
+                )
 
             except ImportError as e:
                 error_msg = f"Could not import analysis module: {e}"
                 print(error_msg, file=sys.stderr)
-                print("Please install analysis dependencies: pip install numpy pandas matplotlib pillow seaborn")
+                print(
+                    "Please install analysis dependencies: pip install numpy pandas matplotlib pillow seaborn"
+                )
                 self.log_error(error_msg)
             except Exception as e:
                 error_msg = f"Cross-validation analysis failed: {e}"
@@ -1800,7 +1896,7 @@ echo "Topaz cross-validation job completed"
             clear
         """
         self.log_command("clear", arg)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system("cls" if os.name == "nt" else "clear")
         self.log_output("Screen cleared")
 
     def do_pwd(self, arg):
@@ -1887,10 +1983,11 @@ echo "Topaz cross-validation job completed"
         try:
             quotes_path = Path(__file__).parent / "resources" / "quotes.txt"
             if quotes_path.exists():
-                with open(quotes_path, 'r', encoding='utf-8') as f:
+                with open(quotes_path, "r", encoding="utf-8") as f:
                     quotes = [line.strip() for line in f if line.strip()]
                 if quotes:
                     import random
+
                     return random.choice(quotes)
             return None
         except Exception:
@@ -2057,13 +2154,11 @@ def main():
 Examples:
   cryodl                    # Start interactive shell
   cryodl --log-file my.log  # Use custom log file
-        """
+        """,
     )
 
     parser.add_argument(
-        '--log-file',
-        default='cryodl.log',
-        help='Log file path (default: cryodl.log)'
+        "--log-file", default="cryodl.log", help="Log file path (default: cryodl.log)"
     )
 
     args = parser.parse_args()
