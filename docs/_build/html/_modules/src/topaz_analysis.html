@@ -1,0 +1,832 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.topaz_analysis &mdash; cryoDL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0b2da8f6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            cryoDL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#from-source-recommended">From Source (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#from-pypi-future-release">From PyPI (Future Release)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#core-dependencies">Core Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#analysis-dependencies">Analysis Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#optional-dependencies">Optional Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#development-dependencies">Development Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#documentation-dependencies">Documentation Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#external-software-dependencies">External Software Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#topaz">Topaz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#modelangelo">ModelAngelo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#slurm-optional">SLURM (Optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation.html#common-issues">Common Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#basic-commands">Basic Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#configuration-management">Configuration Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#file-operations">File Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#working-with-topaz">Working with Topaz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#cross-validation">Cross-Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#working-with-modelangelo">Working with ModelAngelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#slurm-integration">SLURM Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#exiting">Exiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#example-workflow">Example Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli_commands.html">CLI Commands Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#configuration-commands">Configuration Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#init">init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#get">get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#set">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#show">show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#reset">reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#dependency-management">Dependency Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#add-dependency">add_dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#list-dependencies">list_dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#validate-dependencies">validate_dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#configuration-import-export">Configuration Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#export">export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#import">import</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#slurm-commands">SLURM Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#slurm-show">slurm_show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#slurm-update">slurm_update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#slurm-generate">slurm_generate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#software-integration-commands">Software Integration Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#model-angelo">model_angelo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#topaz">topaz</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#analysis-commands">Analysis Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#analyze-cv">analyze_cv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#clear">clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#pwd">pwd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#ls">ls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#help">help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#exit-commands">Exit Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#quit">quit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#exit">exit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#eof-ctrl-d">EOF (Ctrl+D)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#command-examples">Command Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#complete-workflow-example">Complete Workflow Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#configuration-management-example">Configuration Management Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#slurm-management-example">SLURM Management Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#command-line-options">Command Line Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#global-options">Global Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli_commands.html#environment-variables">Environment Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli_commands.html#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_reference.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#module-src.config_manager">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.load_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.create_default_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.save_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.set"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.update_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.validate_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.list_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.reset_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.export_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.import_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.generate_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.update_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.save_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.config_manager.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.prompt"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.__init__"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.load_banner"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.setup_logging"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.log_command"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.log_output"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.log_error"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_init"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_get"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_set"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_add_dependency"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_list_dependencies"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_validate_dependencies"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_show"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_reset"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_export"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_import"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_slurm_generate"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_slurm_show"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_slurm_update"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_model_angelo"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_topaz"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell._run_topaz_preprocess"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell._run_topaz_cross"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_analyze_cv"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_clear"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_pwd"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_ls"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_help"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.load_random_quote"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_quit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_exit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_EOF"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.default"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.emptyline"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.analyze_cross_validation"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.plot_training_curves"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#configuration-manager">Configuration Manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id0"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id1"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id2"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id3"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id4"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id5"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id6"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id7"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id8"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id9"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id10"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id11"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id12"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id13"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id14"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id15"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id16"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id17"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id18"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id19"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id20"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id21"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id22"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id23"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id24"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id25"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id26"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id27"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id28"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id29"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#interactive-cli-shell">Interactive CLI Shell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id30"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id31"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id32"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id33"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id34"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id35"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id36"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id37"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id38"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id39"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id40"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id41"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id42"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id43"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id44"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id45"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id46"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id47"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id48"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id49"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id50"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id51"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id52"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id53"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id54"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id55"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id56"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id57"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id58"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id59"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id60"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id61"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id62"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id63"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id64"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id65"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id66"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id67"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id68"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id69"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id70"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id71"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id72"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#configuration-commands">Configuration Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id73"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id74"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id75"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id76"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id77"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id78"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id79"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#dependency-management-commands">Dependency Management Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id80"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id81"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id82"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#slurm-commands">SLURM Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id83"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id84"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id85"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#software-integration-commands">Software Integration Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id86"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id87"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id88"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id89"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#analysis-commands">Analysis Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id90"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id91"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id92"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id93"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id94"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#exit-commands">Exit Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id95"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id96"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id97"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#topaz-analysis-module">Topaz Analysis Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id98"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id99"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#data-structures">Data Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#configuration-schema">Configuration Schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#analysis-results">Analysis Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#common-exceptions">Common Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#logging">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#log-levels">Log Levels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#command-line-interface">Command Line Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id100"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#command-line-arguments">Command Line Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#interactive-shell-features">Interactive Shell Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#command-history">Command History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#auto-completion">Auto-completion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#error-recovery">Error Recovery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#basic-configuration-management">Basic Configuration Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#running-analysis">Running Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#custom-cli-commands">Custom CLI Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#slurm-integration">SLURM Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">cryoDL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.topaz_analysis</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.topaz_analysis</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Topaz analysis subroutines for cryoDL.</span>
+
+<span class="sd">This module contains analysis functions for Topaz results, including</span>
+<span class="sd">cross-validation analysis and performance evaluation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Circle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Try to import topaz utilities, but don&#39;t fail if not available</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">topaz.utils.data.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_image</span>
+
+    <span class="n">TOPAZ_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">TOPAZ_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Topaz utilities not available. Some functions may not work.&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="analyze_cross_validation">
+<a class="viewcode-back" href="../../api_reference.html#src.topaz_analysis.analyze_cross_validation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_cross_validation</span><span class="p">(</span>
+        <span class="n">cv_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">n_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+        <span class="n">k_folds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze cross-validation results from Topaz training.</span>
+
+<span class="sd">    This function loads cross-validation results, calculates performance metrics,</span>
+<span class="sd">    generates plots, and provides recommendations for optimal hyperparameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cv_dir: Directory containing cross-validation results</span>
+<span class="sd">        n_values: List of N values used in cross-validation</span>
+<span class="sd">        k_folds: Number of folds used in cross-validation</span>
+<span class="sd">        output_dir: Directory to save analysis results (defaults to cv_dir)</span>
+<span class="sd">        save_plots: Whether to save generated plots</span>
+<span class="sd">        show_plots: Whether to display plots interactively</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing analysis results including:</span>
+<span class="sd">        - cv_results: Full cross-validation results DataFrame</span>
+<span class="sd">        - cv_results_mean: Mean results across folds</span>
+<span class="sd">        - cv_results_epoch: Best epoch results for each N</span>
+<span class="sd">        - best_n: Recommended N value</span>
+<span class="sd">        - best_epoch: Recommended number of epochs</span>
+<span class="sd">        - plots: Dictionary of generated plots</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cv_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">cv_dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cv_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cross-validation directory not found: </span><span class="si">{</span><span class="n">cv_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output_dir</span> <span class="o">=</span> <span class="n">cv_dir</span>
+    <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="n">output_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analyzing cross-validation results from: </span><span class="si">{</span><span class="n">cv_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output directory: </span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Load cross-validation results</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_values</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fold</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k_folds</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">cv_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;model_n</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">_fold</span><span class="si">{</span><span class="n">fold</span><span class="si">}</span><span class="s2">_training.txt&quot;</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">table</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+                    <span class="n">table</span><span class="p">[</span><span class="s1">&#39;fold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fold</span>
+                    <span class="c1"># Only keep the validation results</span>
+                    <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">]</span>
+                    <span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded results for N=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">, fold=</span><span class="si">{</span><span class="n">fold</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Could not load </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: File not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tables</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No cross-validation results found!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Combine all results</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cv_results</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv_results</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span><span class="si">}</span><span class="s2"> validation results&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results shape: </span><span class="si">{</span><span class="n">cv_results</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Calculate mean AUPRC for each condition and each epoch</span>
+    <span class="n">cv_results_mean</span> <span class="o">=</span> <span class="n">cv_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;epoch&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;fold&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Find best epoch results for each N</span>
+    <span class="n">cv_results_epoch</span> <span class="o">=</span> <span class="n">cv_results_mean</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Find overall best parameters</span>
+    <span class="n">best_row</span> <span class="o">=</span> <span class="n">cv_results_epoch</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cv_results_epoch</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
+    <span class="n">best_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_row</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">])</span>
+    <span class="n">best_epoch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_row</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">])</span>
+    <span class="n">best_auprc</span> <span class="o">=</span> <span class="n">best_row</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cross-validation Analysis Results:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best N value: </span><span class="si">{</span><span class="n">best_n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best number of epochs: </span><span class="si">{</span><span class="n">best_epoch</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best AUPRC: </span><span class="si">{</span><span class="n">best_auprc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Generate plots</span>
+    <span class="n">plots</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Plot 1: AUPRC vs Epoch for each N</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_values</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cv_results_mean</span><span class="p">[</span><span class="n">cv_results_mean</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;N=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;AUPRC&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cross-validation Performance: AUPRC vs Epoch&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">save_plots</span><span class="p">:</span>
+        <span class="n">plot_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;cv_performance_vs_epoch.png&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved performance plot: </span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">plots</span><span class="p">[</span><span class="s1">&#39;performance_vs_epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">show_plots</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Plot 2: Best AUPRC for each N</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cv_results_epoch</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">],</span> <span class="n">cv_results_epoch</span><span class="p">[</span><span class="s1">&#39;auprc&#39;</span><span class="p">],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">best_n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Best N=</span><span class="si">{</span><span class="n">best_n</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;N (Expected particles per micrograph)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Best AUPRC&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Best Cross-validation Performance by N Value&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">save_plots</span><span class="p">:</span>
+        <span class="n">plot_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;cv_best_performance_by_n.png&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved best performance plot: </span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">plots</span><span class="p">[</span><span class="s1">&#39;best_performance_by_n&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">show_plots</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Plot 3: Heatmap of AUPRC vs N and Epoch</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="c1"># Create pivot table for heatmap</span>
+    <span class="n">heatmap_data</span> <span class="o">=</span> <span class="n">cv_results_mean</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;epoch&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;auprc&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Create heatmap</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">heatmap_data</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;AUPRC&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Set axis labels</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;N Value&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;AUPRC Heatmap: N vs Epoch&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+    <span class="c1"># Set tick labels</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">heatmap_data</span><span class="o">.</span><span class="n">index</span><span class="p">)),</span> <span class="n">heatmap_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">heatmap_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)),</span> <span class="n">heatmap_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">save_plots</span><span class="p">:</span>
+        <span class="n">plot_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;cv_auprc_heatmap.png&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved heatmap: </span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">plots</span><span class="p">[</span><span class="s1">&#39;auprc_heatmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">show_plots</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Save results to CSV</span>
+    <span class="n">results_summary_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;cv_analysis_summary.csv&quot;</span>
+    <span class="n">cv_results_epoch</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">results_summary_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved analysis summary: </span><span class="si">{</span><span class="n">results_summary_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create detailed results file</span>
+    <span class="n">detailed_results_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;cv_detailed_results.csv&quot;</span>
+    <span class="n">cv_results_mean</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">detailed_results_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved detailed results: </span><span class="si">{</span><span class="n">detailed_results_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Generate recommendations</span>
+    <span class="n">recommendations</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;best_n&#39;</span><span class="p">:</span> <span class="n">best_n</span><span class="p">,</span>
+        <span class="s1">&#39;best_epoch&#39;</span><span class="p">:</span> <span class="n">best_epoch</span><span class="p">,</span>
+        <span class="s1">&#39;best_auprc&#39;</span><span class="p">:</span> <span class="n">best_auprc</span><span class="p">,</span>
+        <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Train with N=</span><span class="si">{</span><span class="n">best_n</span><span class="si">}</span><span class="s2"> for at least </span><span class="si">{</span><span class="n">best_epoch</span><span class="si">}</span><span class="s2"> epochs. &quot;</span>
+                          <span class="sa">f</span><span class="s2">&quot;Consider training longer as performance may continue to improve.&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;all_results&#39;</span><span class="p">:</span> <span class="n">cv_results_epoch</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Save recommendations to text file</span>
+    <span class="n">recommendations_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;cv_recommendations.txt&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">recommendations_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Cross-validation Analysis Recommendations</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best N value: </span><span class="si">{</span><span class="n">best_n</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best number of epochs: </span><span class="si">{</span><span class="n">best_epoch</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best AUPRC: </span><span class="si">{</span><span class="n">best_auprc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Recommendation:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">recommendations</span><span class="p">[</span><span class="s1">&#39;recommendation&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Detailed Results:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cv_results_epoch</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved recommendations: </span><span class="si">{</span><span class="n">recommendations_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;cv_results&#39;</span><span class="p">:</span> <span class="n">cv_results</span><span class="p">,</span>
+        <span class="s1">&#39;cv_results_mean&#39;</span><span class="p">:</span> <span class="n">cv_results_mean</span><span class="p">,</span>
+        <span class="s1">&#39;cv_results_epoch&#39;</span><span class="p">:</span> <span class="n">cv_results_epoch</span><span class="p">,</span>
+        <span class="s1">&#39;best_n&#39;</span><span class="p">:</span> <span class="n">best_n</span><span class="p">,</span>
+        <span class="s1">&#39;best_epoch&#39;</span><span class="p">:</span> <span class="n">best_epoch</span><span class="p">,</span>
+        <span class="s1">&#39;best_auprc&#39;</span><span class="p">:</span> <span class="n">best_auprc</span><span class="p">,</span>
+        <span class="s1">&#39;recommendations&#39;</span><span class="p">:</span> <span class="n">recommendations</span><span class="p">,</span>
+        <span class="s1">&#39;plots&#39;</span><span class="p">:</span> <span class="n">plots</span><span class="p">,</span>
+        <span class="s1">&#39;output_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="plot_training_curves">
+<a class="viewcode-back" href="../../api_reference.html#src.topaz_analysis.plot_training_curves">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_training_curves</span><span class="p">(</span>
+        <span class="n">training_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">save_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot training curves from Topaz training files.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        training_files: List of paths to training result files</span>
+<span class="sd">        output_dir: Directory to save plots</span>
+<span class="sd">        save_plots: Whether to save generated plots</span>
+<span class="sd">        show_plots: Whether to display plots interactively</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="n">output_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">training_files</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Load training data</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Extract model name from file path</span>
+            <span class="n">model_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+
+            <span class="c1"># Create training curves plot</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+            <span class="c1"># Plot training and validation metrics</span>
+            <span class="k">if</span> <span class="s1">&#39;train_auprc&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;test_auprc&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;train_auprc&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train AUPRC&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;test_auprc&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test AUPRC&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;AUPRC&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1"> - AUPRC&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;train_loss&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;test_loss&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;train_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train Loss&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;test_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Loss&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1"> - Loss&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;train_precision&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;test_precision&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;train_precision&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train Precision&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;test_precision&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Precision&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1"> - Precision&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;train_recall&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;test_recall&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;train_recall&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train Recall&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;test_recall&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Recall&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1"> - Recall&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">save_plots</span><span class="p">:</span>
+                <span class="n">plot_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">_training_curves.png&quot;</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved training curves: </span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">show_plots</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Could not plot training curves for </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../api_reference.html#src.topaz_analysis.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example usage of the analysis functions.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Example: Analyze cross-validation results</span>
+    <span class="n">cv_dir</span> <span class="o">=</span> <span class="s2">&quot;saved_models/EMPIAR-10025/cv&quot;</span>
+
+    <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">cv_dir</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running cross-validation analysis...&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">analyze_cross_validation</span><span class="p">(</span>
+            <span class="n">cv_dir</span><span class="o">=</span><span class="n">cv_dir</span><span class="p">,</span>
+            <span class="n">n_values</span><span class="o">=</span><span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+            <span class="n">k_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;analysis_results&quot;</span><span class="p">,</span>
+            <span class="n">save_plots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">show_plots</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Analysis complete!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best N: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;best_n&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best epochs: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;best_epoch&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best AUPRC: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;best_auprc&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cross-validation directory not found: </span><span class="si">{</span><span class="n">cv_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please run cross-validation first using the &#39;topaz cross&#39; command.&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, cryoDL Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

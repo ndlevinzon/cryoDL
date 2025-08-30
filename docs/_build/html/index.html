@@ -1,0 +1,913 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cryoDL Documentation &mdash; cryoDL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=0b2da8f6" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            cryoDL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#from-source-recommended">From Source (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#from-pypi-future-release">From PyPI (Future Release)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#core-dependencies">Core Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#analysis-dependencies">Analysis Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#optional-dependencies">Optional Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#development-dependencies">Development Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#documentation-dependencies">Documentation Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#external-software-dependencies">External Software Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#topaz">Topaz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#modelangelo">ModelAngelo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#slurm-optional">SLURM (Optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#common-issues">Common Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-commands">Basic Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#configuration-management">Configuration Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#file-operations">File Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#working-with-topaz">Working with Topaz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#cross-validation">Cross-Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#working-with-modelangelo">Working with ModelAngelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#slurm-integration">SLURM Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#exiting">Exiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#example-workflow">Example Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli_commands.html">CLI Commands Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#configuration-commands">Configuration Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#init">init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#get">get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#set">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#show">show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#reset">reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#dependency-management">Dependency Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#add-dependency">add_dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#list-dependencies">list_dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#validate-dependencies">validate_dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#configuration-import-export">Configuration Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#export">export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#import">import</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#slurm-commands">SLURM Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#slurm-show">slurm_show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#slurm-update">slurm_update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#slurm-generate">slurm_generate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#software-integration-commands">Software Integration Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#model-angelo">model_angelo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#topaz">topaz</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#analysis-commands">Analysis Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#analyze-cv">analyze_cv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#clear">clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#pwd">pwd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#ls">ls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#help">help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#exit-commands">Exit Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#quit">quit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#exit">exit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#eof-ctrl-d">EOF (Ctrl+D)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#command-examples">Command Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#complete-workflow-example">Complete Workflow Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#configuration-management-example">Configuration Management Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#slurm-management-example">SLURM Management Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#command-line-options">Command Line Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#global-options">Global Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#environment-variables">Environment Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-src.config_manager">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.load_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.create_default_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.save_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.set"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.update_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.validate_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.list_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.reset_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.export_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.import_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.generate_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.update_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.save_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.config_manager.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.prompt"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.__init__"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.load_banner"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.setup_logging"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.log_command"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.log_output"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.log_error"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_init"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_get"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_set"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_add_dependency"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_list_dependencies"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_validate_dependencies"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_show"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_reset"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_export"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_import"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_slurm_generate"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_slurm_show"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_slurm_update"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_model_angelo"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_topaz"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell._run_topaz_preprocess"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell._run_topaz_cross"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_analyze_cv"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_clear"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_pwd"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_ls"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_help"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.load_random_quote"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_quit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_exit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_EOF"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.default"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.emptyline"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.analyze_cross_validation"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.plot_training_curves"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#configuration-manager">Configuration Manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id0"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id1"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id2"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id3"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id4"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id5"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id6"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id7"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id8"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id9"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id10"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id11"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id12"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id13"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id14"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id15"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id16"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id17"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id18"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id19"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id20"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id21"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id22"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id23"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id24"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id25"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id26"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id27"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id28"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id29"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#interactive-cli-shell">Interactive CLI Shell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id30"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id31"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id32"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id33"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id34"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id35"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id36"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id37"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id38"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id39"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id40"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id41"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id42"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id43"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id44"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id45"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id46"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id47"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id48"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id49"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id50"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id51"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id52"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id53"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id54"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id55"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id56"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id57"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id58"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id59"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id60"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id61"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id62"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id63"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id64"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id65"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id66"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id67"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id68"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id69"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id70"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id71"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id72"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#configuration-commands">Configuration Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id73"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id74"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id75"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id76"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id77"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id78"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id79"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#dependency-management-commands">Dependency Management Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id80"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id81"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id82"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#slurm-commands">SLURM Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id83"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id84"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id85"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#software-integration-commands">Software Integration Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id86"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id87"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id88"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id89"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#analysis-commands">Analysis Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id90"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id91"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id92"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id93"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id94"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#exit-commands">Exit Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id95"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id96"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id97"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#topaz-analysis-module">Topaz Analysis Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id98"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id99"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#data-structures">Data Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#configuration-schema">Configuration Schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#analysis-results">Analysis Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#common-exceptions">Common Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#logging">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#log-levels">Log Levels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#command-line-interface">Command Line Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id100"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#command-line-arguments">Command Line Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#interactive-shell-features">Interactive Shell Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#command-history">Command History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#auto-completion">Auto-completion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#error-recovery">Error Recovery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#basic-configuration-management">Basic Configuration Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#running-analysis">Running Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#custom-cli-commands">Custom CLI Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#slurm-integration">SLURM Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">cryoDL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">cryoDL Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cryodl-documentation">
+<h1>cryoDL Documentation<a class="headerlink" href="#cryodl-documentation" title="Link to this heading"></a></h1>
+<p>A Python manager for cryo-EM software wrappers with interactive CLI and SLURM integration.</p>
+<a class="reference internal image-reference" href="_images/frenchie_cryoem.png"><img alt="cryoDL Logo" class="align-center" src="_images/frenchie_cryoem.png" style="width: 300px;" />
+</a>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-methods">Installation Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#external-software-dependencies">External Software Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-commands">Basic Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#working-with-topaz">Working with Topaz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#working-with-modelangelo">Working with ModelAngelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#slurm-integration">SLURM Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#exiting">Exiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#example-workflow">Example Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli_commands.html">CLI Commands Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#configuration-commands">Configuration Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#dependency-management">Dependency Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#configuration-import-export">Configuration Import/Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#slurm-commands">SLURM Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#software-integration-commands">Software Integration Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#analysis-commands">Analysis Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#utility-commands">Utility Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#exit-commands">Exit Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#command-examples">Command Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#command-line-options">Command Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-src.config_manager">Core Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#configuration-manager">Configuration Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#interactive-cli-shell">Interactive CLI Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#topaz-analysis-module">Topaz Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#error-handling">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#command-line-interface">Command Line Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#interactive-shell-features">Interactive Shell Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<section id="cryodl-a-pypeline-for-cryoem-deep-learning-utilities">
+<h2>cryoDL: A Pypeline for CryoEM Deep Learning Utilities<a class="headerlink" href="#cryodl-a-pypeline-for-cryoem-deep-learning-utilities" title="Link to this heading"></a></h2>
+<p align="center">
+  <img src="docs/frenchie_cryoem.png" width="300" alt="Project Hero">
+</p>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Configuration Management</strong>: Centralized configuration system with JSON-based storage</p></li>
+<li><p><strong>Dependency Management</strong>: Easy setup and validation of cryo-EM software dependencies</p></li>
+<li><p><strong>CLI Interface</strong>: Command-line tools for configuration management</p></li>
+<li><p><strong>Path Validation</strong>: Automatic validation of dependency paths and executables</p></li>
+<li><p><strong>Cross-platform</strong>: Works on Windows, macOS, and Linux</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h3>
+<section id="installation">
+<h4>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h4>
+<section id="option-1-install-from-source-recommended-for-development">
+<h5>Option 1: Install from source (recommended for development)<a class="headerlink" href="#option-1-install-from-source-recommended-for-development" title="Link to this heading"></a></h5>
+<ol class="arabic simple">
+<li><p>Clone the repository:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ndlevinzon/cryoDL
+<span class="nb">cd</span><span class="w"> </span>cryoDL
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install in development mode:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="option-2-install-with-conda">
+<h5>Option 2: Install with conda<a class="headerlink" href="#option-2-install-with-conda" title="Link to this heading"></a></h5>
+<ol class="arabic simple">
+<li><p>Create and activate a conda environment:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>cryodl<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+conda<span class="w"> </span>activate<span class="w"> </span>cryodl
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install the package:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="option-3-install-with-pip-when-published-to-pypi">
+<h5>Option 3: Install with pip (when published to PyPI)<a class="headerlink" href="#option-3-install-with-pip-when-published-to-pypi" title="Link to this heading"></a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cryodl
+</pre></div>
+</div>
+<p>After installation, you can use the <code class="docutils literal notranslate"><span class="pre">cryodl</span></code> command directly from anywhere in your terminal!</p>
+</section>
+<section id="quick-installation-scripts">
+<h5>Quick Installation Scripts<a class="headerlink" href="#quick-installation-scripts" title="Link to this heading"></a></h5>
+<p>For Linux/macOS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>install.sh
+./install.sh
+</pre></div>
+</div>
+<p>For Windows:</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>install.bat
+</pre></div>
+</div>
+</section>
+</section>
+<section id="basic-usage">
+<h4>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h4>
+<p>After installation, you can use the <code class="docutils literal notranslate"><span class="pre">cryodl</span></code> command directly:</p>
+<ol class="arabic simple">
+<li><p>Initialize the configuration:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cryodl<span class="w"> </span>init
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Add your cryo-EM software dependencies:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cryodl<span class="w"> </span>add-dependency<span class="w"> </span>relion<span class="w"> </span>/usr/local/relion/bin/relion<span class="w"> </span><span class="m">4</span>.0
+cryodl<span class="w"> </span>add-dependency<span class="w"> </span>cryosparc<span class="w"> </span>/opt/cryosparc<span class="w"> </span><span class="m">4</span>.0.0
+cryodl<span class="w"> </span>add-dependency<span class="w"> </span>topaz<span class="w"> </span>/path/to/topaz<span class="w"> </span><span class="m">0</span>.2.5
+cryodl<span class="w"> </span>add-dependency<span class="w"> </span>model_angelo<span class="w"> </span>/path/to/model_angelo<span class="w"> </span><span class="m">1</span>.0.0
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Validate your dependencies:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cryodl<span class="w"> </span>validate-dependencies
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>View your configuration:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cryodl<span class="w"> </span>show
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Generate SLURM headers:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cryodl<span class="w"> </span>slurm<span class="w"> </span>generate<span class="w"> </span>--job-name<span class="w"> </span>model_angelo
+cryodl<span class="w"> </span>slurm<span class="w"> </span>generate<span class="w"> </span>--job-name<span class="w"> </span>topaz<span class="w"> </span>--nodes<span class="w"> </span><span class="m">2</span><span class="w"> </span>--gres-gpu<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration-manager">
+<h3>Configuration Manager<a class="headerlink" href="#configuration-manager" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code> class provides a comprehensive interface for managing project configuration.</p>
+<section id="python-api-usage">
+<h4>Python API Usage<a class="headerlink" href="#python-api-usage" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.config_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigManager</span>
+
+<span class="c1"># Initialize config manager</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigManager</span><span class="p">()</span>
+
+<span class="c1"># Get configuration values</span>
+<span class="n">project_root</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;paths.project_root&#39;</span><span class="p">)</span>
+<span class="n">max_threads</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;settings.max_threads&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Set configuration values</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;settings.max_threads&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;settings.gpu_enabled&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Manage dependencies</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span><span class="s1">&#39;relion&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/local/relion/bin/relion&#39;</span><span class="p">,</span> <span class="s1">&#39;4.0&#39;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span><span class="s1">&#39;cryosparc&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/cryosparc&#39;</span><span class="p">,</span> <span class="s1">&#39;4.0.0&#39;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span><span class="s1">&#39;topaz&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/topaz&#39;</span><span class="p">,</span> <span class="s1">&#39;0.2.5&#39;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span><span class="s1">&#39;model_angelo&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/model_angelo&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Validate dependencies</span>
+<span class="n">is_valid</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validate_dependency_path</span><span class="p">(</span><span class="s1">&#39;relion&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get enabled dependencies</span>
+<span class="n">enabled_deps</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_enabled_dependencies</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="cli-commands">
+<h4>CLI Commands<a class="headerlink" href="#cli-commands" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></td>
+<td><p>Initialize default configuration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">init</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p>Get configuration value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">get</span> <span class="pre">paths.project_root</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>Set configuration value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">set</span> <span class="pre">settings.max_threads</span> <span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">add-dependency</span></code></p></td>
+<td><p>Add/update dependency</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">add-dependency</span> <span class="pre">relion</span> <span class="pre">/path/to/relion</span> <span class="pre">4.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list-dependencies</span></code></p></td>
+<td><p>List all dependencies</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">list-dependencies</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">validate-dependencies</span></code></p></td>
+<td><p>Validate dependency paths</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">validate-dependencies</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">show</span></code></p></td>
+<td><p>Show full configuration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">show</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reset</span></code></p></td>
+<td><p>Reset to defaults</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">reset</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">export</span></code></p></td>
+<td><p>Export configuration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">export</span> <span class="pre">config_backup.json</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">import</span></code></p></td>
+<td><p>Import configuration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cryodl</span> <span class="pre">import</span> <span class="pre">config_backup.json</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="configuration-structure">
+<h3>Configuration Structure<a class="headerlink" href="#configuration-structure" title="Link to this heading"></a></h3>
+<p>The configuration is stored in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> with the following structure:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;project_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cryoDL&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python wrapper for cryo-EM software&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;paths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;project_root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/cryoDL&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;src_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/cryoDL/src&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;docs_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/cryoDL/docs&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;output_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/cryoDL/output&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;temp_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/cryoDL/temp&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;relion&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/local/relion/bin/relion&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;cryosparc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/opt/cryosparc&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.0.0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;eman2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;cisTEM&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;topaz&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/topaz&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.5&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;model_angelo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/model_angelo&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;max_threads&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;memory_limit_gb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;gpu_enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;debug_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;log_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INFO&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;api_keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;cryosparc_license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;relion_license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="supported-dependencies">
+<h3>Supported Dependencies<a class="headerlink" href="#supported-dependencies" title="Link to this heading"></a></h3>
+<p>The configuration manager is pre-configured for common cryo-EM software:</p>
+<ul class="simple">
+<li><p><strong>RELION</strong>: Single-particle analysis software</p></li>
+<li><p><strong>CryoSPARC</strong>: Cryo-EM structure determination platform</p></li>
+<li><p><strong>EMAN2</strong>: Image processing suite for electron microscopy</p></li>
+<li><p><strong>cisTEM</strong>: Single-particle analysis software</p></li>
+<li><p><strong>Topaz</strong>: Deep learning-based particle picking for cryo-EM</p></li>
+<li><p><strong>ModelAngelo</strong>: AI-powered protein structure modeling from cryo-EM maps</p></li>
+</ul>
+</section>
+<section id="development">
+<h3>Development<a class="headerlink" href="#development" title="Link to this heading"></a></h3>
+<section id="project-structure">
+<h4>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cryoDL/
+├── src/
+│   ├── __init__.py
+│   ├── config_manager.py    # Main configuration manager
+│   ├── cli.py              # Command-line interface
+│   └── resources/
+├── docs/
+├── config.json             # Generated configuration file
+├── requirements.txt
+└── README.md
+</pre></div>
+</div>
+</section>
+<section id="adding-new-dependencies">
+<h4>Adding New Dependencies<a class="headerlink" href="#adding-new-dependencies" title="Link to this heading"></a></h4>
+<p>To add support for new cryo-EM software:</p>
+<ol class="arabic simple">
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">default_config</span></code> in <code class="docutils literal notranslate"><span class="pre">config_manager.py</span></code></p></li>
+<li><p>Add validation logic if needed</p></li>
+<li><p>Update documentation</p></li>
+</ol>
+</section>
+<section id="testing">
+<h4>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h4>
+<p>Run the example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/config_manager.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Link to this heading"></a></h3>
+<p>This project is licensed under the terms specified in the LICENSE file.</p>
+</section>
+<section id="contributing">
+<h3>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Fork the repository</p></li>
+<li><p>Create a feature branch</p></li>
+<li><p>Make your changes</p></li>
+<li><p>Add tests if applicable</p></li>
+<li><p>Submit a pull request</p></li>
+</ol>
+</section>
+<section id="support">
+<h3>Support<a class="headerlink" href="#support" title="Link to this heading"></a></h3>
+<p>For issues and questions, please open an issue on the project repository.</p>
+</section>
+<section id="citation">
+<h3>Citation<a class="headerlink" href="#citation" title="Link to this heading"></a></h3>
+<p>If you use CryoDL in your research, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@software</span><span class="p">{</span><span class="nl">cryoDL2025</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{CryoDL: A Pypeline for CryoEM Deep Learning Utilities}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Levinzon, Nate and Shen, Peter}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="p">=</span><span class="s">{https://github.com/ndlevinzon/cryoDL}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Additionally, we are grateful for the following open-source projects that we build on top of:</p>
+<section id="topaz-and-topaz-denoise">
+<h4>Topaz and Topaz Denoise<a class="headerlink" href="#topaz-and-topaz-denoise" title="Link to this heading"></a></h4>
+<details><summary>Citation</summary><p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@Article</span><span class="p">{</span><span class="nl">Bepler2019</span><span class="p">,</span>
+<span class="na">author</span><span class="p">=</span><span class="s">{Bepler, Tristan</span>
+<span class="s">and Morin, Andrew</span>
+<span class="s">and Rapp, Micah</span>
+<span class="s">and Brasch, Julia</span>
+<span class="s">and Shapiro, Lawrence</span>
+<span class="s">and Noble, Alex J.</span>
+<span class="s">and Berger, Bonnie}</span><span class="p">,</span>
+<span class="na">title</span><span class="p">=</span><span class="s">{Positive-unlabeled convolutional neural networks for particle picking in cryo-electron micrographs}</span><span class="p">,</span>
+<span class="na">journal</span><span class="p">=</span><span class="s">{Nature Methods}</span><span class="p">,</span>
+<span class="na">year</span><span class="p">=</span><span class="s">{2019}</span><span class="p">,</span>
+<span class="na">issn</span><span class="p">=</span><span class="s">{1548-7105}</span><span class="p">,</span>
+<span class="na">doi</span><span class="p">=</span><span class="s">{10.1038/s41592-019-0575-8}</span><span class="p">,</span>
+<span class="na">url</span><span class="p">=</span><span class="s">{https://doi.org/10.1038/s41592-019-0575-8}</span>
+<span class="p">}</span>
+<span class="nc">@Article</span><span class="p">{</span><span class="nl">Bepler2020_topazdenoise</span><span class="p">,</span>
+<span class="na">author</span><span class="p">=</span><span class="s">{Bepler, Tristan</span>
+<span class="s">and Kelley, Kotaro</span>
+<span class="s">and Noble, Alex J.</span>
+<span class="s">and Berger, Bonnie}</span><span class="p">,</span>
+<span class="na">title</span><span class="p">=</span><span class="s">{Topaz-Denoise: general deep denoising models for cryoEM and cryoET}</span><span class="p">,</span>
+<span class="na">journal</span><span class="p">=</span><span class="s">{Nature Communications}</span><span class="p">,</span>
+<span class="na">year</span><span class="p">=</span><span class="s">{2020}</span><span class="p">,</span>
+<span class="na">issn</span><span class="p">=</span><span class="s">{2041-1723}</span><span class="p">,</span>
+<span class="na">doi</span><span class="p">=</span><span class="s">{10.1038/s41467-020-18952-1}</span><span class="p">,</span>
+<span class="na">url</span><span class="p">=</span><span class="s">{https://doi.org/10.1038/s41467-020-18952-1}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p></details>
+</section>
+<section id="model-angelo">
+<h4>Model-Angelo<a class="headerlink" href="#model-angelo" title="Link to this heading"></a></h4>
+<details><summary>Citation</summary><p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">jamali2024automated</span><span class="p">,</span>
+<span class="w">        </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Kiarash Jamali and Lukas Kall and Rui Zhang and Alan Brown and Dari Kimanius and Sjors Scheres}</span><span class="p">,</span>
+<span class="w">        </span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Automated model building and protein identification in cryo-EM maps}</span><span class="p">,</span>
+<span class="w">        </span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">        </span><span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1038/s41586-024-07215-4}</span><span class="p">,</span>
+<span class="w">        </span><span class="na">URL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.nature.com/articles/s41586-024-07215-4}</span><span class="p">,</span>
+<span class="w">        </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Nature}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p></details></section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, cryoDL Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
