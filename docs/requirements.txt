@@ -15,6 +15,9 @@ sphinx-paramlinks>=0.5.0
 # Markdown support
 myst-parser>=0.18.0
 
+# PyDoc
+pydoctor>=25.4.0
+
 # Code highlighting
 pygments>=2.10.0
 
