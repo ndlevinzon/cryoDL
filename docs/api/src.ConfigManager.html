@@ -1,0 +1,1556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>src.ConfigManager</title>
+    <meta name="generator" content="pydoctor 25.4.0"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="readthedocstheme.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          cryoDL <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+    
+        <!-- Side navigation -->
+      <div class="sidebarcontainer">
+        <nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="src.ConfigManager.html" class="internal-link" title="This class"><wbr></wbr>Config<wbr></wbr>Manager</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="src.ConfigManager.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#create_default_config" class="internal-link" title="src.ConfigManager.create_default_config">create<wbr></wbr>_default<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#export_config" class="internal-link" title="src.ConfigManager.export_config">export<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#generate_slurm_header" class="internal-link" title="src.ConfigManager.generate_slurm_header">generate<wbr></wbr>_slurm<wbr></wbr>_header</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get" class="internal-link" title="src.ConfigManager.get">get</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_enabled_dependencies" class="internal-link" title="src.ConfigManager.get_enabled_dependencies">get<wbr></wbr>_enabled<wbr></wbr>_dependencies</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_project_metadata" class="internal-link" title="src.ConfigManager.get_project_metadata">get<wbr></wbr>_project<wbr></wbr>_metadata</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_slurm_config" class="internal-link" title="src.ConfigManager.get_slurm_config">get<wbr></wbr>_slurm<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#import_config" class="internal-link" title="src.ConfigManager.import_config">import<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#list_dependencies" class="internal-link" title="src.ConfigManager.list_dependencies">list<wbr></wbr>_dependencies</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#load_config" class="internal-link" title="src.ConfigManager.load_config">load<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#reset_config" class="internal-link" title="src.ConfigManager.reset_config">reset<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#save_config" class="internal-link" title="src.ConfigManager.save_config">save<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#save_slurm_header" class="internal-link" title="src.ConfigManager.save_slurm_header">save<wbr></wbr>_slurm<wbr></wbr>_header</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set" class="internal-link" title="src.ConfigManager.set">set</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#update_dependency_path" class="internal-link" title="src.ConfigManager.update_dependency_path">update<wbr></wbr>_dependency<wbr></wbr>_path</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#update_slurm_config" class="internal-link" title="src.ConfigManager.update_slurm_config">update<wbr></wbr>_slurm<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#validate_dependency_path" class="internal-link" title="src.ConfigManager.validate_dependency_path">validate<wbr></wbr>_dependency<wbr></wbr>_path</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_load_project_metadata" class="internal-link" title="src.ConfigManager._load_project_metadata">_load<wbr></wbr>_project<wbr></wbr>_metadata</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#config" class="internal-link" title="src.ConfigManager.config">config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#config_path" class="internal-link" title="src.ConfigManager.config_path">config<wbr></wbr>_path</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#default_config" class="internal-link" title="src.ConfigManager.default_config">default<wbr></wbr>_config</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#logger" class="internal-link" title="src.ConfigManager.logger">logger</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#project_metadata" class="internal-link" title="src.ConfigManager.project_metadata">project<wbr></wbr>_metadata</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#project_root" class="internal-link" title="src.ConfigManager.project_root">project<wbr></wbr>_root</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Package</span>
+        <code><a href="index.html" class="internal-link" title="The parent of this class">src</a></code> 
+      </div>
+      
+      <div>
+        
+
+        <div class="childrenKindTitle">Modules</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.build_fasta.html" class="internal-link" title="src.build_fasta">build<wbr></wbr>_fasta</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.cli.html" class="internal-link" title="src.cli">cli</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.config_manager.html" class="internal-link" title="src.config_manager">config<wbr></wbr>_manager</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.topaz_analysis.html" class="internal-link" title="src.topaz_analysis">topaz<wbr></wbr>_analysis</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.ConfigManager.html" class="internal-link" title="src.ConfigManager"><wbr></wbr>Config<wbr></wbr>Manager</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.CryoDLShell.html" class="internal-link" title="src.CryoDLShell"><wbr></wbr>Cryo<wbr></wbr>DLShell</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="index.html#__author__" class="internal-link" title="src.__author__">__author__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="index.html#__version__" class="internal-link" title="src.__version__">__version__</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        <!-- No sidebar toggle for read the docs theme, the sidebar is always
+          visible when the screen is width enough.
+        -->
+      </div>
+
+    </nav>
+    
+    <div class="container-fluid">
+
+      <div id="main" class="">
+        
+
+        
+
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">src</a></code><wbr></wbr>.<code><a href="src.ConfigManager.html" class="internal-link" title="src.ConfigManager">ConfigManager</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">ConfigManager</span>:</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="src.ConfigManager.__init__">ConfigManager(config_path)</a></code></p>
+          <p><a href="classIndex.html#src.ConfigManager">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Configuration manager for cryoDL project.
+Handles creation, reading, and updating of config.json with global variables
+and dependency paths.</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id8">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="src.ConfigManager.__init__">__init__</a></code></td>
+    <td>Initialize the configuration manager.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#create_default_config" class="internal-link" title="src.ConfigManager.create_default_config">create<wbr></wbr>_default<wbr></wbr>_config</a></code></td>
+    <td>Create and save default configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#export_config" class="internal-link" title="src.ConfigManager.export_config">export<wbr></wbr>_config</a></code></td>
+    <td>Export configuration to a different location.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#generate_slurm_header" class="internal-link" title="src.ConfigManager.generate_slurm_header">generate<wbr></wbr>_slurm<wbr></wbr>_header</a></code></td>
+    <td>Generate SLURM header from configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get" class="internal-link" title="src.ConfigManager.get">get</a></code></td>
+    <td>Get configuration value using dot notation.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_enabled_dependencies" class="internal-link" title="src.ConfigManager.get_enabled_dependencies">get<wbr></wbr>_enabled<wbr></wbr>_dependencies</a></code></td>
+    <td>Get only enabled dependencies.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_project_metadata" class="internal-link" title="src.ConfigManager.get_project_metadata">get<wbr></wbr>_project<wbr></wbr>_metadata</a></code></td>
+    <td>Get the current project metadata from pyproject.toml.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_slurm_config" class="internal-link" title="src.ConfigManager.get_slurm_config">get<wbr></wbr>_slurm<wbr></wbr>_config</a></code></td>
+    <td>Get current SLURM configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#import_config" class="internal-link" title="src.ConfigManager.import_config">import<wbr></wbr>_config</a></code></td>
+    <td>Import configuration from a file.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#list_dependencies" class="internal-link" title="src.ConfigManager.list_dependencies">list<wbr></wbr>_dependencies</a></code></td>
+    <td>Get all configured dependencies.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#load_config" class="internal-link" title="src.ConfigManager.load_config">load<wbr></wbr>_config</a></code></td>
+    <td>Load configuration from file or create default if not exists.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#reset_config" class="internal-link" title="src.ConfigManager.reset_config">reset<wbr></wbr>_config</a></code></td>
+    <td>Reset configuration to default values.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#save_config" class="internal-link" title="src.ConfigManager.save_config">save<wbr></wbr>_config</a></code></td>
+    <td>Save configuration to file.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#save_slurm_header" class="internal-link" title="src.ConfigManager.save_slurm_header">save<wbr></wbr>_slurm<wbr></wbr>_header</a></code></td>
+    <td>Save SLURM header to a file.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#set" class="internal-link" title="src.ConfigManager.set">set</a></code></td>
+    <td>Set configuration value using dot notation.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#update_dependency_path" class="internal-link" title="src.ConfigManager.update_dependency_path">update<wbr></wbr>_dependency<wbr></wbr>_path</a></code></td>
+    <td>Update dependency path and version.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#update_slurm_config" class="internal-link" title="src.ConfigManager.update_slurm_config">update<wbr></wbr>_slurm<wbr></wbr>_config</a></code></td>
+    <td>Update SLURM configuration parameters.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#validate_dependency_path" class="internal-link" title="src.ConfigManager.validate_dependency_path">validate<wbr></wbr>_dependency<wbr></wbr>_path</a></code></td>
+    <td>Validate if a dependency path exists and is accessible.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#config" class="internal-link" title="src.ConfigManager.config">config</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#config_path" class="internal-link" title="src.ConfigManager.config_path">config<wbr></wbr>_path</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#default_config" class="internal-link" title="src.ConfigManager.default_config">default<wbr></wbr>_config</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#logger" class="internal-link" title="src.ConfigManager.logger">logger</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#project_metadata" class="internal-link" title="src.ConfigManager.project_metadata">project<wbr></wbr>_metadata</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#project_root" class="internal-link" title="src.ConfigManager.project_root">project<wbr></wbr>_root</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_load_project_metadata" class="internal-link" title="src.ConfigManager._load_project_metadata">_load<wbr></wbr>_project<wbr></wbr>_metadata</a></code></td>
+    <td>Load project metadata from pyproject.toml file.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="childList">
+          <div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">config_path: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | Path | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="src.ConfigManager.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Initialize the configuration manager.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">config<wbr></wbr>_path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | Path | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Path to config.json file. If None, uses default location.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.create_default_config">
+    
+  </a>
+  <a name="create_default_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">create_default_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]</code>:</span>
+    
+    <a class="headerLink" href="#create_default_config" title="src.ConfigManager.create_default_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Create and save default configuration.</p>
+<p>Creates the necessary directories and saves a default configuration file
+with project metadata, paths, dependencies, settings, and SLURM configuration.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config = config_manager.create_default_config()
+print(config['settings']['max_threads'])
+4</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary containing the default configuration structure</dt>
+<dd>with all required sections initialized.</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.export_config">
+    
+  </a>
+  <a name="export_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">export_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">export_path: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | Path</code></span>):</span>
+    
+    <a class="headerLink" href="#export_config" title="src.ConfigManager.export_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Export configuration to a different location.</p>
+<p>Exports the current configuration to a specified file path in JSON format.
+This is useful for backing up configurations or sharing them between
+different environments.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.export_config('config_backup.json')
+config_manager.export_config(Path('backups/config_2024.json'))</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">export<wbr></wbr>_path:</span><code>Union[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Path]</code></td><td class="fieldArgDesc">Path where to export the configuration file.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#IOError" class="intersphinx-link">IOError</a></code></td><td>If the file cannot be written to.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.generate_slurm_header">
+    
+  </a>
+  <a name="generate_slurm_header">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">generate_slurm_header</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">job_name: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">**kwargs</span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>:</span>
+    
+    <a class="headerLink" href="#generate_slurm_header" title="src.ConfigManager.generate_slurm_header">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Generate SLURM header from configuration.</p>
+<p>Generates a SLURM job script header using the current SLURM configuration
+settings. Allows overriding specific parameters for the job.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">header = config_manager.generate_slurm_header('my_job', nodes=2, gres_gpu=2)
+print(header)
+#!/bin/bash
+#SBATCH --job-name=my_job
+#SBATCH --nodes=2
+#SBATCH --gres=gpu:2
+...</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">job<wbr></wbr>_name:</span><code>Optional[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">Override job name if provided. If None, uses
+the default job name from configuration.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc">Additional SLURM parameters to override. Valid parameters include:
+- nodes (int): Number of nodes
+- ntasks (int): Number of tasks
+- cpus_per_task (int): CPUs per task
+- gres_gpu (int): Number of GPUs
+- time (str): Time limit (HH:MM:SS)
+- partition (str): Partition name
+- qos (str): Quality of service
+- account (str): Account name
+- mem (str): Memory limit
+- output (str): Output file pattern
+- error (str): Error file pattern</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Complete SLURM header as a string with all directives.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.get">
+    
+  </a>
+  <a name="get">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">key: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">default: <code>Any</code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>) -&gt; <code>Any</code>:</span>
+    
+    <a class="headerLink" href="#get" title="src.ConfigManager.get">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get configuration value using dot notation.</p>
+<p>Retrieves a configuration value using dot notation to access nested
+dictionary keys. If the key doesn't exist, returns the default value.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.get('settings.max_threads')
+4
+config_manager.get('nonexistent.key', 'default')
+'default'</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Configuration key in dot notation (e.g., 'paths.output_dir').</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default:</span><code>Any</code></td><td class="fieldArgDesc">Default value to return if key is not found.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Any</code></td><td class="fieldArgDesc">The configuration value if found, otherwise the default value.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.get_enabled_dependencies">
+    
+  </a>
+  <a name="get_enabled_dependencies">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_enabled_dependencies</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]]</code>:</span>
+    
+    <a class="headerLink" href="#get_enabled_dependencies" title="src.ConfigManager.get_enabled_dependencies">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get only enabled dependencies.</p>
+<p>Returns a filtered dictionary containing only the dependencies that are
+currently enabled in the configuration.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">enabled_deps = config_manager.get_enabled_dependencies()
+print(list(enabled_deps.keys()))
+['topaz', 'model_angelo']</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary containing only enabled dependencies</dt>
+<dd>with their configuration details (path, version, enabled status).</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.get_project_metadata">
+    
+  </a>
+  <a name="get_project_metadata">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_project_metadata</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]</code>:</span>
+    
+    <a class="headerLink" href="#get_project_metadata" title="src.ConfigManager.get_project_metadata">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get the current project metadata from pyproject.toml.</p>
+<p>Returns a copy of the project metadata that was loaded during initialization.
+This includes the project name, version, and description from pyproject.toml.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">metadata = config_manager.get_project_metadata()
+print(f"Version: {metadata['version']}")
+Version: 0.3.0</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary containing project metadata with keys:</dt>
+<dd><ul class="rst-simple rst-first rst-last">
+<li>name (str): Project name</li>
+<li>version (str): Project version</li>
+<li>description (str): Project description</li>
+</ul>
+</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.get_slurm_config">
+    
+  </a>
+  <a name="get_slurm_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_slurm_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]</code>:</span>
+    
+    <a class="headerLink" href="#get_slurm_config" title="src.ConfigManager.get_slurm_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get current SLURM configuration.</p>
+<p>Returns the current SLURM configuration dictionary containing all
+SLURM-related settings.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">slurm_config = config_manager.get_slurm_config()
+print(slurm_config['nodes'])
+1
+print(slurm_config['time'])
+'06:00:00'</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary containing all SLURM configuration parameters</dt>
+<dd>including job_name, nodes, ntasks, cpus_per_task, gres_gpu, time,
+partition, qos, account, mem, output, error, and other SLURM settings.</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.import_config">
+    
+  </a>
+  <a name="import_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">import_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">import_path: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | Path</code></span>):</span>
+    
+    <a class="headerLink" href="#import_config" title="src.ConfigManager.import_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Import configuration from a file.</p>
+<p>Imports a configuration from a specified file path and replaces the current
+configuration. The imported configuration is then saved to the main
+configuration file.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.import_config('config_backup.json')
+config_manager.import_config(Path('backups/config_2024.json'))</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">import<wbr></wbr>_path:</span><code>Union[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Path]</code></td><td class="fieldArgDesc">Path to the configuration file to import.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#IOError" class="intersphinx-link">IOError</a></code></td><td>If the file cannot be read.</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/json.html#json.JSONDecodeError" class="intersphinx-link">json.JSONDecodeError</a></code></td><td>If the file contains invalid JSON.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.list_dependencies">
+    
+  </a>
+  <a name="list_dependencies">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">list_dependencies</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]]</code>:</span>
+    
+    <a class="headerLink" href="#list_dependencies" title="src.ConfigManager.list_dependencies">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get all configured dependencies.</p>
+<p>Returns a dictionary containing all dependencies configured in the system,
+including their paths, versions, and enabled status.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">deps = config_manager.list_dependencies()
+print(deps['topaz']['path'])
+'/usr/local/bin/topaz'</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary where keys are dependency names and</dt>
+<dd>values are dictionaries containing:
+- path (str): Path to the dependency
+- version (str): Version of the dependency
+- enabled (bool): Whether the dependency is enabled</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.load_config">
+    
+  </a>
+  <a name="load_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">load_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]</code>:</span>
+    
+    <a class="headerLink" href="#load_config" title="src.ConfigManager.load_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Load configuration from file or create default if not exists.</p>
+<p>Attempts to load the configuration from the config.json file. If the file
+doesn't exist or is corrupted, creates a new default configuration file.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config = config_manager.load_config()
+print(config['project_info']['version'])
+'0.3.0'</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary containing the loaded or created configuration</dt>
+<dd>with sections for project_info, paths, dependencies, settings, and slurm.</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.reset_config">
+    
+  </a>
+  <a name="reset_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">reset_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#reset_config" title="src.ConfigManager.reset_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Reset configuration to default values.</p>
+<p>Resets the current configuration to the default values and saves the
+changes to the configuration file. This will overwrite any custom
+settings that have been made.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.reset_config()
+# Configuration is now reset to defaults</p>
+</div>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.save_config">
+    
+  </a>
+  <a name="save_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">save_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">config: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any] | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    
+    <a class="headerLink" href="#save_config" title="src.ConfigManager.save_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Save configuration to file.</p>
+<p>Saves the configuration dictionary to the config.json file in JSON format
+with proper indentation. If no config is provided, saves the current
+configuration.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.save_config()
+# Or save a specific config
+custom_config = {'settings': {'max_threads': 8}}
+config_manager.save_config(custom_config)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">config:</span><code>Optional[Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]]</code></td><td class="fieldArgDesc">Configuration dictionary to save.
+If None, saves the current configuration.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#IOError" class="intersphinx-link">IOError</a></code></td><td>If the file cannot be written to.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.save_slurm_header">
+    
+  </a>
+  <a name="save_slurm_header">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">save_slurm_header</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">output_path: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | Path</code>, </span><span class="rst-sig-param">job_name: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">**kwargs</span>):</span>
+    
+    <a class="headerLink" href="#save_slurm_header" title="src.ConfigManager.save_slurm_header">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Save SLURM header to a file.</p>
+<p>Generates a SLURM header using the current configuration and saves it to
+a specified file path. This is useful for creating SLURM job scripts.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.save_slurm_header('my_job.slurm', 'my_job', nodes=2)
+config_manager.save_slurm_header(Path('jobs/batch_job.slurm'))</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output<wbr></wbr>_path:</span><code>Union[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Path]</code></td><td class="fieldArgDesc">Path where to save the SLURM header file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">job<wbr></wbr>_name:</span><code>Optional[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">Override job name if provided. If None, uses
+the default job name from configuration.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc">Additional SLURM parameters to override. See generate_slurm_header
+for valid parameters.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#IOError" class="intersphinx-link">IOError</a></code></td><td>If the file cannot be written to.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.set">
+    
+  </a>
+  <a name="set">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">set</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">key: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">value: <code>Any</code></span>):</span>
+    
+    <a class="headerLink" href="#set" title="src.ConfigManager.set">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Set configuration value using dot notation.</p>
+<p>Sets a configuration value using dot notation to access nested dictionary
+keys. Creates intermediate dictionaries if they don't exist.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.set('settings.max_threads', 8)
+config_manager.set('new_section.new_key', 'new_value')</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Configuration key in dot notation (e.g., 'settings.max_threads').</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">value:</span><code>Any</code></td><td class="fieldArgDesc">Value to set for the configuration key.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.update_dependency_path">
+    
+  </a>
+  <a name="update_dependency_path">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">update_dependency_path</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">dependency: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">path: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">version: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> = <span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span></span>):</span>
+    
+    <a class="headerLink" href="#update_dependency_path" title="src.ConfigManager.update_dependency_path">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Update dependency path and version.</p>
+<p>Updates the path and version for a specified dependency in the configuration.
+If the dependency doesn't exist in the configuration, logs a warning.
+The dependency is automatically enabled if a path is provided.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.update_dependency_path('topaz', '/usr/local/bin/topaz', '0.3.7')
+config_manager.update_dependency_path('model_angelo', '/path/to/model_angelo')</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dependency:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Name of the dependency (e.g., 'topaz', 'model_angelo').</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Path to the dependency executable or directory.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <em>optional</em></td><td class="fieldArgDesc">Version of the dependency. Defaults to empty string.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.update_slurm_config">
+    
+  </a>
+  <a name="update_slurm_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">update_slurm_config</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">**kwargs</span>):</span>
+    
+    <a class="headerLink" href="#update_slurm_config" title="src.ConfigManager.update_slurm_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Update SLURM configuration parameters.</p>
+<p>Updates the SLURM configuration section with new parameter values and
+saves the changes to the configuration file.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.update_slurm_config(nodes=2, gres_gpu=2, time='12:00:00')
+config_manager.update_slurm_config(partition='gpu', account='my_account')</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc">SLURM parameters to update. Valid parameters include:
+- job_name (str): Default job name
+- nodes (int): Number of nodes
+- ntasks (int): Number of tasks
+- cpus_per_task (int): CPUs per task
+- gres_gpu (int): Number of GPUs
+- time (str): Time limit (HH:MM:SS)
+- partition (str): Partition name
+- qos (str): Quality of service
+- account (str): Account name
+- mem (str): Memory limit
+- output (str): Output file pattern
+- error (str): Error file pattern
+- mail_type (str): Mail notification type
+- mail_user (str): Mail notification user
+- exclude (str): Nodes to exclude
+- dependency (str): Job dependencies
+- array (str): Array job specification
+- comment (str): Comment for the configuration</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.ConfigManager.validate_dependency_path">
+    
+  </a>
+  <a name="validate_dependency_path">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">validate_dependency_path</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">dependency: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>:</span>
+    
+    <a class="headerLink" href="#validate_dependency_path" title="src.ConfigManager.validate_dependency_path">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Validate if a dependency path exists and is accessible.</p>
+<p>Checks if the specified dependency exists in the configuration and if its
+path points to an existing file or directory.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager.validate_dependency_path('topaz')
+True
+config_manager.validate_dependency_path('nonexistent')
+False</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dependency:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Name of the dependency to validate.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">True if the dependency path exists and is accessible, False otherwise.</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.ConfigManager.config">
+    
+  </a>
+  <a name="config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">config</span> =
+    
+    <a class="headerLink" href="#config" title="src.ConfigManager.config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.ConfigManager.config_path">
+    
+  </a>
+  <a name="config_path">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">config_path</span> =
+    
+    <a class="headerLink" href="#config_path" title="src.ConfigManager.config_path">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.ConfigManager.default_config">
+    
+  </a>
+  <a name="default_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">default_config</span> =
+    
+    <a class="headerLink" href="#default_config" title="src.ConfigManager.default_config">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.ConfigManager.logger">
+    
+  </a>
+  <a name="logger">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">logger</span> =
+    
+    <a class="headerLink" href="#logger" title="src.ConfigManager.logger">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.ConfigManager.project_metadata">
+    
+  </a>
+  <a name="project_metadata">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">project_metadata</span> =
+    
+    <a class="headerLink" href="#project_metadata" title="src.ConfigManager.project_metadata">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.ConfigManager.project_root">
+    
+  </a>
+  <a name="project_root">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">project_root</span> =
+    
+    <a class="headerLink" href="#project_root" title="src.ConfigManager.project_root">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="src.ConfigManager._load_project_metadata">
+    
+  </a>
+  <a name="_load_project_metadata">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_load_project_metadata</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr>Any]</code>:</span>
+    
+    <a class="headerLink" href="#_load_project_metadata" title="src.ConfigManager._load_project_metadata">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Load project metadata from pyproject.toml file.</p>
+<p>Reads the project name, version, and description from the pyproject.toml
+file located in the project root directory. If the file is not found or
+cannot be read, returns default values.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">metadata = config_manager._load_project_metadata()
+print(metadata['version'])
+'0.3.0'</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code>Any]</code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>Dictionary containing project metadata with keys:</dt>
+<dd><ul class="rst-simple rst-first rst-last">
+<li>name (str): Project name</li>
+<li>version (str): Project version</li>
+<li>description (str): Project description</li>
+</ul>
+</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+    <hr />
+    
+    
+    <div class="container-fluid">
+      <a href="index.html">API Documentation</a> for cryoDL,
+    generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+      25.4.0 at 2025-08-30 14:03:31.
+    </div>
+    
+    <script src="ajax.js" type="text/javascript"></script>
+    <script src="searchlib.js" type="text/javascript"></script>
+    <script src="search.js" type="text/javascript"></script>
+  
+  </footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

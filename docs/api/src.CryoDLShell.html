@@ -1,0 +1,2339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>src.CryoDLShell</title>
+    <meta name="generator" content="pydoctor 25.4.0"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="readthedocstheme.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          cryoDL <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+    
+        <!-- Side navigation -->
+      <div class="sidebarcontainer">
+        <nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="src.CryoDLShell.html" class="internal-link" title="This class"><wbr></wbr>Cryo<wbr></wbr>DLShell</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="src.CryoDLShell.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#default" class="internal-link" title="src.CryoDLShell.default">default</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_add_dependency" class="internal-link" title="src.CryoDLShell.do_add_dependency">do<wbr></wbr>_add<wbr></wbr>_dependency</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_analyze_cv" class="internal-link" title="src.CryoDLShell.do_analyze_cv">do<wbr></wbr>_analyze<wbr></wbr>_cv</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_clear" class="internal-link" title="src.CryoDLShell.do_clear">do<wbr></wbr>_clear</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_EOF" class="internal-link" title="src.CryoDLShell.do_EOF">do_<wbr></wbr>EOF</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_exit" class="internal-link" title="src.CryoDLShell.do_exit">do<wbr></wbr>_exit</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_export" class="internal-link" title="src.CryoDLShell.do_export">do<wbr></wbr>_export</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_fasta" class="internal-link" title="src.CryoDLShell.do_fasta">do<wbr></wbr>_fasta</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_get" class="internal-link" title="src.CryoDLShell.do_get">do<wbr></wbr>_get</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_help" class="internal-link" title="src.CryoDLShell.do_help">do<wbr></wbr>_help</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_import" class="internal-link" title="src.CryoDLShell.do_import">do<wbr></wbr>_import</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_init" class="internal-link" title="src.CryoDLShell.do_init">do<wbr></wbr>_init</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_list_dependencies" class="internal-link" title="src.CryoDLShell.do_list_dependencies">do<wbr></wbr>_list<wbr></wbr>_dependencies</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_ls" class="internal-link" title="src.CryoDLShell.do_ls">do<wbr></wbr>_ls</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_model_angelo" class="internal-link" title="src.CryoDLShell.do_model_angelo">do<wbr></wbr>_model<wbr></wbr>_angelo</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_pwd" class="internal-link" title="src.CryoDLShell.do_pwd">do<wbr></wbr>_pwd</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_quit" class="internal-link" title="src.CryoDLShell.do_quit">do<wbr></wbr>_quit</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_reset" class="internal-link" title="src.CryoDLShell.do_reset">do<wbr></wbr>_reset</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_set" class="internal-link" title="src.CryoDLShell.do_set">do<wbr></wbr>_set</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_show" class="internal-link" title="src.CryoDLShell.do_show">do<wbr></wbr>_show</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_slurm_generate" class="internal-link" title="src.CryoDLShell.do_slurm_generate">do<wbr></wbr>_slurm<wbr></wbr>_generate</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_slurm_show" class="internal-link" title="src.CryoDLShell.do_slurm_show">do<wbr></wbr>_slurm<wbr></wbr>_show</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_slurm_update" class="internal-link" title="src.CryoDLShell.do_slurm_update">do<wbr></wbr>_slurm<wbr></wbr>_update</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_topaz" class="internal-link" title="src.CryoDLShell.do_topaz">do<wbr></wbr>_topaz</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_validate_dependencies" class="internal-link" title="src.CryoDLShell.do_validate_dependencies">do<wbr></wbr>_validate<wbr></wbr>_dependencies</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_version" class="internal-link" title="src.CryoDLShell.do_version">do<wbr></wbr>_version</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#emptyline" class="internal-link" title="src.CryoDLShell.emptyline">emptyline</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#load_banner" class="internal-link" title="src.CryoDLShell.load_banner">load<wbr></wbr>_banner</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#load_random_quote" class="internal-link" title="src.CryoDLShell.load_random_quote">load<wbr></wbr>_random<wbr></wbr>_quote</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#log_command" class="internal-link" title="src.CryoDLShell.log_command">log<wbr></wbr>_command</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#log_error" class="internal-link" title="src.CryoDLShell.log_error">log<wbr></wbr>_error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#log_output" class="internal-link" title="src.CryoDLShell.log_output">log<wbr></wbr>_output</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#setup_logging" class="internal-link" title="src.CryoDLShell.setup_logging">setup<wbr></wbr>_logging</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_run_topaz_cross" class="internal-link" title="src.CryoDLShell._run_topaz_cross">_run<wbr></wbr>_topaz<wbr></wbr>_cross</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_run_topaz_preprocess" class="internal-link" title="src.CryoDLShell._run_topaz_preprocess">_run<wbr></wbr>_topaz<wbr></wbr>_preprocess</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#config_manager" class="internal-link" title="src.CryoDLShell.config_manager">config<wbr></wbr>_manager</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#intro" class="internal-link" title="src.CryoDLShell.intro">intro</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#log_file" class="internal-link" title="src.CryoDLShell.log_file">log<wbr></wbr>_file</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#logger" class="internal-link" title="src.CryoDLShell.logger">logger</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#prompt" class="internal-link" title="src.CryoDLShell.prompt">prompt</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Package</span>
+        <code><a href="index.html" class="internal-link" title="The parent of this class">src</a></code> 
+      </div>
+      
+      <div>
+        
+
+        <div class="childrenKindTitle">Modules</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.build_fasta.html" class="internal-link" title="src.build_fasta">build<wbr></wbr>_fasta</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.cli.html" class="internal-link" title="src.cli">cli</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.config_manager.html" class="internal-link" title="src.config_manager">config<wbr></wbr>_manager</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.topaz_analysis.html" class="internal-link" title="src.topaz_analysis">topaz<wbr></wbr>_analysis</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.ConfigManager.html" class="internal-link" title="src.ConfigManager"><wbr></wbr>Config<wbr></wbr>Manager</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.CryoDLShell.html" class="internal-link" title="src.CryoDLShell"><wbr></wbr>Cryo<wbr></wbr>DLShell</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="index.html#__author__" class="internal-link" title="src.__author__">__author__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="index.html#__version__" class="internal-link" title="src.__version__">__version__</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        <!-- No sidebar toggle for read the docs theme, the sidebar is always
+          visible when the screen is width enough.
+        -->
+      </div>
+
+    </nav>
+    
+    <div class="container-fluid">
+
+      <div id="main" class="">
+        
+
+        
+
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">src</a></code><wbr></wbr>.<code><a href="src.CryoDLShell.html" class="internal-link" title="src.CryoDLShell">CryoDLShell</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">CryoDLShell</span>(<a href="https://docs.python.org/3/library/cmd.html#cmd.Cmd" class="intersphinx-link">cmd.Cmd</a>):</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="src.CryoDLShell.__init__">CryoDLShell(config_manager, log_file)</a></code></p>
+          <p><a href="classIndex.html#src.CryoDLShell">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Interactive shell for cryoDL configuration management.</p>
+<p>A command-line interface that provides an interactive environment for managing
+cryoDL configuration, dependencies, and running cryo-EM software workflows.
+Supports both local execution and SLURM job submission for computational tasks.</p>
+</div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id9">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="src.CryoDLShell.__init__">__init__</a></code></td>
+    <td>Initialize the CryoDLShell.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#default" class="internal-link" title="src.CryoDLShell.default">default</a></code></td>
+    <td>Handle unknown commands.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_add_dependency" class="internal-link" title="src.CryoDLShell.do_add_dependency">do<wbr></wbr>_add<wbr></wbr>_dependency</a></code></td>
+    <td>Add or update dependency path.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_analyze_cv" class="internal-link" title="src.CryoDLShell.do_analyze_cv">do<wbr></wbr>_analyze<wbr></wbr>_cv</a></code></td>
+    <td>Analyze cross-validation results.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_clear" class="internal-link" title="src.CryoDLShell.do_clear">do<wbr></wbr>_clear</a></code></td>
+    <td>Clear the screen.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_EOF" class="internal-link" title="src.CryoDLShell.do_EOF">do_<wbr></wbr>EOF</a></code></td>
+    <td>Handle Ctrl+D (EOF).</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_exit" class="internal-link" title="src.CryoDLShell.do_exit">do<wbr></wbr>_exit</a></code></td>
+    <td>Exit the interactive shell.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_export" class="internal-link" title="src.CryoDLShell.do_export">do<wbr></wbr>_export</a></code></td>
+    <td>Export configuration to file.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_fasta" class="internal-link" title="src.CryoDLShell.do_fasta">do<wbr></wbr>_fasta</a></code></td>
+    <td>Build FASTA files from PDB IDs using RCSB PDB database.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_get" class="internal-link" title="src.CryoDLShell.do_get">do<wbr></wbr>_get</a></code></td>
+    <td>Get configuration value.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_help" class="internal-link" title="src.CryoDLShell.do_help">do<wbr></wbr>_help</a></code></td>
+    <td>Show help for commands.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_import" class="internal-link" title="src.CryoDLShell.do_import">do<wbr></wbr>_import</a></code></td>
+    <td>Import configuration from file.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_init" class="internal-link" title="src.CryoDLShell.do_init">do<wbr></wbr>_init</a></code></td>
+    <td>Initialize default configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_list_dependencies" class="internal-link" title="src.CryoDLShell.do_list_dependencies">do<wbr></wbr>_list<wbr></wbr>_dependencies</a></code></td>
+    <td>List all configured dependencies.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_ls" class="internal-link" title="src.CryoDLShell.do_ls">do<wbr></wbr>_ls</a></code></td>
+    <td>List files in current directory.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_model_angelo" class="internal-link" title="src.CryoDLShell.do_model_angelo">do<wbr></wbr>_model<wbr></wbr>_angelo</a></code></td>
+    <td>Run ModelAngelo for protein structure prediction.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_pwd" class="internal-link" title="src.CryoDLShell.do_pwd">do<wbr></wbr>_pwd</a></code></td>
+    <td>Show current working directory.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_quit" class="internal-link" title="src.CryoDLShell.do_quit">do<wbr></wbr>_quit</a></code></td>
+    <td>Exit the interactive shell.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_reset" class="internal-link" title="src.CryoDLShell.do_reset">do<wbr></wbr>_reset</a></code></td>
+    <td>Reset configuration to defaults.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_set" class="internal-link" title="src.CryoDLShell.do_set">do<wbr></wbr>_set</a></code></td>
+    <td>Set configuration value.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_show" class="internal-link" title="src.CryoDLShell.do_show">do<wbr></wbr>_show</a></code></td>
+    <td>Show full configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_slurm_generate" class="internal-link" title="src.CryoDLShell.do_slurm_generate">do<wbr></wbr>_slurm<wbr></wbr>_generate</a></code></td>
+    <td>Generate SLURM header.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_slurm_show" class="internal-link" title="src.CryoDLShell.do_slurm_show">do<wbr></wbr>_slurm<wbr></wbr>_show</a></code></td>
+    <td>Show SLURM configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_slurm_update" class="internal-link" title="src.CryoDLShell.do_slurm_update">do<wbr></wbr>_slurm<wbr></wbr>_update</a></code></td>
+    <td>Update SLURM configuration.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_topaz" class="internal-link" title="src.CryoDLShell.do_topaz">do<wbr></wbr>_topaz</a></code></td>
+    <td>Run Topaz for particle picking and analysis.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_validate_dependencies" class="internal-link" title="src.CryoDLShell.do_validate_dependencies">do<wbr></wbr>_validate<wbr></wbr>_dependencies</a></code></td>
+    <td>Validate all dependency paths.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_version" class="internal-link" title="src.CryoDLShell.do_version">do<wbr></wbr>_version</a></code></td>
+    <td>Display version information.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#emptyline" class="internal-link" title="src.CryoDLShell.emptyline">emptyline</a></code></td>
+    <td>Handle empty lines.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#load_banner" class="internal-link" title="src.CryoDLShell.load_banner">load<wbr></wbr>_banner</a></code></td>
+    <td>Load and return the ASCII banner.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#load_random_quote" class="internal-link" title="src.CryoDLShell.load_random_quote">load<wbr></wbr>_random<wbr></wbr>_quote</a></code></td>
+    <td>Load and return a random quote from quotes.txt.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#log_command" class="internal-link" title="src.CryoDLShell.log_command">log<wbr></wbr>_command</a></code></td>
+    <td>Log user command.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#log_error" class="internal-link" title="src.CryoDLShell.log_error">log<wbr></wbr>_error</a></code></td>
+    <td>Log error messages.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#log_output" class="internal-link" title="src.CryoDLShell.log_output">log<wbr></wbr>_output</a></code></td>
+    <td>Log command output.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#setup_logging" class="internal-link" title="src.CryoDLShell.setup_logging">setup<wbr></wbr>_logging</a></code></td>
+    <td>Set up logging to file.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#config_manager" class="internal-link" title="src.CryoDLShell.config_manager">config<wbr></wbr>_manager</a></code></td>
+    <td>The configuration manager instance.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#intro" class="internal-link" title="src.CryoDLShell.intro">intro</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#log_file" class="internal-link" title="src.CryoDLShell.log_file">log<wbr></wbr>_file</a></code></td>
+    <td>Path to the log file for recording all interactions.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#logger" class="internal-link" title="src.CryoDLShell.logger">logger</a></code></td>
+    <td>Logger instance for recording commands and outputs.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#prompt" class="internal-link" title="src.CryoDLShell.prompt">prompt</a></code></td>
+    <td>The command prompt displayed to users.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_run_topaz_cross" class="internal-link" title="src.CryoDLShell._run_topaz_cross">_run<wbr></wbr>_topaz<wbr></wbr>_cross</a></code></td>
+    <td>Run Topaz cross-validation command.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_run_topaz_preprocess" class="internal-link" title="src.CryoDLShell._run_topaz_preprocess">_run<wbr></wbr>_topaz<wbr></wbr>_preprocess</a></code></td>
+    <td>Run Topaz preprocess command.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="childList">
+          <div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">config_manager: <code><a href="src.ConfigManager.html" class="internal-link" title="src.ConfigManager">ConfigManager</a></code>, </span><span class="rst-sig-param">log_file: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> = <span class="rst-variable-quote">'</span><span class="rst-variable-string">cryodl.log</span><span class="rst-variable-quote">'</span></span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="src.CryoDLShell.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Initialize the CryoDLShell.</p>
+<p>Sets up the interactive shell with configuration management, logging,
+and displays the ASCII banner with version information.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">config_manager = ConfigManager()
+shell = CryoDLShell(config_manager, "my_session.log")</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">config<wbr></wbr>_manager:</span><code><a href="src.ConfigManager.html" class="internal-link" title="src.ConfigManager">ConfigManager</a></code></td><td class="fieldArgDesc">The configuration manager instance
+to use for managing settings and dependencies.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">log<wbr></wbr>_file:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <em>optional</em></td><td class="fieldArgDesc">Path to the log file for recording all
+interactions. Defaults to "cryodl.log".</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.default">
+    
+  </a>
+  <a name="default">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">default</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">line</span>):</span>
+    
+    <a class="headerLink" href="#default" title="src.CryoDLShell.default">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle unknown commands.</p>
+<p>Handles commands that are not recognized by the shell by displaying
+an error message and suggesting to use the help command.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">unknown_command
+# Shows error message and suggests using help</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The unrecognized command line.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_add_dependency">
+    
+  </a>
+  <a name="do_add_dependency">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_add_dependency</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_add_dependency" title="src.CryoDLShell.do_add_dependency">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Add or update dependency path.</p>
+<p>Updates the path and version for a specified dependency in the configuration.
+The dependency is automatically enabled if a path is provided.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>add_dependency &lt;name&gt; &lt;path&gt; [version]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">add_dependency topaz /usr/local/bin/topaz 0.3.7
+add_dependency model_angelo /path/to/model_angelo 1.0.1
+add_dependency relion /usr/local/relion/bin/relion</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Dependency name, path, and optional version.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_analyze_cv">
+    
+  </a>
+  <a name="do_analyze_cv">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_analyze_cv</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_analyze_cv" title="src.CryoDLShell.do_analyze_cv">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Analyze cross-validation results.</p>
+<p>Analyzes cross-validation results from Topaz training to determine optimal
+hyperparameters and generate performance plots and recommendations.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>analyze_cv [cv_directory] [n_values] [k_folds]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">analyze_cv saved_models/EMPIAR-10025/cv 250,300,350,400,450,500 5
+analyze_cv
+# Prompts for parameters interactively</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Cross-validation parameters. Can include:
+cv_directory: Path to cross-validation results directory
+n_values: Comma-separated list of N values used
+k_folds: Number of folds used in cross-validation</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_clear">
+    
+  </a>
+  <a name="do_clear">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_clear</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_clear" title="src.CryoDLShell.do_clear">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Clear the screen.</p>
+<p>Clears the terminal screen for better readability.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">clear</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_EOF">
+    
+  </a>
+  <a name="do_EOF">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_EOF</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_EOF" title="src.CryoDLShell.do_EOF">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle Ctrl+D (EOF).</p>
+<p>Handles the end-of-file signal (Ctrl+D) by exiting the shell gracefully
+with a farewell message and quote.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last"># Press Ctrl+D
+# Exits the shell with a farewell message</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_exit">
+    
+  </a>
+  <a name="do_exit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_exit</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_exit" title="src.CryoDLShell.do_exit">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Exit the interactive shell.</p>
+<p>Exits the interactive shell, displays a random quote, and logs the session end.
+Alias for the quit command.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>exit</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">exit
+# Exits the shell with a farewell message</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_export">
+    
+  </a>
+  <a name="do_export">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_export</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_export" title="src.CryoDLShell.do_export">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Export configuration to file.</p>
+<p>Exports the current configuration to a specified file path in JSON format.
+This is useful for backing up configurations or sharing them between
+different environments.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>export &lt;path&gt;</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">export config_backup.json
+export backups/config_2024.json</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The file path where to export the configuration.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_fasta">
+    
+  </a>
+  <a name="do_fasta">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_fasta</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_fasta" title="src.CryoDLShell.do_fasta">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Build FASTA files from PDB IDs using RCSB PDB database.</p>
+<p>Retrieves FASTA sequences from the RCSB PDB database and saves them to
+indexed files for use in cryo-EM workflows. Supports single and multiple
+PDB IDs.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>fasta &lt;pdb_id&gt; [--output filename]
+fasta --multiple &lt;pdb_id1&gt; &lt;pdb_id2&gt; ... [--output filename]
+fasta --list &lt;pdb_id&gt;</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">fasta 1ABC
+fasta 1ABC --output my_protein.fasta
+fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
+fasta --list 1ABC</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">PDB ID(s) and options. Can include:
+pdb_id: Single PDB ID (e.g., "1ABC")
+--multiple: Process multiple PDB IDs
+--list: List entities in PDB entry
+--output filename: Specify output filename</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_get">
+    
+  </a>
+  <a name="do_get">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_get</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_get" title="src.CryoDLShell.do_get">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get configuration value.</p>
+<p>Retrieves a configuration value using dot notation to access nested
+configuration keys.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>get &lt;key&gt;</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">get paths.project_root
+get settings.max_threads
+get dependencies.topaz.path</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The configuration key in dot notation.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_help">
+    
+  </a>
+  <a name="do_help">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_help</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_help" title="src.CryoDLShell.do_help">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Show help for commands.</p>
+<p>Displays help information for available commands.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>help [command]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">help
+help model_angelo</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Optional command name to get help for.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_import">
+    
+  </a>
+  <a name="do_import">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_import</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_import" title="src.CryoDLShell.do_import">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Import configuration from file.</p>
+<p>Imports a configuration from a specified file path and replaces the current
+configuration. The imported configuration is then saved to the main
+configuration file.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>import &lt;path&gt;</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">import config_backup.json
+import backups/config_2024.json</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The file path of the configuration to import.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_init">
+    
+  </a>
+  <a name="do_init">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_init</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_init" title="src.CryoDLShell.do_init">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Initialize default configuration.</p>
+<p>Creates a new configuration file with default settings. If a configuration
+file already exists, it will not be overwritten unless the --force flag
+is used.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>init [--force]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">init
+init --force</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Command arguments. Use --force to overwrite existing config.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_list_dependencies">
+    
+  </a>
+  <a name="do_list_dependencies">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_list_dependencies</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_list_dependencies" title="src.CryoDLShell.do_list_dependencies">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>List all configured dependencies.</p>
+<p>Displays a formatted list of all dependencies configured in the system,
+including their paths, versions, and enabled status.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">list_dependencies
+# Shows all dependencies with their status</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_ls">
+    
+  </a>
+  <a name="do_ls">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_ls</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_ls" title="src.CryoDLShell.do_ls">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>List files in current directory.</p>
+<p>Lists files and directories in the current directory or a specified path.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>ls [path]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">ls
+ls /path/to/directory</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Optional path to list. If empty, lists current directory.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_model_angelo">
+    
+  </a>
+  <a name="do_model_angelo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_model_angelo</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_model_angelo" title="src.CryoDLShell.do_model_angelo">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Run ModelAngelo for protein structure prediction.</p>
+<p>Executes ModelAngelo for protein structure prediction from cryo-EM data.
+Prompts for input files (.mrc and FASTA) and can run either locally or
+submit to SLURM queue.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>model_angelo [--local]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">model_angelo
+model_angelo --local</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Command arguments. Use --local to run locally instead of SLURM.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_pwd">
+    
+  </a>
+  <a name="do_pwd">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_pwd</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_pwd" title="src.CryoDLShell.do_pwd">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Show current working directory.</p>
+<p>Displays the current working directory path.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">pwd
+# Shows current working directory</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_quit">
+    
+  </a>
+  <a name="do_quit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_quit</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_quit" title="src.CryoDLShell.do_quit">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Exit the interactive shell.</p>
+<p>Exits the interactive shell, displays a random quote, and logs the session end.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>quit</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">quit
+# Exits the shell with a farewell message</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_reset">
+    
+  </a>
+  <a name="do_reset">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_reset</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_reset" title="src.CryoDLShell.do_reset">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Reset configuration to defaults.</p>
+<p>Resets the current configuration to the default values and saves the
+changes. This will overwrite any custom settings that have been made.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">reset
+# Configuration is reset to default values</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_set">
+    
+  </a>
+  <a name="do_set">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_set</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_set" title="src.CryoDLShell.do_set">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Set configuration value.</p>
+<p>Sets a configuration value using dot notation. Creates intermediate
+dictionaries if they don't exist.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>set &lt;key&gt; &lt;value&gt;</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">set settings.max_threads 8
+set settings.gpu_enabled true
+set new_section.new_key new_value</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The configuration key and value in format "key value".</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_show">
+    
+  </a>
+  <a name="do_show">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_show</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_show" title="src.CryoDLShell.do_show">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Show full configuration.</p>
+<p>Displays the complete configuration in JSON format.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">show
+# Displays the entire configuration as JSON</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_slurm_generate">
+    
+  </a>
+  <a name="do_slurm_generate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_slurm_generate</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_slurm_generate" title="src.CryoDLShell.do_slurm_generate">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Generate SLURM header.</p>
+<p>Generates a SLURM job script header using the current SLURM configuration
+settings. Allows overriding specific parameters for the job.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>slurm_generate [--job-name &lt;name&gt;] [--output &lt;file&gt;] [--nodes &lt;n&gt;] [--ntasks &lt;n&gt;] [--cpus-per-task &lt;n&gt;] [--gres-gpu &lt;n&gt;] [--time &lt;time&gt;] [--mem &lt;mem&gt;]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">slurm_generate --job-name model_angelo --nodes 2 --gres-gpu 2
+slurm_generate --output my_job.slurm --time 12:00:00</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">SLURM parameters to override. Available options:
+--job-name &lt;name&gt;: Override job name
+--output &lt;file&gt;: Save header to file
+--nodes &lt;n&gt;: Number of nodes
+--ntasks &lt;n&gt;: Number of tasks
+--cpus-per-task &lt;n&gt;: CPUs per task
+--gres-gpu &lt;n&gt;: Number of GPUs
+--time &lt;time&gt;: Time limit (HH:MM:SS)
+--mem &lt;mem&gt;: Memory limit</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_slurm_show">
+    
+  </a>
+  <a name="do_slurm_show">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_slurm_show</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_slurm_show" title="src.CryoDLShell.do_slurm_show">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Show SLURM configuration.</p>
+<p>Displays the current SLURM configuration settings in a formatted table.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">slurm_show
+# Shows all SLURM configuration parameters</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_slurm_update">
+    
+  </a>
+  <a name="do_slurm_update">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_slurm_update</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_slurm_update" title="src.CryoDLShell.do_slurm_update">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Update SLURM configuration.</p>
+<p>Updates the SLURM configuration section with new parameter values and
+saves the changes to the configuration file.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>slurm_update [--job-name &lt;name&gt;] [--nodes &lt;n&gt;] [--ntasks &lt;n&gt;] [--cpus-per-task &lt;n&gt;] [--gres-gpu &lt;n&gt;] [--time &lt;time&gt;] [--partition &lt;partition&gt;] [--qos &lt;qos&gt;] [--account &lt;account&gt;] [--mem &lt;mem&gt;] [--output &lt;pattern&gt;] [--error &lt;pattern&gt;]</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">slurm_update --nodes 2 --gres-gpu 2 --time 12:00:00
+slurm_update --partition gpu --account my_account</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">SLURM parameters to update. Available options:
+--job-name &lt;name&gt;: Default job name
+--nodes &lt;n&gt;: Number of nodes
+--ntasks &lt;n&gt;: Number of tasks
+--cpus-per-task &lt;n&gt;: CPUs per task
+--gres-gpu &lt;n&gt;: Number of GPUs
+--time &lt;time&gt;: Time limit (HH:MM:SS)
+--partition &lt;partition&gt;: Partition name
+--qos &lt;qos&gt;: Quality of service
+--account &lt;account&gt;: Account name
+--mem &lt;mem&gt;: Memory limit
+--output &lt;pattern&gt;: Output file pattern
+--error &lt;pattern&gt;: Error file pattern</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_topaz">
+    
+  </a>
+  <a name="do_topaz">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_topaz</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_topaz" title="src.CryoDLShell.do_topaz">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Run Topaz for particle picking and analysis.</p>
+<p>Executes Topaz commands for cryo-EM particle picking and analysis workflows.
+Supports preprocessing, model training, postprocessing, and cross-validation.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>topaz &lt;command&gt; [--local]</dd>
+<dt>Commands:</dt>
+<dd>preprocess, model, postprocess, cross</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">topaz preprocess --local
+topaz preprocess
+topaz cross</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Topaz command and options. Available commands:
+preprocess: Preprocess micrographs and particle coordinates
+model: Train particle picking models
+postprocess: Post-process results
+cross: Perform cross-validation analysis
+Use --local to run locally instead of SLURM.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_validate_dependencies">
+    
+  </a>
+  <a name="do_validate_dependencies">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_validate_dependencies</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_validate_dependencies" title="src.CryoDLShell.do_validate_dependencies">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Validate all dependency paths.</p>
+<p>Checks if all configured dependency paths exist and are accessible.
+Displays the validation status for each dependency.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">validate_dependencies
+# Shows validation status for all dependencies</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.do_version">
+    
+  </a>
+  <a name="do_version">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">do_version</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">arg</span>):</span>
+    
+    <a class="headerLink" href="#do_version" title="src.CryoDLShell.do_version">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Display version information.</p>
+<p>Shows detailed version information including project name, version,
+and description from the configuration.</p>
+<dl class="rst-docutils">
+<dt>Usage:</dt>
+<dd>version</dd>
+</dl>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">version
+# Shows version information</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Not used.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.emptyline">
+    
+  </a>
+  <a name="emptyline">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">emptyline</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#emptyline" title="src.CryoDLShell.emptyline">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle empty lines.</p>
+<p>Handles empty command lines by doing nothing, which allows users
+to press Enter to get a new prompt without executing any command.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">[press Enter]
+# Shows new prompt without executing anything</p>
+</div>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.load_banner">
+    
+  </a>
+  <a name="load_banner">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">load_banner</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#load_banner" title="src.CryoDLShell.load_banner">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Load and return the ASCII banner.</p>
+<p>Loads the ASCII art banner from the resources directory and combines it
+with version information from the configuration manager. If the banner
+file is not found, returns a simple text banner.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">banner = shell.load_banner()
+print(banner)
+[ASCII art banner with version info]</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><dl class="rst-docutils">
+<dt>The formatted banner string with version information and</dt>
+<dd>instructions for using the CLI.</dd>
+</dl>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.load_random_quote">
+    
+  </a>
+  <a name="load_random_quote">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">load_random_quote</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#load_random_quote" title="src.CryoDLShell.load_random_quote">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Load and return a random quote from quotes.txt.</p>
+<p>Reads quotes from the quotes.txt file in the resources directory and
+returns a randomly selected quote.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">quote = shell.load_random_quote()
+print(quote)
+"Some inspiring quote about science..."</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A randomly selected quote, or None if no quotes are available.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.log_command">
+    
+  </a>
+  <a name="log_command">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">log_command</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">command: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">args: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> = <span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span></span>):</span>
+    
+    <a class="headerLink" href="#log_command" title="src.CryoDLShell.log_command">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Log user command.</p>
+<p>Records a user command with its arguments to the log file.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell.log_command("get", "settings.max_threads")
+# Logs: "Command: get settings.max_threads"</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">command:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The command name that was executed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <em>optional</em></td><td class="fieldArgDesc">The arguments passed to the command.
+Defaults to empty string.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.log_error">
+    
+  </a>
+  <a name="log_error">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">log_error</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">error: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>):</span>
+    
+    <a class="headerLink" href="#log_error" title="src.CryoDLShell.log_error">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Log error messages.</p>
+<p>Records error messages to the log file with error level.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell.log_error("Configuration file not found")
+# Logs: "Error: Configuration file not found"</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The error message to log.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.log_output">
+    
+  </a>
+  <a name="log_output">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">log_output</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">output: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>):</span>
+    
+    <a class="headerLink" href="#log_output" title="src.CryoDLShell.log_output">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Log command output.</p>
+<p>Records the output of a command to the log file.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell.log_output("Configuration loaded successfully")
+# Logs: "Output: Configuration loaded successfully"</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The output text to log.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.CryoDLShell.setup_logging">
+    
+  </a>
+  <a name="setup_logging">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">setup_logging</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#setup_logging" title="src.CryoDLShell.setup_logging">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Set up logging to file.</p>
+<p>Configures logging to write all commands, outputs, and errors to a log file.
+Uses a custom formatter with timestamps and creates a file handler that
+appends to the log file.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell.setup_logging()
+# All subsequent commands will be logged to the log file</p>
+</div>
+</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.CryoDLShell.config_manager">
+    
+  </a>
+  <a name="config_manager">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">config_manager</span>: <code><a href="src.ConfigManager.html" class="internal-link" title="src.ConfigManager">ConfigManager</a></code> =
+    
+    <a class="headerLink" href="#config_manager" title="src.CryoDLShell.config_manager">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The configuration manager instance.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.CryoDLShell.intro">
+    
+  </a>
+  <a name="intro">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">intro</span> =
+    
+    <a class="headerLink" href="#intro" title="src.CryoDLShell.intro">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.CryoDLShell.log_file">
+    
+  </a>
+  <a name="log_file">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">log_file</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
+    
+    <a class="headerLink" href="#log_file" title="src.CryoDLShell.log_file">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Path to the log file for recording all interactions.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.CryoDLShell.logger">
+    
+  </a>
+  <a name="logger">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">logger</span>: <code><a href="https://docs.python.org/3/library/logging.html#logging.Logger" class="intersphinx-link">logging.Logger</a></code> =
+    
+    <a class="headerLink" href="#logger" title="src.CryoDLShell.logger">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Logger instance for recording commands and outputs.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.CryoDLShell.prompt">
+    
+  </a>
+  <a name="prompt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">prompt</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
+    
+    <a class="headerLink" href="#prompt" title="src.CryoDLShell.prompt">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The command prompt displayed to users.</p></div>
+    
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="src.CryoDLShell._run_topaz_cross">
+    
+  </a>
+  <a name="_run_topaz_cross">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_run_topaz_cross</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">topaz_path, </span><span class="rst-sig-param">is_local</span>):</span>
+    
+    <a class="headerLink" href="#_run_topaz_cross" title="src.CryoDLShell._run_topaz_cross">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Run Topaz cross-validation command.</p>
+<p>Executes the Topaz cross-validation workflow to train models with different
+hyperparameters and evaluate performance. Can run locally or generate SLURM scripts.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell._run_topaz_cross('/usr/local/bin/topaz', True)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">topaz<wbr></wbr>_path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Path to the Topaz executable.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_local:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">If True, run locally; if False, submit to SLURM.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="src.CryoDLShell._run_topaz_preprocess">
+    
+  </a>
+  <a name="_run_topaz_preprocess">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_run_topaz_preprocess</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">topaz_path, </span><span class="rst-sig-param">is_local</span>):</span>
+    
+    <a class="headerLink" href="#_run_topaz_preprocess" title="src.CryoDLShell._run_topaz_preprocess">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Run Topaz preprocess command.</p>
+<p>Executes the Topaz preprocess workflow to downsample micrographs and
+scale particle coordinates. Can run locally or generate SLURM scripts.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell._run_topaz_preprocess('/usr/local/bin/topaz', True)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">topaz<wbr></wbr>_path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Path to the Topaz executable.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_local:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">If True, run locally; if False, submit to SLURM.</td></tr></table></div>
+  </div>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+    <hr />
+    
+    
+    <div class="container-fluid">
+      <a href="index.html">API Documentation</a> for cryoDL,
+    generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+      25.4.0 at 2025-08-30 14:03:31.
+    </div>
+    
+    <script src="ajax.js" type="text/javascript"></script>
+    <script src="searchlib.js" type="text/javascript"></script>
+    <script src="search.js" type="text/javascript"></script>
+  
+  </footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

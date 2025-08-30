@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>src.build_fasta.FastaBuilder</title>
+    <meta name="generator" content="pydoctor 25.4.0"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="readthedocstheme.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          cryoDL <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+    
+        <!-- Side navigation -->
+      <div class="sidebarcontainer">
+        <nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="src.build_fasta.FastaBuilder.html" class="internal-link" title="This class"><wbr></wbr>Fasta<wbr></wbr>Builder</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="src.build_fasta.FastaBuilder.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#build_fasta_from_multiple_pdbs" class="internal-link" title="src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs">build<wbr></wbr>_fasta<wbr></wbr>_from<wbr></wbr>_multiple<wbr></wbr>_pdbs</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#build_fasta_from_pdb" class="internal-link" title="src.build_fasta.FastaBuilder.build_fasta_from_pdb">build<wbr></wbr>_fasta<wbr></wbr>_from<wbr></wbr>_pdb</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#fetch_fasta_sequence" class="internal-link" title="src.build_fasta.FastaBuilder.fetch_fasta_sequence">fetch<wbr></wbr>_fasta<wbr></wbr>_sequence</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#fetch_pdb_info" class="internal-link" title="src.build_fasta.FastaBuilder.fetch_pdb_info">fetch<wbr></wbr>_pdb<wbr></wbr>_info</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#fetch_polymer_entities" class="internal-link" title="src.build_fasta.FastaBuilder.fetch_polymer_entities">fetch<wbr></wbr>_polymer<wbr></wbr>_entities</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_entity_info" class="internal-link" title="src.build_fasta.FastaBuilder.get_entity_info">get<wbr></wbr>_entity<wbr></wbr>_info</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#list_pdb_entities" class="internal-link" title="src.build_fasta.FastaBuilder.list_pdb_entities">list<wbr></wbr>_pdb<wbr></wbr>_entities</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#validate_pdb_id" class="internal-link" title="src.build_fasta.FastaBuilder.validate_pdb_id">validate<wbr></wbr>_pdb<wbr></wbr>_id</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#max_retries" class="internal-link" title="src.build_fasta.FastaBuilder.max_retries">max<wbr></wbr>_retries</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#rcsb_base_url" class="internal-link" title="src.build_fasta.FastaBuilder.rcsb_base_url">rcsb<wbr></wbr>_base<wbr></wbr>_url</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#retry_delay" class="internal-link" title="src.build_fasta.FastaBuilder.retry_delay">retry<wbr></wbr>_delay</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#timeout" class="internal-link" title="src.build_fasta.FastaBuilder.timeout">timeout</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="src.build_fasta.html" class="internal-link" title="The parent of this class">build<wbr></wbr>_fasta</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.build_fasta.FastaBuilder.html" class="internal-link" title="src.build_fasta.FastaBuilder"><wbr></wbr>Fasta<wbr></wbr>Builder</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.build_fasta.html#main" class="internal-link" title="src.build_fasta.main">main</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.build_fasta.html#logger" class="internal-link" title="src.build_fasta.logger">logger</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        <!-- No sidebar toggle for read the docs theme, the sidebar is always
+          visible when the screen is width enough.
+        -->
+      </div>
+
+    </nav>
+    
+    <div class="container-fluid">
+
+      <div id="main" class="">
+        
+
+        
+
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">src</a></code><wbr></wbr>.<code><a href="src.build_fasta.html" class="internal-link" title="src.build_fasta">build_fasta</a></code><wbr></wbr>.<code><a href="src.build_fasta.FastaBuilder.html" class="internal-link" title="src.build_fasta.FastaBuilder">FastaBuilder</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">FastaBuilder</span>:</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="src.build_fasta.FastaBuilder.__init__">FastaBuilder(timeout, max_retries, retry_delay)</a></code></p>
+          <p><a href="classIndex.html#src.build_fasta.FastaBuilder">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Build FASTA files from PDB IDs by retrieving sequences from RCSB PDB.</p>
+<p>This class provides methods to fetch FASTA sequences from the RCSB PDB database
+and save them to indexed files for use in cryo-EM software workflows.</p>
+</div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id4">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="src.build_fasta.FastaBuilder.__init__">__init__</a></code></td>
+    <td>Initialize the FastaBuilder.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#build_fasta_from_multiple_pdbs" class="internal-link" title="src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs">build<wbr></wbr>_fasta<wbr></wbr>_from<wbr></wbr>_multiple<wbr></wbr>_pdbs</a></code></td>
+    <td>Build a FASTA file from multiple PDB IDs.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#build_fasta_from_pdb" class="internal-link" title="src.build_fasta.FastaBuilder.build_fasta_from_pdb">build<wbr></wbr>_fasta<wbr></wbr>_from<wbr></wbr>_pdb</a></code></td>
+    <td>Build a FASTA file from a single PDB ID.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#fetch_fasta_sequence" class="internal-link" title="src.build_fasta.FastaBuilder.fetch_fasta_sequence">fetch<wbr></wbr>_fasta<wbr></wbr>_sequence</a></code></td>
+    <td>Fetch FASTA sequence for a specific polymer entity.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#fetch_pdb_info" class="internal-link" title="src.build_fasta.FastaBuilder.fetch_pdb_info">fetch<wbr></wbr>_pdb<wbr></wbr>_info</a></code></td>
+    <td>Fetch basic information about a PDB entry.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#fetch_polymer_entities" class="internal-link" title="src.build_fasta.FastaBuilder.fetch_polymer_entities">fetch<wbr></wbr>_polymer<wbr></wbr>_entities</a></code></td>
+    <td>Fetch polymer entity information for a PDB entry.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_entity_info" class="internal-link" title="src.build_fasta.FastaBuilder.get_entity_info">get<wbr></wbr>_entity<wbr></wbr>_info</a></code></td>
+    <td>Get detailed information about a specific polymer entity.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#list_pdb_entities" class="internal-link" title="src.build_fasta.FastaBuilder.list_pdb_entities">list<wbr></wbr>_pdb<wbr></wbr>_entities</a></code></td>
+    <td>List all polymer entities in a PDB entry.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#validate_pdb_id" class="internal-link" title="src.build_fasta.FastaBuilder.validate_pdb_id">validate<wbr></wbr>_pdb<wbr></wbr>_id</a></code></td>
+    <td>Validate a PDB ID format.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#max_retries" class="internal-link" title="src.build_fasta.FastaBuilder.max_retries">max<wbr></wbr>_retries</a></code></td>
+    <td>Maximum number of retry attempts for failed requests</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#rcsb_base_url" class="internal-link" title="src.build_fasta.FastaBuilder.rcsb_base_url">rcsb<wbr></wbr>_base<wbr></wbr>_url</a></code></td>
+    <td>Base URL for RCSB PDB API</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#retry_delay" class="internal-link" title="src.build_fasta.FastaBuilder.retry_delay">retry<wbr></wbr>_delay</a></code></td>
+    <td>Delay between retry attempts in seconds</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#timeout" class="internal-link" title="src.build_fasta.FastaBuilder.timeout">timeout</a></code></td>
+    <td>Request timeout in seconds</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="childList">
+          <div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">timeout: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 30, </span><span class="rst-sig-param">max_retries: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 3, </span><span class="rst-sig-param">retry_delay: <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> = 1.0</span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="src.build_fasta.FastaBuilder.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Initialize the FastaBuilder.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">builder = FastaBuilder(timeout=60, max_retries=5)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, <em>optional</em></td><td class="fieldArgDesc">Request timeout in seconds. Defaults to 30.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max<wbr></wbr>_retries:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, <em>optional</em></td><td class="fieldArgDesc">Maximum number of retry attempts for failed requests.
+Defaults to 3.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">retry<wbr></wbr>_delay:</span><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code>, <em>optional</em></td><td class="fieldArgDesc">Delay between retry attempts in seconds.
+Defaults to 1.0.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs">
+    
+  </a>
+  <a name="build_fasta_from_multiple_pdbs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">build_fasta_from_multiple_pdbs</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_ids: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code>, </span><span class="rst-sig-param">output_file: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> = <span class="rst-variable-quote">'</span><span class="rst-variable-string">combined_protein.fasta</span><span class="rst-variable-quote">'</span></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code>:</span>
+    
+    <a class="headerLink" href="#build_fasta_from_multiple_pdbs" title="src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Build a FASTA file from multiple PDB IDs.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">pdb_list = ["1ABC", "2DEF", "3GHI"]
+success, message = builder.build_fasta_from_multiple_pdbs(pdb_list, "my_proteins.fasta")
+print(message)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_ids:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.List" class="intersphinx-link">List</a>[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">List of PDB IDs to fetch sequences from.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output<wbr></wbr>_file:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <em>optional</em></td><td class="fieldArgDesc">Output file path. Defaults to "combined_protein.fasta".</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Tuple" class="intersphinx-link">Tuple</a>[<a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">(success, message) indicating operation result.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.build_fasta_from_pdb">
+    
+  </a>
+  <a name="build_fasta_from_pdb">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">build_fasta_from_pdb</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">output_file: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code>:</span>
+    
+    <a class="headerLink" href="#build_fasta_from_pdb" title="src.build_fasta.FastaBuilder.build_fasta_from_pdb">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Build a FASTA file from a single PDB ID.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">success, message = builder.build_fasta_from_pdb("1ABC", "protein.fasta")
+print(message)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID to fetch sequences from.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output<wbr></wbr>_file:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <em>optional</em></td><td class="fieldArgDesc">Output file path. If None, uses default naming.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Tuple" class="intersphinx-link">Tuple</a>[<a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">(success, message) indicating operation result.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.fetch_fasta_sequence">
+    
+  </a>
+  <a name="fetch_fasta_sequence">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">fetch_fasta_sequence</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">entity_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>:</span>
+    
+    <a class="headerLink" href="#fetch_fasta_sequence" title="src.build_fasta.FastaBuilder.fetch_fasta_sequence">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Fetch FASTA sequence for a specific polymer entity.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">sequence = builder.fetch_fasta_sequence("1ABC", "1")
+if sequence:
+...     print(sequence[:100])  # First 100 characters</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">entity<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The polymer entity ID.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Optional" class="intersphinx-link">Optional</a>[<a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">FASTA sequence string, or None if failed.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.fetch_pdb_info">
+    
+  </a>
+  <a name="fetch_pdb_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">fetch_pdb_info</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>:</span>
+    
+    <a class="headerLink" href="#fetch_pdb_info" title="src.build_fasta.FastaBuilder.fetch_pdb_info">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Fetch basic information about a PDB entry.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">info = builder.fetch_pdb_info("1ABC")
+print(info.get("title", "No title available"))</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID to fetch information for.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Optional" class="intersphinx-link">Optional</a>[<a href="https://docs.python.org/3/library/typing.html#typing.Dict" class="intersphinx-link">Dict</a>]</code></td><td class="fieldArgDesc">Dictionary containing PDB information, or None if failed.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.fetch_polymer_entities">
+    
+  </a>
+  <a name="fetch_polymer_entities">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">fetch_polymer_entities</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>] | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>:</span>
+    
+    <a class="headerLink" href="#fetch_polymer_entities" title="src.build_fasta.FastaBuilder.fetch_polymer_entities">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Fetch polymer entity information for a PDB entry.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">entities = builder.fetch_polymer_entities("1ABC")
+for entity in entities:
+...     print(f"Entity {entity.get('entity_id')}: {entity.get('title', 'No title')}")</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID to fetch polymer entities for.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Optional" class="intersphinx-link">Optional</a>[<a href="https://docs.python.org/3/library/typing.html#typing.List" class="intersphinx-link">List</a>[<a href="https://docs.python.org/3/library/typing.html#typing.Dict" class="intersphinx-link">Dict</a>]]</code></td><td class="fieldArgDesc">List of polymer entity dictionaries, or None if failed.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.get_entity_info">
+    
+  </a>
+  <a name="get_entity_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_entity_info</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, </span><span class="rst-sig-param">entity_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>:</span>
+    
+    <a class="headerLink" href="#get_entity_info" title="src.build_fasta.FastaBuilder.get_entity_info">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Get detailed information about a specific polymer entity.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">info = builder.get_entity_info("1ABC", "1")
+print(f"Title: {info.get('title', 'No title')}")
+print(f"Type: {info.get('entity', {}).get('type', 'Unknown')}")</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">entity<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The polymer entity ID.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Optional" class="intersphinx-link">Optional</a>[<a href="https://docs.python.org/3/library/typing.html#typing.Dict" class="intersphinx-link">Dict</a>]</code></td><td class="fieldArgDesc">Dictionary containing entity information, or None if failed.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.list_pdb_entities">
+    
+  </a>
+  <a name="list_pdb_entities">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">list_pdb_entities</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code>:</span>
+    
+    <a class="headerLink" href="#list_pdb_entities" title="src.build_fasta.FastaBuilder.list_pdb_entities">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>List all polymer entities in a PDB entry.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">success, info = builder.list_pdb_entities("1ABC")
+print(info)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID to list entities for.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/typing.html#typing.Tuple" class="intersphinx-link">Tuple</a>[<a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code></td><td class="fieldArgDesc">(success, message) containing entity information.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.validate_pdb_id">
+    
+  </a>
+  <a name="validate_pdb_id">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">validate_pdb_id</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">pdb_id: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>:</span>
+    
+    <a class="headerLink" href="#validate_pdb_id" title="src.build_fasta.FastaBuilder.validate_pdb_id">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Validate a PDB ID format.</p>
+<p>PDB IDs should be 4 characters long and contain only alphanumeric characters.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">builder.validate_pdb_id("1ABC")
+True
+builder.validate_pdb_id("INVALID")
+False</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pdb<wbr></wbr>_id:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The PDB ID to validate.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">True if the PDB ID is valid, False otherwise.</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.max_retries">
+    
+  </a>
+  <a name="max_retries">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">max_retries</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#max_retries" title="src.build_fasta.FastaBuilder.max_retries">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Maximum number of retry attempts for failed requests</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.rcsb_base_url">
+    
+  </a>
+  <a name="rcsb_base_url">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">rcsb_base_url</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
+    
+    <a class="headerLink" href="#rcsb_base_url" title="src.build_fasta.FastaBuilder.rcsb_base_url">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Base URL for RCSB PDB API</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.retry_delay">
+    
+  </a>
+  <a name="retry_delay">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">retry_delay</span>: <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> =
+    
+    <a class="headerLink" href="#retry_delay" title="src.build_fasta.FastaBuilder.retry_delay">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Delay between retry attempts in seconds</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.build_fasta.FastaBuilder.timeout">
+    
+  </a>
+  <a name="timeout">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">timeout</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#timeout" title="src.build_fasta.FastaBuilder.timeout">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Request timeout in seconds</p></div>
+    
+  </div>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+    <hr />
+    
+    
+    <div class="container-fluid">
+      <a href="index.html">API Documentation</a> for cryoDL,
+    generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+      25.4.0 at 2025-08-30 14:03:31.
+    </div>
+    
+    <script src="ajax.js" type="text/javascript"></script>
+    <script src="searchlib.js" type="text/javascript"></script>
+    <script src="search.js" type="text/javascript"></script>
+  
+  </footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
