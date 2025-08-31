@@ -478,6 +478,16 @@
         
 
         
+            <div class="itemName"><code><a href="#_run_topaz_denoise" class="internal-link" title="src.CryoDLShell._run_topaz_denoise">_run<wbr></wbr>_topaz<wbr></wbr>_denoise</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="#_run_topaz_preprocess" class="internal-link" title="src.CryoDLShell._run_topaz_preprocess">_run<wbr></wbr>_topaz<wbr></wbr>_preprocess</a></code>
             </div>
         
@@ -912,6 +922,11 @@ Supports both local execution and SLURM job submission for computational tasks.<
     <td>Method</td>
     <td><code><a href="#_run_topaz_cross" class="internal-link" title="src.CryoDLShell._run_topaz_cross">_run<wbr></wbr>_topaz<wbr></wbr>_cross</a></code></td>
     <td>Run Topaz cross-validation command.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_run_topaz_denoise" class="internal-link" title="src.CryoDLShell._run_topaz_denoise">_run<wbr></wbr>_topaz<wbr></wbr>_denoise</a></code></td>
+    <td>Run Topaz denoise command.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
@@ -1623,14 +1638,15 @@ changes. This will overwrite any custom settings that have been made.</p>
 dictionaries if they don't exist.</p>
 <dl class="rst-docutils">
 <dt>Usage:</dt>
-<dd>set &lt;key&gt; &lt;value&gt;</dd>
+<dd><pre class="py-doctest">
+<span class="py-builtin">set</span> &lt;key&gt; &lt;value&gt;</pre></dd>
 </dl>
 <div class="rst-admonition rst-admonition-example">
 <p class="rst-admonition-title rst-first">Example</p>
-<p class="rst-last">set settings.max_threads 8
-set settings.gpu_enabled true
-set new_section.new_key new_value</p>
-</div>
+<pre class="py-doctest">
+<span class="py-builtin">set</span> settings.max_threads 8
+<span class="py-builtin">set</span> settings.gpu_enabled true
+<span class="py-builtin">set</span> new_section.new_key new_value</pre></div>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The configuration key and value in format "key value".</td></tr></table></div>
   </div>
 </div><div class="basemethod">
@@ -1816,16 +1832,18 @@ Supports preprocessing, model training, postprocessing, and cross-validation.</p
 <dt>Usage:</dt>
 <dd>topaz &lt;command&gt; [--local]</dd>
 <dt>Commands:</dt>
-<dd>preprocess, model, postprocess, cross</dd>
+<dd>preprocess, denoise, model, postprocess, cross</dd>
 </dl>
 <div class="rst-admonition rst-admonition-example">
 <p class="rst-admonition-title rst-first">Example</p>
 <p class="rst-last">topaz preprocess --local
+topaz denoise --local
 topaz preprocess
 topaz cross</p>
 </div>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Topaz command and options. Available commands:
 preprocess: Preprocess micrographs and particle coordinates
+denoise: Train and apply denoising models to micrographs
 model: Train particle picking models
 postprocess: Post-process results
 cross: Perform cross-validation analysis
@@ -2283,6 +2301,37 @@ hyperparameters and evaluate performance. Can run locally or generate SLURM scri
 </div><div class="basemethod private">
   
   
+  <a name="src.CryoDLShell._run_topaz_denoise">
+    
+  </a>
+  <a name="_run_topaz_denoise">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_run_topaz_denoise</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">topaz_path, </span><span class="rst-sig-param">is_local</span>):</span>
+    
+    <a class="headerLink" href="#_run_topaz_denoise" title="src.CryoDLShell._run_topaz_denoise">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Run Topaz denoise command.</p>
+<p>Executes the Topaz denoising workflow to train denoising models and apply them
+to micrographs. Can run locally or generate SLURM scripts.</p>
+<div class="rst-admonition rst-admonition-example">
+<p class="rst-admonition-title rst-first">Example</p>
+<p class="rst-last">shell._run_topaz_denoise('/usr/local/bin/topaz', True)</p>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">topaz<wbr></wbr>_path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Path to the Topaz executable.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_local:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">If True, run locally; if False, submit to SLURM.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
   <a name="src.CryoDLShell._run_topaz_preprocess">
     
   </a>
@@ -2324,7 +2373,7 @@ scale particle coordinates. Can run locally or generate SLURM scripts.</p>
     <div class="container-fluid">
       <a href="index.html">API Documentation</a> for cryoDL,
     generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-      25.4.0 at 2025-08-30 14:03:31.
+      25.4.0 at 2025-08-30 19:18:10.
     </div>
     
     <script src="ajax.js" type="text/javascript"></script>

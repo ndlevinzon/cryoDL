@@ -9,7 +9,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0b2da8f6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=980c018e" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -160,36 +160,60 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../api_reference.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#module-src.config_manager">Core Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#core-modules">Core Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#configuration-manager">Configuration Manager</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.load_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.create_default_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.load_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.save_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.set"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.update_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.validate_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.list_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.generate_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.update_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id0"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager._load_project_metadata"><code class="docutils literal notranslate"><span class="pre">ConfigManager._load_project_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get_project_metadata"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_project_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id1"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id2"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id3"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id4"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id5"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id6"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id7"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id8"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.reset_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.export_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.import_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.generate_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.update_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.get_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id9"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id10"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id11"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.config_manager.ConfigManager.save_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.config_manager.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#interactive-cli-shell">Interactive CLI Shell</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.prompt"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.__init__"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.load_banner"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.setup_logging"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.log_command"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.log_output"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.log_error"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.load_banner"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.load_random_quote"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.prompt"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id12"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id13"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id14"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id15"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id16"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id17"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_init"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_get"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_set"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
@@ -203,16 +227,19 @@
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_slurm_generate"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_slurm_show"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_slurm_update"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_fasta"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_fasta()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_model_angelo"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_topaz"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell._run_topaz_preprocess"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell._run_topaz_denoise"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_denoise()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell._run_topaz_cross"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_analyze_cv"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_clear"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_pwd"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_ls"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_help"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.load_random_quote"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id18"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_version"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_version()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_quit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_exit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.do_EOF"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
@@ -220,144 +247,82 @@
 <li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.cli.CryoDLShell.emptyline"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.analyze_cross_validation"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.plot_training_curves"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#configuration-manager">Configuration Manager</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id0"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id1"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id2"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id3"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id4"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id5"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id6"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id7"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id8"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id9"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id10"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id11"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id12"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id13"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id14"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id15"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id16"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id17"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id18"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id19"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id20"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id21"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id22"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id23"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id24"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id25"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id26"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id27"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id28"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id29"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#interactive-cli-shell">Interactive CLI Shell</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id30"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id31"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id32"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id33"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id34"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id35"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id36"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id37"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id38"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id39"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id40"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id41"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id42"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id43"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id44"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id45"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id46"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id47"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id48"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id49"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id50"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id51"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id52"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id53"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id54"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id55"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id56"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id57"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id58"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id59"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id60"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id61"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id62"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id63"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id64"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id65"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id66"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id67"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id68"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id69"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id70"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id71"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.default()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id72"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#configuration-commands">Configuration Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id73"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id74"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id75"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id76"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id77"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id78"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id79"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id19"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id20"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id21"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id22"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id23"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id24"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id25"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#dependency-management-commands">Dependency Management Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id80"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id81"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id82"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id26"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id27"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id28"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#slurm-commands">SLURM Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id83"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id84"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id85"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id29"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id30"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id31"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#software-integration-commands">Software Integration Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id86"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id87"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id88"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id89"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id32"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id33"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id34"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id35"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#analysis-commands">Analysis Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id90"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id36"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id37"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_fasta()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#utility-commands">Utility Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id91"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id92"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id93"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id94"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id38"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id39"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id40"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id41"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#exit-commands">Exit Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id95"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id96"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id97"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id42"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id43"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id44"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#topaz-analysis-module">Topaz Analysis Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id98"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id99"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.analyze_cross_validation"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.topaz_analysis.plot_training_curves"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#fasta-sequence-builder">FASTA Sequence Builder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder"><code class="docutils literal notranslate"><span class="pre">FastaBuilder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.__init__"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.validate_pdb_id"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.validate_pdb_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.fetch_pdb_info"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_pdb_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.fetch_polymer_entities"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_polymer_entities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.fetch_fasta_sequence"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_fasta_sequence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.get_entity_info"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.get_entity_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.build_fasta_from_pdb"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_pdb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_multiple_pdbs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#src.build_fasta.FastaBuilder.list_pdb_entities"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.list_pdb_entities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id45"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id46"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.validate_pdb_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id47"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_pdb_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id48"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_polymer_entities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id49"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_fasta_sequence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id50"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.get_entity_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id51"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_pdb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id52"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_multiple_pdbs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api_reference.html#id53"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.list_pdb_entities()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#data-structures">Data Structures</a><ul>
@@ -375,7 +340,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#environment-variables">Environment Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api_reference.html#command-line-interface">Command Line Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#id100"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#src.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api_reference.html#command-line-arguments">Command Line Arguments</a></li>
 </ul>
 </li>
@@ -428,6 +393,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">tomllib</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">tomli</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tomllib</span>
+
 
 <div class="viewcode-block" id="ConfigManager">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager">[docs]</a>
@@ -448,44 +418,49 @@
 <span class="sd">            config_path: Path to config.json file. If None, uses default location.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">config_path</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_path</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">config_path</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span>
+        <span class="p">)</span>
 
         <span class="c1"># Setup logging</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
+        <span class="c1"># Load project metadata from pyproject.toml</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_project_metadata</span><span class="p">()</span>
+
         <span class="c1"># Default configuration structure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default_config</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;project_info&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;cryoDL&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Python wrapper for cryo-EM software&quot;</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_metadata</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_metadata</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_metadata</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
             <span class="p">},</span>
             <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;project_root&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">),</span>
                 <span class="s2">&quot;src_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span><span class="p">),</span>
                 <span class="s2">&quot;docs_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;docs&quot;</span><span class="p">),</span>
                 <span class="s2">&quot;output_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;output&quot;</span><span class="p">),</span>
-                <span class="s2">&quot;temp_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;temp&quot;</span><span class="p">)</span>
+                <span class="s2">&quot;temp_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;temp&quot;</span><span class="p">),</span>
             <span class="p">},</span>
             <span class="s2">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;topaz&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/uufs/chpc.utah.edu/sys/installdir/r8/topaz/0.3.7/bin/topaz&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.7&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span>
+                    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="p">},</span>
                 <span class="s2">&quot;model_angelo&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/uufs/chpc.utah.edu/sys/installdir/model-angelo/1.0.1/bin/model_angelo&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span>
-                <span class="p">}</span>
+                    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">},</span>
             <span class="p">},</span>
             <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;max_threads&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
                 <span class="s2">&quot;memory_limit_gb&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
                 <span class="s2">&quot;gpu_enabled&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
                 <span class="s2">&quot;debug_mode&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-                <span class="s2">&quot;log_level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span>
+                <span class="s2">&quot;log_level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s2">&quot;slurm&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;job_name&quot;</span><span class="p">:</span> <span class="s2">&quot;cryodl_job&quot;</span><span class="p">,</span>
@@ -505,26 +480,112 @@
                 <span class="s2">&quot;exclude&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;dependency&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;array&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;SLURM job configuration for cryoDL workflows&quot;</span>
-            <span class="p">}</span>
+                <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;SLURM job configuration for cryoDL workflows&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">}</span>
 
         <span class="c1"># Load or create configuration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_config</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="ConfigManager._load_project_metadata">
+<a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager._load_project_metadata">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_project_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load project metadata from pyproject.toml file.</span>
+
+<span class="sd">        Reads the project name, version, and description from the pyproject.toml</span>
+<span class="sd">        file located in the project root directory. If the file is not found or</span>
+<span class="sd">        cannot be read, returns default values.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Dictionary containing project metadata with keys:</span>
+<span class="sd">                - name (str): Project name</span>
+<span class="sd">                - version (str): Project version</span>
+<span class="sd">                - description (str): Project description</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            metadata = config_manager._load_project_metadata()</span>
+<span class="sd">            print(metadata[&#39;version&#39;])</span>
+<span class="sd">            &#39;0.3.0&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pyproject_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;pyproject.toml&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pyproject_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pyproject.toml not found at </span><span class="si">{</span><span class="n">pyproject_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;cryoDL&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Python wrapper for cryo-EM software&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pyproject_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">pyproject_data</span> <span class="o">=</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+            <span class="n">project_data</span> <span class="o">=</span> <span class="n">pyproject_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+            <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;cryoDL&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;Python wrapper for cryo-EM software&quot;</span>
+                <span class="p">),</span>
+            <span class="p">}</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded project metadata from pyproject.toml: </span><span class="si">{</span><span class="n">metadata</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">metadata</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reading pyproject.toml: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;cryoDL&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Python wrapper for cryo-EM software&quot;</span><span class="p">,</span>
+            <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ConfigManager.get_project_metadata">
+<a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.get_project_metadata">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_project_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current project metadata from pyproject.toml.</span>
+
+<span class="sd">        Returns a copy of the project metadata that was loaded during initialization.</span>
+<span class="sd">        This includes the project name, version, and description from pyproject.toml.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Dictionary containing project metadata with keys:</span>
+<span class="sd">                - name (str): Project name</span>
+<span class="sd">                - version (str): Project version</span>
+<span class="sd">                - description (str): Project description</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            metadata = config_manager.get_project_metadata()</span>
+<span class="sd">            print(f&quot;Version: {metadata[&#39;version&#39;]}&quot;)</span>
+<span class="sd">            Version: 0.3.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_metadata</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="ConfigManager.load_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.load_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Load configuration from file or create default if not exists.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load configuration from file or create default if not exists.</span>
+
+<span class="sd">        Attempts to load the configuration from the config.json file. If the file</span>
+<span class="sd">        doesn&#39;t exist or is corrupted, creates a new default configuration file.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Dictionary containing configuration</span>
+<span class="sd">            Dict[str, Any]: Dictionary containing the loaded or created configuration</span>
+<span class="sd">                with sections for project_info, paths, dependencies, settings, and slurm.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config = config_manager.load_config()</span>
+<span class="sd">            print(config[&#39;project_info&#39;][&#39;version&#39;])</span>
+<span class="sd">            &#39;0.3.0&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration loaded from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">config</span>
@@ -539,15 +600,27 @@
 <div class="viewcode-block" id="ConfigManager.create_default_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.create_default_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_default_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create and save default configuration.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create and save default configuration.</span>
+
+<span class="sd">        Creates the necessary directories and saves a default configuration file</span>
+<span class="sd">        with project metadata, paths, dependencies, settings, and SLURM configuration.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Dictionary containing default configuration</span>
+<span class="sd">            Dict[str, Any]: Dictionary containing the default configuration structure</span>
+<span class="sd">                with all required sections initialized.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config = config_manager.create_default_config()</span>
+<span class="sd">            print(config[&#39;settings&#39;][&#39;max_threads&#39;])</span>
+<span class="sd">            4</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Create necessary directories</span>
         <span class="k">for</span> <span class="n">path_key</span><span class="p">,</span> <span class="n">path_value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_config</span><span class="p">[</span><span class="s2">&quot;paths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">path_key</span> <span class="o">!=</span> <span class="s2">&quot;project_root&quot;</span> <span class="ow">and</span> <span class="n">path_key</span> <span class="o">!=</span> <span class="s2">&quot;src_dir&quot;</span> <span class="ow">and</span> <span class="n">path_key</span> <span class="o">!=</span> <span class="s2">&quot;docs_dir&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">path_key</span> <span class="o">!=</span> <span class="s2">&quot;project_root&quot;</span>
+                <span class="ow">and</span> <span class="n">path_key</span> <span class="o">!=</span> <span class="s2">&quot;src_dir&quot;</span>
+                <span class="ow">and</span> <span class="n">path_key</span> <span class="o">!=</span> <span class="s2">&quot;docs_dir&quot;</span>
+            <span class="p">):</span>
                 <span class="n">Path</span><span class="p">(</span><span class="n">path_value</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># Save default config</span>
@@ -558,17 +631,30 @@
 <div class="viewcode-block" id="ConfigManager.save_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.save_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Save configuration to file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save configuration to file.</span>
+
+<span class="sd">        Saves the configuration dictionary to the config.json file in JSON format</span>
+<span class="sd">        with proper indentation. If no config is provided, saves the current</span>
+<span class="sd">        configuration.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            config: Configuration to save. If None, saves current config.</span>
+<span class="sd">            config (Optional[Dict[str, Any]]): Configuration dictionary to save.</span>
+<span class="sd">                If None, saves the current configuration.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: If the file cannot be written to.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.save_config()</span>
+<span class="sd">            # Or save a specific config</span>
+<span class="sd">            custom_config = {&#39;settings&#39;: {&#39;max_threads&#39;: 8}}</span>
+<span class="sd">            config_manager.save_config(custom_config)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration saved to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -579,17 +665,25 @@
 <div class="viewcode-block" id="ConfigManager.get">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.get">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get configuration value using dot notation (e.g., &#39;paths.output_dir&#39;).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get configuration value using dot notation.</span>
+
+<span class="sd">        Retrieves a configuration value using dot notation to access nested</span>
+<span class="sd">        dictionary keys. If the key doesn&#39;t exist, returns the default value.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            key: Configuration key in dot notation</span>
-<span class="sd">            default: Default value if key not found</span>
+<span class="sd">            key (str): Configuration key in dot notation (e.g., &#39;paths.output_dir&#39;).</span>
+<span class="sd">            default (Any): Default value to return if key is not found.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Configuration value</span>
+<span class="sd">            Any: The configuration value if found, otherwise the default value.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.get(&#39;settings.max_threads&#39;)</span>
+<span class="sd">            4</span>
+<span class="sd">            config_manager.get(&#39;nonexistent.key&#39;, &#39;default&#39;)</span>
+<span class="sd">            &#39;default&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">keys</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -603,14 +697,20 @@
 <div class="viewcode-block" id="ConfigManager.set">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.set">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set configuration value using dot notation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set configuration value using dot notation.</span>
+
+<span class="sd">        Sets a configuration value using dot notation to access nested dictionary</span>
+<span class="sd">        keys. Creates intermediate dictionaries if they don&#39;t exist.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            key: Configuration key in dot notation</span>
-<span class="sd">            value: Value to set</span>
+<span class="sd">            key (str): Configuration key in dot notation (e.g., &#39;settings.max_threads&#39;).</span>
+<span class="sd">            value (Any): Value to set for the configuration key.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.set(&#39;settings.max_threads&#39;, 8)</span>
+<span class="sd">            config_manager.set(&#39;new_section.new_key&#39;, &#39;new_value&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">keys</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span>
 
         <span class="c1"># Navigate to the parent of the target key</span>
@@ -626,14 +726,23 @@
 
 <div class="viewcode-block" id="ConfigManager.update_dependency_path">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.update_dependency_path">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">update_dependency_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update dependency path and version.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_dependency_path</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update dependency path and version.</span>
+
+<span class="sd">        Updates the path and version for a specified dependency in the configuration.</span>
+<span class="sd">        If the dependency doesn&#39;t exist in the configuration, logs a warning.</span>
+<span class="sd">        The dependency is automatically enabled if a path is provided.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            dependency: Name of the dependency (e.g., &#39;relion&#39;, &#39;cryosparc&#39;)</span>
-<span class="sd">            path: Path to the dependency executable or directory</span>
-<span class="sd">            version: Version of the dependency</span>
+<span class="sd">            dependency (str): Name of the dependency (e.g., &#39;topaz&#39;, &#39;model_angelo&#39;).</span>
+<span class="sd">            path (str): Path to the dependency executable or directory.</span>
+<span class="sd">            version (str, optional): Version of the dependency. Defaults to empty string.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.update_dependency_path(&#39;topaz&#39;, &#39;/usr/local/bin/topaz&#39;, &#39;0.3.7&#39;)</span>
+<span class="sd">            config_manager.update_dependency_path(&#39;model_angelo&#39;, &#39;/path/to/model_angelo&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">dependency</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown dependency: </span><span class="si">{</span><span class="n">dependency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -650,14 +759,22 @@
 <div class="viewcode-block" id="ConfigManager.validate_dependency_path">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.validate_dependency_path">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_dependency_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Validate if a dependency path exists and is accessible.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate if a dependency path exists and is accessible.</span>
+
+<span class="sd">        Checks if the specified dependency exists in the configuration and if its</span>
+<span class="sd">        path points to an existing file or directory.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            dependency: Name of the dependency</span>
+<span class="sd">            dependency (str): Name of the dependency to validate.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            True if path is valid, False otherwise</span>
+<span class="sd">            bool: True if the dependency path exists and is accessible, False otherwise.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.validate_dependency_path(&#39;topaz&#39;)</span>
+<span class="sd">            True</span>
+<span class="sd">            config_manager.validate_dependency_path(&#39;nonexistent&#39;)</span>
+<span class="sd">            False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">dependency</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -672,11 +789,22 @@
 <div class="viewcode-block" id="ConfigManager.list_dependencies">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.list_dependencies">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">list_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get all configured dependencies.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all configured dependencies.</span>
+
+<span class="sd">        Returns a dictionary containing all dependencies configured in the system,</span>
+<span class="sd">        including their paths, versions, and enabled status.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Dictionary of dependencies with their paths and status</span>
+<span class="sd">            Dict[str, Dict[str, Any]]: Dictionary where keys are dependency names and</span>
+<span class="sd">                values are dictionaries containing:</span>
+<span class="sd">                - path (str): Path to the dependency</span>
+<span class="sd">                - version (str): Version of the dependency</span>
+<span class="sd">                - enabled (bool): Whether the dependency is enabled</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            deps = config_manager.list_dependencies()</span>
+<span class="sd">            print(deps[&#39;topaz&#39;][&#39;path&#39;])</span>
+<span class="sd">            &#39;/usr/local/bin/topaz&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]</span></div>
 
@@ -684,14 +812,23 @@
 <div class="viewcode-block" id="ConfigManager.get_enabled_dependencies">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_enabled_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get only enabled dependencies.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get only enabled dependencies.</span>
+
+<span class="sd">        Returns a filtered dictionary containing only the dependencies that are</span>
+<span class="sd">        currently enabled in the configuration.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Dictionary of enabled dependencies</span>
+<span class="sd">            Dict[str, Dict[str, Any]]: Dictionary containing only enabled dependencies</span>
+<span class="sd">                with their configuration details (path, version, enabled status).</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            enabled_deps = config_manager.get_enabled_dependencies()</span>
+<span class="sd">            print(list(enabled_deps.keys()))</span>
+<span class="sd">            [&#39;topaz&#39;, &#39;model_angelo&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="n">name</span><span class="p">:</span> <span class="n">info</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">info</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="p">}</span></div>
 
@@ -699,8 +836,15 @@
 <div class="viewcode-block" id="ConfigManager.reset_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.reset_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reset_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reset configuration to default values.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset configuration to default values.</span>
+
+<span class="sd">        Resets the current configuration to the default values and saves the</span>
+<span class="sd">        changes to the configuration file. This will overwrite any custom</span>
+<span class="sd">        settings that have been made.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.reset_config()</span>
+<span class="sd">            # Configuration is now reset to defaults</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
@@ -710,15 +854,25 @@
 <div class="viewcode-block" id="ConfigManager.export_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.export_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">export_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">export_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Export configuration to a different location.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export configuration to a different location.</span>
+
+<span class="sd">        Exports the current configuration to a specified file path in JSON format.</span>
+<span class="sd">        This is useful for backing up configurations or sharing them between</span>
+<span class="sd">        different environments.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            export_path: Path where to export the configuration</span>
+<span class="sd">            export_path (Union[str, Path]): Path where to export the configuration file.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: If the file cannot be written to.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.export_config(&#39;config_backup.json&#39;)</span>
+<span class="sd">            config_manager.export_config(Path(&#39;backups/config_2024.json&#39;))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">export_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">export_path</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration exported to </span><span class="si">{</span><span class="n">export_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -729,15 +883,26 @@
 <div class="viewcode-block" id="ConfigManager.import_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.import_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">import_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">import_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Import configuration from a file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Import configuration from a file.</span>
+
+<span class="sd">        Imports a configuration from a specified file path and replaces the current</span>
+<span class="sd">        configuration. The imported configuration is then saved to the main</span>
+<span class="sd">        configuration file.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            import_path: Path to the configuration file to import</span>
+<span class="sd">            import_path (Union[str, Path]): Path to the configuration file to import.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: If the file cannot be read.</span>
+<span class="sd">            json.JSONDecodeError: If the file contains invalid JSON.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.import_config(&#39;config_backup.json&#39;)</span>
+<span class="sd">            config_manager.import_config(Path(&#39;backups/config_2024.json&#39;))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">import_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">import_path</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">import_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">import_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">new_config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">new_config</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
@@ -750,15 +915,38 @@
 <div class="viewcode-block" id="ConfigManager.generate_slurm_header">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.generate_slurm_header">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_slurm_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate SLURM header from configuration.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate SLURM header from configuration.</span>
+
+<span class="sd">        Generates a SLURM job script header using the current SLURM configuration</span>
+<span class="sd">        settings. Allows overriding specific parameters for the job.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            job_name: Override job name if provided</span>
-<span class="sd">            **kwargs: Additional SLURM parameters to override</span>
+<span class="sd">            job_name (Optional[str]): Override job name if provided. If None, uses</span>
+<span class="sd">                the default job name from configuration.</span>
+<span class="sd">            **kwargs: Additional SLURM parameters to override. Valid parameters include:</span>
+<span class="sd">                - nodes (int): Number of nodes</span>
+<span class="sd">                - ntasks (int): Number of tasks</span>
+<span class="sd">                - cpus_per_task (int): CPUs per task</span>
+<span class="sd">                - gres_gpu (int): Number of GPUs</span>
+<span class="sd">                - time (str): Time limit (HH:MM:SS)</span>
+<span class="sd">                - partition (str): Partition name</span>
+<span class="sd">                - qos (str): Quality of service</span>
+<span class="sd">                - account (str): Account name</span>
+<span class="sd">                - mem (str): Memory limit</span>
+<span class="sd">                - output (str): Output file pattern</span>
+<span class="sd">                - error (str): Error file pattern</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            SLURM header as string</span>
+<span class="sd">            str: Complete SLURM header as a string with all directives.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            header = config_manager.generate_slurm_header(&#39;my_job&#39;, nodes=2, gres_gpu=2)</span>
+<span class="sd">            print(header)</span>
+<span class="sd">            #!/bin/bash</span>
+<span class="sd">            #SBATCH --job-name=my_job</span>
+<span class="sd">            #SBATCH --nodes=2</span>
+<span class="sd">            #SBATCH --gres=gpu:2</span>
+<span class="sd">            ...</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">slurm_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slurm&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -779,7 +967,14 @@
             <span class="p">(</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
             <span class="p">(</span><span class="s2">&quot;ntasks&quot;</span><span class="p">,</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ntasks&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
             <span class="p">(</span><span class="s2">&quot;cpus-per-task&quot;</span><span class="p">,</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cpus_per_task&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
-            <span class="p">(</span><span class="s2">&quot;gres&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gpu:</span><span class="si">{</span><span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;gres_gpu&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gres_gpu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="p">(</span>
+                <span class="s2">&quot;gres&quot;</span><span class="p">,</span>
+                <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;gpu:</span><span class="si">{</span><span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;gres_gpu&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">if</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gres_gpu&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                    <span class="k">else</span> <span class="kc">None</span>
+                <span class="p">),</span>
+            <span class="p">),</span>
             <span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;06:00:00&quot;</span><span class="p">)),</span>
             <span class="p">(</span><span class="s2">&quot;partition&quot;</span><span class="p">,</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;partition&quot;</span><span class="p">,</span> <span class="s2">&quot;notchpeak-gpu&quot;</span><span class="p">)),</span>
             <span class="p">(</span><span class="s2">&quot;qos&quot;</span><span class="p">,</span> <span class="n">slurm_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qos&quot;</span><span class="p">,</span> <span class="s2">&quot;notchpeak-gpu&quot;</span><span class="p">)),</span>
@@ -819,11 +1014,35 @@
 <div class="viewcode-block" id="ConfigManager.update_slurm_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.update_slurm_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">update_slurm_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update SLURM configuration parameters.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update SLURM configuration parameters.</span>
+
+<span class="sd">        Updates the SLURM configuration section with new parameter values and</span>
+<span class="sd">        saves the changes to the configuration file.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            **kwargs: SLURM parameters to update</span>
+<span class="sd">            **kwargs: SLURM parameters to update. Valid parameters include:</span>
+<span class="sd">                - job_name (str): Default job name</span>
+<span class="sd">                - nodes (int): Number of nodes</span>
+<span class="sd">                - ntasks (int): Number of tasks</span>
+<span class="sd">                - cpus_per_task (int): CPUs per task</span>
+<span class="sd">                - gres_gpu (int): Number of GPUs</span>
+<span class="sd">                - time (str): Time limit (HH:MM:SS)</span>
+<span class="sd">                - partition (str): Partition name</span>
+<span class="sd">                - qos (str): Quality of service</span>
+<span class="sd">                - account (str): Account name</span>
+<span class="sd">                - mem (str): Memory limit</span>
+<span class="sd">                - output (str): Output file pattern</span>
+<span class="sd">                - error (str): Error file pattern</span>
+<span class="sd">                - mail_type (str): Mail notification type</span>
+<span class="sd">                - mail_user (str): Mail notification user</span>
+<span class="sd">                - exclude (str): Nodes to exclude</span>
+<span class="sd">                - dependency (str): Job dependencies</span>
+<span class="sd">                - array (str): Array job specification</span>
+<span class="sd">                - comment (str): Comment for the configuration</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.update_slurm_config(nodes=2, gres_gpu=2, time=&#39;12:00:00&#39;)</span>
+<span class="sd">            config_manager.update_slurm_config(partition=&#39;gpu&#39;, account=&#39;my_account&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s2">&quot;slurm&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;slurm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -838,31 +1057,55 @@
 <div class="viewcode-block" id="ConfigManager.get_slurm_config">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.get_slurm_config">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_slurm_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get current SLURM configuration.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current SLURM configuration.</span>
+
+<span class="sd">        Returns the current SLURM configuration dictionary containing all</span>
+<span class="sd">        SLURM-related settings.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Dictionary containing SLURM configuration</span>
+<span class="sd">            Dict[str, Any]: Dictionary containing all SLURM configuration parameters</span>
+<span class="sd">                including job_name, nodes, ntasks, cpus_per_task, gres_gpu, time,</span>
+<span class="sd">                partition, qos, account, mem, output, error, and other SLURM settings.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            slurm_config = config_manager.get_slurm_config()</span>
+<span class="sd">            print(slurm_config[&#39;nodes&#39;])</span>
+<span class="sd">            1</span>
+<span class="sd">            print(slurm_config[&#39;time&#39;])</span>
+<span class="sd">            &#39;06:00:00&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slurm&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
 
 
 <div class="viewcode-block" id="ConfigManager.save_slurm_header">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.ConfigManager.save_slurm_header">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">save_slurm_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">job_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Save SLURM header to a file.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_slurm_header</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">job_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save SLURM header to a file.</span>
+
+<span class="sd">        Generates a SLURM header using the current configuration and saves it to</span>
+<span class="sd">        a specified file path. This is useful for creating SLURM job scripts.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            output_path: Path where to save the SLURM header</span>
-<span class="sd">            job_name: Override job name if provided</span>
-<span class="sd">            **kwargs: Additional SLURM parameters to override</span>
+<span class="sd">            output_path (Union[str, Path]): Path where to save the SLURM header file.</span>
+<span class="sd">            job_name (Optional[str]): Override job name if provided. If None, uses</span>
+<span class="sd">                the default job name from configuration.</span>
+<span class="sd">            **kwargs: Additional SLURM parameters to override. See generate_slurm_header</span>
+<span class="sd">                for valid parameters.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: If the file cannot be written to.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            config_manager.save_slurm_header(&#39;my_job.slurm&#39;, &#39;my_job&#39;, nodes=2)</span>
+<span class="sd">            config_manager.save_slurm_header(Path(&#39;jobs/batch_job.slurm&#39;))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
         <span class="n">header_content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_slurm_header</span><span class="p">(</span><span class="n">job_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header_content</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SLURM header saved to </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -875,8 +1118,18 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../api_reference.html#src.config_manager.main">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Example usage of the ConfigManager.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example usage of the ConfigManager.</span>
+
+<span class="sd">    Demonstrates basic usage of the ConfigManager class including setting</span>
+<span class="sd">    configuration values, updating dependency paths, and validating dependencies.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        python config_manager.py</span>
+<span class="sd">            Project root: /path/to/project</span>
+<span class="sd">            Max threads: 8</span>
+<span class="sd">            Enabled dependencies: [&#39;topaz&#39;, &#39;model_angelo&#39;]</span>
+<span class="sd">            topaz path valid: True</span>
+<span class="sd">            model_angelo path valid: False</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialize config manager</span>
     <span class="n">config_manager</span> <span class="o">=</span> <span class="n">ConfigManager</span><span class="p">()</span>
@@ -887,12 +1140,16 @@
 
     <span class="c1"># Example: Update dependency paths</span>
     <span class="n">config_manager</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span><span class="s2">&quot;topaz&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/topaz&quot;</span><span class="p">,</span> <span class="s2">&quot;0.2.5&quot;</span><span class="p">)</span>
-    <span class="n">config_manager</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span><span class="s2">&quot;model_angelo&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/model_angelo&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">)</span>
+    <span class="n">config_manager</span><span class="o">.</span><span class="n">update_dependency_path</span><span class="p">(</span>
+        <span class="s2">&quot;model_angelo&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/model_angelo&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0.0&quot;</span>
+    <span class="p">)</span>
 
     <span class="c1"># Example: Get configuration values</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Project root: </span><span class="si">{</span><span class="n">config_manager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;paths.project_root&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max threads: </span><span class="si">{</span><span class="n">config_manager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;settings.max_threads&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enabled dependencies: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">config_manager</span><span class="o">.</span><span class="n">get_enabled_dependencies</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Enabled dependencies: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">config_manager</span><span class="o">.</span><span class="n">get_enabled_dependencies</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
 
     <span class="c1"># Example: Validate dependency paths</span>
     <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">config_manager</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]:</span>
@@ -912,7 +1169,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, cryoDL Team.</p>
+    <p>&#169; Copyright 2025, cryoDL Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

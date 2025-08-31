@@ -47,7 +47,7 @@ class FastaBuilder:
         Example:
             builder = FastaBuilder(timeout=60, max_retries=5)
         """
-        self.rcsb_base_url = "https://data.rcsb.org/rest/v1/core"
+        self.rcsb_base_url = "https://search.rcsb.org/rcsbsearch/v2/query"
         self.timeout = timeout
         self.max_retries = max_retries
         self.retry_delay = retry_delay

@@ -20,7 +20,7 @@ From Source (Recommended)
 
    .. code-block:: bash
 
-      git clone https://github.com/yourusername/cryoDL.git
+      git clone https://github.com/ndlevinzon/cryoDL.git
       cd cryoDL
 
 2. Install in development mode:

@@ -9,7 +9,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=0b2da8f6" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=980c018e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -160,36 +160,60 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-src.config_manager">Core Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#core-modules">Core Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#configuration-manager">Configuration Manager</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.load_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.create_default_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.load_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.save_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.set"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.update_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.validate_dependency_path"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.list_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.generate_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.update_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id0"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager._load_project_metadata"><code class="docutils literal notranslate"><span class="pre">ConfigManager._load_project_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get_project_metadata"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_project_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id1"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id2"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id3"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id4"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id5"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id6"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id7"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id8"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.reset_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.export_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.import_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.generate_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.update_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.get_slurm_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id9"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id10"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id11"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.config_manager.ConfigManager.save_slurm_header"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.config_manager.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#interactive-cli-shell">Interactive CLI Shell</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.prompt"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.__init__"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.load_banner"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.setup_logging"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.log_command"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.log_output"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.log_error"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.load_banner"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.load_random_quote"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.prompt"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id12"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id13"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id14"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id15"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id16"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id17"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_init"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_get"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_set"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
@@ -203,16 +227,19 @@
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_slurm_generate"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_slurm_show"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_slurm_update"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_fasta"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_fasta()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_model_angelo"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_topaz"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell._run_topaz_preprocess"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell._run_topaz_denoise"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_denoise()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell._run_topaz_cross"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_analyze_cv"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_clear"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_pwd"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_ls"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_help"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.load_random_quote"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id18"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_version"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_version()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_quit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_exit"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.do_EOF"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
@@ -220,144 +247,82 @@
 <li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.cli.CryoDLShell.emptyline"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.analyze_cross_validation"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.plot_training_curves"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#configuration-manager">Configuration Manager</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id0"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id1"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id2"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id3"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id4"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id5"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id6"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id7"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id8"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id9"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id10"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id11"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id12"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id13"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id14"><code class="docutils literal notranslate"><span class="pre">ConfigManager.load_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id15"><code class="docutils literal notranslate"><span class="pre">ConfigManager.create_default_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id16"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id17"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id18"><code class="docutils literal notranslate"><span class="pre">ConfigManager.set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id19"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id20"><code class="docutils literal notranslate"><span class="pre">ConfigManager.validate_dependency_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id21"><code class="docutils literal notranslate"><span class="pre">ConfigManager.list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id22"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_enabled_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id23"><code class="docutils literal notranslate"><span class="pre">ConfigManager.reset_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id24"><code class="docutils literal notranslate"><span class="pre">ConfigManager.export_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id25"><code class="docutils literal notranslate"><span class="pre">ConfigManager.import_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id26"><code class="docutils literal notranslate"><span class="pre">ConfigManager.generate_slurm_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id27"><code class="docutils literal notranslate"><span class="pre">ConfigManager.update_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id28"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_slurm_config()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id29"><code class="docutils literal notranslate"><span class="pre">ConfigManager.save_slurm_header()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#interactive-cli-shell">Interactive CLI Shell</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id30"><code class="docutils literal notranslate"><span class="pre">CryoDLShell</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id31"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id32"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id33"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id34"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id35"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id36"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id37"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id38"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.prompt</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id39"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id40"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_banner()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id41"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.setup_logging()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id42"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_command()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id43"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_output()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id44"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.log_error()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id45"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id46"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id47"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id48"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id49"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id50"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id51"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id52"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id53"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id54"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id55"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id56"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id57"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id58"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id59"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id60"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id61"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id62"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id63"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id64"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id65"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id66"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id67"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.load_random_quote()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id68"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id69"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id70"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id71"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.default()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id72"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.emptyline()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#configuration-commands">Configuration Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id73"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id74"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id75"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id76"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id77"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id78"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id79"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id19"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id20"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id21"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id22"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id23"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id24"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id25"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_import()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#dependency-management-commands">Dependency Management Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id80"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id81"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id82"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id26"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_add_dependency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id27"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_list_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id28"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_validate_dependencies()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#slurm-commands">SLURM Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id83"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id84"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id85"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id29"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id30"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id31"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_slurm_generate()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#software-integration-commands">Software Integration Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id86"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id87"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id88"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id89"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id32"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_model_angelo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id33"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_topaz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id34"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_preprocess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id35"><code class="docutils literal notranslate"><span class="pre">CryoDLShell._run_topaz_cross()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#analysis-commands">Analysis Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id90"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id36"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_analyze_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id37"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_fasta()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#utility-commands">Utility Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id91"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id92"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id93"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id94"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id38"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id39"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_pwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id40"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id41"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_help()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#exit-commands">Exit Commands</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id95"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id96"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id97"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id42"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id43"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id44"><code class="docutils literal notranslate"><span class="pre">CryoDLShell.do_EOF()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#topaz-analysis-module">Topaz Analysis Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id98"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id99"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.analyze_cross_validation"><code class="docutils literal notranslate"><span class="pre">analyze_cross_validation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.topaz_analysis.plot_training_curves"><code class="docutils literal notranslate"><span class="pre">plot_training_curves()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#fasta-sequence-builder">FASTA Sequence Builder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder"><code class="docutils literal notranslate"><span class="pre">FastaBuilder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.__init__"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.validate_pdb_id"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.validate_pdb_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.fetch_pdb_info"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_pdb_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.fetch_polymer_entities"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_polymer_entities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.fetch_fasta_sequence"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_fasta_sequence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.get_entity_info"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.get_entity_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.build_fasta_from_pdb"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_pdb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_multiple_pdbs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#src.build_fasta.FastaBuilder.list_pdb_entities"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.list_pdb_entities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id45"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id46"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.validate_pdb_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id47"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_pdb_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id48"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_polymer_entities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id49"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.fetch_fasta_sequence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id50"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.get_entity_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id51"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_pdb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id52"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.build_fasta_from_multiple_pdbs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_reference.html#id53"><code class="docutils literal notranslate"><span class="pre">FastaBuilder.list_pdb_entities()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#data-structures">Data Structures</a><ul>
@@ -375,7 +340,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#environment-variables">Environment Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#command-line-interface">Command Line Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id100"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#src.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_reference.html#command-line-arguments">Command Line Arguments</a></li>
 </ul>
 </li>
@@ -425,9 +390,11 @@
 <div class="genindex-jumpbox">
  <a href="#_"><strong>_</strong></a>
  | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
@@ -442,17 +409,23 @@
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id31">__init__() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id39">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.__init__">[2]</a>
+      <li><a href="api_reference.html#id45">__init__() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.__init__">[1]</a>
 
       <ul>
-        <li><a href="api_reference.html#id1">(src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id13">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.__init__">[2]</a>
+        <li><a href="api_reference.html#id12">(src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.__init__">[1]</a>
+</li>
+        <li><a href="api_reference.html#id0">(src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.__init__">[1]</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id61">_run_topaz_cross() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id89">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell._run_topaz_cross">[2]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager._load_project_metadata">_load_project_metadata() (src.config_manager.ConfigManager method)</a>
 </li>
-      <li><a href="api_reference.html#id60">_run_topaz_preprocess() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id88">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell._run_topaz_preprocess">[2]</a>
+      <li><a href="api_reference.html#id35">_run_topaz_cross() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell._run_topaz_cross">[1]</a>
+</li>
+      <li><a href="api_reference.html#src.cli.CryoDLShell._run_topaz_denoise">_run_topaz_denoise() (src.cli.CryoDLShell method)</a>
+</li>
+      <li><a href="api_reference.html#id34">_run_topaz_preprocess() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell._run_topaz_preprocess">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -460,7 +433,19 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id98">analyze_cross_validation() (in module src.topaz_analysis)</a>, <a href="api_reference.html#src.topaz_analysis.analyze_cross_validation">[1]</a>
+      <li><a href="api_reference.html#src.topaz_analysis.analyze_cross_validation">analyze_cross_validation() (in module src.topaz_analysis)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference.html#id52">build_fasta_from_multiple_pdbs() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.build_fasta_from_multiple_pdbs">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference.html#id51">build_fasta_from_pdb() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.build_fasta_from_pdb">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -468,13 +453,13 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id0">ConfigManager (class in src.config_manager)</a>, <a href="api_reference.html#src.config_manager.ConfigManager">[1]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager">ConfigManager (class in src.config_manager)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id15">create_default_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id2">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.create_default_config">[2]</a>
+      <li><a href="api_reference.html#id2">create_default_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.create_default_config">[1]</a>
 </li>
-      <li><a href="api_reference.html#id30">CryoDLShell (class in src.cli)</a>, <a href="api_reference.html#src.cli.CryoDLShell">[1]</a>
+      <li><a href="api_reference.html#src.cli.CryoDLShell">CryoDLShell (class in src.cli)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -482,55 +467,59 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id71">default() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.default">[1]</a>
+      <li><a href="api_reference.html#src.cli.CryoDLShell.default">default() (src.cli.CryoDLShell method)</a>
 </li>
-      <li><a href="api_reference.html#id48">do_add_dependency() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id80">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_add_dependency">[2]</a>
+      <li><a href="api_reference.html#id26">do_add_dependency() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_add_dependency">[1]</a>
 </li>
-      <li><a href="api_reference.html#id62">do_analyze_cv() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id90">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_analyze_cv">[2]</a>
+      <li><a href="api_reference.html#id36">do_analyze_cv() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_analyze_cv">[1]</a>
 </li>
-      <li><a href="api_reference.html#id63">do_clear() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id91">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_clear">[2]</a>
+      <li><a href="api_reference.html#id38">do_clear() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_clear">[1]</a>
 </li>
-      <li><a href="api_reference.html#id70">do_EOF() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id97">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_EOF">[2]</a>
+      <li><a href="api_reference.html#id44">do_EOF() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_EOF">[1]</a>
 </li>
-      <li><a href="api_reference.html#id69">do_exit() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id96">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_exit">[2]</a>
+      <li><a href="api_reference.html#id43">do_exit() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_exit">[1]</a>
 </li>
-      <li><a href="api_reference.html#id53">do_export() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id78">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_export">[2]</a>
+      <li><a href="api_reference.html#id24">do_export() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_export">[1]</a>
 </li>
-      <li><a href="api_reference.html#id46">do_get() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id74">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_get">[2]</a>
+      <li><a href="api_reference.html#id37">do_fasta() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_fasta">[1]</a>
 </li>
-      <li><a href="api_reference.html#id66">do_help() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id94">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_help">[2]</a>
+      <li><a href="api_reference.html#id20">do_get() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_get">[1]</a>
 </li>
-      <li><a href="api_reference.html#id54">do_import() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id79">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_import">[2]</a>
+      <li><a href="api_reference.html#id41">do_help() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_help">[1]</a>
 </li>
-      <li><a href="api_reference.html#id45">do_init() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id73">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_init">[2]</a>
+      <li><a href="api_reference.html#id25">do_import() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_import">[1]</a>
 </li>
-      <li><a href="api_reference.html#id49">do_list_dependencies() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id81">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_list_dependencies">[2]</a>
+      <li><a href="api_reference.html#id19">do_init() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_init">[1]</a>
+</li>
+      <li><a href="api_reference.html#id27">do_list_dependencies() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_list_dependencies">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id65">do_ls() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id93">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_ls">[2]</a>
+      <li><a href="api_reference.html#id40">do_ls() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_ls">[1]</a>
 </li>
-      <li><a href="api_reference.html#id58">do_model_angelo() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id86">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_model_angelo">[2]</a>
+      <li><a href="api_reference.html#id32">do_model_angelo() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_model_angelo">[1]</a>
 </li>
-      <li><a href="api_reference.html#id64">do_pwd() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id92">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_pwd">[2]</a>
+      <li><a href="api_reference.html#id39">do_pwd() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_pwd">[1]</a>
 </li>
-      <li><a href="api_reference.html#id68">do_quit() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id95">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_quit">[2]</a>
+      <li><a href="api_reference.html#id42">do_quit() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_quit">[1]</a>
 </li>
-      <li><a href="api_reference.html#id52">do_reset() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id77">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_reset">[2]</a>
+      <li><a href="api_reference.html#id23">do_reset() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_reset">[1]</a>
 </li>
-      <li><a href="api_reference.html#id47">do_set() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id75">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_set">[2]</a>
+      <li><a href="api_reference.html#id21">do_set() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_set">[1]</a>
 </li>
-      <li><a href="api_reference.html#id51">do_show() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id76">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_show">[2]</a>
+      <li><a href="api_reference.html#id22">do_show() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_show">[1]</a>
 </li>
-      <li><a href="api_reference.html#id55">do_slurm_generate() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id85">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_slurm_generate">[2]</a>
+      <li><a href="api_reference.html#id31">do_slurm_generate() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_slurm_generate">[1]</a>
 </li>
-      <li><a href="api_reference.html#id56">do_slurm_show() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id83">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_slurm_show">[2]</a>
+      <li><a href="api_reference.html#id29">do_slurm_show() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_slurm_show">[1]</a>
 </li>
-      <li><a href="api_reference.html#id57">do_slurm_update() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id84">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_slurm_update">[2]</a>
+      <li><a href="api_reference.html#id30">do_slurm_update() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_slurm_update">[1]</a>
 </li>
-      <li><a href="api_reference.html#id59">do_topaz() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id87">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_topaz">[2]</a>
+      <li><a href="api_reference.html#id33">do_topaz() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_topaz">[1]</a>
 </li>
-      <li><a href="api_reference.html#id50">do_validate_dependencies() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id82">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_validate_dependencies">[2]</a>
+      <li><a href="api_reference.html#id28">do_validate_dependencies() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.do_validate_dependencies">[1]</a>
+</li>
+      <li><a href="api_reference.html#src.cli.CryoDLShell.do_version">do_version() (src.cli.CryoDLShell method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -538,11 +527,27 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id72">emptyline() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.emptyline">[1]</a>
+      <li><a href="api_reference.html#src.cli.CryoDLShell.emptyline">emptyline() (src.cli.CryoDLShell method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id24">export_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.export_config">[1]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager.export_config">export_config() (src.config_manager.ConfigManager method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference.html#src.build_fasta.FastaBuilder">FastaBuilder (class in src.build_fasta)</a>
+</li>
+      <li><a href="api_reference.html#id49">fetch_fasta_sequence() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.fetch_fasta_sequence">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference.html#id47">fetch_pdb_info() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.fetch_pdb_info">[1]</a>
+</li>
+      <li><a href="api_reference.html#id48">fetch_polymer_entities() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.fetch_polymer_entities">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -550,15 +555,19 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id10">generate_slurm_header() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id26">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.generate_slurm_header">[2]</a>
+      <li><a href="api_reference.html#id9">generate_slurm_header() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.generate_slurm_header">[1]</a>
 </li>
-      <li><a href="api_reference.html#id17">get() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id5">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.get">[2]</a>
+      <li><a href="api_reference.html#id4">get() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.get">[1]</a>
+</li>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies">get_enabled_dependencies() (src.config_manager.ConfigManager method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id22">get_enabled_dependencies() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.get_enabled_dependencies">[1]</a>
+      <li><a href="api_reference.html#id50">get_entity_info() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.get_entity_info">[1]</a>
 </li>
-      <li><a href="api_reference.html#id11">get_slurm_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id28">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.get_slurm_config">[2]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager.get_project_metadata">get_project_metadata() (src.config_manager.ConfigManager method)</a>
+</li>
+      <li><a href="api_reference.html#id11">get_slurm_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.get_slurm_config">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -566,7 +575,7 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id25">import_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.import_config">[1]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager.import_config">import_config() (src.config_manager.ConfigManager method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -574,21 +583,23 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id21">list_dependencies() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id9">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.list_dependencies">[2]</a>
+      <li><a href="api_reference.html#id8">list_dependencies() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.list_dependencies">[1]</a>
 </li>
-      <li><a href="api_reference.html#id36">load_banner() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id40">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.load_banner">[2]</a>
+      <li><a href="api_reference.html#id53">list_pdb_entities() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.list_pdb_entities">[1]</a>
 </li>
-      <li><a href="api_reference.html#id14">load_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id3">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.load_config">[2]</a>
+      <li><a href="api_reference.html#id13">load_banner() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.load_banner">[1]</a>
+</li>
+      <li><a href="api_reference.html#id1">load_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.load_config">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id37">load_random_quote() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id67">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.load_random_quote">[2]</a>
+      <li><a href="api_reference.html#id18">load_random_quote() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.load_random_quote">[1]</a>
 </li>
-      <li><a href="api_reference.html#id33">log_command() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id42">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.log_command">[2]</a>
+      <li><a href="api_reference.html#id15">log_command() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.log_command">[1]</a>
 </li>
-      <li><a href="api_reference.html#id35">log_error() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id44">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.log_error">[2]</a>
+      <li><a href="api_reference.html#id17">log_error() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.log_error">[1]</a>
 </li>
-      <li><a href="api_reference.html#id34">log_output() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id43">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.log_output">[2]</a>
+      <li><a href="api_reference.html#id16">log_output() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.log_output">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -596,38 +607,19 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id100">main() (in module src.cli)</a>, <a href="api_reference.html#src.cli.main">[1]</a>
-
-      <ul>
-        <li><a href="api_reference.html#src.config_manager.main">(in module src.config_manager)</a>
+      <li><a href="api_reference.html#src.cli.main">main() (in module src.cli)</a>
 </li>
-        <li><a href="api_reference.html#src.topaz_analysis.main">(in module src.topaz_analysis)</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    module
-
-      <ul>
-        <li><a href="api_reference.html#module-src.cli">src.cli</a>
-</li>
-        <li><a href="api_reference.html#module-src.config_manager">src.config_manager</a>
-</li>
-        <li><a href="api_reference.html#module-src.topaz_analysis">src.topaz_analysis</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id99">plot_training_curves() (in module src.topaz_analysis)</a>, <a href="api_reference.html#src.topaz_analysis.plot_training_curves">[1]</a>
+      <li><a href="api_reference.html#src.topaz_analysis.plot_training_curves">plot_training_curves() (in module src.topaz_analysis)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id38">prompt (src.cli.CryoDLShell attribute)</a>, <a href="api_reference.html#src.cli.CryoDLShell.prompt">[1]</a>
+      <li><a href="api_reference.html#src.cli.CryoDLShell.prompt">prompt (src.cli.CryoDLShell attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -635,7 +627,7 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id23">reset_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.reset_config">[1]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager.reset_config">reset_config() (src.config_manager.ConfigManager method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -643,48 +635,27 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id16">save_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id4">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.save_config">[2]</a>
+      <li><a href="api_reference.html#id3">save_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.save_config">[1]</a>
 </li>
-      <li><a href="api_reference.html#id29">save_slurm_header() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.save_slurm_header">[1]</a>
+      <li><a href="api_reference.html#src.config_manager.ConfigManager.save_slurm_header">save_slurm_header() (src.config_manager.ConfigManager method)</a>
 </li>
-      <li><a href="api_reference.html#id18">set() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id6">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.set">[2]</a>
-</li>
-      <li><a href="api_reference.html#id32">setup_logging() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#id41">[1]</a>, <a href="api_reference.html#src.cli.CryoDLShell.setup_logging">[2]</a>
-</li>
-      <li>
-    src.cli
-
-      <ul>
-        <li><a href="api_reference.html#module-src.cli">module</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    src.config_manager
-
-      <ul>
-        <li><a href="api_reference.html#module-src.config_manager">module</a>
+      <li><a href="api_reference.html#id5">set() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.set">[1]</a>
 </li>
-      </ul></li>
-      <li>
-    src.topaz_analysis
-
-      <ul>
-        <li><a href="api_reference.html#module-src.topaz_analysis">module</a>
+      <li><a href="api_reference.html#id14">setup_logging() (src.cli.CryoDLShell method)</a>, <a href="api_reference.html#src.cli.CryoDLShell.setup_logging">[1]</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id19">update_dependency_path() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id7">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.update_dependency_path">[2]</a>
+      <li><a href="api_reference.html#id6">update_dependency_path() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.update_dependency_path">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id12">update_slurm_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id27">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.update_slurm_config">[2]</a>
+      <li><a href="api_reference.html#id10">update_slurm_config() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.update_slurm_config">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -692,7 +663,11 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_reference.html#id20">validate_dependency_path() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#id8">[1]</a>, <a href="api_reference.html#src.config_manager.ConfigManager.validate_dependency_path">[2]</a>
+      <li><a href="api_reference.html#id7">validate_dependency_path() (src.config_manager.ConfigManager method)</a>, <a href="api_reference.html#src.config_manager.ConfigManager.validate_dependency_path">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference.html#id46">validate_pdb_id() (src.build_fasta.FastaBuilder method)</a>, <a href="api_reference.html#src.build_fasta.FastaBuilder.validate_pdb_id">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -706,7 +681,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, cryoDL Team.</p>
+    <p>&#169; Copyright 2025, cryoDL Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

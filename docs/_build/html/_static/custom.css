@@ -10,6 +10,57 @@
     --cryodl-info: #17A2B8;
 }
 
+/* Ensure all text is visible on white background */
+body {
+    color: #333333 !important;
+}
+
+/* Override any white text that might be inherited */
+.wy-nav-content {
+    color: #333333 !important;
+}
+
+.wy-nav-content p,
+.wy-nav-content li,
+.wy-nav-content div,
+.wy-nav-content span {
+    color: #333333 !important;
+}
+
+/* Ensure headings are visible */
+.wy-nav-content h1,
+.wy-nav-content h2,
+.wy-nav-content h3,
+.wy-nav-content h4,
+.wy-nav-content h5,
+.wy-nav-content h6 {
+    color: #333333 !important;
+}
+
+/* Fix any inherited white text in tables */
+.wy-table-responsive th,
+.wy-table-responsive td {
+    color: #333333 !important;
+}
+
+/* Ensure code blocks have proper contrast */
+.highlight {
+    color: #333333 !important;
+}
+
+.highlight pre {
+    color: #333333 !important;
+}
+
+/* Fix any white text in admonitions */
+.admonition {
+    color: #333333 !important;
+}
+
+.admonition-title {
+    color: #333333 !important;
+}
+
 /* Header styling */
 .wy-side-nav-search {
     background-color: var(--cryodl-primary);
@@ -171,7 +222,7 @@ code {
 
 .wy-table-responsive th {
     background-color: var(--cryodl-primary);
-    color: white;
+    color: white !important;
     padding: 10px;
     text-align: left;
 }
@@ -179,10 +230,15 @@ code {
 .wy-table-responsive td {
     padding: 8px;
     border-bottom: 1px solid #ddd;
+    color: #333333 !important;
 }
 
 .wy-table-responsive tr:nth-child(even) {
     background-color: #f8f9fa;
+}
+
+.wy-table-responsive tr:nth-child(odd) {
+    background-color: #ffffff;
 }
 
 /* Button styling */
@@ -254,18 +310,38 @@ code {
 
 /* Syntax highlighting for different languages */
 .highlight-bash {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #f8f9fa;
+    color: #333333 !important;
+    border: 1px solid #e9ecef;
 }
 
 .highlight-python {
-    background-color: #2b5b84;
-    color: #f8f8f2;
+    background-color: #f8f9fa;
+    color: #333333 !important;
+    border: 1px solid #e9ecef;
 }
 
 .highlight-json {
-    background-color: #1e1e1e;
-    color: #d4d4d4;
+    background-color: #f8f9fa;
+    color: #333333 !important;
+    border: 1px solid #e9ecef;
+}
+
+/* Ensure all code blocks have proper contrast */
+.highlight-default {
+    background-color: #f8f9fa !important;
+    color: #333333 !important;
+    border: 1px solid #e9ecef;
+}
+
+.highlight-default .highlight {
+    background-color: transparent !important;
+    color: #333333 !important;
+}
+
+.highlight-default pre {
+    background-color: transparent !important;
+    color: #333333 !important;
 }
 
 /* Custom admonitions */
@@ -322,4 +398,342 @@ code {
 
 .wy-breadcrumbs a:hover {
     color: var(--cryodl-secondary);
+}
+
+/* Additional fixes for Read the Docs theme */
+.wy-nav-content-wrap {
+    background-color: #ffffff;
+}
+
+.wy-nav-content {
+    background-color: #ffffff;
+}
+
+/* Fix any inherited white text in specific elements */
+.wy-nav-content .section,
+.wy-nav-content .section * {
+    color: #333333 !important;
+}
+
+/* Fix docutils elements */
+.docutils {
+    color: #333333 !important;
+}
+
+.docutils * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in lists */
+.wy-nav-content ul,
+.wy-nav-content ol {
+    color: #333333 !important;
+}
+
+.wy-nav-content ul li,
+.wy-nav-content ol li {
+    color: #333333 !important;
+}
+
+/* Fix any white text in paragraphs */
+.wy-nav-content p {
+    color: #333333 !important;
+}
+
+/* Fix any white text in divs */
+.wy-nav-content div {
+    color: #333333 !important;
+}
+
+/* Fix any white text in spans */
+.wy-nav-content span {
+    color: #333333 !important;
+}
+
+/* Fix any white text in links */
+.wy-nav-content a {
+    color: var(--cryodl-primary) !important;
+}
+
+.wy-nav-content a:hover {
+    color: var(--cryodl-secondary) !important;
+}
+
+/* Fix any white text in strong/bold elements */
+.wy-nav-content strong,
+.wy-nav-content b {
+    color: #333333 !important;
+}
+
+/* Fix any white text in emphasis/italic elements */
+.wy-nav-content em,
+.wy-nav-content i {
+    color: #333333 !important;
+}
+
+/* Fix any white text in blockquotes */
+.wy-nav-content blockquote {
+    color: #333333 !important;
+}
+
+.wy-nav-content blockquote * {
+    color: #333333 !important;
+}
+
+/* Additional sphinx-rtd-theme specific fixes */
+.rst-content {
+    color: #333333 !important;
+}
+
+.rst-content * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in autodoc elements */
+.autoclass,
+.autofunction,
+.automethod,
+.autoattribute {
+    color: #333333 !important;
+}
+
+.autoclass *,
+.autofunction *,
+.automethod *,
+.autoattribute * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in signature elements */
+.sig {
+    color: #333333 !important;
+}
+
+.sig * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in desc elements */
+.desc {
+    color: #333333 !important;
+}
+
+.desc * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in field-list elements */
+.field-list {
+    color: #333333 !important;
+}
+
+.field-list * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in option-list elements */
+.option-list {
+    color: #333333 !important;
+}
+
+.option-list * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in literal elements */
+.literal {
+    color: #333333 !important;
+}
+
+.literal * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in reference elements */
+.reference {
+    color: var(--cryodl-primary) !important;
+}
+
+.reference:hover {
+    color: var(--cryodl-secondary) !important;
+}
+
+/* Fix any white text in footnote elements */
+.footnote {
+    color: #333333 !important;
+}
+
+.footnote * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in citation elements */
+.citation {
+    color: #333333 !important;
+}
+
+.citation * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in math elements */
+.math {
+    color: #333333 !important;
+}
+
+.math * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in index elements */
+.index {
+    color: #333333 !important;
+}
+
+.index * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in glossary elements */
+.glossary {
+    color: #333333 !important;
+}
+
+.glossary * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in topic elements */
+.topic {
+    color: #333333 !important;
+}
+
+.topic * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in sidebar elements */
+.sidebar {
+    color: #333333 !important;
+}
+
+.sidebar * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in rubric elements */
+.rubric {
+    color: #333333 !important;
+}
+
+.rubric * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in epigraph elements */
+.epigraph {
+    color: #333333 !important;
+}
+
+.epigraph * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in highlights elements */
+.highlights {
+    color: #333333 !important;
+}
+
+.highlights * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in pull-quote elements */
+.pull-quote {
+    color: #333333 !important;
+}
+
+.pull-quote * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in compound elements */
+.compound {
+    color: #333333 !important;
+}
+
+.compound * {
+    color: #333333 !important;
+}
+
+/* Fix any white text in container elements */
+.container {
+    color: #333333 !important;
+}
+
+.container * {
+    color: #333333 !important;
+}
+
+/* Fix example code blocks */
+.example {
+    color: #333333 !important;
+}
+
+.example .highlight {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+}
+
+.example .highlight pre {
+    color: #333333 !important;
+    background-color: transparent !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Fix usage sections */
+.usage {
+    color: #333333 !important;
+}
+
+.usage .highlight {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+}
+
+.usage .highlight pre {
+    color: #333333 !important;
+    background-color: transparent !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Fix any literal blocks in examples and usage */
+.example .literal-block,
+.usage .literal-block {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+    color: #333333 !important;
+}
+
+/* Fix any code blocks that might be rendered as text */
+.example code,
+.usage code {
+    background-color: #f8f9fa !important;
+    color: #333333 !important;
+    border: 1px solid #e9ecef !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
 }
