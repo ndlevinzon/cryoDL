@@ -29,12 +29,12 @@ except ImportError:
 
 
 def analyze_cross_validation(
-    cv_dir: str,
-    n_values: List[int] = [250, 300, 350, 400, 450, 500],
-    k_folds: int = 5,
-    output_dir: Optional[str] = None,
-    save_plots: bool = True,
-    show_plots: bool = False,
+        cv_dir: str,
+        n_values: List[int] = [250, 300, 350, 400, 450, 500],
+        k_folds: int = 5,
+        output_dir: Optional[str] = None,
+        save_plots: bool = True,
+        show_plots: bool = False,
 ) -> Dict:
     """
     Analyze cross-validation results from Topaz training.
@@ -240,7 +240,7 @@ def analyze_cross_validation(
         "best_epoch": best_epoch,
         "best_auprc": best_auprc,
         "recommendation": f"Train with N={best_n} for at least {best_epoch} epochs. "
-        f"Consider training longer as performance may continue to improve.",
+                          f"Consider training longer as performance may continue to improve.",
         "all_results": cv_results_epoch.to_dict("records"),
     }
 
@@ -273,10 +273,10 @@ def analyze_cross_validation(
 
 
 def plot_training_curves(
-    training_files: List[str],
-    output_dir: str,
-    save_plots: bool = True,
-    show_plots: bool = False,
+        training_files: List[str],
+        output_dir: str,
+        save_plots: bool = True,
+        show_plots: bool = False,
 ) -> None:
     """
     Plot training curves from Topaz training files.
@@ -385,6 +385,294 @@ def main():
     else:
         print(f"Cross-validation directory not found: {cv_dir}")
         print("Please run cross-validation first using the 'topaz cross' command.")
+
+
+def run_denoising_workflow(
+        movies_dir: str,
+        output_dir: str,
+        project_name: str,
+        topaz_path: str,
+        patch_size: int = 1024
+) -> None:
+    """
+    Run the complete Topaz denoising workflow.
+
+    This function implements the denoising workflow including:
+    1. Splitting movie frames into even/odd training data
+    2. Training the denoising model
+    3. Applying the trained model to denoise micrographs
+
+    Args:
+        movies_dir: Directory containing raw movie frames (.mrc files)
+        output_dir: Base output directory for all results
+        project_name: Name of the project (e.g., EMPIAR-10025)
+        topaz_path: Path to the topaz executable
+        patch_size: Patch size for denoising (default: 1024)
+
+    Example:
+        run_denoising_workflow(
+            movies_dir='data/EMPIAR-10025/rawdata/movies',
+            output_dir='topaz_denoise_output',
+            project_name='EMPIAR-10025',
+            topaz_path='/usr/local/bin/topaz'
+        )
+    """
+    import subprocess
+    import mrcfile
+
+    # Setup paths
+    output_path = Path(output_dir)
+    denoised_dir = output_path / "data" / project_name / "denoised"
+    training_data_dir = denoised_dir / "training_data"
+    part_a_dir = training_data_dir / "partA"  # odd frames
+    part_b_dir = training_data_dir / "partB"  # even frames
+    models_dir = output_path / "saved_models" / "denoising"
+
+    # Create directories
+    denoised_dir.mkdir(parents=True, exist_ok=True)
+    part_a_dir.mkdir(parents=True, exist_ok=True)
+    part_b_dir.mkdir(parents=True, exist_ok=True)
+    models_dir.mkdir(parents=True, exist_ok=True)
+
+    print(f"Processing movie frames from: {movies_dir}")
+    print(f"Output directory: {output_dir}")
+
+    # Step 1: Split movie frames into even/odd training data
+    print("\nStep 1: Splitting movie frames into even/odd training data...")
+
+    movie_paths = list(Path(movies_dir).glob("*.mrc"))
+    if not movie_paths:
+        raise ValueError(f"No .mrc files found in {movies_dir}")
+
+    for movie_path in movie_paths:
+        name = movie_path.name
+
+        try:
+            # Load the movie frames
+            with mrcfile.open(movie_path, mode='r') as mrc:
+                frames = mrc.data
+
+            print(f"Processing: {name} (shape: {frames.shape})")
+
+            # Split and sum frames
+            if len(frames.shape) == 3:
+                odd_mic = frames[::2].sum(axis=0)  # Sum odd frames
+                even_mic = frames[1::2].sum(axis=0)  # Sum even frames
+            else:
+                print(f"Warning: {name} is not a 3D movie stack, skipping")
+                continue
+
+            # Save the split micrographs
+            odd_path = part_a_dir / name
+            with mrcfile.new(odd_path, overwrite=True) as mrc:
+                mrc.set_data(odd_mic[np.newaxis, ...])
+
+            even_path = part_b_dir / name
+            with mrcfile.new(even_path, overwrite=True) as mrc:
+                mrc.set_data(even_mic[np.newaxis, ...])
+
+        except Exception as e:
+            print(f"Warning: Error processing {name}: {e}")
+            continue
+
+    print(f"Training data created in: {training_data_dir}")
+
+    # Step 2: Train the denoising model
+    print("\nStep 2: Training denoising model...")
+
+    train_cmd = [
+        topaz_path, "denoise",
+        "-a", str(part_a_dir),
+        "-b", str(part_b_dir),
+        "--save-prefix", str(models_dir / "model"),
+        "--preload"
+    ]
+
+    print(f"Training command: {' '.join(train_cmd)}")
+
+    try:
+        result = subprocess.run(
+            train_cmd,
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        print("Training completed successfully")
+        print(f"Training output: {result.stdout}")
+    except subprocess.CalledProcessError as e:
+        print(f"Training failed: {e}")
+        print(f"Error output: {e.stderr}")
+        raise
+
+    # Step 3: Apply the trained model to denoise micrographs
+    print("\nStep 3: Applying denoising model to micrographs...")
+
+    # Find the trained model (assuming epoch 100)
+    model_path = models_dir / "model_epoch100.sav"
+    if not model_path.exists():
+        # Try to find the latest model
+        model_files = list(models_dir.glob("model_epoch*.sav"))
+        if model_files:
+            model_path = max(model_files, key=lambda x: int(x.stem.split('_')[-1]))
+            print(f"Using model: {model_path}")
+        else:
+            raise FileNotFoundError(f"No trained model found in {models_dir}")
+
+    # Find micrographs to denoise
+    micrographs_dir = Path(movies_dir).parent / "micrographs"
+    if not micrographs_dir.exists():
+        print(f"Warning: Micrographs directory not found: {micrographs_dir}")
+        print("Skipping denoising application")
+        return
+
+    denoise_cmd = [
+        topaz_path, "denoise",
+        "-m", str(model_path),
+        "--patch-size", str(patch_size),
+        "-o", str(denoised_dir),
+        str(micrographs_dir / "*.mrc")
+    ]
+
+    print(f"Denoising command: {' '.join(denoise_cmd)}")
+
+    try:
+        result = subprocess.run(
+            denoise_cmd,
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        print("Denoising completed successfully")
+        print(f"Denoised micrographs saved to: {denoised_dir}")
+    except subprocess.CalledProcessError as e:
+        print(f"Denoising failed: {e}")
+        print(f"Error output: {e.stderr}")
+        raise
+
+    print(f"\nDenoising workflow completed successfully!")
+    print(f"Results saved to: {denoised_dir}")
+
+
+def visualize_denoising_results(
+        raw_dir: str,
+        denoised_dir: str,
+        output_dir: str,
+        example_name: Optional[str] = None,
+        crop_region: Optional[Tuple[int, int, int, int]] = None
+) -> None:
+    """
+    Visualize denoising results by comparing raw and denoised micrographs.
+
+    Args:
+        raw_dir: Directory containing raw micrographs
+        denoised_dir: Directory containing denoised micrographs
+        output_dir: Directory to save visualization plots
+        example_name: Name of specific micrograph to visualize (without extension)
+        crop_region: Region to crop for detailed view (x1, y1, x2, y2)
+
+    Example:
+        visualize_denoising_results(
+            raw_dir='data/EMPIAR-10025/rawdata/micrographs',
+            denoised_dir='topaz_denoise_output/data/EMPIAR-10025/denoised',
+            output_dir='topaz_denoise_output/visualization'
+        )
+    """
+    import mrcfile
+
+    # Setup paths
+    raw_path = Path(raw_dir)
+    denoised_path = Path(denoised_dir)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    # Find micrographs to visualize
+    if example_name:
+        raw_files = [raw_path / f"{example_name}.mrc"]
+        denoised_files = [denoised_path / f"{example_name}.mrc"]
+    else:
+        raw_files = list(raw_path.glob("*.mrc"))
+        denoised_files = list(denoised_path.glob("*.mrc"))
+
+    if not raw_files:
+        print(f"No raw micrographs found in {raw_dir}")
+        return
+
+    if not denoised_files:
+        print(f"No denoised micrographs found in {denoised_dir}")
+        return
+
+    # Use the first available micrograph if no specific example given
+    if not example_name:
+        raw_file = raw_files[0]
+        denoised_file = denoised_files[0]
+        example_name = raw_file.stem
+    else:
+        raw_file = raw_files[0]
+        denoised_file = denoised_files[0]
+
+    print(f"Visualizing: {example_name}")
+
+    try:
+        # Load the raw micrograph
+        with mrcfile.open(raw_file, mode='r') as mrc:
+            mic_raw = np.array(mrc.data, copy=False)
+
+        # Load the denoised micrograph
+        with mrcfile.open(denoised_file, mode='r') as mrc:
+            mic_dn = np.array(mrc.data, copy=False)
+
+        # Scale them for visualization
+        mu = mic_dn.mean()
+        std = mic_dn.std()
+
+        mic_raw_scaled = (mic_raw - mu) / std
+        mic_dn_scaled = (mic_dn - mu) / std
+
+        # Create full micrograph comparison
+        fig, ax = plt.subplots(1, 2, figsize=(24, 12))
+
+        im1 = ax[0].imshow(mic_raw_scaled, vmin=-4, vmax=4, cmap='Greys_r')
+        ax[0].set_title(f'Raw Micrograph: {example_name}')
+        ax[0].set_xlabel('X (pixels)')
+        ax[0].set_ylabel('Y (pixels)')
+        plt.colorbar(im1, ax=ax[0])
+
+        im2 = ax[1].imshow(mic_dn_scaled, vmin=-4, vmax=4, cmap='Greys_r')
+        ax[1].set_title(f'Denoised Micrograph: {example_name}')
+        ax[1].set_xlabel('X (pixels)')
+        ax[1].set_ylabel('Y (pixels)')
+        plt.colorbar(im2, ax=ax[1])
+
+        plt.tight_layout()
+        plt.savefig(output_path / f"{example_name}_comparison.png", dpi=300, bbox_inches="tight")
+        print(f"Saved full comparison: {output_path / f'{example_name}_comparison.png'}")
+
+        # Create detailed crop comparison if crop region specified
+        if crop_region:
+            x1, y1, x2, y2 = crop_region
+
+            fig, ax = plt.subplots(1, 2, figsize=(24, 12))
+
+            im1 = ax[0].imshow(mic_raw_scaled[y1:y2, x1:x2], vmin=-4, vmax=4, cmap='Greys_r')
+            ax[0].set_title(f'Raw Micrograph (Crop): {example_name}')
+            ax[0].set_xlabel('X (pixels)')
+            ax[0].set_ylabel('Y (pixels)')
+            plt.colorbar(im1, ax=ax[0])
+
+            im2 = ax[1].imshow(mic_dn_scaled[y1:y2, x1:x2], vmin=-4, vmax=4, cmap='Greys_r')
+            ax[1].set_title(f'Denoised Micrograph (Crop): {example_name}')
+            ax[1].set_xlabel('X (pixels)')
+            ax[1].set_ylabel('Y (pixels)')
+            plt.colorbar(im2, ax=ax[1])
+
+            plt.tight_layout()
+            plt.savefig(output_path / f"{example_name}_crop_comparison.png", dpi=300, bbox_inches="tight")
+            print(f"Saved crop comparison: {output_path / f'{example_name}_crop_comparison.png'}")
+
+        plt.close('all')
+
+    except Exception as e:
+        print(f"Error visualizing {example_name}: {e}")
 
 
 if __name__ == "__main__":

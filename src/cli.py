@@ -7,6 +7,7 @@ import argparse
 import cmd
 import datetime
 import logging
+import subprocess
 import os
 import sys
 import traceback
@@ -1102,6 +1103,7 @@ echo "ModelAngelo job completed"
         Args:
             arg (str): Topaz command and options. Available commands:
                 preprocess: Preprocess micrographs and particle coordinates
+                denoise: Train and apply denoising models to micrographs
                 model: Train particle picking models
                 postprocess: Post-process results
                 cross: Perform cross-validation analysis
@@ -1111,10 +1113,11 @@ echo "ModelAngelo job completed"
             topaz <command> [--local]
 
         Commands:
-            preprocess, model, postprocess, cross
+            preprocess, denoise, model, postprocess, cross
 
         Example:
             topaz preprocess --local
+            topaz denoise --local
             topaz preprocess
             topaz cross
         """
@@ -1148,6 +1151,8 @@ echo "ModelAngelo job completed"
 
             if command == "preprocess":
                 self._run_topaz_preprocess(topaz_path, is_local)
+            elif command == "denoise":
+                self._run_topaz_denoise(topaz_path, is_local)
             elif command == "model":
                 print("Topaz model command not yet implemented")
                 self.log_output("Topaz model command not yet implemented")
@@ -1157,7 +1162,7 @@ echo "ModelAngelo job completed"
             else:
                 error_msg = f"Unknown topaz command: {command}"
                 print(error_msg, file=sys.stderr)
-                print("Available commands: preprocess, model, postprocess")
+                print("Available commands: preprocess, denoise, model, postprocess")
                 self.log_error(error_msg)
 
         except Exception as e:
@@ -1422,6 +1427,207 @@ echo "Topaz preprocess job completed"
 
         except Exception as e:
             error_msg = f"Error in topaz preprocess: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
+    def _run_topaz_denoise(self, topaz_path, is_local):
+        """Run Topaz denoise command.
+
+        Executes the Topaz denoising workflow to train denoising models and apply them
+        to micrographs. Can run locally or generate SLURM scripts.
+
+        Args:
+            topaz_path (str): Path to the Topaz executable.
+            is_local (bool): If True, run locally; if False, submit to SLURM.
+
+        Example:
+            shell._run_topaz_denoise('/usr/local/bin/topaz', True)
+        """
+        try:
+            print("Topaz Denoise Setup:")
+            print("-" * 20)
+
+            # Prompt for input parameters
+            raw_movies = input("Enter path to raw movie frames directory: ").strip()
+            if not raw_movies:
+                error_msg = "Raw movie frames directory path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Validate movies directory exists
+            movies_path = Path(raw_movies)
+            if not movies_path.exists():
+                error_msg = f"Movie frames directory not found: {raw_movies}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Get output directory
+            output_dir = input(
+                "Enter output directory name (default: topaz_denoise_output): "
+            ).strip()
+            if not output_dir:
+                output_dir = "topaz_denoise_output"
+
+            # Get project name for organization
+            project_name = input(
+                "Enter project name (e.g., EMPIAR-10025, default: project): "
+            ).strip()
+            if not project_name:
+                project_name = "project"
+
+            # Create output directories
+            denoise_root = Path(output_dir)
+            denoised_dir = denoise_root / "data" / project_name / "denoised"
+            training_data_dir = denoised_dir / "training_data"
+            part_a_dir = training_data_dir / "partA"  # odd frames
+            part_b_dir = training_data_dir / "partB"  # even frames
+            models_dir = denoise_root / "saved_models" / "denoising"
+
+            if is_local:
+                # Run locally
+                print(f"\nRunning Topaz denoise locally:")
+                print(f"Input movies: {raw_movies}")
+                print(f"Output directory: {output_dir}")
+
+                # Create directories
+                denoised_dir.mkdir(parents=True, exist_ok=True)
+                part_a_dir.mkdir(parents=True, exist_ok=True)
+                part_b_dir.mkdir(parents=True, exist_ok=True)
+                models_dir.mkdir(parents=True, exist_ok=True)
+
+                # Import and run the denoising workflow
+                from .topaz_analysis import run_denoising_workflow
+
+                try:
+                    run_denoising_workflow(
+                        movies_dir=raw_movies,
+                        output_dir=str(denoise_root),
+                        project_name=project_name,
+                        topaz_path=topaz_path
+                    )
+
+                    success_msg = f"Topaz denoise completed successfully. Output in: {denoised_dir}"
+                    print(success_msg)
+                    self.log_output(success_msg)
+
+                    # Run visualization
+                    print("\nGenerating visualization...")
+                    from .topaz_analysis import visualize_denoising_results
+                    visualize_denoising_results(
+                        raw_dir=f"data/{project_name}/rawdata/micrographs",
+                        denoised_dir=str(denoised_dir),
+                        output_dir=str(denoise_root / "visualization")
+                    )
+
+                except Exception as e:
+                    error_msg = f"Error in denoising workflow: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            else:
+                # Generate and submit SLURM job
+                job_name = "topaz_denoise"
+
+                # Create SLURM script content
+                slurm_script = f"""#!/bin/bash
+#SBATCH --job-name={job_name}
+#SBATCH --nodes={self.config_manager.get('slurm.nodes', 1)}
+#SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
+#SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
+#SBATCH --gres=gpu:{self.config_manager.get('slurm.gres_gpu', 1)}
+#SBATCH --time={self.config_manager.get('slurm.time', '06:00:00')}
+#SBATCH --partition={self.config_manager.get('slurm.partition', 'notchpeak-gpu')}
+#SBATCH --qos={self.config_manager.get('slurm.qos', 'notchpeak-gpu')}
+#SBATCH --account={self.config_manager.get('slurm.account', 'notchpeak-gpu')}
+#SBATCH --mem={self.config_manager.get('slurm.mem', '96G')}
+#SBATCH -o {self.config_manager.get('slurm.output', 'slurm-%j.out-%N')}
+#SBATCH -e {self.config_manager.get('slurm.error', 'slurm-%j.err-%N')}
+
+set -euo pipefail
+set -x
+
+module purge
+module load topaz/0.2.5
+
+# Be explicit about threads to avoid oversubscription
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+
+cd "${{SLURM_SUBMIT_DIR}}"
+echo "WORKDIR: ${{SLURM_SUBMIT_DIR}}"
+nvidia-smi || true
+
+# Create directories
+mkdir -p "{denoised_dir}"
+mkdir -p "{part_a_dir}"
+mkdir -p "{part_b_dir}"
+mkdir -p "{models_dir}"
+
+# Paths
+RAW_MOVIES="{raw_movies}"
+PROJECT_NAME="{project_name}"
+DENOISE_ROOT="{output_dir}"
+
+# Run the denoising workflow
+python -c "
+import sys
+sys.path.append('{self.project_root}')
+from src.topaz_analysis import run_denoising_workflow, visualize_denoising_results
+
+# Run denoising
+run_denoising_workflow(
+    movies_dir='{raw_movies}',
+    output_dir='{output_dir}',
+    project_name='{project_name}',
+    topaz_path='{topaz_path}'
+)
+
+# Run visualization
+visualize_denoising_results(
+    raw_dir=f'data/{project_name}/rawdata/micrographs',
+    denoised_dir='{denoised_dir}',
+    output_dir='{output_dir}/visualization'
+)
+"
+"""
+
+                # Write SLURM script to file
+                slurm_script_path = f"{job_name}.sh"
+                with open(slurm_script_path, "w") as f:
+                    f.write(slurm_script)
+
+                # Submit SLURM job
+                try:
+                    result = subprocess.run(
+                        f"sbatch {slurm_script_path}",
+                        shell=True,
+                        capture_output=True,
+                        text=True,
+                    )
+
+                    if result.returncode == 0:
+                        job_id = result.stdout.strip().split()[-1]
+                        success_msg = f"Topaz denoise job submitted successfully. Job ID: {job_id}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                        print(f"SLURM script saved as: {slurm_script_path}")
+                        print(f"Job output will be in: slurm-<job_id>.out-<node>")
+                        print(f"Job errors will be in: slurm-<job_id>.err-<node>")
+                    else:
+                        error_msg = f"Failed to submit SLURM job: {result.stderr}"
+                        print(error_msg, file=sys.stderr)
+                        self.log_error(error_msg)
+                except Exception as e:
+                    error_msg = f"Error submitting SLURM job: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+
+        except Exception as e:
+            error_msg = f"Error in topaz denoise: {e}"
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
