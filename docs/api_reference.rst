@@ -213,6 +213,12 @@ The :class:`FastaBuilder` class provides functionality to fetch FASTA sequences 
 
    .. automethod:: build_fasta_from_multiple_pdbs
 
+   .. automethod:: search_pdb_entries
+
+   .. automethod:: search_by_pdb_id
+
+   .. automethod:: search_by_sequence
+
    .. automethod:: list_pdb_entities
 
    .. automethod:: create_annotated_sequence
