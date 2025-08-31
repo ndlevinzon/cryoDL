@@ -762,9 +762,23 @@ All interactions are logged to cryodl.log in the current directory.
             # Parse arguments
             args = arg.split()
             if not args:
-                print("Error: PDB ID is required. Usage: fasta <pdb_id> [options]")
-                print("Use 'fasta --help' for more information")
+                print("FASTA command - Build FASTA files from PDB IDs using RCSB PDB Search API")
+                print()
+                print("Usage:")
+                print("  fasta <pdb_id> [--output filename]")
+                print("  fasta --multiple <pdb_id1> <pdb_id2> ... [--output filename]")
+                print("  fasta --list <pdb_id>")
+                print("  fasta --search \"query\" [--output filename]")
+                print("  fasta --sequence <sequence> [--type protein|dna|rna] [--evalue <value>] [--output filename]")
+                print("  fasta --annotate <cif_file> <fasta_file> [--output filename]")
+                print()
+                print("Use 'fasta --help' for detailed information")
                 self.log_error("Missing PDB ID argument")
+                return
+
+            # Check for help first
+            if args[0] in ["--help", "-h", "help"]:
+                print(self.do_fasta.__doc__)
                 return
 
             # Check for special options
@@ -816,7 +830,8 @@ All interactions are logged to cryodl.log in the current directory.
             elif args[0] == "--sequence":
                 if len(args) < 2:
                     print("Error: Sequence required for --sequence option")
-                    print("Usage: fasta --sequence <sequence> [--type protein|dna|rna] [--evalue <value>] [--output filename]")
+                    print(
+                        "Usage: fasta --sequence <sequence> [--type protein|dna|rna] [--evalue <value>] [--output filename]")
                     self.log_error("Missing sequence for --sequence option")
                     return
 
@@ -860,7 +875,8 @@ All interactions are logged to cryodl.log in the current directory.
                         success, message = builder.build_fasta_from_multiple_pdbs(results, output_file)
                         if success:
                             print(message)
-                            self.log_output(f"Successfully created FASTA file from sequence search results: {output_file}")
+                            self.log_output(
+                                f"Successfully created FASTA file from sequence search results: {output_file}")
                         else:
                             print(f"Error: {message}", file=sys.stderr)
                             self.log_error(f"Failed to create FASTA file from sequence search results: {message}")
@@ -1051,6 +1067,12 @@ All interactions are logged to cryodl.log in the current directory.
 
             # Parse arguments
             args = arg.split()
+
+            # Check for help first
+            if args and args[0] in ["--help", "-h", "help"]:
+                print(self.do_model_angelo.__doc__)
+                return
+
             is_local = "--local" in args
 
             # Prompt for input files
@@ -1300,9 +1322,25 @@ echo "ModelAngelo job completed"
             # Parse arguments
             args = arg.split()
             if not args:
-                print("Error: Topaz command required. Usage: topaz <command> [--local]")
-                print("Available commands: preprocess, model, postprocess")
+                print("Topaz command - Run Topaz for particle picking and analysis")
+                print()
+                print("Usage:")
+                print("  topaz <command> [--local]")
+                print()
+                print("Available commands:")
+                print("  preprocess  - Preprocess micrographs and particle coordinates")
+                print("  denoise     - Train and apply denoising models to micrographs")
+                print("  model       - Train particle picking models")
+                print("  postprocess - Post-process results")
+                print("  cross       - Perform cross-validation analysis")
+                print()
+                print("Use 'topaz --help' for detailed information")
                 self.log_error("Missing topaz command")
+                return
+
+            # Check for help first
+            if args[0] in ["--help", "-h", "help"]:
+                print(self.do_topaz.__doc__)
                 return
 
             command = args[0]
