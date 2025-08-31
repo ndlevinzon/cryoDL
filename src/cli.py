@@ -961,7 +961,7 @@ All interactions are logged to cryodl.log in the current directory.
 
                 # Extract PDB IDs and output file
                 pdb_ids = []
-                output_file = None
+                output_file = "combined_protein.fasta"
 
                 i = 1
                 while i < len(args):
@@ -978,8 +978,7 @@ All interactions are logged to cryodl.log in the current directory.
                     return
 
                 print(f"Processing multiple PDB IDs: {', '.join(pdb_ids)}")
-                if output_file:
-                    print(f"Output file: {output_file}")
+                print(f"Output file: {output_file}")
 
                 builder = FastaBuilder()
                 success, message = builder.build_fasta_from_multiple_pdbs(
@@ -1002,15 +1001,14 @@ All interactions are logged to cryodl.log in the current directory.
             else:
                 # Single PDB ID mode
                 pdb_id = args[0].upper()
-                output_file = None
+                output_file = f"{pdb_id}_protein.fasta"
 
                 # Check for output file option
                 if len(args) >= 3 and args[1] == "--output":
                     output_file = args[2]
 
                 print(f"Fetching FASTA sequence for PDB ID: {pdb_id}")
-                if output_file:
-                    print(f"Output file: {output_file}")
+                print(f"Output file: {output_file}")
 
                 builder = FastaBuilder()
                 success, message = builder.build_fasta_from_pdb(pdb_id, output_file)
