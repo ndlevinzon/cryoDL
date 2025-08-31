@@ -99,7 +99,7 @@ class FastaBuilder:
                 "type": "terminal",
                 "service": "text",
                 "parameters": {
-                    "attribute": "rcsb_id",
+                    "attribute": "rcsb_entry_info.entry_id",
                     "operator": "exact_match",
                     "value": pdb_id
                 }
@@ -162,7 +162,7 @@ class FastaBuilder:
                 "type": "terminal",
                 "service": "text",
                 "parameters": {
-                    "attribute": "rcsb_id",
+                    "attribute": "rcsb_entry_info.entry_id",
                     "operator": "exact_match",
                     "value": pdb_id
                 }
@@ -239,7 +239,7 @@ class FastaBuilder:
                         "type": "terminal",
                         "service": "text",
                         "parameters": {
-                            "attribute": "rcsb_id",
+                            "attribute": "rcsb_entry_info.entry_id",
                             "operator": "exact_match",
                             "value": pdb_id
                         }
@@ -336,7 +336,7 @@ class FastaBuilder:
                         "type": "terminal",
                         "service": "text",
                         "parameters": {
-                            "attribute": "rcsb_id",
+                            "attribute": "rcsb_entry_info.entry_id",
                             "operator": "exact_match",
                             "value": pdb_id
                         }
@@ -681,7 +681,7 @@ class FastaBuilder:
                 "type": "terminal",
                 "service": "text",
                 "parameters": {
-                    "attribute": "rcsb_id",
+                    "attribute": "rcsb_entry_info.entry_id",
                     "operator": "exact_match",
                     "value": pdb_id
                 }
