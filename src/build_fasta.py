@@ -207,18 +207,19 @@ class FastaBuilder:
             self,
             cif_file: str,
             fasta_file: str,
-            output_file: str = "annotated_sequence.fasta"
+            output_file: str = "structure_sequence_alignment.csv"
     ) -> Tuple[bool, str]:
-        """Create an annotated FASTA file that aligns FASTA sequences to CIF subunits.
+        """Create a CSV file that aligns CIF structure chains to FASTA sequences with similarity metrics.
 
-        This function takes a ModelAngelo output .cif file and a FASTA file, then creates
-        an annotated sequence file that maps the FASTA sequence names to the corresponding
-        subunits in the .cif file.
+        This function takes a protein structure .cif file and a FASTA file, then creates
+        a CSV file with three columns: "cif chain", "fasta sequence", "sequence similarity".
+        It performs a BLAST-like search to find the best matching FASTA sequence for each
+        CIF chain and calculates sequence similarity metrics.
 
         Args:
-            cif_file (str): Path to the ModelAngelo output .cif file
+            cif_file (str): Path to the protein structure .cif file
             fasta_file (str): Path to the input FASTA file
-            output_file (str, optional): Output file name. Defaults to "annotated_sequence.fasta".
+            output_file (str, optional): Output CSV file name. Defaults to "structure_sequence_alignment.csv".
 
         Returns:
             Tuple[bool, str]: (success, message) where success is True if the operation
@@ -227,9 +228,9 @@ class FastaBuilder:
 
         Example:
             success, message = builder.create_annotated_sequence(
-                "modelangelo_output.cif",
-                "input_sequences.fasta",
-                "annotated_sequences.fasta"
+                "protein_structure.cif",
+                "sequences.fasta",
+                "alignment_results.csv"
             )
         """
         try:
@@ -240,49 +241,55 @@ class FastaBuilder:
             if not os.path.exists(fasta_file):
                 return False, f"Error: FASTA file not found: {fasta_file}"
 
-            # Read and parse the CIF file
-            cif_data = self._parse_cif_file(cif_file)
-            if not cif_data:
-                return False, f"Error: Failed to parse CIF file: {cif_file}"
+            # Read and parse the CIF file to extract chain sequences
+            cif_chains = self._parse_cif_chains(cif_file)
+            if not cif_chains:
+                return False, f"Error: Failed to parse CIF file or no chains found: {cif_file}"
 
             # Read and parse the FASTA file
             fasta_data = self._parse_fasta_file(fasta_file)
             if not fasta_data:
                 return False, f"Error: Failed to parse FASTA file: {fasta_file}"
 
-            # Create annotated sequences
-            annotated_sequences = self._create_annotations(cif_data, fasta_data)
+            # Create alignment results
+            alignment_results = self._create_chain_alignments(cif_chains, fasta_data)
 
-            # Write the annotated sequences to output file
-            self._write_annotated_sequences(annotated_sequences, output_file)
+            # Write the alignment results to CSV file
+            self._write_alignment_csv(alignment_results, output_file)
 
-            return True, f"Successfully created annotated sequence file: {output_file}"
+            return True, f"Successfully created alignment CSV file: {output_file} with {len(alignment_results)} chain alignments"
 
         except Exception as e:
             logger.error(f"Error creating annotated sequence: {str(e)}")
             return False, f"Error: {str(e)}"
 
-    def _parse_cif_file(self, cif_file: str) -> Optional[Dict]:
-        """Parse a CIF file and extract sequence information.
+    def _parse_cif_chains(self, cif_file: str) -> Optional[Dict[str, str]]:
+        """Parse a CIF file and extract chain sequences.
 
         Args:
             cif_file (str): Path to the CIF file
 
         Returns:
-            Optional[Dict]: Dictionary containing parsed CIF data, or None if failed
+            Optional[Dict[str, str]]: Dictionary mapping chain IDs to sequences, or None if failed
         """
         try:
-            cif_data = {
-                'entities': {},
-                'sequences': {},
-                'chains': {}
-            }
+            chains = {}
 
             with open(cif_file, 'r') as f:
                 lines = f.readlines()
 
-            current_section = None
-            current_entity = None
+            # Amino acid three-letter to one-letter code mapping
+            aa_mapping = {
+                'ALA': 'A', 'ARG': 'R', 'ASN': 'N', 'ASP': 'D', 'CYS': 'C',
+                'GLN': 'Q', 'GLU': 'E', 'GLY': 'G', 'HIS': 'H', 'ILE': 'I',
+                'LEU': 'L', 'LYS': 'K', 'MET': 'M', 'PHE': 'F', 'PRO': 'P',
+                'SER': 'S', 'THR': 'T', 'TRP': 'W', 'TYR': 'Y', 'VAL': 'V',
+                'SEC': 'U', 'PYL': 'O'  # Selenocysteine and Pyrrolysine
+            }
+
+            # Parse atom_site section to extract chain sequences
+            in_atom_site = False
+            chain_residues = {}  # chain_id -> {res_id -> res_name}
 
             for line in lines:
                 line = line.strip()
@@ -291,57 +298,49 @@ class FastaBuilder:
                 if not line or line.startswith('#'):
                     continue
 
-                # Check for section headers
-                if line.startswith('_entity.'):
-                    current_section = 'entity'
-                    current_entity = line.split('.')[1]
-                    if current_entity not in cif_data['entities']:
-                        cif_data['entities'][current_entity] = {}
-                elif line.startswith('_entity_poly_seq.'):
-                    current_section = 'sequence'
-                elif line.startswith('_atom_site.'):
-                    current_section = 'atoms'
+                # Check for atom_site section
+                if line.startswith('_atom_site.'):
+                    in_atom_site = True
+                    continue
+                elif line.startswith('_') and not line.startswith('_atom_site.'):
+                    in_atom_site = False
+                    continue
 
-                # Parse entity information
-                if current_section == 'entity' and current_entity:
-                    if line.startswith('_entity.'):
-                        key = line.split('.')[1]
-                        cif_data['entities'][current_entity][key] = None
-                    elif line and not line.startswith('_'):
-                        # This is a value line
-                        if current_entity in cif_data['entities']:
-                            # Find the last key that doesn't have a value
-                            for key in cif_data['entities'][current_entity]:
-                                if cif_data['entities'][current_entity][key] is None:
-                                    cif_data['entities'][current_entity][key] = line
-                                    break
+                if in_atom_site and line and not line.startswith('_'):
+                    # Parse atom_site data line
+                    parts = line.split()
+                    if len(parts) >= 6:  # Should have at least chain_id, res_id, res_name
+                        try:
+                            # Find chain_id, res_id, and res_name columns
+                            # This is a simplified parser - in real CIF files, column order may vary
+                            chain_id = parts[0]  # Assuming chain_id is first
+                            res_id = parts[1]  # Assuming res_id is second
+                            res_name = parts[2]  # Assuming res_name is third
 
-                # Parse sequence information
-                if current_section == 'sequence':
-                    if line.startswith('_entity_poly_seq.'):
-                        key = line.split('.')[1]
-                        if key not in cif_data['sequences']:
-                            cif_data['sequences'][key] = []
-                    elif line and not line.startswith('_'):
-                        # This is a sequence data line
-                        parts = line.split()
-                        if len(parts) >= 3:  # entity_id, seq_id, res_name
-                            entity_id = parts[0]
-                            seq_id = parts[1]
-                            res_name = parts[2]
+                            # Only process protein residues
+                            if res_name in aa_mapping:
+                                if chain_id not in chain_residues:
+                                    chain_residues[chain_id] = {}
+                                chain_residues[chain_id][res_id] = res_name
+                        except (IndexError, ValueError):
+                            continue
 
-                            if entity_id not in cif_data['sequences']:
-                                cif_data['sequences'][entity_id] = []
+            # Convert chain_residues to sequences
+            for chain_id, residues in chain_residues.items():
+                # Sort residues by residue ID (convert to int for proper sorting)
+                sorted_residues = sorted(residues.items(), key=lambda x: int(x[0]) if x[0].isdigit() else float('inf'))
 
-                            cif_data['sequences'][entity_id].append({
-                                'seq_id': seq_id,
-                                'res_name': res_name
-                            })
+                sequence = []
+                for res_id, res_name in sorted_residues:
+                    sequence.append(aa_mapping[res_name])
 
-            return cif_data
+                if sequence:  # Only add chains with valid sequences
+                    chains[chain_id] = ''.join(sequence)
+
+            return chains if chains else None
 
         except Exception as e:
-            logger.error(f"Error parsing CIF file: {str(e)}")
+            logger.error(f"Error parsing CIF chains: {str(e)}")
             return None
 
     def _parse_fasta_file(self, fasta_file: str) -> Optional[Dict]:
@@ -490,27 +489,108 @@ class FastaBuilder:
 
         return None
 
-    def _write_annotated_sequences(self, annotated_sequences: List[Dict], output_file: str):
-        """Write annotated sequences to output file.
+    def _create_chain_alignments(self, cif_chains: Dict[str, str], fasta_data: Dict[str, str]) -> List[Dict]:
+        """Create alignments between CIF chains and FASTA sequences with similarity metrics.
 
         Args:
-            annotated_sequences (List[Dict]): List of annotated sequences
-            output_file (str): Output file path
+            cif_chains (Dict[str, str]): Dictionary mapping chain IDs to sequences
+            fasta_data (Dict[str, str]): Dictionary mapping FASTA headers to sequences
+
+        Returns:
+            List[Dict]: List of alignment results with chain, sequence, and similarity info
         """
-        with open(output_file, 'w') as f:
-            for i, annotation in enumerate(annotated_sequences, 1):
-                # Write header with entity information
-                f.write(
-                    f">Entity_{annotation['entity_id']} | {annotation['entity_type']} | {annotation['entity_title']}\n")
+        alignment_results = []
 
-                # Write the sequence (prefer FASTA sequence if available, otherwise CIF sequence)
-                sequence = annotation['fasta_sequence'] or annotation['cif_sequence']
-                if sequence:
-                    # Write sequence in 80-character lines
-                    for j in range(0, len(sequence), 80):
-                        f.write(sequence[j:j + 80] + '\n')
+        for chain_id, chain_sequence in cif_chains.items():
+            best_match = None
+            best_similarity = 0.0
 
-                f.write('\n')  # Add blank line between sequences
+            # Find the best matching FASTA sequence for this chain
+            for fasta_header, fasta_sequence in fasta_data.items():
+                similarity = self._calculate_sequence_similarity(chain_sequence, fasta_sequence)
+
+                if similarity > best_similarity:
+                    best_similarity = similarity
+                    best_match = fasta_header
+
+            # Add result to alignment_results
+            alignment_results.append({
+                'cif_chain': chain_id,
+                'fasta_sequence': best_match if best_match else "No match found",
+                'sequence_similarity': f"{best_similarity:.4f}" if best_match else "0.0000"
+            })
+
+        return alignment_results
+
+    def _calculate_sequence_similarity(self, seq1: str, seq2: str) -> float:
+        """Calculate sequence similarity between two sequences using local alignment.
+
+        Args:
+            seq1 (str): First sequence
+            seq2 (str): Second sequence
+
+        Returns:
+            float: Similarity score between 0.0 and 1.0
+        """
+        if not seq1 or not seq2:
+            return 0.0
+
+        # Use a simple local alignment algorithm (similar to BLAST)
+        # This is a simplified version - for production use, consider using BioPython's BLAST
+
+        # Find the longest common substring as a proxy for local alignment
+        def longest_common_substring(s1, s2):
+            m = [[0] * (1 + len(s2)) for _ in range(1 + len(s1))]
+            longest = 0
+            for x in range(len(s1)):
+                for y in range(len(s2)):
+                    if s1[x] == s2[y]:
+                        m[x + 1][y + 1] = m[x][y] + 1
+                        longest = max(longest, m[x + 1][y + 1])
+            return longest
+
+        # Calculate similarity using multiple metrics
+        lcs_length = longest_common_substring(seq1, seq2)
+
+        # Calculate identity (exact matches)
+        min_len = min(len(seq1), len(seq2))
+        if min_len == 0:
+            return 0.0
+
+        # Count exact matches
+        exact_matches = sum(1 for a, b in zip(seq1, seq2) if a == b)
+        identity = exact_matches / min_len
+
+        # Calculate coverage (how much of the shorter sequence is covered by the longer one)
+        coverage = lcs_length / min_len
+
+        # Combine metrics (weighted average)
+        similarity = (0.6 * identity + 0.4 * coverage)
+
+        return min(similarity, 1.0)  # Ensure it doesn't exceed 1.0
+
+    def _write_alignment_csv(self, alignment_results: List[Dict], output_file: str):
+        """Write alignment results to CSV file.
+
+        Args:
+            alignment_results (List[Dict]): List of alignment results
+            output_file (str): Output CSV file path
+        """
+        import csv
+
+        with open(output_file, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+
+            # Write header
+            writer.writerow(['cif_chain', 'fasta_sequence', 'sequence_similarity'])
+
+            # Write data rows
+            for result in alignment_results:
+                writer.writerow([
+                    result['cif_chain'],
+                    result['fasta_sequence'],
+                    result['sequence_similarity']
+                ])
 
 
 def main():
