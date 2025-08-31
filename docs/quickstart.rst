@@ -137,29 +137,6 @@ Run cross-validation with automatic analysis:
    # 4. Run cross-validation training
    # 5. Automatically analyze results
 
-Denoising
-~~~~~~~~~
-
-Run Topaz denoising workflow:
-
-.. code-block:: bash
-
-   cryoDL> topaz denoise --local
-
-   # This will:
-   # 1. Split movie frames into even/odd training data
-   # 2. Train a denoising model
-   # 3. Apply the model to denoise micrographs
-   # 4. Generate visualization plots
-
-Submit to SLURM:
-
-.. code-block:: bash
-
-   cryoDL> topaz denoise
-
-   # Same workflow but submitted to SLURM cluster
-
 Working with ModelAngelo
 -----------------------
 
@@ -192,6 +169,37 @@ Analyze existing cross-validation results:
    # - Performance plots
    # - Analysis summaries
    # - Recommendations
+
+FASTA Sequence Management
+------------------------
+
+Build FASTA files from PDB IDs:
+
+.. code-block:: bash
+
+   # Single PDB ID
+   cryoDL> fasta 2BG9
+
+   # Multiple PDB IDs
+   cryoDL> fasta --multiple 2BG9 4B2T 1ABC
+
+   # With custom output filename
+   cryoDL> fasta 2BG9 --output my_protein.fasta
+
+Create structure-sequence alignments:
+
+.. code-block:: bash
+
+   # Align CIF structure chains to FASTA sequences
+   cryoDL> fasta --annotate structure.cif sequences.fasta
+
+   # With custom output filename
+   cryoDL> fasta --annotate structure.cif sequences.fasta --output alignment.csv
+
+   # This generates a CSV file with:
+   # - CIF chain IDs
+   # - Best matching FASTA sequence headers
+   # - Sequence similarity scores
 
 SLURM Integration
 ----------------
@@ -269,7 +277,13 @@ Here's a complete example workflow:
    # Enter: 5
    # Enter: 250,300,350,400,450,500
 
-   # 5. View results
+   # 5. Build FASTA sequences for analysis
+   cryoDL> fasta --multiple 2BG9 4B2T --output proteins.fasta
+
+   # 6. Create structure-sequence alignments (if you have CIF files)
+   cryoDL> fasta --annotate model.cif proteins.fasta --output alignment.csv
+
+   # 7. View results
    cryoDL> ls cv_output/saved_models/cv/
 
    # 6. Exit

@@ -147,6 +147,9 @@ enabled_deps = config.get_enabled_dependencies()
 | `reset` | Reset to defaults | `cryodl reset` |
 | `export` | Export configuration | `cryodl export config_backup.json` |
 | `import` | Import configuration | `cryodl import config_backup.json` |
+| `fasta` | Build FASTA files from PDB IDs | `cryodl fasta 2BG9` |
+| `fasta --multiple` | Build FASTA from multiple PDB IDs | `cryodl fasta --multiple 2BG9 4B2T` |
+| `fasta --annotate` | Create structure-sequence alignments | `cryodl fasta --annotate structure.cif sequences.fasta` |
 
 ## Configuration Structure
 
