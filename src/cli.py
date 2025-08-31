@@ -716,25 +716,29 @@ All interactions are logged to cryodl.log in the current directory.
 
         Retrieves FASTA sequences from the RCSB PDB database and saves them to
         indexed files for use in cryo-EM workflows. Supports single and multiple
-        PDB IDs.
+        PDB IDs. Also supports creating annotated sequences from ModelAngelo CIF output.
 
         Args:
             arg (str): PDB ID(s) and options. Can include:
                 pdb_id: Single PDB ID (e.g., "1ABC")
                 --multiple: Process multiple PDB IDs
                 --list: List entities in PDB entry
+                --annotate: Create annotated sequences from CIF and FASTA files
                 --output filename: Specify output filename
 
         Usage:
             fasta <pdb_id> [--output filename]
             fasta --multiple <pdb_id1> <pdb_id2> ... [--output filename]
             fasta --list <pdb_id>
+            fasta --annotate <cif_file> <fasta_file> [--output filename]
 
         Example:
             fasta 1ABC
             fasta 1ABC --output my_protein.fasta
             fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
             fasta --list 1ABC
+            fasta --annotate modelangelo_output.cif input.fasta
+            fasta --annotate model.cif input.fasta --output annotated.fasta
         """
         self.log_command("fasta", arg)
         try:
@@ -757,7 +761,46 @@ All interactions are logged to cryodl.log in the current directory.
                 return
 
             # Check for special options
-            if args[0] == "--list":
+            if args[0] == "--annotate":
+                if len(args) < 3:
+                    print("Error: CIF file and FASTA file required for --annotate option")
+                    print("Usage: fasta --annotate <cif_file> <fasta_file> [--output filename]")
+                    self.log_error("Missing CIF or FASTA file for --annotate option")
+                    return
+
+                cif_file = args[1]
+                fasta_file = args[2]
+                output_file = None
+
+                # Check for output file option
+                if len(args) >= 5 and args[3] == "--output":
+                    output_file = args[4]
+
+                print(f"Creating annotated sequence from:")
+                print(f"  CIF file: {cif_file}")
+                print(f"  FASTA file: {fasta_file}")
+                if output_file:
+                    print(f"  Output file: {output_file}")
+
+                builder = FastaBuilder()
+                success, message = builder.create_annotated_sequence(
+                    cif_file, fasta_file, output_file
+                )
+
+                if success:
+                    print(message)
+                    self.log_output(
+                        f"Successfully created annotated sequence file from {cif_file} and {fasta_file}"
+                    )
+                else:
+                    print(f"Error: {message}", file=sys.stderr)
+                    self.log_error(
+                        f"Failed to create annotated sequence file: {message}"
+                    )
+
+                return
+
+            elif args[0] == "--list":
                 if len(args) < 2:
                     print("Error: PDB ID required for --list option")
                     self.log_error("Missing PDB ID for --list option")

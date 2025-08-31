@@ -215,6 +215,8 @@ The :class:`FastaBuilder` class provides functionality to fetch FASTA sequences 
 
    .. automethod:: list_pdb_entities
 
+   .. automethod:: create_annotated_sequence
+
 Data Structures
 --------------
 
