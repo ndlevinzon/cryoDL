@@ -10,6 +10,7 @@ import os
 import sys
 import requests
 import time
+import json
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from urllib.parse import urljoin
@@ -23,10 +24,11 @@ class FastaBuilder:
     """Build FASTA files from PDB IDs by retrieving sequences from RCSB PDB.
 
     This class provides methods to fetch FASTA sequences from the RCSB PDB database
-    and save them to indexed files for use in cryo-EM software workflows.
+    using the new Search API and save them to indexed files for use in cryo-EM software workflows.
 
     Attributes:
-        rcsb_base_url (str): Base URL for RCSB PDB API
+        rcsb_search_url (str): URL for RCSB PDB Search API
+        rcsb_data_url (str): URL for RCSB PDB Data API (for sequence retrieval)
         timeout (int): Request timeout in seconds
         max_retries (int): Maximum number of retry attempts for failed requests
         retry_delay (float): Delay between retry attempts in seconds
@@ -47,7 +49,8 @@ class FastaBuilder:
         Example:
             builder = FastaBuilder(timeout=60, max_retries=5)
         """
-        self.rcsb_base_url = "https://search.rcsb.org/rcsbsearch/v2/query"
+        self.rcsb_search_url = "https://search.rcsb.org/rcsbsearch/v2/query"
+        self.rcsb_data_url = "https://data.rcsb.org/rest/v1/core"
         self.timeout = timeout
         self.max_retries = max_retries
         self.retry_delay = retry_delay
@@ -92,7 +95,7 @@ class FastaBuilder:
             logger.error(f"Invalid PDB ID format: {pdb_id}")
             return None
 
-        url = f"{self.rcsb_base_url}/entry/{pdb_id}"
+        url = f"{self.rcsb_data_url}/entry/{pdb_id}"
 
         for attempt in range(self.max_retries):
             try:
@@ -127,7 +130,7 @@ class FastaBuilder:
             logger.error(f"Invalid PDB ID format: {pdb_id}")
             return None
 
-        url = f"{self.rcsb_base_url}/polymer_entity/{pdb_id}"
+        url = f"{self.rcsb_data_url}/polymer_entity/{pdb_id}"
 
         for attempt in range(self.max_retries):
             try:
@@ -173,7 +176,7 @@ class FastaBuilder:
             logger.error(f"Invalid PDB ID format: {pdb_id}")
             return None
 
-        url = f"{self.rcsb_base_url}/polymer_entity/{pdb_id}/{entity_id}"
+        url = f"{self.rcsb_data_url}/polymer_entity/{pdb_id}/{entity_id}"
 
         for attempt in range(self.max_retries):
             try:
@@ -224,7 +227,7 @@ class FastaBuilder:
             logger.error(f"Invalid PDB ID format: {pdb_id}")
             return None
 
-        url = f"{self.rcsb_base_url}/polymer_entity/{pdb_id}/{entity_id}"
+        url = f"{self.rcsb_data_url}/polymer_entity/{pdb_id}/{entity_id}"
 
         for attempt in range(self.max_retries):
             try:
@@ -244,7 +247,7 @@ class FastaBuilder:
                     return None
 
     def build_fasta_from_pdb(
-            self, pdb_id: str, output_file: str = None
+        self, pdb_id: str, output_file: str = None
     ) -> Tuple[bool, str]:
         """Build a FASTA file from a single PDB ID.
 
@@ -301,7 +304,7 @@ class FastaBuilder:
 
                     # Write sequence in 80-character lines
                     for i in range(0, len(sequence), 80):
-                        f.write(sequence[i: i + 80] + "\n")
+                        f.write(sequence[i : i + 80] + "\n")
                     f.write("\n")
 
             return True, f"Successfully created FASTA file: {output_file}"
@@ -311,7 +314,7 @@ class FastaBuilder:
             return False, f"Error writing FASTA file: {e}"
 
     def build_fasta_from_multiple_pdbs(
-            self, pdb_ids: List[str], output_file: str = "combined_protein.fasta"
+        self, pdb_ids: List[str], output_file: str = "combined_protein.fasta"
     ) -> Tuple[bool, str]:
         """Build a FASTA file from multiple PDB IDs.
 
@@ -378,7 +381,7 @@ class FastaBuilder:
 
                         # Write sequence in 80-character lines
                         for i in range(0, len(sequence), 80):
-                            f.write(sequence[i: i + 80] + "\n")
+                            f.write(sequence[i : i + 80] + "\n")
                         f.write("\n")
 
                         pdb_success = True
@@ -404,59 +407,185 @@ class FastaBuilder:
             logger.error(f"Error writing combined FASTA file: {e}")
             return False, f"Error writing combined FASTA file: {e}"
 
-    def list_pdb_entities(self, pdb_id: str) -> Tuple[bool, str]:
-        """List all polymer entities in a PDB entry.
+    def search_pdb_entries(self, query: str, return_type: str = "entry", max_results: int = 100) -> Optional[List[str]]:
+        """Search for PDB entries using the RCSB Search API.
 
         Args:
-            pdb_id (str): The PDB ID to list entities for.
+            query (str): Search query (can be PDB ID, text search, etc.)
+            return_type (str): Type of results to return ("entry", "polymer_entity", etc.)
+            max_results (int): Maximum number of results to return
 
         Returns:
-            Tuple[bool, str]: (success, message) containing entity information.
+            Optional[List[str]]: List of PDB identifiers, or None if failed
 
         Example:
-            success, info = builder.list_pdb_entities("1ABC")
-            print(info)
+            results = builder.search_pdb_entries("thymidine kinase", "entry", 50)
+            print(f"Found {len(results)} entries")
+        """
+        # Build search query
+        search_query = {
+            "query": {
+                "type": "terminal",
+                "service": "full_text",
+                "parameters": {
+                    "value": query
+                }
+            },
+            "return_type": return_type,
+            "request_options": {
+                "paginate": {
+                    "start": 0,
+                    "rows": max_results
+                }
+            }
+        }
+
+        for attempt in range(self.max_retries):
+            try:
+                response = requests.post(
+                    self.rcsb_search_url,
+                    json=search_query,
+                    timeout=self.timeout,
+                    headers={"Content-Type": "application/json"}
+                )
+                response.raise_for_status()
+                data = response.json()
+
+                # Extract identifiers from response
+                if "result_set" in data:
+                    identifiers = [item["identifier"] for item in data["result_set"]]
+                    return identifiers
+                else:
+                    logger.warning(f"No result_set in search response for query: {query}")
+                    return None
+
+            except requests.exceptions.RequestException as e:
+                logger.warning(f"Search attempt {attempt + 1} failed for query '{query}': {e}")
+                if attempt < self.max_retries - 1:
+                    time.sleep(self.retry_delay)
+                else:
+                    logger.error(f"Failed to search for '{query}' after {self.max_retries} attempts")
+                    return None
+
+    def search_by_pdb_id(self, pdb_id: str) -> Optional[Dict]:
+        """Search for a specific PDB entry by ID using the Search API.
+
+        Args:
+            pdb_id (str): The PDB ID to search for
+
+        Returns:
+            Optional[Dict]: Search result data, or None if failed
+
+        Example:
+            result = builder.search_by_pdb_id("1ABC")
+            if result:
+                print(f"Found entry: {result.get('identifier')}")
         """
         if not self.validate_pdb_id(pdb_id):
-            return False, f"Invalid PDB ID format: {pdb_id}"
+            logger.error(f"Invalid PDB ID format: {pdb_id}")
+            return None
 
-        # Get PDB info
-        pdb_info = self.fetch_pdb_info(pdb_id)
-        if not pdb_info:
-            return False, f"Could not fetch PDB info for: {pdb_id}"
+        # Build exact match query for PDB ID
+        search_query = {
+            "query": {
+                "type": "terminal",
+                "service": "text",
+                "parameters": {
+                    "attribute": "rcsb_id",
+                    "operator": "exact_match",
+                    "value": pdb_id
+                }
+            },
+            "return_type": "entry"
+        }
 
-        # Get polymer entities
-        entities = self.fetch_polymer_entities(pdb_id)
-        if not entities:
-            return False, f"No polymer entities found for PDB ID: {pdb_id}"
+        for attempt in range(self.max_retries):
+            try:
+                response = requests.post(
+                    self.rcsb_search_url,
+                    json=search_query,
+                    timeout=self.timeout,
+                    headers={"Content-Type": "application/json"}
+                )
+                response.raise_for_status()
+                data = response.json()
 
-        # Build information string
-        title = pdb_info.get("title", "No title available")
-        info_lines = [
-            f"PDB ID: {pdb_id}",
-            f"Title: {title}",
-            f"Number of polymer entities: {len(entities)}",
-            "",
-        ]
+                # Return the first result if found
+                if "result_set" in data and data["result_set"]:
+                    return data["result_set"][0]
+                else:
+                    logger.warning(f"No results found for PDB ID: {pdb_id}")
+                    return None
 
-        for i, entity in enumerate(entities, 1):
-            entity_id = entity.get("entity_id", "1")
-            entity_title = entity.get("title", "No title")
-            entity_type = entity.get("type", "Unknown")
+            except requests.exceptions.RequestException as e:
+                logger.warning(f"Search attempt {attempt + 1} failed for PDB ID {pdb_id}: {e}")
+                if attempt < self.max_retries - 1:
+                    time.sleep(self.retry_delay)
+                else:
+                    logger.error(f"Failed to search for PDB ID {pdb_id} after {self.max_retries} attempts")
+                    return None
 
-            info_lines.append(f"Entity {i}:")
-            info_lines.append(f"  ID: {entity_id}")
-            info_lines.append(f"  Type: {entity_type}")
-            info_lines.append(f"  Title: {entity_title}")
-            info_lines.append("")
+    def search_by_sequence(self, sequence: str, sequence_type: str = "protein", e_value: float = 1e-10) -> Optional[List[str]]:
+        """Search for PDB entries by sequence similarity using the Search API.
 
-        return True, "\n".join(info_lines)
+        Args:
+            sequence (str): Protein or nucleic acid sequence in FASTA format
+            sequence_type (str): Type of sequence ("protein", "dna", "rna")
+            e_value (float): E-value threshold for sequence similarity
+
+        Returns:
+            Optional[List[str]]: List of PDB identifiers, or None if failed
+
+        Example:
+            results = builder.search_by_sequence("MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG", "protein")
+            print(f"Found {len(results)} similar sequences")
+        """
+        # Build sequence search query
+        search_query = {
+            "query": {
+                "type": "terminal",
+                "service": "sequence",
+                "parameters": {
+                    "sequence": sequence,
+                    "sequence_type": sequence_type,
+                    "e_value_cutoff": e_value
+                }
+            },
+            "return_type": "entry"
+        }
+
+        for attempt in range(self.max_retries):
+            try:
+                response = requests.post(
+                    self.rcsb_search_url,
+                    json=search_query,
+                    timeout=self.timeout,
+                    headers={"Content-Type": "application/json"}
+                )
+                response.raise_for_status()
+                data = response.json()
+
+                # Extract identifiers from response
+                if "result_set" in data:
+                    identifiers = [item["identifier"] for item in data["result_set"]]
+                    return identifiers
+                else:
+                    logger.warning(f"No result_set in sequence search response")
+                    return None
+
+            except requests.exceptions.RequestException as e:
+                logger.warning(f"Sequence search attempt {attempt + 1} failed: {e}")
+                if attempt < self.max_retries - 1:
+                    time.sleep(self.retry_delay)
+                else:
+                    logger.error(f"Failed to perform sequence search after {self.max_retries} attempts")
+                    return None
 
     def create_annotated_sequence(
-            self,
-            cif_file: str,
-            fasta_file: str,
-            output_file: str = "annotated_sequence.fasta"
+        self,
+        cif_file: str,
+        fasta_file: str,
+        output_file: str = "annotated_sequence.fasta"
     ) -> Tuple[bool, str]:
         """Create an annotated FASTA file that aligns FASTA sequences to CIF subunits.
 
@@ -761,6 +890,54 @@ class FastaBuilder:
 
                 f.write('\n')  # Add blank line between sequences
 
+    def list_pdb_entities(self, pdb_id: str) -> Tuple[bool, str]:
+        """List all polymer entities in a PDB entry.
+
+        Args:
+            pdb_id (str): The PDB ID to list entities for.
+
+        Returns:
+            Tuple[bool, str]: (success, message) containing entity information.
+
+        Example:
+            success, info = builder.list_pdb_entities("1ABC")
+            print(info)
+        """
+        if not self.validate_pdb_id(pdb_id):
+            return False, f"Invalid PDB ID format: {pdb_id}"
+
+        # Get PDB info
+        pdb_info = self.fetch_pdb_info(pdb_id)
+        if not pdb_info:
+            return False, f"Could not fetch PDB info for: {pdb_id}"
+
+        # Get polymer entities
+        entities = self.fetch_polymer_entities(pdb_id)
+        if not entities:
+            return False, f"No polymer entities found for PDB ID: {pdb_id}"
+
+        # Build information string
+        title = pdb_info.get("title", "No title available")
+        info_lines = [
+            f"PDB ID: {pdb_id}",
+            f"Title: {title}",
+            f"Number of polymer entities: {len(entities)}",
+            "",
+        ]
+
+        for i, entity in enumerate(entities, 1):
+            entity_id = entity.get("entity_id", "1")
+            entity_title = entity.get("title", "No title")
+            entity_type = entity.get("type", "Unknown")
+
+            info_lines.append(f"Entity {i}:")
+            info_lines.append(f"  ID: {entity_id}")
+            info_lines.append(f"  Type: {entity_type}")
+            info_lines.append(f"  Title: {entity_title}")
+            info_lines.append("")
+
+        return True, "\n".join(info_lines)
+
 
 def main():
     """Command-line interface for FastaBuilder.
@@ -781,7 +958,6 @@ Examples:
   python build_fasta.py 1ABC my_protein.fasta   # Create custom filename
   python build_fasta.py --multiple 1ABC 2DEF 3GHI combined.fasta
   python build_fasta.py --list 1ABC             # List entities in PDB
-  python build_fasta.py --annotate model.cif input.fasta  # Create annotated sequence
         """,
     )
 

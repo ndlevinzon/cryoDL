@@ -712,17 +712,20 @@ All interactions are logged to cryodl.log in the current directory.
             self.log_error(error_msg)
 
     def do_fasta(self, arg):
-        """Build FASTA files from PDB IDs using RCSB PDB database.
+        """Build FASTA files from PDB IDs using RCSB PDB Search API.
 
-        Retrieves FASTA sequences from the RCSB PDB database and saves them to
-        indexed files for use in cryo-EM workflows. Supports single and multiple
-        PDB IDs. Also supports creating annotated sequences from ModelAngelo CIF output.
+        Retrieves FASTA sequences from the RCSB PDB database using the new Search API
+        and saves them to indexed files for use in cryo-EM workflows. Supports single
+        and multiple PDB IDs, text searches, sequence similarity searches, and creating
+        annotated sequences from ModelAngelo CIF output.
 
         Args:
             arg (str): PDB ID(s) and options. Can include:
                 pdb_id: Single PDB ID (e.g., "1ABC")
                 --multiple: Process multiple PDB IDs
                 --list: List entities in PDB entry
+                --search: Search for PDB entries by text query
+                --sequence: Search for PDB entries by sequence similarity
                 --annotate: Create annotated sequences from CIF and FASTA files
                 --output filename: Specify output filename
 
@@ -730,6 +733,8 @@ All interactions are logged to cryodl.log in the current directory.
             fasta <pdb_id> [--output filename]
             fasta --multiple <pdb_id1> <pdb_id2> ... [--output filename]
             fasta --list <pdb_id>
+            fasta --search "thymidine kinase" [--output filename]
+            fasta --sequence <sequence> [--type protein|dna|rna] [--evalue 1e-10] [--output filename]
             fasta --annotate <cif_file> <fasta_file> [--output filename]
 
         Example:
@@ -737,6 +742,8 @@ All interactions are logged to cryodl.log in the current directory.
             fasta 1ABC --output my_protein.fasta
             fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
             fasta --list 1ABC
+            fasta --search "HIV protease" --output hiv_proteins.fasta
+            fasta --sequence MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG --type protein
             fasta --annotate modelangelo_output.cif input.fasta
             fasta --annotate model.cif input.fasta --output annotated.fasta
         """
@@ -761,7 +768,116 @@ All interactions are logged to cryodl.log in the current directory.
                 return
 
             # Check for special options
-            if args[0] == "--annotate":
+            if args[0] == "--search":
+                if len(args) < 2:
+                    print("Error: Search query required for --search option")
+                    print("Usage: fasta --search <query> [--output filename]")
+                    self.log_error("Missing search query for --search option")
+                    return
+
+                search_query = args[1]
+                output_file = None
+
+                # Check for output file option
+                if len(args) >= 4 and args[2] == "--output":
+                    output_file = args[3]
+
+                print(f"Searching for PDB entries with query: '{search_query}'")
+                if output_file:
+                    print(f"Output file: {output_file}")
+
+                builder = FastaBuilder()
+                results = builder.search_pdb_entries(search_query, "entry", 100)
+
+                if results:
+                    print(f"Found {len(results)} PDB entries")
+                    if output_file:
+                        # Build FASTA files for all found entries
+                        success, message = builder.build_fasta_from_multiple_pdbs(results, output_file)
+                        if success:
+                            print(message)
+                            self.log_output(f"Successfully created FASTA file from search results: {output_file}")
+                        else:
+                            print(f"Error: {message}", file=sys.stderr)
+                            self.log_error(f"Failed to create FASTA file from search results: {message}")
+                    else:
+                        # Just display the results
+                        print("PDB entries found:")
+                        for i, pdb_id in enumerate(results[:20], 1):  # Show first 20
+                            print(f"  {i}. {pdb_id}")
+                        if len(results) > 20:
+                            print(f"  ... and {len(results) - 20} more")
+                else:
+                    print("No PDB entries found for the search query")
+                    self.log_error(f"No search results found for query: {search_query}")
+
+                return
+
+            elif args[0] == "--sequence":
+                if len(args) < 2:
+                    print("Error: Sequence required for --sequence option")
+                    print("Usage: fasta --sequence <sequence> [--type protein|dna|rna] [--evalue <value>] [--output filename]")
+                    self.log_error("Missing sequence for --sequence option")
+                    return
+
+                sequence = args[1]
+                sequence_type = "protein"
+                e_value = 1e-10
+                output_file = None
+
+                # Parse additional options
+                i = 2
+                while i < len(args):
+                    if args[i] == "--type" and i + 1 < len(args):
+                        sequence_type = args[i + 1]
+                        i += 2
+                    elif args[i] == "--evalue" and i + 1 < len(args):
+                        try:
+                            e_value = float(args[i + 1])
+                            i += 2
+                        except ValueError:
+                            print("Error: Invalid e-value. Must be a number.")
+                            return
+                    elif args[i] == "--output" and i + 1 < len(args):
+                        output_file = args[i + 1]
+                        i += 2
+                    else:
+                        i += 1
+
+                print(f"Searching for PDB entries by sequence similarity:")
+                print(f"  Sequence type: {sequence_type}")
+                print(f"  E-value threshold: {e_value}")
+                if output_file:
+                    print(f"  Output file: {output_file}")
+
+                builder = FastaBuilder()
+                results = builder.search_by_sequence(sequence, sequence_type, e_value)
+
+                if results:
+                    print(f"Found {len(results)} similar PDB entries")
+                    if output_file:
+                        # Build FASTA files for all found entries
+                        success, message = builder.build_fasta_from_multiple_pdbs(results, output_file)
+                        if success:
+                            print(message)
+                            self.log_output(f"Successfully created FASTA file from sequence search results: {output_file}")
+                        else:
+                            print(f"Error: {message}", file=sys.stderr)
+                            self.log_error(f"Failed to create FASTA file from sequence search results: {message}")
+                    else:
+                        # Just display the results
+                        print("Similar PDB entries found:")
+                        for i, pdb_id in enumerate(results[:20], 1):  # Show first 20
+                            print(f"  {i}. {pdb_id}")
+                        if len(results) > 20:
+                            print(f"  ... and {len(results) - 20} more")
+                else:
+                    print("No similar PDB entries found")
+                    self.log_error(f"No sequence search results found")
+
+                return
+
+            elif args[0] == "--annotate":
                 if len(args) < 3:
                     print("Error: CIF file and FASTA file required for --annotate option")
                     print("Usage: fasta --annotate <cif_file> <fasta_file> [--output filename]")
