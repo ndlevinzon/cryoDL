@@ -332,9 +332,15 @@ cryoDL recognizes the following environment variables:
 Command Line Interface
 ---------------------
 
-The main entry point for the CLI is the :func:`src.cli.main` function:
+The main entry points for the different modules:
 
 .. autofunction:: src.cli.main
+
+.. autofunction:: src.config_manager.main
+
+.. autofunction:: src.topaz_analysis.main
+
+.. autofunction:: src.build_fasta.main
 
 Command Line Arguments
 ~~~~~~~~~~~~~~~~~~~~~

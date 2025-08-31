@@ -137,6 +137,29 @@ Run cross-validation with automatic analysis:
    # 4. Run cross-validation training
    # 5. Automatically analyze results
 
+Denoising
+~~~~~~~~~
+
+Run Topaz denoising workflow:
+
+.. code-block:: bash
+
+   cryoDL> topaz denoise --local
+
+   # This will:
+   # 1. Split movie frames into even/odd training data
+   # 2. Train a denoising model
+   # 3. Apply the model to denoise micrographs
+   # 4. Generate visualization plots
+
+Submit to SLURM:
+
+.. code-block:: bash
+
+   cryoDL> topaz denoise
+
+   # Same workflow but submitted to SLURM cluster
+
 Working with ModelAngelo
 -----------------------
 
