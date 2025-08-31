@@ -1,445 +1,107 @@
 CLI Commands Reference
 =====================
 
-This page provides a comprehensive reference for all available commands in the cryoDL interactive shell.
+This page provides a comprehensive reference for all available commands in the cryoDL interactive shell, automatically generated from the source code.
 
-Configuration Commands
----------------------
-
-init
-~~~~
-
-Initialize default configuration.
-
-**Usage:**
-.. code-block:: bash
-
-   init [--force]
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> init
-   cryoDL> init --force
-
-**Description:**
-Creates a new `config.json` file with default settings. Use `--force` to overwrite existing configuration.
-
-get
-~~~
-
-Get configuration value.
-
-**Usage:**
-.. code-block:: bash
-
-   get <key>
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> get dependencies.topaz.path
-   cryoDL> get slurm.nodes
-   cryoDL> get settings.max_threads
-
-**Description:**
-Retrieves and displays the value of a configuration key using dot notation.
-
-set
-~~~
-
-Set configuration value.
-
-**Usage:**
-.. code-block:: bash
-
-   set <key> <value>
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> set settings.max_threads 8
-   cryoDL> set slurm.time "24:00:00"
-   cryoDL> set dependencies.topaz.version "0.2.5"
-
-**Description:**
-Sets a configuration value. The key uses dot notation for nested configuration.
-
-show
-~~~~
-
-Show full configuration.
-
-**Usage:**
-.. code-block:: bash
-
-   show
-
-**Description:**
-Displays the complete configuration in JSON format.
-
-reset
-~~~~~
-
-Reset configuration to defaults.
-
-**Usage:**
-.. code-block:: bash
-
-   reset
-
-**Description:**
-Resets all configuration values to their defaults.
-
-Dependency Management
+Interactive CLI Shell
 --------------------
 
-add_dependency
-~~~~~~~~~~~~~
+The :class:`CryoDLShell` class provides the interactive command-line interface.
 
-Add or update dependency path.
+.. autoclass:: src.cli.CryoDLShell
+   :members:
+   :special-members: __init__
 
-**Usage:**
-.. code-block:: bash
+   .. automethod:: __init__
 
-   add_dependency <name> <path> [version]
+   .. automethod:: setup_logging
 
-**Examples:**
-.. code-block:: bash
+   .. automethod:: log_command
 
-   cryoDL> add_dependency topaz /usr/local/bin/topaz 0.2.5
-   cryoDL> add_dependency model_angelo /opt/model-angelo/bin/model-angelo
-   cryoDL> add_dependency relion /usr/local/relion/bin/relion 4.0
+   .. automethod:: log_output
 
-**Description:**
-Adds or updates a dependency with its path and optional version.
+   .. automethod:: log_error
 
-list_dependencies
-~~~~~~~~~~~~~~~~
+   .. automethod:: load_banner
 
-List all configured dependencies.
+   .. automethod:: load_random_quote
 
-**Usage:**
-.. code-block:: bash
+Configuration Commands
+~~~~~~~~~~~~~~~~~~~~~
 
-   list_dependencies
+.. automethod:: src.cli.CryoDLShell.do_init
 
-**Description:**
-Displays all configured dependencies with their paths, versions, and status.
+.. automethod:: src.cli.CryoDLShell.do_get
 
-validate_dependencies
-~~~~~~~~~~~~~~~~~~~~
+.. automethod:: src.cli.CryoDLShell.do_set
 
-Validate all dependency paths.
+.. automethod:: src.cli.CryoDLShell.do_show
 
-**Usage:**
-.. code-block:: bash
+.. automethod:: src.cli.CryoDLShell.do_reset
 
-   validate_dependencies
+.. automethod:: src.cli.CryoDLShell.do_export
 
-**Description:**
-Checks that all configured dependency paths exist and are executable.
+.. automethod:: src.cli.CryoDLShell.do_import
 
-Configuration Import/Export
---------------------------
+Dependency Management Commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export
-~~~~~~
+.. automethod:: src.cli.CryoDLShell.do_add_dependency
 
-Export configuration to file.
+.. automethod:: src.cli.CryoDLShell.do_list_dependencies
 
-**Usage:**
-.. code-block:: bash
-
-   export <path>
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> export config_backup.json
-   cryoDL> export /path/to/config.json
-
-**Description:**
-Saves the current configuration to a JSON file.
-
-import
-~~~~~~
-
-Import configuration from file.
-
-**Usage:**
-.. code-block:: bash
-
-   import <path>
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> import config_backup.json
-   cryoDL> import /path/to/config.json
-
-**Description:**
-Loads configuration from a JSON file.
+.. automethod:: src.cli.CryoDLShell.do_validate_dependencies
 
 SLURM Commands
---------------
+~~~~~~~~~~~~~~
 
-slurm_show
-~~~~~~~~~~
+.. automethod:: src.cli.CryoDLShell.do_slurm_show
 
-Show SLURM configuration.
+.. automethod:: src.cli.CryoDLShell.do_slurm_update
 
-**Usage:**
-.. code-block:: bash
-
-   slurm_show
-
-**Description:**
-Displays current SLURM configuration settings.
-
-slurm_update
-~~~~~~~~~~~
-
-Update SLURM configuration.
-
-**Usage:**
-.. code-block:: bash
-
-   slurm_update [--job-name <name>] [--nodes <n>] [--ntasks <n>] [--cpus-per-task <n>] [--gres-gpu <n>] [--time <time>] [--partition <partition>] [--qos <qos>] [--account <account>] [--mem <mem>] [--output <pattern>] [--error <pattern>]
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> slurm_update --nodes 2 --gres-gpu 2 --time 12:00:00
-   cryoDL> slurm_update --partition notchpeak-gpu --mem 96G
-   cryoDL> slurm_update --job-name default --cpus-per-task 8
-
-**Description:**
-Updates SLURM configuration parameters. Only specified parameters are updated.
-
-slurm_generate
-~~~~~~~~~~~~~
-
-Generate SLURM header.
-
-**Usage:**
-.. code-block:: bash
-
-   slurm_generate [--job-name <name>] [--output <file>] [--nodes <n>] [--ntasks <n>] [--cpus-per-task <n>] [--gres-gpu <n>] [--time <time>] [--mem <mem>]
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> slurm_generate --job-name model_angelo --nodes 2 --gres-gpu 2
-   cryoDL> slurm_generate --output my_job.slurm --time 24:00:00
-
-**Description:**
-Generates a SLURM header with specified parameters. Use `--output` to save to a file.
+.. automethod:: src.cli.CryoDLShell.do_slurm_generate
 
 Software Integration Commands
-----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-model_angelo
-~~~~~~~~~~~
+.. automethod:: src.cli.CryoDLShell.do_model_angelo
 
-Run ModelAngelo for protein structure prediction.
+.. automethod:: src.cli.CryoDLShell.do_topaz
 
-**Usage:**
-.. code-block:: bash
+.. automethod:: src.cli.CryoDLShell._run_topaz_preprocess
 
-   model_angelo [--local]
+.. automethod:: src.cli.CryoDLShell._run_topaz_denoise
 
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> model_angelo --local
-   cryoDL> model_angelo
-
-**Description:**
-Runs ModelAngelo for protein structure prediction. Use `--local` to run directly, otherwise submits to SLURM.
-
-**Prompts:**
-- MRC file path
-- FASTA file path
-
-topaz
-~~~~~
-
-Run Topaz for particle picking and analysis.
-
-**Usage:**
-.. code-block:: bash
-
-   topaz <command> [--local]
-
-**Commands:**
-- `preprocess` - Preprocess micrographs
-- `cross` - Run cross-validation
-- `model` - Train models (not yet implemented)
-- `postprocess` - Post-process results (not yet implemented)
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> topaz preprocess --local
-   cryoDL> topaz cross
-   cryoDL> topaz preprocess
-
-**Description:**
-Runs Topaz commands for particle picking and analysis. Use `--local` to run directly, otherwise submits to SLURM.
-
-**Preprocess Prompts:**
-- Raw micrographs directory
-- Particle coordinates file (optional)
-- Output directory
-- Pixel size for downsampling
-
-**Cross-validation Prompts:**
-- Raw micrographs directory
-- Particle coordinates file
-- Output directory
-- Pixel size for downsampling
-- Number of test micrographs to hold out
-- Number of folds for cross-validation
-- N values (comma-separated)
+.. automethod:: src.cli.CryoDLShell._run_topaz_cross
 
 Analysis Commands
-----------------
+~~~~~~~~~~~~~~~~
 
-analyze_cv
-~~~~~~~~~
+.. automethod:: src.cli.CryoDLShell.do_analyze_cv
 
-Analyze cross-validation results.
-
-**Usage:**
-.. code-block:: bash
-
-   analyze_cv [cv_directory] [n_values] [k_folds]
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> analyze_cv saved_models/EMPIAR-10025/cv
-   cryoDL> analyze_cv cv_results 250,300,350,400,450,500 5
-
-**Description:**
-Analyzes cross-validation results and generates performance plots and recommendations.
-
-**Prompts (if not provided as arguments):**
-- Cross-validation directory path
-- N values (comma-separated)
-- Number of folds
+.. automethod:: src.cli.CryoDLShell.do_fasta
 
 Utility Commands
----------------
+~~~~~~~~~~~~~~~
 
-clear
-~~~~~
+.. automethod:: src.cli.CryoDLShell.do_clear
 
-Clear the screen.
+.. automethod:: src.cli.CryoDLShell.do_pwd
 
-**Usage:**
-.. code-block:: bash
+.. automethod:: src.cli.CryoDLShell.do_ls
 
-   clear
+.. automethod:: src.cli.CryoDLShell.do_help
 
-**Description:**
-Clears the terminal screen.
-
-pwd
-~~~
-
-Show current working directory.
-
-**Usage:**
-.. code-block:: bash
-
-   pwd
-
-**Description:**
-Displays the current working directory.
-
-ls
-~~
-
-List files in current directory.
-
-**Usage:**
-.. code-block:: bash
-
-   ls [path]
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> ls
-   cryoDL> ls output_dir
-   cryoDL> ls /path/to/directory
-
-**Description:**
-Lists files and directories. If no path is provided, lists current directory.
-
-help
-~~~~
-
-Show help for commands.
-
-**Usage:**
-.. code-block:: bash
-
-   help [command]
-
-**Examples:**
-.. code-block:: bash
-
-   cryoDL> help
-   cryoDL> help topaz
-   cryoDL> help model_angelo
-
-**Description:**
-Shows help information. Without arguments, lists all available commands.
+.. automethod:: src.cli.CryoDLShell.do_version
 
 Exit Commands
-------------
+~~~~~~~~~~~~
 
-quit
-~~~~
+.. automethod:: src.cli.CryoDLShell.do_quit
 
-Exit the interactive shell.
+.. automethod:: src.cli.CryoDLShell.do_exit
 
-**Usage:**
-.. code-block:: bash
-
-   quit
-
-**Description:**
-Exits the cryoDL shell and displays a random quote.
-
-exit
-~~~~
-
-Exit the interactive shell.
-
-**Usage:**
-.. code-block:: bash
-
-   exit
-
-**Description:**
-Exits the cryoDL shell and displays a random quote.
-
-EOF (Ctrl+D)
-~~~~~~~~~~~
-
-Handle Ctrl+D (EOF).
-
-**Usage:**
-.. code-block:: bash
-
-   Ctrl+D
-
-**Description:**
-Exits the cryoDL shell and displays a random quote.
+.. automethod:: src.cli.CryoDLShell.do_EOF
 
 Command Examples
 ---------------
@@ -550,6 +212,7 @@ All commands and their outputs are automatically logged to `cryodl.log` in the c
 - Session information
 
 Example log entry:
+
 .. code-block:: text
 
    2024-01-15 10:30:45 - INFO - Command: topaz preprocess --local

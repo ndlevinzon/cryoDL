@@ -130,6 +130,8 @@ Software Integration Commands
 
 .. automethod:: src.cli.CryoDLShell._run_topaz_preprocess
 
+.. automethod:: src.cli.CryoDLShell._run_topaz_denoise
+
 .. automethod:: src.cli.CryoDLShell._run_topaz_cross
 
 Analysis Commands
@@ -167,6 +169,10 @@ The :mod:`src.topaz_analysis` module provides analysis functions for Topaz resul
 .. autofunction:: src.topaz_analysis.analyze_cross_validation
 
 .. autofunction:: src.topaz_analysis.plot_training_curves
+
+.. autofunction:: src.topaz_analysis.run_denoising_workflow
+
+.. autofunction:: src.topaz_analysis.visualize_denoising_results
 
 FASTA Sequence Builder
 --------------------
