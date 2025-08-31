@@ -114,13 +114,13 @@ class FastaBuilder:
                     return None
 
     def build_fasta_from_pdb(
-            self, pdb_id: str, output_file: str
+            self, pdb_id: str, output_file: str = None
     ) -> Tuple[bool, str]:
         """Build a FASTA file from a single PDB ID.
 
         Args:
             pdb_id (str): The PDB ID to fetch sequences from.
-            output_file (str): Output file path.
+            output_file (str, optional): Output file path. If None, uses default naming.
 
         Returns:
             Tuple[bool, str]: (success, message) indicating operation result.
@@ -132,7 +132,11 @@ class FastaBuilder:
         if not self.validate_pdb_id(pdb_id):
             return False, f"Invalid PDB ID format: {pdb_id}"
 
-        # Fetch FASTA sequence directly from RCSB
+        # Generate output filename if not provided
+        if output_file is None:
+            output_file = f"{pdb_id}_protein.fasta"
+
+        # Fetch FASTA sequence
         fasta_content = self.fetch_fasta_sequence(pdb_id)
         if not fasta_content:
             return False, f"Failed to fetch FASTA sequence for PDB ID: {pdb_id}"
@@ -181,23 +185,27 @@ class FastaBuilder:
                 for pdb_id in pdb_ids:
                     logger.info(f"Processing PDB ID: {pdb_id}")
 
-                    # Fetch FASTA sequence directly from RCSB
+                    # Fetch FASTA sequence
                     fasta_content = self.fetch_fasta_sequence(pdb_id)
                     if fasta_content:
                         # Write FASTA content to file
                         f.write(fasta_content)
+                        f.write("\n")  # Add separator between entries
                         successful_pdbs.append(pdb_id)
                     else:
-                        failed_pdbs.append(pdb_id)
+                        failed_pdbs.append(f"{pdb_id} (failed to fetch)")
 
             # Prepare result message
+            message_parts = [f"Successfully created FASTA file: {output_file}"]
             if successful_pdbs:
-                message = f"Successfully created FASTA file: {output_file} with {len(successful_pdbs)} sequences"
-                if failed_pdbs:
-                    message += f" (Failed: {', '.join(failed_pdbs)})"
-                return True, message
-            else:
-                return False, f"Failed to fetch any sequences. Failed PDB IDs: {', '.join(failed_pdbs)}"
+                message_parts.append(
+                    f"Successfully processed: {', '.join(successful_pdbs)}"
+                )
+            if failed_pdbs:
+                message_parts.append(f"Failed to process: {', '.join(failed_pdbs)}")
+
+            success = len(successful_pdbs) > 0
+            return success, " | ".join(message_parts)
 
         except Exception as e:
             logger.error(f"Error writing combined FASTA file: {e}")
@@ -263,33 +271,27 @@ class FastaBuilder:
             logger.error(f"Error creating annotated sequence: {str(e)}")
             return False, f"Error: {str(e)}"
 
-    def _parse_cif_chains(self, cif_file: str) -> Optional[Dict[str, str]]:
-        """Parse a CIF file and extract chain sequences.
+    def _parse_cif_file(self, cif_file: str) -> Optional[Dict]:
+        """Parse a CIF file and extract sequence information.
 
         Args:
             cif_file (str): Path to the CIF file
 
         Returns:
-            Optional[Dict[str, str]]: Dictionary mapping chain IDs to sequences, or None if failed
+            Optional[Dict]: Dictionary containing parsed CIF data, or None if failed
         """
         try:
-            chains = {}
+            cif_data = {
+                'entities': {},
+                'sequences': {},
+                'chains': {}
+            }
 
             with open(cif_file, 'r') as f:
                 lines = f.readlines()
 
-            # Amino acid three-letter to one-letter code mapping
-            aa_mapping = {
-                'ALA': 'A', 'ARG': 'R', 'ASN': 'N', 'ASP': 'D', 'CYS': 'C',
-                'GLN': 'Q', 'GLU': 'E', 'GLY': 'G', 'HIS': 'H', 'ILE': 'I',
-                'LEU': 'L', 'LYS': 'K', 'MET': 'M', 'PHE': 'F', 'PRO': 'P',
-                'SER': 'S', 'THR': 'T', 'TRP': 'W', 'TYR': 'Y', 'VAL': 'V',
-                'SEC': 'U', 'PYL': 'O'  # Selenocysteine and Pyrrolysine
-            }
-
-            # Parse atom_site section to extract chain sequences
-            in_atom_site = False
-            chain_residues = {}  # chain_id -> {res_id -> res_name}
+            current_section = None
+            current_entity = None
 
             for line in lines:
                 line = line.strip()
@@ -298,49 +300,57 @@ class FastaBuilder:
                 if not line or line.startswith('#'):
                     continue
 
-                # Check for atom_site section
-                if line.startswith('_atom_site.'):
-                    in_atom_site = True
-                    continue
-                elif line.startswith('_') and not line.startswith('_atom_site.'):
-                    in_atom_site = False
-                    continue
+                # Check for section headers
+                if line.startswith('_entity.'):
+                    current_section = 'entity'
+                    current_entity = line.split('.')[1]
+                    if current_entity not in cif_data['entities']:
+                        cif_data['entities'][current_entity] = {}
+                elif line.startswith('_entity_poly_seq.'):
+                    current_section = 'sequence'
+                elif line.startswith('_atom_site.'):
+                    current_section = 'atoms'
 
-                if in_atom_site and line and not line.startswith('_'):
-                    # Parse atom_site data line
-                    parts = line.split()
-                    if len(parts) >= 6:  # Should have at least chain_id, res_id, res_name
-                        try:
-                            # Find chain_id, res_id, and res_name columns
-                            # This is a simplified parser - in real CIF files, column order may vary
-                            chain_id = parts[0]  # Assuming chain_id is first
-                            res_id = parts[1]  # Assuming res_id is second
-                            res_name = parts[2]  # Assuming res_name is third
+                # Parse entity information
+                if current_section == 'entity' and current_entity:
+                    if line.startswith('_entity.'):
+                        key = line.split('.')[1]
+                        cif_data['entities'][current_entity][key] = None
+                    elif line and not line.startswith('_'):
+                        # This is a value line
+                        if current_entity in cif_data['entities']:
+                            # Find the last key that doesn't have a value
+                            for key in cif_data['entities'][current_entity]:
+                                if cif_data['entities'][current_entity][key] is None:
+                                    cif_data['entities'][current_entity][key] = line
+                                    break
 
-                            # Only process protein residues
-                            if res_name in aa_mapping:
-                                if chain_id not in chain_residues:
-                                    chain_residues[chain_id] = {}
-                                chain_residues[chain_id][res_id] = res_name
-                        except (IndexError, ValueError):
-                            continue
+                # Parse sequence information
+                if current_section == 'sequence':
+                    if line.startswith('_entity_poly_seq.'):
+                        key = line.split('.')[1]
+                        if key not in cif_data['sequences']:
+                            cif_data['sequences'][key] = []
+                    elif line and not line.startswith('_'):
+                        # This is a sequence data line
+                        parts = line.split()
+                        if len(parts) >= 3:  # entity_id, seq_id, res_name
+                            entity_id = parts[0]
+                            seq_id = parts[1]
+                            res_name = parts[2]
 
-            # Convert chain_residues to sequences
-            for chain_id, residues in chain_residues.items():
-                # Sort residues by residue ID (convert to int for proper sorting)
-                sorted_residues = sorted(residues.items(), key=lambda x: int(x[0]) if x[0].isdigit() else float('inf'))
+                            if entity_id not in cif_data['sequences']:
+                                cif_data['sequences'][entity_id] = []
 
-                sequence = []
-                for res_id, res_name in sorted_residues:
-                    sequence.append(aa_mapping[res_name])
+                            cif_data['sequences'][entity_id].append({
+                                'seq_id': seq_id,
+                                'res_name': res_name
+                            })
 
-                if sequence:  # Only add chains with valid sequences
-                    chains[chain_id] = ''.join(sequence)
-
-            return chains if chains else None
+            return cif_data
 
         except Exception as e:
-            logger.error(f"Error parsing CIF chains: {str(e)}")
+            logger.error(f"Error parsing CIF file: {str(e)}")
             return None
 
     def _parse_fasta_file(self, fasta_file: str) -> Optional[Dict]:
@@ -488,6 +498,135 @@ class FastaBuilder:
                 return header
 
         return None
+
+    def _write_annotated_sequences(self, annotated_sequences: List[Dict], output_file: str):
+        """Write annotated sequences to output file.
+
+        Args:
+            annotated_sequences (List[Dict]): List of annotated sequences
+            output_file (str): Output file path
+        """
+        with open(output_file, 'w') as f:
+            for i, annotation in enumerate(annotated_sequences, 1):
+                # Write header with entity information
+                f.write(
+                    f">Entity_{annotation['entity_id']} | {annotation['entity_type']} | {annotation['entity_title']}\n")
+
+                # Write the sequence (prefer FASTA sequence if available, otherwise CIF sequence)
+                sequence = annotation['fasta_sequence'] or annotation['cif_sequence']
+                if sequence:
+                    # Write sequence in 80-character lines
+                    for j in range(0, len(sequence), 80):
+                        f.write(sequence[j:j + 80] + '\n')
+
+                f.write('\n')  # Add blank line between sequences
+
+    def _parse_cif_chains(self, cif_file: str) -> Optional[Dict[str, str]]:
+        """Parse a CIF file and extract chain sequences.
+
+        Args:
+            cif_file (str): Path to the CIF file
+
+        Returns:
+            Optional[Dict[str, str]]: Dictionary mapping chain IDs to sequences, or None if failed
+        """
+        try:
+            chains = {}
+
+            with open(cif_file, 'r') as f:
+                lines = f.readlines()
+
+            # Amino acid three-letter to one-letter code mapping
+            aa_mapping = {
+                'ALA': 'A', 'ARG': 'R', 'ASN': 'N', 'ASP': 'D', 'CYS': 'C',
+                'GLN': 'Q', 'GLU': 'E', 'GLY': 'G', 'HIS': 'H', 'ILE': 'I',
+                'LEU': 'L', 'LYS': 'K', 'MET': 'M', 'PHE': 'F', 'PRO': 'P',
+                'SER': 'S', 'THR': 'T', 'TRP': 'W', 'TYR': 'Y', 'VAL': 'V',
+                'SEC': 'U', 'PYL': 'O'  # Selenocysteine and Pyrrolysine
+            }
+
+            # Parse atom_site section to extract chain sequences
+            in_atom_site = False
+            chain_residues = {}  # chain_id -> {res_id -> res_name}
+
+            # Track column positions for the atom_site data
+            chain_col = None
+            res_id_col = None
+            res_name_col = None
+
+            for line in lines:
+                line = line.strip()
+
+                # Skip empty lines and comments
+                if not line or line.startswith('#'):
+                    continue
+
+                # Check for atom_site section headers to determine column positions
+                if line.startswith('_atom_site.label_asym_id'):
+                    chain_col = 6  # 7th column (0-indexed)
+                elif line.startswith('_atom_site.label_seq_id'):
+                    res_id_col = 8  # 9th column (0-indexed)
+                elif line.startswith('_atom_site.label_comp_id'):
+                    res_name_col = 5  # 6th column (0-indexed)
+                elif line.startswith('_atom_site.'):
+                    # Still in atom_site section, continue
+                    continue
+                elif line.startswith('_') and not line.startswith('_atom_site.'):
+                    # End of atom_site section
+                    in_atom_site = False
+                    continue
+                elif line.startswith('loop_'):
+                    # Start of a loop section
+                    in_atom_site = False
+                    continue
+                elif line.startswith('data_'):
+                    # Data block start
+                    in_atom_site = False
+                    continue
+
+                # Check if we're in the atom_site data section
+                if not in_atom_site and (chain_col is not None or res_id_col is not None or res_name_col is not None):
+                    # We've seen atom_site headers, so we're in the data section
+                    in_atom_site = True
+
+                if in_atom_site and line and not line.startswith('_') and not line.startswith('loop_'):
+                    # Parse atom_site data line
+                    parts = line.split()
+                    if len(parts) >= 9:  # Should have at least 9 columns
+                        try:
+                            # Extract chain_id, res_id, and res_name using the correct column positions
+                            chain_id = parts[chain_col] if chain_col is not None and chain_col < len(parts) else parts[
+                                6]
+                            res_id = parts[res_id_col] if res_id_col is not None and res_id_col < len(parts) else parts[
+                                8]
+                            res_name = parts[res_name_col] if res_name_col is not None and res_name_col < len(
+                                parts) else parts[5]
+
+                            # Only process protein residues
+                            if res_name in aa_mapping:
+                                if chain_id not in chain_residues:
+                                    chain_residues[chain_id] = {}
+                                chain_residues[chain_id][res_id] = res_name
+                        except (IndexError, ValueError):
+                            continue
+
+            # Convert chain_residues to sequences
+            for chain_id, residues in chain_residues.items():
+                # Sort residues by residue ID (convert to int for proper sorting)
+                sorted_residues = sorted(residues.items(), key=lambda x: int(x[0]) if x[0].isdigit() else float('inf'))
+
+                sequence = []
+                for res_id, res_name in sorted_residues:
+                    sequence.append(aa_mapping[res_name])
+
+                if sequence:  # Only add chains with valid sequences
+                    chains[chain_id] = ''.join(sequence)
+
+            return chains if chains else None
+
+        except Exception as e:
+            logger.error(f"Error parsing CIF chains: {str(e)}")
+            return None
 
     def _create_chain_alignments(self, cif_chains: Dict[str, str], fasta_data: Dict[str, str]) -> List[Dict]:
         """Create alignments between CIF chains and FASTA sequences with similarity metrics.

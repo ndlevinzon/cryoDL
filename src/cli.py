@@ -734,7 +734,7 @@ All interactions are logged to cryodl.log in the current directory.
             fasta 1ABC
             fasta 1ABC --output my_protein.fasta
             fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
-            fasta --annotate model.cif protein.fasta --output annotations.txt
+            fasta --annotate model.cif protein.fasta --output annotations.csv
         """
         self.log_command("fasta", arg)
         try:
@@ -776,7 +776,7 @@ All interactions are logged to cryodl.log in the current directory.
 
                 cif_file = args[1]
                 fasta_file = args[2]
-                output_file = "annotations.txt"
+                output_file = "annotations.csv"
 
                 # Check for output file option
                 if len(args) >= 5 and args[3] == "--output":
