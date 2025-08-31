@@ -114,13 +114,13 @@ class FastaBuilder:
                     return None
 
     def build_fasta_from_pdb(
-            self, pdb_id: str, output_file: str = None
+            self, pdb_id: str, output_file: str
     ) -> Tuple[bool, str]:
         """Build a FASTA file from a single PDB ID.
 
         Args:
             pdb_id (str): The PDB ID to fetch sequences from.
-            output_file (str, optional): Output file path. If None, uses default naming.
+            output_file (str): Output file path.
 
         Returns:
             Tuple[bool, str]: (success, message) indicating operation result.
@@ -132,11 +132,7 @@ class FastaBuilder:
         if not self.validate_pdb_id(pdb_id):
             return False, f"Invalid PDB ID format: {pdb_id}"
 
-        # Generate output filename if not provided
-        if output_file is None:
-            output_file = f"{pdb_id}_protein.fasta"
-
-        # Fetch FASTA sequence
+        # Fetch FASTA sequence directly from RCSB
         fasta_content = self.fetch_fasta_sequence(pdb_id)
         if not fasta_content:
             return False, f"Failed to fetch FASTA sequence for PDB ID: {pdb_id}"
@@ -185,27 +181,23 @@ class FastaBuilder:
                 for pdb_id in pdb_ids:
                     logger.info(f"Processing PDB ID: {pdb_id}")
 
-                    # Fetch FASTA sequence
+                    # Fetch FASTA sequence directly from RCSB
                     fasta_content = self.fetch_fasta_sequence(pdb_id)
                     if fasta_content:
                         # Write FASTA content to file
                         f.write(fasta_content)
-                        f.write("\n")  # Add separator between entries
                         successful_pdbs.append(pdb_id)
                     else:
-                        failed_pdbs.append(f"{pdb_id} (failed to fetch)")
+                        failed_pdbs.append(pdb_id)
 
             # Prepare result message
-            message_parts = [f"Successfully created FASTA file: {output_file}"]
             if successful_pdbs:
-                message_parts.append(
-                    f"Successfully processed: {', '.join(successful_pdbs)}"
-                )
-            if failed_pdbs:
-                message_parts.append(f"Failed to process: {', '.join(failed_pdbs)}")
-
-            success = len(successful_pdbs) > 0
-            return success, " | ".join(message_parts)
+                message = f"Successfully created FASTA file: {output_file} with {len(successful_pdbs)} sequences"
+                if failed_pdbs:
+                    message += f" (Failed: {', '.join(failed_pdbs)})"
+                return True, message
+            else:
+                return False, f"Failed to fetch any sequences. Failed PDB IDs: {', '.join(failed_pdbs)}"
 
         except Exception as e:
             logger.error(f"Error writing combined FASTA file: {e}")
