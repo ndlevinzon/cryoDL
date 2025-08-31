@@ -135,6 +135,10 @@ Complete Workflow Example
    cryoDL> topaz cross --local
    # Enter prompts...
 
+   # Run denoising workflow
+   cryoDL> topaz denoise --local
+   # Enter prompts...
+
    # Analyze results
    cryoDL> analyze_cv output_dir/saved_models/cv
 

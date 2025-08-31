@@ -63,6 +63,18 @@ The :class:`ConfigManager` class is the core component for managing cryoDL confi
 
    .. automethod:: update_slurm_config
 
+   .. automethod:: save_slurm_header
+
+   .. automethod:: get_project_metadata
+
+   .. automethod:: export_config
+
+   .. automethod:: import_config
+
+   .. automethod:: reset_config
+
+   .. automethod:: get_enabled_dependencies
+
 Interactive CLI Shell
 --------------------
 
@@ -151,6 +163,8 @@ Utility Commands
 .. automethod:: src.cli.CryoDLShell.do_ls
 
 .. automethod:: src.cli.CryoDLShell.do_help
+
+.. automethod:: src.cli.CryoDLShell.do_version
 
 Exit Commands
 ~~~~~~~~~~~~
