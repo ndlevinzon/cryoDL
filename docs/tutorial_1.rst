@@ -1,7 +1,7 @@
 Tutorial 1: Using Model-Angelo with cryoDL FastaBuilder
 ================
 
-In this tutorial, we will walk through the process of using the Model-Angelo tool integrated within cryoDL to build and refine protein structures from cryo-EM maps. This tutorial assumes you have a basic understanding of cryo-EM data processing and are familiar with command-line interfaces.
+In this tutorial, we will walk through the process of using the Model-Angelo tool integrated within cryoDL to build and refine protein structures from cryo-EM maps.
 
 .. note::
    Model-Angelo is a powerful stand-alone tool for automated model building and refinement. This tutorial will guide you through its integration with cryoDL, allowing for streamlined workflows in structural biology. Please refer to the official Model-Angelo citation and documentation for more detailed information on its capabilities and usage.
