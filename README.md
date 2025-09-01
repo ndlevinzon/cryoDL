@@ -78,8 +78,6 @@ cryodl init
 
 2. Add your cryo-EM software dependencies:
 ```bash
-cryodl add-dependency relion /usr/local/relion/bin/relion 4.0
-cryodl add-dependency cryosparc /opt/cryosparc 4.0.0
 cryodl add-dependency topaz /path/to/topaz 0.2.5
 cryodl add-dependency model_angelo /path/to/model_angelo 1.0.0
 ```
@@ -133,24 +131,6 @@ is_valid = config.validate_dependency_path('relion')
 enabled_deps = config.get_enabled_dependencies()
 ```
 
-### CLI Commands
-
-| Command | Description | Example |
-|---------|-------------|---------|
-| `init` | Initialize default configuration | `cryodl init` |
-| `get` | Get configuration value | `cryodl get paths.project_root` |
-| `set` | Set configuration value | `cryodl set settings.max_threads 8` |
-| `add-dependency` | Add/update dependency | `cryodl add-dependency relion /path/to/relion 4.0` |
-| `list-dependencies` | List all dependencies | `cryodl list-dependencies` |
-| `validate-dependencies` | Validate dependency paths | `cryodl validate-dependencies` |
-| `show` | Show full configuration | `cryodl show` |
-| `reset` | Reset to defaults | `cryodl reset` |
-| `export` | Export configuration | `cryodl export config_backup.json` |
-| `import` | Import configuration | `cryodl import config_backup.json` |
-| `fasta` | Build FASTA files from PDB IDs | `cryodl fasta 2BG9` |
-| `fasta --multiple` | Build FASTA from multiple PDB IDs | `cryodl fasta --multiple 2BG9 4B2T` |
-| `fasta --annotate` | Create structure-sequence alignments | `cryodl fasta --annotate structure.cif sequences.fasta` |
-
 ## Configuration Structure
 
 The configuration is stored in `config.json` with the following structure:
@@ -170,26 +150,6 @@ The configuration is stored in `config.json` with the following structure:
         "temp_dir": "/path/to/cryoDL/temp"
     },
     "dependencies": {
-        "relion": {
-            "path": "/usr/local/relion/bin/relion",
-            "version": "4.0",
-            "enabled": true
-        },
-        "cryosparc": {
-            "path": "/opt/cryosparc",
-            "version": "4.0.0",
-            "enabled": true
-        },
-        "eman2": {
-            "path": "",
-            "version": "",
-            "enabled": false
-        },
-        "cisTEM": {
-            "path": "",
-            "version": "",
-            "enabled": false
-        },
         "topaz": {
             "path": "/path/to/topaz",
             "version": "0.2.5",
@@ -219,10 +179,6 @@ The configuration is stored in `config.json` with the following structure:
 
 The configuration manager is pre-configured for common cryo-EM software:
 
-- **RELION**: Single-particle analysis software
-- **CryoSPARC**: Cryo-EM structure determination platform
-- **EMAN2**: Image processing suite for electron microscopy
-- **cisTEM**: Single-particle analysis software
 - **Topaz**: Deep learning-based particle picking for cryo-EM
 - **ModelAngelo**: AI-powered protein structure modeling from cryo-EM maps
 
@@ -235,11 +191,13 @@ cryoDL/
 ├── src/
 │   ├── __init__.py
 │   ├── config_manager.py    # Main configuration manager
-│   ├── cli.py              # Command-line interface
+│   ├── cli.py               # Command-line interface
+│   ├── topaz_analysis.py    # Topaz analysis functions
+│   ├── build_fastas.py      # FASTA building utilities
 │   └── resources/
 ├── docs/
-├── config.json             # Generated configuration file
-├── requirements.txt
+├── config.json              # Generated configuration file
+├── pyproject.toml
 └── README.md
 ```
 
