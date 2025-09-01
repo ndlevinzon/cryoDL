@@ -111,69 +111,51 @@ This will likely take several hours to complete, depending on the size of your m
 Step 3: Analyzing the Results
 --------------------------
 
-Continue with additional steps as needed.
-
-**Interactive prompts:**
-
-If the command prompts for input, show the interaction:
-
-.. code-block:: bash
-
-   cryoDL> topaz preprocess --local
-   Enter path to micrographs: /path/to/micrographs
-   Enter path to particles file: /path/to/particles.txt
-   Enter output directory: output_dir
-   Enter pixel size: 1.0
-
-**File structure created:**
-
-Show what files and directories should be created:
+Once completed, navigate to the output directory specified during the Model-Angelo setup. You should find several files, including:
 
 .. code-block:: text
 
-   output_dir/
-   ├── preprocessed/
-   │   ├── micrographs.mrcs
-   │   └── particles.txt
-   ├── logs/
-   │   └── preprocessing.log
-   └── config.json
+   /path/to/your/cryoem/maps/
+        ├── see_alpa_output/                         # SEE-Alpha stage: point detections from density
+        │   ├── see_alpha_output_p.cif               # Predicted phosphate (P) points for NA backbones (RNA/DNA “seed” positions)
+        │   ├── see_alpha_output_ca.cif              # Predicted C-alpha (CA) points for protein backbones (“seed” positions)
+        │   ├── see_alpha_merged_output.cif          # Combined/filtered union of the P + Cα point clouds used to start tracing
+        │   ├── output_p_points_before_pruning.cif   # Raw P detections BEFORE pruning/thinning (contains extra/spurious points)
+        │   └── output_ca_points_before_pruning.cif  # Raw Cα detections BEFORE pruning/thinning (more false positives)
+        ├── gnn_output_round_1/                      # Round 1 graph-neural-network (GNN) inference:
+        │                                            #   intermediate graphs, per-point residue/base-type probabilities,
+        │                                            #   tentative chain segments, and early sequence assignments
+        ├── gnn_output_round_2/                      # Round 2 GNN inference: improved graphs, tentative chain segments, and sequence assignments
+        ├── gnn_output_round_3/                      # Round 3 GNN inference: final graphs, chain segments, and sequence assignments
+        ├── model_angelo_output_map_raw.cif          # First-pass built model from GNN tracing (may be poly-Ala/UNK in places;
+        │                                            #   pre–HMM/sequence-identification or before final rebuild/cleanup)
+        ├── model_angelo_output_map.cif              # Final rebuilt/cleaned-up model from GNN tracing (may be poly-Ala/UNK in places;
+        │                                            #   this is the file you typically inspect, refine, and deposit
+        └── model_angelo.log                         # Full run log: versions, parameters, timings, warnings/errors (keep for repro)
 
-Verification
------------
+We can visualize the final model (model_angelo_output_map.cif) using molecular visualization software like PyMOL or ChimeraX.
+In order to annotate which chains correspond to which sequences in our FASTA file, we can use the --annotate flag in cryoDL.
 
-How to verify that everything worked correctly:
-
-.. code-block:: bash
-
-   # Check that files were created
-   cryoDL> ls output_dir/
-
-   # Validate the results
-   cryoDL> [validation command]
-
-**Expected verification output:**
+**Using the command line:**
 
 .. code-block:: text
 
-   [Show what successful verification looks like]
+    $ cd /path/to/your/cryoem/maps/
+    $ cryoDL
 
-Advanced Options
----------------
+**Using the CryoDL command line:**
 
-Optional advanced configurations or variations:
+.. code-block:: text
 
-.. code-block:: bash
+    cryoDL> fasta --annotate model_angelo_output_map.cif ../combined_protein.fasta
+    INFO:cryodl_interactive:Command: fasta --annotate model_angelo_output_map.cif ../combined_protein.fasta
+    Creating annotated sequence from CIF: model_angelo_output_map.cif
+    Using FASTA file: ../combined_protein.fasta
+    Output file: annotations.csv
+    Successfully created annotated sequence file: annotations.csv
+    INFO:cryodl_interactive:Output: Successfully created annotated FASTA file: annotations.csv
 
-   # Advanced option 1
-   cryoDL> [command] --advanced-flag
-
-   # Advanced option 2
-   cryoDL> [command] --custom-parameter value
-
-**When to use advanced options:**
-
-Explain when and why you might want to use these advanced features.
+This will generate an (annotations.csv) file that maps the chains in your Model-Angelo output to the sequences in your FASTA file. You can open this CSV file in any spreadsheet software or text editor to view the annotations.
 
 Troubleshooting
 --------------
@@ -233,18 +215,6 @@ What to do after completing this tutorial:
 * :ref:`api_reference` - Python API documentation
 * :ref:`configuration` - Configuration options
 
-**Practice Exercises:**
-
-Optional exercises to reinforce learning:
-
-1. **Exercise 1**: [Description of practice exercise]
-   * Try [specific task]
-   * Expected outcome: [what should happen]
-
-2. **Exercise 2**: [Another practice exercise]
-   * Try [specific task]
-   * Expected outcome: [what should happen]
-
 Summary
 -------
 
@@ -262,24 +232,3 @@ Brief summary of what was accomplished in this tutorial.
 * ``[command2]`` - [what it does]
 * ``[command3]`` - [what it does]
 
----
-
-.. note::
-   **Template Usage**: When creating a new tutorial from this template:
-
-   1. Copy this file and rename it to ``tutorial_[topic].rst``
-   2. Replace all placeholder text in [brackets] with actual content
-   3. Remove any sections that aren't relevant to your tutorial
-   4. Add the tutorial to the main documentation index
-   5. Test all commands and examples to ensure they work correctly
-
-**Template Sections to Customize:**
-
-* **Title and Description**: Replace with your tutorial's specific topic
-* **Prerequisites**: List what users need before starting
-* **Learning Objectives**: What users will learn
-* **Steps**: Replace with your actual tutorial steps
-* **Commands**: Use real cryoDL commands with actual examples
-* **Output**: Show real expected output
-* **Troubleshooting**: Address common issues for your specific topic
-* **Next Steps**: Link to relevant documentation
