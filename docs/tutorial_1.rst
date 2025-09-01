@@ -106,7 +106,7 @@ You will be prompted to confirm submission to SLURM. You can also choose not to 
 
 **Expected results:**
 
-This will likely take several hours to complete, depending on the size of your map and the resources allocated. Once the job is finished, you will find the output files in the specified output directory.
+This will likely take several hours to complete, depending on the size of your map and the resources allocated. You can see the status of the Model-Angelo job in the .out file, and any errors will be printed to the .err file. Once the job is finished, you will find the output files in the specified output directory.
 
 Step 3: Analyzing the Results
 --------------------------

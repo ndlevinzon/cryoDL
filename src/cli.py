@@ -1101,8 +1101,8 @@ echo "ModelAngelo job completed"
                         print(success_msg)
                         self.log_output(success_msg)
                         print(f"SLURM script saved as: {slurm_script_path}")
-                        print(f"Job output will be in: {job_name}_<job_id>.out")
-                        print(f"Job errors will be in: {job_name}_<job_id>.err")
+                        print(f"Job output will be in: {job_name}_{job_id}.out")
+                        print(f"Job errors will be in: {job_name}_{job_id}.err")
                     else:
                         error_msg = f"Failed to submit SLURM job: {result.stderr}"
                         print(error_msg, file=sys.stderr)
