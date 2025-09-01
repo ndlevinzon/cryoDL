@@ -35,7 +35,7 @@ First, CD into the directory containing your Cryo-EM maps. We will build our FAS
 
 .. code-block:: bash
 
-   $ cd /path/to/your/cryoem/maps
+   $ cd /path/to/your/cryoem/maps.mrc
 
 We are now in the directory where our cryo-EM maps are located. This is important because we will be running Model-Angelo in this directory later.
 
@@ -46,13 +46,13 @@ Next, we will launch cryoDL and use the FastaBuilder command to create a FASTA f
 .. code-block:: text
 
     $ cryoDL
-    cryoDL> fasta --multiple 4B2T Q8N3Y1
-    INFO:cryodl_interactive:Command: fasta --multiple 4B2T Q8N3Y1
-    Processing multiple identifiers: 4B2T, Q8N3Y1
+    cryoDL> fasta --multiple 1A2B X1Y2B3
+    INFO:cryodl_interactive:Command: fasta --multiple 1A2B X1Y2B3
+    Processing multiple identifiers: 1A2B, X1Y2B3
     Output file: combined_protein.fasta
-    INFO:src.build_fasta:Processing PDB ID: 4B2T
-    INFO:src.build_fasta:Processing UniProt ID: Q8N3Y1
-    Successfully created FASTA file: combined_protein.fasta | Successfully processed: PDB:4B2T, UniProt:Q8N3Y1
+    INFO:src.build_fasta:Processing PDB ID: 1A2B
+    INFO:src.build_fasta:Processing UniProt ID: X1Y2B3
+    Successfully created FASTA file: combined_protein.fasta | Successfully processed: PDB:1A2B, UniProt:X1Y2B3
     INFO:cryodl_interactive:Output: Successfully created FASTA file: combined_protein.fasta
 
 We now have a FASTA file named `combined_protein.fasta` in our current directory, which contains the sequences for the proteins with PDB ID 4B2T and UniProt ID Q8N3Y1.
@@ -70,15 +70,15 @@ Once you have your FASTA file ready, you can run Model-Angelo to build models fr
     INFO:cryodl_interactive:Command: model_angelo
     ModelAngelo Setup:
     --------------------
-    Enter path to .mrc file: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/cryosparc_P195_J59_004_volume_map.mrc
-    Enter path to protein FASTA file: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/combined_protein.fasta
+    Enter path to .mrc file: /path/to/your/cryoem/maps.mrc
+    Enter path to protein FASTA file: /path/to/your/cryoem/combined_protein.fasta
 
     Job Summary:
-        Job Name: model_angelo_cryosparc_P195_J59_004_volume_map
-        MRC File: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/cryosparc_P195_J59_004_volume_map.mrc
-        FASTA File: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/combined_protein.fasta
-        Output Directory: model_angelo_output_cryosparc_P195_J59_004_volume_map
-        SLURM Script: model_angelo_cryosparc_P195_J59_004_volume_map.slurm
+        Job Name: model_angelo_maps
+        MRC File: /path/to/your/cryoem/maps.mrc
+        FASTA File: /path/to/your/cryoem/combined_protein.fasta
+        Output Directory: model_angelo_output_maps
+        SLURM Script: model_angelo_maps.slurm
         Time Limit: 06:00:00
         Nodes: 1
         CPUs per Task: 4
@@ -94,19 +94,21 @@ After inputting the required information, cryoDL summarizes the job details, inc
 You will be prompted to confirm submission to SLURM. You can also choose not to submit the job immediately by entering 'N', in which case the SLURM script will be saved for later submission, or run model-angelo locally with the --local flag (not recommended, as you will likely need more memory than is available by default).
 
 **Using the cryoDL command line:**
+
 .. code-block:: text
-Submit this job to SLURM? (Y/N): y
-ModelAngelo job submitted successfully. Job ID: 5976006
-INFO:cryodl_interactive:Output: ModelAngelo job submitted successfully. Job ID: 5976006
-SLURM script saved as: model_angelo_cryosparc_P195_J59_004_volume_map.slurm
-Job output will be in: model_angelo_cryosparc_P195_J59_004_volume_map_<job_id>.out
-Job errors will be in: model_angelo_cryosparc_P195_J59_004_volume_map_<job_id>.err
+
+    Submit this job to SLURM? (Y/N): y
+    ModelAngelo job submitted successfully. Job ID: 5976006
+    INFO:cryodl_interactive:Output: ModelAngelo job submitted successfully. Job ID: 5976006
+    SLURM script saved as: model_angelo_maps.slurm
+    Job output will be in: model_angelo_maps_<job_id>.out
+    Job errors will be in: model_angelo_maps_<job_id>.err
 
 **Expected results:**
 
-Describe what should happen after running these commands.
+This will likely take several hours to complete, depending on the size of your map and the resources allocated. Once the job is finished, you will find the output files in the specified output directory.
 
-Step 3: [Third Step Title]
+Step 3: Analyzing the Results
 --------------------------
 
 Continue with additional steps as needed.
