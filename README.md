@@ -102,75 +102,81 @@ cryodl slurm generate --job-name topaz --nodes 2 --gres-gpu 2
 ## Example Workflow
 ```mermaid
 flowchart TD
-  %% ===== 0) Preflight =====
-  subgraph S0[0) Preflight]
-    A0[Raw cryo-EM movies<br/>+ microscope params (Å/px, volts, dose, gain)]
+
+  %% 0) Preflight
+  subgraph Preflight["0) Preflight"]
+    A0["Raw movies + microscope params (pixel size, voltage, dose, gain)"]
   end
 
-  %% ===== 1) Motion/CTF/Curation in cryoSPARC =====
-  subgraph S1[1) Motion / CTF / Curation (cryoSPARC)]
-    A1[Import Movies]
-    A2[Patch Motion Correction (Multi)<br/>(dose-weighted micrographs)]
-    A3[Patch CTF Estimation (Multi)]
-    A4[Curate Exposures<br/>(defocus, CTF fit, motion, ice)]
+  %% 1) Motion / CTF / Curation (cryoSPARC)
+  subgraph CryoSPARC1["1) Motion / CTF / Curation (cryoSPARC)"]
+    A1["Import Movies"]
+    A2["Patch Motion Correction (Multi)"]
+    A3["Patch CTF Estimation (Multi)"]
+    A4["Curate Exposures (defocus, CTF fit, motion, ice)"]
+    A1 --> A2 --> A3 --> A4
   end
-  A0 --> A1 --> A2 --> A3 --> A4
+  A0 --> A1
 
-  %% ===== 2) Picking with Topaz =====
-  subgraph S2[2) Picking with Topaz (in cryoSPARC)]
-    B1[Blob Picker → Extract (binned) → 2D Class<br/>(select positive classes)]
-    B2[Topaz Train<br/>(use positives; auto negatives)]
-    B3[Topaz Extract (apply model to all micrographs)]
-    B4[Extract (production) → 2D Class<br/>(clean particle stack)]
+  %% 2) Picking with Topaz
+  subgraph Topaz["2) Picking with Topaz"]
+    B1["Blob Picker -> Extract (binned) -> 2D (select positives)"]
+    B2["Topaz Train (use positives; auto negatives)"]
+    B3["Topaz Extract (apply model to all micrographs)"]
+    B4["Extract (production) -> 2D (clean particle stack)"]
+    B1 --> B2 --> B3 --> B4
   end
-  A4 --> B1 --> B2 --> B3 --> B4
+  A4 --> B1
 
-  %% ===== 3) Initial 3D & Refinement in cryoSPARC =====
-  subgraph S3[3) Initial 3D & Refinement (cryoSPARC)]
-    C1[Ab-initio Reconstruction (1–3 classes)]
-    C2[Heterogeneous Refinement<br/>(separate states/junk)]
-    C3[Non-Uniform Refinement (NU-refine)]
-    C4[CTF Refinement<br/>(per-particle defocus, tilt/coma)]
-    C5[Local Motion Correction → NU-refine]
+  %% 3) Initial 3D & Refinement (cryoSPARC)
+  subgraph CryoSPARC3["3) Initial 3D & Refinement (cryoSPARC)"]
+    C1["Ab-initio Reconstruction (1–3 classes)"]
+    C2["Heterogeneous Refinement (separate states/junk)"]
+    C3["Non-Uniform Refinement (NU-refine)"]
+    C4["CTF Refinement (per-particle defocus, tilt/coma)"]
+    C5["Local Motion Correction -> NU-refine"]
+    C1 --> C2 --> C3 --> C4 --> C5
   end
-  B4 --> C1 --> C2 --> C3 --> C4 --> C5
+  B4 --> C1
 
-  %% ===== 4) Heterogeneity with cryoDRGN =====
-  subgraph S4[4) Heterogeneity with cryoDRGN]
-    E1[Export particles + poses/CTF<br/>(.star + .mrcs)]
-    D1[cryoDRGN Train<br/>(learn latent space)]
-    D2[Reconstruct state-specific volumes]
-    D3[Optional: particle assignments per state]
+  %% 4) Heterogeneity with cryoDRGN
+  subgraph cryoDRGN["4) Heterogeneity (cryoDRGN)"]
+    E1["Export particles + poses/CTF (.star + .mrcs)"]
+    D1["cryoDRGN Train (learn latent space)"]
+    D2["Reconstruct state-specific volumes"]
+    D3["Optional: particle subsets per state"]
+    E1 --> D1 --> D2 --> D3
   end
   C4 --> E1
-  E1 --> D1 --> D2 --> D3
 
-  %% ===== 5) Bring states back & polish in cryoSPARC =====
-  subgraph S5[5) State import & polishing (cryoSPARC)]
-    F1[Import state volumes / subsets]
-    F2[Heterogeneous or Local Refinement<br/>(per state)]
-    F3[NU-refine per state]
-    F4[Sharpen/Filter + Local Resolution]
+  %% 5) State import & polishing (cryoSPARC)
+  subgraph CryoSPARC5["5) State import & polishing (cryoSPARC)"]
+    F1["Import state volumes/subsets"]
+    F2["Heterogeneous or Local Refinement (per state)"]
+    F3["NU-refine per state"]
+    F4["Sharpen/Filter + Local Resolution"]
+    F1 --> F2 --> F3 --> F4
   end
   D2 --> F1
   D3 --> F1
-  F1 --> F2 --> F3 --> F4
 
-  %% ===== 6) Model building with ModelAngelo =====
-  subgraph S6[6) Model building (ModelAngelo)]
-    G1[Prepare map (px size correct), half-maps, mask, FASTA]
-    G2[ModelAngelo build / build_no_seq → hmm_search → rebuild]
-    G3[Validate & fix (Phenix/Coot/ISOLDE)]
+  %% 6) Model building (ModelAngelo)
+  subgraph ModelAngelo["6) Model building (ModelAngelo)"]
+    G1["Prepare map, half-maps, mask, FASTA (pixel size correct)"]
+    G2["build or build_no_seq -> hmm_search -> rebuild"]
+    G3["Validate & fix (Phenix/Coot/ISOLDE)"]
+    G1 --> G2 --> G3
   end
-  F4 --> G1 --> G2 --> G3
+  F4 --> G1
 
-  %% ===== 7) Deliverables =====
-  subgraph S7[7) Deliverables & deposition]
-    H1[Final maps (full + half) + masks + FSC]
-    H2[Models (PDB/mmCIF) + validation]
-    H3[Deposit to EMDB/PDB]
+  %% 7) Deliverables
+  subgraph Deliverables["7) Deliverables & deposition"]
+    H1["Maps (full + half) + masks + FSC"]
+    H2["Models (PDB/mmCIF) + validation"]
+    H3["Deposit to EMDB/PDB"]
+    H1 --> H2 --> H3
   end
-  G3 --> H1 --> H2 --> H3
+  G3 --> H1
 ```
 
 ## Supported Dependencies
