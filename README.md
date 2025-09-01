@@ -3,7 +3,8 @@
 [![Documentation Status](https://readthedocs.org/projects/cryodl/badge/?version=latest)](https://cryodl.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/yagwip.svg)](https://badge.fury.io/py/yagwip)
 
-# cryoDL: A Pypeline for CryoEM Deep Learning Utilities
+# **<ins>CryoDL<ins/>**
+## A Pypeline for CryoEM Deep Learning Utilities
 <p align="center">
   <img src="docs/frenchie_cryoem.png" width="300" alt="Project Hero">
 </p>
@@ -98,81 +99,29 @@ cryodl slurm generate --job-name model_angelo
 cryodl slurm generate --job-name topaz --nodes 2 --gres-gpu 2
 ```
 
-## Configuration Manager
+## Example Workflow
+```mermaid
+graph TD;
+    Z{{FASTA}}-->A{Sanitize};
+    A{Sanitize}-->B{{Database-Creation}};
+    B{{Database-Creation}}-->C[Query];
+    C[Query]-->D[Extract];
+    C[Query]-->E[Extract-Contig];
+    A{Sanitize}-->F[FASTA-Metrics];
+    A{Sanitize}-->H[Split-FASTA];
+    I[JSON/GenBank]-->J[Search];
 
-The `ConfigManager` class provides a comprehensive interface for managing project configuration.
-
-### Python API Usage
-
-```python
-from src.config_manager import ConfigManager
-
-# Initialize config manager
-config = ConfigManager()
-
-# Get configuration values
-project_root = config.get('paths.project_root')
-max_threads = config.get('settings.max_threads', 4)
-
-# Set configuration values
-config.set('settings.max_threads', 8)
-config.set('settings.gpu_enabled', True)
-
-# Manage dependencies
-config.update_dependency_path('relion', '/usr/local/relion/bin/relion', '4.0')
-config.update_dependency_path('cryosparc', '/opt/cryosparc', '4.0.0')
-config.update_dependency_path('topaz', '/path/to/topaz', '0.2.5')
-config.update_dependency_path('model_angelo', '/path/to/model_angelo', '1.0.0')
-
-# Validate dependencies
-is_valid = config.validate_dependency_path('relion')
-
-# Get enabled dependencies
-enabled_deps = config.get_enabled_dependencies()
-```
-
-## Configuration Structure
-
-The configuration is stored in `config.json` with the following structure:
-
-```json
-{
-    "project_info": {
-        "name": "cryoDL",
-        "version": "0.1.0",
-        "description": "Python wrapper for cryo-EM software"
-    },
-    "paths": {
-        "project_root": "/path/to/cryoDL",
-        "src_dir": "/path/to/cryoDL/src",
-        "docs_dir": "/path/to/cryoDL/docs",
-        "output_dir": "/path/to/cryoDL/output",
-        "temp_dir": "/path/to/cryoDL/temp"
-    },
-    "dependencies": {
-        "topaz": {
-            "path": "/path/to/topaz",
-            "version": "0.2.5",
-            "enabled": true
-        },
-        "model_angelo": {
-            "path": "/path/to/model_angelo",
-            "version": "1.0.0",
-            "enabled": true
-        }
-    },
-    "settings": {
-        "max_threads": 4,
-        "memory_limit_gb": 16,
-        "gpu_enabled": false,
-        "debug_mode": false,
-        "log_level": "INFO"
-    },
-    "api_keys": {
-        "cryosparc_license": "",
-        "relion_license": ""
-    }
-}
+    %% Custom style for Sanitize node
+    style Z fill:#11d393,stroke:#fff5ee,stroke-width:4,font-size:30,color:#454545
+    style A fill:#d48074,stroke:#fff5ee,stroke-width:3,font-size:26px
+    style B fill:#d40078,stroke:#FCF5E5,stroke-width:2,font-size:22px
+    style C fill:#920075,stroke:#333,stroke-width:1,font-size:18px
+    style D fill:#650D89,stroke:#333,stroke-width:1,font-size:18px
+    style E fill:#023788,stroke:#333,stroke-width:1,font-size:18px
+    style F fill:#fd1d53,stroke:#333,stroke-width:1,font-size:18px
+    style H fill:#2e2157,stroke:#333,stroke-width:1,font-size:18px
+    style I fill:#11c9d3,stroke:#333,stroke-width:1,font-size:22px,color:#454545
+    style J fill:#6e1515,stroke:#333,stroke-width:1,font-size:18px
 ```
 
 ## Supported Dependencies
