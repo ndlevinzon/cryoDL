@@ -11,6 +11,8 @@ import subprocess
 import os
 import sys
 import traceback
+import readline
+import glob
 from pathlib import Path
 from typing import List, Optional
 
@@ -54,6 +56,7 @@ class CryoDLShell(cmd.Cmd):
         self.log_file = log_file
         self.setup_logging()
         self.intro = self.load_banner()
+        self.setup_tab_completion()
 
     def load_banner(self):
         """Load and return the ASCII banner.
@@ -98,6 +101,203 @@ All interactions are logged to cryodl.log in the current directory.
 Type 'help' for available commands, 'quit' to exit.
 All interactions are logged to cryodl.log in the current directory.
 """
+
+    def setup_tab_completion(self):
+        """Set up tab completion for file paths."""
+        try:
+            # Set up readline for tab completion
+            readline.set_completer_delims(' \t\n`!@#$%^&*()=+[{]}\\|;:\'",<>?')
+            readline.parse_and_bind("tab: complete")
+            readline.set_completer(self._file_path_completer)
+        except Exception as e:
+            # Tab completion not available on all platforms
+            logger.warning(f"Tab completion not available: {e}")
+
+    def _file_path_completer(self, text, state):
+        """Tab completion for file paths, handling both absolute and relative paths."""
+        if state == 0:
+            # This is the first time for this text, so build a match list
+            self._completion_matches = self._get_file_completions(text)
+
+        try:
+            return self._completion_matches[state]
+        except IndexError:
+            return None
+
+    def _get_file_completions(self, text):
+        """Get file completions for the given text."""
+        if not text:
+            # If no text, show current directory contents
+            text = "."
+
+        # Handle different path scenarios
+        if text.startswith('/'):
+            # Absolute path
+            base_path = text
+        elif text.startswith('./'):
+            # Relative path starting with ./
+            base_path = text
+        elif text.startswith('../'):
+            # Relative path starting with ../
+            base_path = text
+        elif '/' in text:
+            # Relative path with directory
+            base_path = text
+        else:
+            # Just a filename in current directory
+            base_path = f"./{text}"
+
+        # Get the directory and filename parts
+        if base_path.endswith('/'):
+            # Directory ends with slash, show contents
+            dir_path = base_path
+            filename = ""
+        else:
+            dir_path = str(Path(base_path).parent)
+            filename = Path(base_path).name
+
+        # Handle root directory case
+        if dir_path == ".":
+            dir_path = os.getcwd()
+        elif not os.path.isabs(dir_path):
+            dir_path = os.path.join(os.getcwd(), dir_path)
+
+        try:
+            # Get directory contents
+            if os.path.exists(dir_path) and os.path.isdir(dir_path):
+                files = os.listdir(dir_path)
+
+                # Filter files that match the filename prefix
+                matches = []
+                for file in files:
+                    if file.startswith(filename):
+                        full_path = os.path.join(dir_path, file)
+
+                        # Convert back to the original format (relative/absolute)
+                        if text.startswith('/'):
+                            # Absolute path
+                            if os.path.isdir(full_path):
+                                matches.append(full_path + '/')
+                            else:
+                                matches.append(full_path)
+                        elif text.startswith('./'):
+                            # Relative path starting with ./
+                            rel_path = os.path.relpath(full_path, os.getcwd())
+                            if os.path.isdir(full_path):
+                                matches.append(rel_path + '/')
+                            else:
+                                matches.append(rel_path)
+                        elif text.startswith('../'):
+                            # Relative path starting with ../
+                            rel_path = os.path.relpath(full_path, os.getcwd())
+                            if os.path.isdir(full_path):
+                                matches.append(rel_path + '/')
+                            else:
+                                matches.append(rel_path)
+                        elif '/' in text:
+                            # Relative path with directory
+                            rel_path = os.path.relpath(full_path, os.getcwd())
+                            if os.path.isdir(full_path):
+                                matches.append(rel_path + '/')
+                            else:
+                                matches.append(rel_path)
+                        else:
+                            # Just filename in current directory
+                            if os.path.isdir(full_path):
+                                matches.append(file + '/')
+                            else:
+                                matches.append(file)
+
+                return sorted(matches)
+            else:
+                return []
+        except (OSError, PermissionError):
+            return []
+
+    def input_with_completion(self, prompt, file_types=None):
+        """Input function with tab completion for file paths.
+
+        Args:
+            prompt (str): The input prompt
+            file_types (list, optional): List of file extensions to filter by
+
+        Returns:
+            str: The user input
+        """
+        print(f"\n{prompt}")
+        print("(Use TAB for file completion, ENTER to confirm)")
+
+        while True:
+            try:
+                user_input = input("> ").strip()
+                if user_input:
+                    # Validate file exists
+                    file_path = Path(user_input)
+
+                    # Handle relative paths
+                    if not file_path.is_absolute():
+                        file_path = Path.cwd() / user_input
+
+                    if not file_path.exists():
+                        print(f"Warning: File not found: {user_input}")
+                        retry = input("Continue anyway? (y/n): ").strip().lower()
+                        if retry not in ['y', 'yes']:
+                            continue
+
+                    # Check file type if specified
+                    if file_types and file_path.suffix not in file_types:
+                        print(f"Warning: File type {file_path.suffix} not in expected types: {file_types}")
+                        retry = input("Continue anyway? (y/n): ").strip().lower()
+                        if retry not in ['y', 'yes']:
+                            continue
+
+                    return user_input
+                else:
+                    print("Please enter a file path")
+            except KeyboardInterrupt:
+                print("\nOperation cancelled")
+                raise
+            except Exception as e:
+                print(f"Error: {e}")
+                print("Please try again")
+
+    def show_directory_contents(self, path=".", file_types=None):
+        """Show directory contents with optional file type filtering.
+
+        Args:
+            path (str): Directory path to show contents for
+            file_types (list, optional): List of file extensions to filter by
+        """
+        try:
+            if not os.path.isabs(path):
+                full_path = os.path.join(os.getcwd(), path)
+            else:
+                full_path = path
+
+            if not os.path.exists(full_path):
+                print(f"Directory not found: {path}")
+                return
+
+            if not os.path.isdir(full_path):
+                print(f"Not a directory: {path}")
+                return
+
+            files = os.listdir(full_path)
+            if file_types:
+                filtered_files = [f for f in files if any(f.endswith(ext) for ext in file_types)]
+            else:
+                filtered_files = files
+
+            print(f"\nContents of {path}:")
+            for file in sorted(filtered_files):
+                file_path = os.path.join(full_path, file)
+                if os.path.isdir(file_path):
+                    print(f"  📁 {file}/")
+                else:
+                    print(f"  📄 {file}")
+
+        except Exception as e:
+            print(f"Error listing directory contents: {e}")
 
     def setup_logging(self):
         """Set up logging to file.
@@ -932,8 +1132,31 @@ All interactions are logged to cryodl.log in the current directory.
             print("ModelAngelo Setup:")
             print("-" * 20)
 
-            # Get MRC file path
-            mrc_file = input("Enter path to .mrc file: ").strip()
+            # Show current directory and available files
+            current_dir = os.getcwd()
+            print(f"Current working directory: {current_dir}")
+            print("\nAvailable files in current directory:")
+            try:
+                files = os.listdir(current_dir)
+                mrc_files = [f for f in files if f.endswith(('.mrc', '.map', '.em'))]
+                fasta_files = [f for f in files if f.endswith(('.fasta', '.fa', '.fas', '.seq'))]
+
+                if mrc_files:
+                    print(f"  MRC files: {', '.join(mrc_files)}")
+                if fasta_files:
+                    print(f"  FASTA files: {', '.join(fasta_files)}")
+                if not mrc_files and not fasta_files:
+                    print("  No MRC or FASTA files found in current directory")
+            except Exception as e:
+                print(f"  Could not list directory contents: {e}")
+
+            print("-" * 20)
+
+            # Get MRC file path with tab completion
+            mrc_file = self.input_with_completion(
+                "Enter path to .mrc file:",
+                file_types=[".mrc", ".map", ".em"]
+            )
             if not mrc_file:
                 error_msg = "MRC file path is required"
                 print(error_msg, file=sys.stderr)
@@ -942,14 +1165,20 @@ All interactions are logged to cryodl.log in the current directory.
 
             # Validate MRC file exists
             mrc_path = Path(mrc_file)
+            if not mrc_path.is_absolute():
+                mrc_path = Path.cwd() / mrc_file
+
             if not mrc_path.exists():
                 error_msg = f"MRC file not found: {mrc_file}"
                 print(error_msg, file=sys.stderr)
                 self.log_error(error_msg)
                 return
 
-            # Get FASTA file path
-            fasta_file = input("Enter path to protein FASTA file: ").strip()
+            # Get FASTA file path with tab completion
+            fasta_file = self.input_with_completion(
+                "Enter path to protein FASTA file:",
+                file_types=[".fasta", ".fa", ".fas", ".seq"]
+            )
             if not fasta_file:
                 error_msg = "FASTA file path is required"
                 print(error_msg, file=sys.stderr)
@@ -958,6 +1187,9 @@ All interactions are logged to cryodl.log in the current directory.
 
             # Validate FASTA file exists
             fasta_path = Path(fasta_file)
+            if not fasta_path.is_absolute():
+                fasta_path = Path.cwd() / fasta_file
+
             if not fasta_path.exists():
                 error_msg = f"FASTA file not found: {fasta_file}"
                 print(error_msg, file=sys.stderr)
@@ -1101,8 +1333,8 @@ echo "ModelAngelo job completed"
                         print(success_msg)
                         self.log_output(success_msg)
                         print(f"SLURM script saved as: {slurm_script_path}")
-                        print(f"Job output will be in: {job_name}_{job_id}.out")
-                        print(f"Job errors will be in: {job_name}_{job_id}.err")
+                        print(f"Job output will be in: {job_name}_<job_id>.out")
+                        print(f"Job errors will be in: {job_name}_<job_id>.err")
                     else:
                         error_msg = f"Failed to submit SLURM job: {result.stderr}"
                         print(error_msg, file=sys.stderr)
@@ -2182,18 +2414,63 @@ echo "Topaz cross-validation job completed"
         """
         self.log_command("ls", arg)
         try:
-            path = Path(arg.strip()) if arg.strip() else Path(".")
-            if path.exists():
-                files = list(path.iterdir())
-                output = "\n".join([f.name for f in files])
-                print(output)
-                self.log_output(output)
+            if arg.strip():
+                # Show specific directory
+                path = arg.strip()
+                self.show_directory_contents(path)
             else:
-                error_msg = f"Path does not exist: {path}"
-                print(error_msg, file=sys.stderr)
-                self.log_error(error_msg)
+                # Show current directory
+                self.show_directory_contents(".")
         except Exception as e:
             error_msg = f"Error listing files: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
+    def do_lsmrc(self, arg):
+        """List MRC files in current or specified directory.
+
+        Lists only MRC, MAP, and EM files in the current directory or a specified path.
+
+        Args:
+            arg (str): Optional path to list. If empty, lists current directory.
+
+        Usage:
+            lsmrc [path]
+
+        Example:
+            lsmrc
+            lsmrc /path/to/directory
+        """
+        self.log_command("lsmrc", arg)
+        try:
+            path = arg.strip() if arg.strip() else "."
+            self.show_directory_contents(path, file_types=[".mrc", ".map", ".em"])
+        except Exception as e:
+            error_msg = f"Error listing MRC files: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
+    def do_lsfasta(self, arg):
+        """List FASTA files in current or specified directory.
+
+        Lists only FASTA files in the current directory or a specified path.
+
+        Args:
+            arg (str): Optional path to list. If empty, lists current directory.
+
+        Usage:
+            lsfasta [path]
+
+        Example:
+            lsfasta
+            lsfasta /path/to/directory
+        """
+        self.log_command("lsfasta", arg)
+        try:
+            path = arg.strip() if arg.strip() else "."
+            self.show_directory_contents(path, file_types=[".fasta", ".fa", ".fas", ".seq"])
+        except Exception as e:
+            error_msg = f"Error listing FASTA files: {e}"
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
@@ -2213,7 +2490,28 @@ echo "Topaz cross-validation job completed"
             help model_angelo
         """
         self.log_command("help", arg)
-        super().do_help(arg)
+
+        if arg:
+            # Show help for specific command
+            super().do_help(arg)
+        else:
+            # Show general help with new commands
+            print("Available commands:")
+            print("  Configuration:")
+            print("    init, show, get, set, add_dependency, validate_dependencies")
+            print("    list_dependencies, export_config, import_config, reset_config")
+            print("  SLURM:")
+            print("    slurm_show, slurm_update, slurm_generate")
+            print("  Analysis:")
+            print("    topaz, model_angelo, analyze_cv")
+            print("  FASTA:")
+            print("    fasta")
+            print("  File Operations:")
+            print("    pwd, ls, lsmrc, lsfasta, clear")
+            print("  System:")
+            print("    help, version, quit")
+            print("\nUse 'help <command>' for detailed information about a specific command.")
+            print("\nTab completion is available for file paths in the model_angelo workflow!")
 
     def load_random_quote(self):
         """Load and return a random quote from quotes.txt.
