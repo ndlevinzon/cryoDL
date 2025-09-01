@@ -1,7 +1,7 @@
 API Reference
 =============
 
-This section provides detailed API documentation for the cryoDL package, automatically generated from the source code.
+This section provides detailed API documentation for the cryoDL package.
 
 Core Modules
 ------------

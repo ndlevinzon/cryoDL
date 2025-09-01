@@ -1,7 +1,7 @@
 CLI Commands Reference
 =====================
 
-This page provides a comprehensive reference for all available commands in the cryoDL interactive shell, automatically generated from the source code.
+This page provides a comprehensive reference for all available commands in the cryoDL interactive shell.
 
 Interactive CLI Shell
 --------------------
