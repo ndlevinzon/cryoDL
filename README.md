@@ -101,27 +101,76 @@ cryodl slurm generate --job-name topaz --nodes 2 --gres-gpu 2
 
 ## Example Workflow
 ```mermaid
-graph TD;
-    Z{{FASTA}}-->A{Sanitize};
-    A{Sanitize}-->B{{Database-Creation}};
-    B{{Database-Creation}}-->C[Query];
-    C[Query]-->D[Extract];
-    C[Query]-->E[Extract-Contig];
-    A{Sanitize}-->F[FASTA-Metrics];
-    A{Sanitize}-->H[Split-FASTA];
-    I[JSON/GenBank]-->J[Search];
+flowchart TD
+  %% ===== 0) Preflight =====
+  subgraph S0[0) Preflight]
+    A0[Raw cryo-EM movies<br/>+ microscope params (Å/px, volts, dose, gain)]
+  end
 
-    %% Custom style for Sanitize node
-    style Z fill:#11d393,stroke:#fff5ee,stroke-width:4,font-size:30,color:#454545
-    style A fill:#d48074,stroke:#fff5ee,stroke-width:3,font-size:26px
-    style B fill:#d40078,stroke:#FCF5E5,stroke-width:2,font-size:22px
-    style C fill:#920075,stroke:#333,stroke-width:1,font-size:18px
-    style D fill:#650D89,stroke:#333,stroke-width:1,font-size:18px
-    style E fill:#023788,stroke:#333,stroke-width:1,font-size:18px
-    style F fill:#fd1d53,stroke:#333,stroke-width:1,font-size:18px
-    style H fill:#2e2157,stroke:#333,stroke-width:1,font-size:18px
-    style I fill:#11c9d3,stroke:#333,stroke-width:1,font-size:22px,color:#454545
-    style J fill:#6e1515,stroke:#333,stroke-width:1,font-size:18px
+  %% ===== 1) Motion/CTF/Curation in cryoSPARC =====
+  subgraph S1[1) Motion / CTF / Curation (cryoSPARC)]
+    A1[Import Movies]
+    A2[Patch Motion Correction (Multi)<br/>(dose-weighted micrographs)]
+    A3[Patch CTF Estimation (Multi)]
+    A4[Curate Exposures<br/>(defocus, CTF fit, motion, ice)]
+  end
+  A0 --> A1 --> A2 --> A3 --> A4
+
+  %% ===== 2) Picking with Topaz =====
+  subgraph S2[2) Picking with Topaz (in cryoSPARC)]
+    B1[Blob Picker → Extract (binned) → 2D Class<br/>(select positive classes)]
+    B2[Topaz Train<br/>(use positives; auto negatives)]
+    B3[Topaz Extract (apply model to all micrographs)]
+    B4[Extract (production) → 2D Class<br/>(clean particle stack)]
+  end
+  A4 --> B1 --> B2 --> B3 --> B4
+
+  %% ===== 3) Initial 3D & Refinement in cryoSPARC =====
+  subgraph S3[3) Initial 3D & Refinement (cryoSPARC)]
+    C1[Ab-initio Reconstruction (1–3 classes)]
+    C2[Heterogeneous Refinement<br/>(separate states/junk)]
+    C3[Non-Uniform Refinement (NU-refine)]
+    C4[CTF Refinement<br/>(per-particle defocus, tilt/coma)]
+    C5[Local Motion Correction → NU-refine]
+  end
+  B4 --> C1 --> C2 --> C3 --> C4 --> C5
+
+  %% ===== 4) Heterogeneity with cryoDRGN =====
+  subgraph S4[4) Heterogeneity with cryoDRGN]
+    E1[Export particles + poses/CTF<br/>(.star + .mrcs)]
+    D1[cryoDRGN Train<br/>(learn latent space)]
+    D2[Reconstruct state-specific volumes]
+    D3[Optional: particle assignments per state]
+  end
+  C4 --> E1
+  E1 --> D1 --> D2 --> D3
+
+  %% ===== 5) Bring states back & polish in cryoSPARC =====
+  subgraph S5[5) State import & polishing (cryoSPARC)]
+    F1[Import state volumes / subsets]
+    F2[Heterogeneous or Local Refinement<br/>(per state)]
+    F3[NU-refine per state]
+    F4[Sharpen/Filter + Local Resolution]
+  end
+  D2 --> F1
+  D3 --> F1
+  F1 --> F2 --> F3 --> F4
+
+  %% ===== 6) Model building with ModelAngelo =====
+  subgraph S6[6) Model building (ModelAngelo)]
+    G1[Prepare map (px size correct), half-maps, mask, FASTA]
+    G2[ModelAngelo build / build_no_seq → hmm_search → rebuild]
+    G3[Validate & fix (Phenix/Coot/ISOLDE)]
+  end
+  F4 --> G1 --> G2 --> G3
+
+  %% ===== 7) Deliverables =====
+  subgraph S7[7) Deliverables & deposition]
+    H1[Final maps (full + half) + masks + FSC]
+    H2[Models (PDB/mmCIF) + validation]
+    H3[Deposit to EMDB/PDB]
+  end
+  G3 --> H1 --> H2 --> H3
 ```
 
 ## Supported Dependencies
