@@ -1002,6 +1002,10 @@ All interactions are logged to cryodl.log in the current directory.
             else:
                 # Generate and submit SLURM job
                 job_name = f"model_angelo_{mrc_stem}"
+                partition = self.config_manager.get("slurm.partition")
+                qos = self.config_manager.get("slurm.qos")
+                account = self.config_manager.get("slurm.account")
+                gres_gpu = self.config_manager.get("slurm.gres_gpu")
 
                 # Create SLURM script content
                 slurm_script = f"""#!/bin/bash
@@ -1013,26 +1017,11 @@ All interactions are logged to cryodl.log in the current directory.
 #SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
 #SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
 #SBATCH --mem={self.config_manager.get('slurm.mem', '16G')}
-    """
+#SBATCH --partition={partition}
+#SBATCH --qos={qos}
+#SBATCH --account={account}
+#SBATCH --gres=gpu:{gres_gpu}
 
-                # Add optional SLURM parameters if configured
-                partition = self.config_manager.get("slurm.partition")
-                if partition:
-                    slurm_script += f"#SBATCH --partition={partition}\n"
-
-                qos = self.config_manager.get("slurm.qos")
-                if qos:
-                    slurm_script += f"#SBATCH --qos={qos}\n"
-
-                account = self.config_manager.get("slurm.account")
-                if account:
-                    slurm_script += f"#SBATCH --account={account}\n"
-
-                gres_gpu = self.config_manager.get("slurm.gres_gpu")
-                if gres_gpu:
-                    slurm_script += f"#SBATCH --gres=gpu:{gres_gpu}\n"
-
-                slurm_script += f"""
 set -euo pipefail
 set -x
 

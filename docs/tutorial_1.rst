@@ -1,94 +1,79 @@
-Tutorial Template
+Tutorial 1: Using Model-Angelo with cryoDL FastaBuilder
 ================
 
-This is a template for creating tutorials in the cryoDL documentation. Copy this template and customize it for your specific tutorial.
+In this tutorial, we will walk through the process of using the Model-Angelo tool integrated within cryoDL to build and refine protein structures from cryo-EM maps. This tutorial assumes you have a basic understanding of cryo-EM data processing and are familiar with command-line interfaces.
 
 .. note::
-   This is a template file. When creating a new tutorial, copy this file and rename it to something like ``tutorial_my_topic.rst``, then customize the content.
+   Model-Angelo is a powerful stand-alone tool for automated model building and refinement. This tutorial will guide you through its integration with cryoDL, allowing for streamlined workflows in structural biology. Please refer to the official Model-Angelo citation and documentation for more detailed information on its capabilities and usage.
 
-Tutorial Title
--------------
 
-Brief description of what this tutorial will teach users.
-
-Prerequisites
 ------------
 
 Before starting this tutorial, make sure you have:
 
 * cryoDL installed and configured (see :ref:`installation`)
-* Basic familiarity with command line interfaces
-* [Add any other prerequisites specific to this tutorial]
-
-*Optional prerequisites:*
-
-* [Add any optional software or knowledge that would be helpful]
+* Have Model-Angelo installed (see `Model-Angelo GitHub)
+* Access to cryo-EM maps (.mrc) and corresponding sequence data (PDB or UniProt IDs)
 
 Learning Objectives
 ------------------
 
 By the end of this tutorial, you will be able to:
 
-* [Objective 1]
-* [Objective 2]
-* [Objective 3]
+* Build FASTA files using cryoDL's FastaBuilder, using either PDB or UniProt IDs
+* Run Model-Angelo through cryoDL to generate protein models from cryo-EM maps
+* Annotate the generated models with sequence information
 
-Overview
---------
-
-Brief overview of what the tutorial covers and why it's useful.
-
-.. note::
-   You can add notes, warnings, or tips using admonitions like this.
-
-.. warning::
-   Use warnings for important safety information or potential pitfalls.
-
-.. tip::
-   Use tips for helpful hints and best practices.
-
-Step 1: [First Step Title]
+Step 1: Building a FASTA File
 --------------------------
 
-Description of the first step.
+Before running Model-Angelo, you need to create a FASTA file containing the sequences of the proteins you want to model. You can do this using cryoDL's FastaBuilder.
 
-**Command to run:**
+First, CD into the directory containing your Cryo-EM maps. We will build our FASTA at this same directory.
+
+**Using the command line:**
 
 .. code-block:: bash
 
-   cryoDL> [your command here]
+   $ cd /path/to/your/cryoem/maps
 
-**What this does:**
+We are now in the directory where our cryo-EM maps are located. This is important because we will be running Model-Angelo in this directory later.
 
-Explain what the command does and why it's necessary.
+Next, we will launch cryoDL and use the FastaBuilder command to create a FASTA file. You can provide either PDB IDs or UniProt IDs. In this example, we will use both methods with the --multiple flag.
 
-**Expected output:**
+**Using the command line:**
 
 .. code-block:: text
 
-   [Show expected output or response]
+    $ cryoDL
+    cryoDL> fasta --multiple 4B2T Q8N3Y1
+    INFO:cryodl_interactive:Command: fasta --multiple 4B2T Q8N3Y1
+    Processing multiple identifiers: 4B2T, Q8N3Y1
+    Output file: combined_protein.fasta
+    INFO:src.build_fasta:Processing PDB ID: 4B2T
+    INFO:src.build_fasta:Processing UniProt ID: Q8N3Y1
+    Successfully created FASTA file: combined_protein.fasta | Successfully processed: PDB:4B2T, UniProt:Q8N3Y1
+    INFO:cryodl_interactive:Output: Successfully created FASTA file: combined_protein.fasta
 
-**Troubleshooting:**
+We now have a FASTA file named `combined_protein.fasta` in our current directory, which contains the sequences for the proteins with PDB ID 4B2T and UniProt ID Q8N3Y1.
 
-If you encounter issues:
-
-* **Problem**: [Describe the problem]
-  **Solution**: [Provide the solution]
-
-* **Problem**: [Another common issue]
-  **Solution**: [Another solution]
-
-Step 2: [Second Step Title]
+Step 2: Running Model-Angelo
 ---------------------------
 
-Description of the second step.
+Once you have your FASTA file ready, you can run Model-Angelo to build models from your cryo-EM maps.
 
-**Commands to run:**
+**Using the cryoDL command line:**
 
-.. code-block:: bash
+.. code-block:: text
 
-   cryoDL> [first command]
-   cryoDL> [second command]
+    cryoDL> model-angelo
+    INFO:cryodl_interactive:Command: fasta --multiple 4B2T Q8N3Y1
+    Processing multiple identifiers: 4B2T, Q8N3Y1
+    Output file: combined_protein.fasta
+    INFO:src.build_fasta:Processing PDB ID: 4B2T
+    INFO:src.build_fasta:Processing UniProt ID: Q8N3Y1
+    Successfully created FASTA file: combined_protein.fasta | Successfully processed: PDB:4B2T, UniProt:Q8N3Y1
+    INFO:cryodl_interactive:Output: Successfully created FASTA file: combined_protein.fasta
 
 **What these do:**
 
