@@ -22,53 +22,9 @@ copyright = '2025, cryoDL Team'
 author = 'cryoDL Team'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.3.0'
 
 # -- General configuration ---------------------------------------------------
-
-# --- Autodoc hook: turn "Usage:" and "Examples:" text into code blocks automatically -------
-# DISABLED: This transformer was causing issues with Napoleon processing
-# def _usage_examples_to_codeblock(app, what, name, obj, options, lines):
-#     """
-#     Convert 'Usage:' and 'Examples:' sections in raw Google-style docstrings into proper code blocks.
-#     """
-#     out, i = [], 0
-#     while i < len(lines):
-#         line = lines[i]
-#         line_lower = line.strip().lower()
-#
-#         if line_lower in ["usage:", "examples:"]:
-#             # Keep the original section header
-#             out.append(line)
-#             out.append("")
-#             i += 1
-#
-#             # Collect following non-empty lines until a blank line or a new section header
-#             code_lines = []
-#             while i < len(lines):
-#                 nxt = lines[i]
-#                 if not nxt.strip():
-#                     break
-#                 if re.match(r"^[A-Z][A-Za-z0-9 _-]*:\s*$", nxt.strip()):  # next section
-#                     break
-#                 code_lines.append(nxt.rstrip())
-#                 i += 1
-#
-#             # If we have code lines, format them as a code block
-#             if code_lines:
-#                 out.append(".. code-block:: bash")
-#                 out.append("")
-#                 for code_line in code_lines:
-#                     out.append("    " + code_line)
-#                 out.append("")
-#             continue
-#
-#         out.append(line)
-#         i += 1
-#
-#     lines[:] = out
-
-
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -239,18 +195,6 @@ todo_include_todos = True
 
 # Autosummary settings
 autosummary_generate = True
-
-# Pydoctor configuration - commented out due to integration issues
-# extensions += ["pydoctor.sphinx_ext.build_apidocs"]
-
-# pydoctor_args = [
-#     "--project-name=cryoDL",
-#     "--docformat=google",
-#     "--add-package=../src/",
-#     "--html-output=api",
-#     "--theme=readthedocs",
-#     "--intersphinx=https://docs.python.org/3/objects.inv",
-# ]
 
 # -- Custom CSS for better styling -------------------------------------------
 

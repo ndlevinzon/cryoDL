@@ -14,6 +14,7 @@ A Python manager for cryo-EM software wrappers with interactive CLI and SLURM in
 
    installation
    quickstart
+   tutorial_1
    cli_commands
    api_reference
 
