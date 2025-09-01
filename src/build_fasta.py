@@ -3,7 +3,7 @@
 FASTA sequence builder for cryoDL.
 
 This module provides functionality to retrieve FASTA sequences from the RCSB PDB database
-and save them to indexed files for use in cryo-EM workflows.
+and UniProt database, and save them to indexed files for use in cryo-EM workflows.
 """
 
 import os
@@ -11,6 +11,7 @@ import sys
 import requests
 import time
 import json
+import re
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 import logging
@@ -20,13 +21,14 @@ logger = logging.getLogger(__name__)
 
 
 class FastaBuilder:
-    """Build FASTA files from PDB IDs by retrieving sequences from RCSB PDB.
+    """Build FASTA files from PDB IDs or UniProt IDs by retrieving sequences from RCSB PDB and UniProt.
 
-    This class provides methods to fetch FASTA sequences from the RCSB PDB database
+    This class provides methods to fetch FASTA sequences from the RCSB PDB database and UniProt database
     and save them to indexed files for use in cryo-EM software workflows.
 
     Attributes:
         rcsb_fasta_url (str): Base URL for RCSB PDB FASTA sequences
+        uniprot_fasta_url (str): Base URL for UniProt FASTA sequences
         timeout (int): Request timeout in seconds
         max_retries (int): Maximum number of retry attempts for failed requests
         retry_delay (float): Delay between retry attempts in seconds
@@ -48,6 +50,7 @@ class FastaBuilder:
             builder = FastaBuilder(timeout=60, max_retries=5)
         """
         self.rcsb_fasta_url = "https://www.rcsb.org/fasta/entry"
+        self.uniprot_fasta_url = "https://rest.uniprot.org/uniprotkb"
         self.timeout = timeout
         self.max_retries = max_retries
         self.retry_delay = retry_delay
@@ -75,11 +78,67 @@ class FastaBuilder:
         # PDB IDs should contain only alphanumeric characters
         return pdb_id.isalnum()
 
-    def fetch_fasta_sequence(self, pdb_id: str) -> Optional[str]:
-        """Fetch FASTA sequence for a PDB entry using direct FASTA URL.
+    def validate_uniprot_id(self, uniprot_id: str) -> bool:
+        """Validate a UniProt ID format.
+
+        UniProt IDs follow specific patterns:
+        - Entry names: 1-11 characters, alphanumeric and underscores
+        - Accession numbers: 6-10 characters, alphanumeric, format like A0A0A0 or P12345
 
         Args:
-            pdb_id (str): The PDB ID to fetch FASTA sequence for.
+            uniprot_id (str): The UniProt ID to validate.
+
+        Returns:
+            bool: True if the UniProt ID is valid, False otherwise.
+
+        Example:
+            builder.validate_uniprot_id("Q8N3Y1")
+            True
+            builder.validate_uniprot_id("P53_HUMAN")
+            True
+            builder.validate_uniprot_id("INVALID")
+            False
+        """
+        if not uniprot_id:
+            return False
+
+        # UniProt accession number pattern (6-10 alphanumeric characters)
+        accession_pattern = r'^[A-N,R-Z][0-9][A-Z][A-Z,0-9][A-Z,0-9][0-9]$|^[O,P,Q][0-9][A-Z,0-9][A-Z,0-9][A-Z,0-9][0-9]$|^[A-N,R-Z][0-9][A-Z][A-Z,0-9][A-Z,0-9][0-9][A-Z,0-9][A-Z,0-9][0-9]$|^[O,P,Q][0-9][A-Z,0-9][A-Z,0-9][A-Z,0-9][0-9][A-Z,0-9][A-Z,0-9][0-9]$'
+
+        # UniProt entry name pattern (1-11 characters, alphanumeric and underscores)
+        entry_pattern = r'^[A-Z0-9_]{1,11}$'
+
+        return bool(re.match(accession_pattern, uniprot_id) or re.match(entry_pattern, uniprot_id))
+
+    def get_id_type(self, identifier: str) -> str:
+        """Determine if an identifier is a PDB ID or UniProt ID.
+
+        Args:
+            identifier (str): The identifier to classify.
+
+        Returns:
+            str: 'pdb' if it's a PDB ID, 'uniprot' if it's a UniProt ID, 'unknown' otherwise.
+
+        Example:
+            builder.get_id_type("2BG9")
+            'pdb'
+            builder.get_id_type("Q8N3Y1")
+            'uniprot'
+            builder.get_id_type("INVALID")
+            'unknown'
+        """
+        if self.validate_pdb_id(identifier):
+            return 'pdb'
+        elif self.validate_uniprot_id(identifier):
+            return 'uniprot'
+        else:
+            return 'unknown'
+
+    def fetch_fasta_sequence(self, identifier: str) -> Optional[str]:
+        """Fetch FASTA sequence for a PDB entry or UniProt entry using direct FASTA URL.
+
+        Args:
+            identifier (str): The PDB ID or UniProt ID to fetch FASTA sequence for.
 
         Returns:
             Optional[str]: FASTA sequence string, or None if failed.
@@ -88,6 +147,28 @@ class FastaBuilder:
             sequence = builder.fetch_fasta_sequence("2BG9")
             if sequence:
                 print(sequence[:100])  # First 100 characters
+            sequence = builder.fetch_fasta_sequence("Q8N3Y1")
+            if sequence:
+                print(sequence[:100])  # First 100 characters
+        """
+        id_type = self.get_id_type(identifier)
+
+        if id_type == 'pdb':
+            return self._fetch_pdb_fasta_sequence(identifier)
+        elif id_type == 'uniprot':
+            return self._fetch_uniprot_fasta_sequence(identifier)
+        else:
+            logger.error(f"Invalid identifier format: {identifier}")
+            return None
+
+    def _fetch_pdb_fasta_sequence(self, pdb_id: str) -> Optional[str]:
+        """Fetch FASTA sequence for a PDB entry using direct FASTA URL.
+
+        Args:
+            pdb_id (str): The PDB ID to fetch FASTA sequence for.
+
+        Returns:
+            Optional[str]: FASTA sequence string, or None if failed.
         """
         if not self.validate_pdb_id(pdb_id):
             logger.error(f"Invalid PDB ID format: {pdb_id}")
@@ -104,12 +185,45 @@ class FastaBuilder:
                 return response.text
 
             except requests.exceptions.RequestException as e:
-                logger.warning(f"Attempt {attempt + 1} failed for {pdb_id}: {e}")
+                logger.warning(f"Attempt {attempt + 1} failed for PDB {pdb_id}: {e}")
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
                 else:
                     logger.error(
-                        f"Failed to fetch FASTA sequence for {pdb_id} after {self.max_retries} attempts"
+                        f"Failed to fetch FASTA sequence for PDB {pdb_id} after {self.max_retries} attempts"
+                    )
+                    return None
+
+    def _fetch_uniprot_fasta_sequence(self, uniprot_id: str) -> Optional[str]:
+        """Fetch FASTA sequence for a UniProt entry using REST API.
+
+        Args:
+            uniprot_id (str): The UniProt ID to fetch FASTA sequence for.
+
+        Returns:
+            Optional[str]: FASTA sequence string, or None if failed.
+        """
+        if not self.validate_uniprot_id(uniprot_id):
+            logger.error(f"Invalid UniProt ID format: {uniprot_id}")
+            return None
+
+        url = f"{self.uniprot_fasta_url}/{uniprot_id}.fasta"
+
+        for attempt in range(self.max_retries):
+            try:
+                response = requests.get(url, timeout=self.timeout)
+                response.raise_for_status()
+
+                # Return the FASTA content directly
+                return response.text
+
+            except requests.exceptions.RequestException as e:
+                logger.warning(f"Attempt {attempt + 1} failed for UniProt {uniprot_id}: {e}")
+                if attempt < self.max_retries - 1:
+                    time.sleep(self.retry_delay)
+                else:
+                    logger.error(
+                        f"Failed to fetch FASTA sequence for UniProt {uniprot_id} after {self.max_retries} attempts"
                     )
                     return None
 
@@ -137,7 +251,7 @@ class FastaBuilder:
             output_file = f"{pdb_id}_protein.fasta"
 
         # Fetch FASTA sequence
-        fasta_content = self.fetch_fasta_sequence(pdb_id)
+        fasta_content = self._fetch_pdb_fasta_sequence(pdb_id)
         if not fasta_content:
             return False, f"Failed to fetch FASTA sequence for PDB ID: {pdb_id}"
 
@@ -151,6 +265,72 @@ class FastaBuilder:
         except Exception as e:
             logger.error(f"Error writing FASTA file: {e}")
             return False, f"Error writing FASTA file: {e}"
+
+    def build_fasta_from_uniprot(
+            self, uniprot_id: str, output_file: str = None
+    ) -> Tuple[bool, str]:
+        """Build a FASTA file from a single UniProt ID.
+
+        Args:
+            uniprot_id (str): The UniProt ID to fetch sequences from.
+            output_file (str, optional): Output file path. If None, uses default naming.
+
+        Returns:
+            Tuple[bool, str]: (success, message) indicating operation result.
+
+        Example:
+            success, message = builder.build_fasta_from_uniprot("Q8N3Y1", "protein.fasta")
+            print(message)
+        """
+        if not self.validate_uniprot_id(uniprot_id):
+            return False, f"Invalid UniProt ID format: {uniprot_id}"
+
+        # Generate output filename if not provided
+        if output_file is None:
+            output_file = f"{uniprot_id}_protein.fasta"
+
+        # Fetch FASTA sequence
+        fasta_content = self._fetch_uniprot_fasta_sequence(uniprot_id)
+        if not fasta_content:
+            return False, f"Failed to fetch FASTA sequence for UniProt ID: {uniprot_id}"
+
+        try:
+            # Write FASTA content directly to file
+            with open(output_file, "w") as f:
+                f.write(fasta_content)
+
+            return True, f"Successfully created FASTA file: {output_file}"
+
+        except Exception as e:
+            logger.error(f"Error writing FASTA file: {e}")
+            return False, f"Error writing FASTA file: {e}"
+
+    def build_fasta_from_identifier(
+            self, identifier: str, output_file: str = None
+    ) -> Tuple[bool, str]:
+        """Build a FASTA file from a single identifier (PDB ID or UniProt ID).
+
+        Args:
+            identifier (str): The PDB ID or UniProt ID to fetch sequences from.
+            output_file (str, optional): Output file path. If None, uses default naming.
+
+        Returns:
+            Tuple[bool, str]: (success, message) indicating operation result.
+
+        Example:
+            success, message = builder.build_fasta_from_identifier("2BG9", "protein.fasta")
+            print(message)
+            success, message = builder.build_fasta_from_identifier("Q8N3Y1", "protein.fasta")
+            print(message)
+        """
+        id_type = self.get_id_type(identifier)
+
+        if id_type == 'pdb':
+            return self.build_fasta_from_pdb(identifier, output_file)
+        elif id_type == 'uniprot':
+            return self.build_fasta_from_uniprot(identifier, output_file)
+        else:
+            return False, f"Invalid identifier format: {identifier} (not a valid PDB ID or UniProt ID)"
 
     def build_fasta_from_multiple_pdbs(
             self, pdb_ids: List[str], output_file: str = "combined_protein.fasta"
@@ -186,7 +366,7 @@ class FastaBuilder:
                     logger.info(f"Processing PDB ID: {pdb_id}")
 
                     # Fetch FASTA sequence
-                    fasta_content = self.fetch_fasta_sequence(pdb_id)
+                    fasta_content = self._fetch_pdb_fasta_sequence(pdb_id)
                     if fasta_content:
                         # Write FASTA content to file
                         f.write(fasta_content)
@@ -211,23 +391,102 @@ class FastaBuilder:
             logger.error(f"Error writing combined FASTA file: {e}")
             return False, f"Error writing combined FASTA file: {e}"
 
+    def build_fasta_from_multiple_identifiers(
+            self, identifiers: List[str], output_file: str = "combined_protein.fasta"
+    ) -> Tuple[bool, str]:
+        """Build a FASTA file from multiple identifiers (PDB IDs and/or UniProt IDs).
+
+        Args:
+            identifiers (List[str]): List of PDB IDs and/or UniProt IDs to fetch sequences from.
+            output_file (str, optional): Output file path. Defaults to "combined_protein.fasta".
+
+        Returns:
+            Tuple[bool, str]: (success, message) indicating operation result.
+
+        Example:
+            id_list = ["2BG9", "Q8N3Y1", "1ABC", "P53_HUMAN"]
+            success, message = builder.build_fasta_from_multiple_identifiers(id_list, "my_proteins.fasta")
+            print(message)
+        """
+        if not identifiers:
+            return False, "No identifiers provided"
+
+        # Validate all identifiers
+        invalid_ids = []
+        pdb_ids = []
+        uniprot_ids = []
+
+        for identifier in identifiers:
+            id_type = self.get_id_type(identifier)
+            if id_type == 'pdb':
+                pdb_ids.append(identifier)
+            elif id_type == 'uniprot':
+                uniprot_ids.append(identifier)
+            else:
+                invalid_ids.append(identifier)
+
+        if invalid_ids:
+            return False, f"Invalid identifier(s): {', '.join(invalid_ids)}"
+
+        successful_ids = []
+        failed_ids = []
+
+        try:
+            with open(output_file, "w") as f:
+                # Process PDB IDs
+                for pdb_id in pdb_ids:
+                    logger.info(f"Processing PDB ID: {pdb_id}")
+                    fasta_content = self._fetch_pdb_fasta_sequence(pdb_id)
+                    if fasta_content:
+                        f.write(fasta_content)
+                        f.write("\n")  # Add separator between entries
+                        successful_ids.append(f"PDB:{pdb_id}")
+                    else:
+                        failed_ids.append(f"PDB:{pdb_id} (failed to fetch)")
+
+                # Process UniProt IDs
+                for uniprot_id in uniprot_ids:
+                    logger.info(f"Processing UniProt ID: {uniprot_id}")
+                    fasta_content = self._fetch_uniprot_fasta_sequence(uniprot_id)
+                    if fasta_content:
+                        f.write(fasta_content)
+                        f.write("\n")  # Add separator between entries
+                        successful_ids.append(f"UniProt:{uniprot_id}")
+                    else:
+                        failed_ids.append(f"UniProt:{uniprot_id} (failed to fetch)")
+
+            # Prepare result message
+            message_parts = [f"Successfully created FASTA file: {output_file}"]
+            if successful_ids:
+                message_parts.append(
+                    f"Successfully processed: {', '.join(successful_ids)}"
+                )
+            if failed_ids:
+                message_parts.append(f"Failed to process: {', '.join(failed_ids)}")
+
+            success = len(successful_ids) > 0
+            return success, " | ".join(message_parts)
+
+        except Exception as e:
+            logger.error(f"Error writing combined FASTA file: {e}")
+            return False, f"Error writing combined FASTA file: {e}"
+
     def create_annotated_sequence(
             self,
             cif_file: str,
             fasta_file: str,
-            output_file: str = "structure_sequence_alignment.csv"
+            output_file: str = "annotated_sequence.fasta"
     ) -> Tuple[bool, str]:
-        """Create a CSV file that aligns CIF structure chains to FASTA sequences with similarity metrics.
+        """Create an annotated FASTA file that aligns FASTA sequences to CIF subunits.
 
-        This function takes a protein structure .cif file and a FASTA file, then creates
-        a CSV file with three columns: "cif chain", "fasta sequence", "sequence similarity".
-        It performs a BLAST-like search to find the best matching FASTA sequence for each
-        CIF chain and calculates sequence similarity metrics.
+        This function takes a ModelAngelo output .cif file and a FASTA file, then creates
+        an annotated sequence file that maps the FASTA sequence names to the corresponding
+        subunits in the .cif file.
 
         Args:
-            cif_file (str): Path to the protein structure .cif file
+            cif_file (str): Path to the ModelAngelo output .cif file
             fasta_file (str): Path to the input FASTA file
-            output_file (str, optional): Output CSV file name. Defaults to "structure_sequence_alignment.csv".
+            output_file (str, optional): Output file name. Defaults to "annotated_sequence.fasta".
 
         Returns:
             Tuple[bool, str]: (success, message) where success is True if the operation
@@ -236,9 +495,9 @@ class FastaBuilder:
 
         Example:
             success, message = builder.create_annotated_sequence(
-                "protein_structure.cif",
-                "sequences.fasta",
-                "alignment_results.csv"
+                "modelangelo_output.cif",
+                "input_sequences.fasta",
+                "annotated_sequences.fasta"
             )
         """
         try:
@@ -249,23 +508,23 @@ class FastaBuilder:
             if not os.path.exists(fasta_file):
                 return False, f"Error: FASTA file not found: {fasta_file}"
 
-            # Read and parse the CIF file to extract chain sequences
-            cif_chains = self._parse_cif_chains(cif_file)
-            if not cif_chains:
-                return False, f"Error: Failed to parse CIF file or no chains found: {cif_file}"
+            # Read and parse the CIF file
+            cif_data = self._parse_cif_file(cif_file)
+            if not cif_data:
+                return False, f"Error: Failed to parse CIF file: {cif_file}"
 
             # Read and parse the FASTA file
             fasta_data = self._parse_fasta_file(fasta_file)
             if not fasta_data:
                 return False, f"Error: Failed to parse FASTA file: {fasta_file}"
 
-            # Create alignment results
-            alignment_results = self._create_chain_alignments(cif_chains, fasta_data)
+            # Create annotated sequences
+            annotated_sequences = self._create_annotations(cif_data, fasta_data)
 
-            # Write the alignment results to CSV file
-            self._write_alignment_csv(alignment_results, output_file)
+            # Write the annotated sequences to output file
+            self._write_annotated_sequences(annotated_sequences, output_file)
 
-            return True, f"Successfully created alignment CSV file: {output_file} with {len(alignment_results)} chain alignments"
+            return True, f"Successfully created annotated sequence file: {output_file}"
 
         except Exception as e:
             logger.error(f"Error creating annotated sequence: {str(e)}")
@@ -521,216 +780,6 @@ class FastaBuilder:
 
                 f.write('\n')  # Add blank line between sequences
 
-    def _parse_cif_chains(self, cif_file: str) -> Optional[Dict[str, str]]:
-        """Parse a CIF file and extract chain sequences.
-
-        Args:
-            cif_file (str): Path to the CIF file
-
-        Returns:
-            Optional[Dict[str, str]]: Dictionary mapping chain IDs to sequences, or None if failed
-        """
-        try:
-            chains = {}
-
-            with open(cif_file, 'r') as f:
-                lines = f.readlines()
-
-            # Amino acid three-letter to one-letter code mapping
-            aa_mapping = {
-                'ALA': 'A', 'ARG': 'R', 'ASN': 'N', 'ASP': 'D', 'CYS': 'C',
-                'GLN': 'Q', 'GLU': 'E', 'GLY': 'G', 'HIS': 'H', 'ILE': 'I',
-                'LEU': 'L', 'LYS': 'K', 'MET': 'M', 'PHE': 'F', 'PRO': 'P',
-                'SER': 'S', 'THR': 'T', 'TRP': 'W', 'TYR': 'Y', 'VAL': 'V',
-                'SEC': 'U', 'PYL': 'O'  # Selenocysteine and Pyrrolysine
-            }
-
-            # Parse atom_site section to extract chain sequences
-            in_atom_site = False
-            chain_residues = {}  # chain_id -> {res_id -> res_name}
-
-            # Track column positions for the atom_site data
-            chain_col = None
-            res_id_col = None
-            res_name_col = None
-
-            for line in lines:
-                line = line.strip()
-
-                # Skip empty lines and comments
-                if not line or line.startswith('#'):
-                    continue
-
-                # Check for atom_site section headers to determine column positions
-                if line.startswith('_atom_site.label_asym_id'):
-                    chain_col = 6  # 7th column (0-indexed)
-                elif line.startswith('_atom_site.label_seq_id'):
-                    res_id_col = 8  # 9th column (0-indexed)
-                elif line.startswith('_atom_site.label_comp_id'):
-                    res_name_col = 5  # 6th column (0-indexed)
-                elif line.startswith('_atom_site.'):
-                    # Still in atom_site section, continue
-                    continue
-                elif line.startswith('_') and not line.startswith('_atom_site.'):
-                    # End of atom_site section
-                    in_atom_site = False
-                    continue
-                elif line.startswith('loop_'):
-                    # Start of a loop section
-                    in_atom_site = False
-                    continue
-                elif line.startswith('data_'):
-                    # Data block start
-                    in_atom_site = False
-                    continue
-
-                # Check if we're in the atom_site data section
-                if not in_atom_site and (chain_col is not None or res_id_col is not None or res_name_col is not None):
-                    # We've seen atom_site headers, so we're in the data section
-                    in_atom_site = True
-
-                if in_atom_site and line and not line.startswith('_') and not line.startswith('loop_'):
-                    # Parse atom_site data line
-                    parts = line.split()
-                    if len(parts) >= 9:  # Should have at least 9 columns
-                        try:
-                            # Extract chain_id, res_id, and res_name using the correct column positions
-                            chain_id = parts[chain_col] if chain_col is not None and chain_col < len(parts) else parts[
-                                6]
-                            res_id = parts[res_id_col] if res_id_col is not None and res_id_col < len(parts) else parts[
-                                8]
-                            res_name = parts[res_name_col] if res_name_col is not None and res_name_col < len(
-                                parts) else parts[5]
-
-                            # Only process protein residues
-                            if res_name in aa_mapping:
-                                if chain_id not in chain_residues:
-                                    chain_residues[chain_id] = {}
-                                chain_residues[chain_id][res_id] = res_name
-                        except (IndexError, ValueError):
-                            continue
-
-            # Convert chain_residues to sequences
-            for chain_id, residues in chain_residues.items():
-                # Sort residues by residue ID (convert to int for proper sorting)
-                sorted_residues = sorted(residues.items(), key=lambda x: int(x[0]) if x[0].isdigit() else float('inf'))
-
-                sequence = []
-                for res_id, res_name in sorted_residues:
-                    sequence.append(aa_mapping[res_name])
-
-                if sequence:  # Only add chains with valid sequences
-                    chains[chain_id] = ''.join(sequence)
-
-            return chains if chains else None
-
-        except Exception as e:
-            logger.error(f"Error parsing CIF chains: {str(e)}")
-            return None
-
-    def _create_chain_alignments(self, cif_chains: Dict[str, str], fasta_data: Dict[str, str]) -> List[Dict]:
-        """Create alignments between CIF chains and FASTA sequences with similarity metrics.
-
-        Args:
-            cif_chains (Dict[str, str]): Dictionary mapping chain IDs to sequences
-            fasta_data (Dict[str, str]): Dictionary mapping FASTA headers to sequences
-
-        Returns:
-            List[Dict]: List of alignment results with chain, sequence, and similarity info
-        """
-        alignment_results = []
-
-        for chain_id, chain_sequence in cif_chains.items():
-            best_match = None
-            best_similarity = 0.0
-
-            # Find the best matching FASTA sequence for this chain
-            for fasta_header, fasta_sequence in fasta_data.items():
-                similarity = self._calculate_sequence_similarity(chain_sequence, fasta_sequence)
-
-                if similarity > best_similarity:
-                    best_similarity = similarity
-                    best_match = fasta_header
-
-            # Add result to alignment_results
-            alignment_results.append({
-                'cif_chain': chain_id,
-                'fasta_sequence': best_match if best_match else "No match found",
-                'sequence_similarity': f"{best_similarity:.4f}" if best_match else "0.0000"
-            })
-
-        return alignment_results
-
-    def _calculate_sequence_similarity(self, seq1: str, seq2: str) -> float:
-        """Calculate sequence similarity between two sequences using local alignment.
-
-        Args:
-            seq1 (str): First sequence
-            seq2 (str): Second sequence
-
-        Returns:
-            float: Similarity score between 0.0 and 1.0
-        """
-        if not seq1 or not seq2:
-            return 0.0
-
-        # Use a simple local alignment algorithm (similar to BLAST)
-        # This is a simplified version - for production use, consider using BioPython's BLAST
-
-        # Find the longest common substring as a proxy for local alignment
-        def longest_common_substring(s1, s2):
-            m = [[0] * (1 + len(s2)) for _ in range(1 + len(s1))]
-            longest = 0
-            for x in range(len(s1)):
-                for y in range(len(s2)):
-                    if s1[x] == s2[y]:
-                        m[x + 1][y + 1] = m[x][y] + 1
-                        longest = max(longest, m[x + 1][y + 1])
-            return longest
-
-        # Calculate similarity using multiple metrics
-        lcs_length = longest_common_substring(seq1, seq2)
-
-        # Calculate identity (exact matches)
-        min_len = min(len(seq1), len(seq2))
-        if min_len == 0:
-            return 0.0
-
-        # Count exact matches
-        exact_matches = sum(1 for a, b in zip(seq1, seq2) if a == b)
-        identity = exact_matches / min_len
-
-        # Calculate coverage (how much of the shorter sequence is covered by the longer one)
-        coverage = lcs_length / min_len
-
-        # Combine metrics (weighted average)
-        similarity = (0.6 * identity + 0.4 * coverage)
-
-        return min(similarity, 1.0)  # Ensure it doesn't exceed 1.0
-
-    def _write_alignment_csv(self, alignment_results: List[Dict], output_file: str):
-        """Write alignment results to CSV file.
-
-        Args:
-            alignment_results (List[Dict]): List of alignment results
-            output_file (str): Output CSV file path
-        """
-        import csv
-
-        with open(output_file, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-
-            # Write header
-            writer.writerow(['cif_chain', 'fasta_sequence', 'sequence_similarity'])
-
-            # Write data rows
-            for result in alignment_results:
-                writer.writerow([
-                    result['cif_chain'],
-                    result['fasta_sequence'],
-                    result['sequence_similarity']
-                ])
-
 
 def main():
     """Main function for command-line usage."""
@@ -761,7 +810,7 @@ def main():
 
     if args.multiple or len(args.pdb_ids) > 1:
         success, message = builder.build_fasta_from_multiple_pdbs(
-            args.pdb_ids, args.output or "combined_protein.fasta"
+            args.pdb_ids, args.output
         )
     else:
         success, message = builder.build_fasta_from_pdb(

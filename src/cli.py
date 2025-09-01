@@ -712,28 +712,29 @@ All interactions are logged to cryodl.log in the current directory.
             self.log_error(error_msg)
 
     def do_fasta(self, arg):
-        """Build FASTA files from PDB IDs using RCSB PDB.
+        """Build FASTA files from PDB IDs or UniProt IDs using RCSB PDB and UniProt.
 
-        Retrieves FASTA sequences from the RCSB PDB database and saves them to files
-        for use in cryo-EM workflows. Supports single and multiple PDB IDs, and
+        Retrieves FASTA sequences from the RCSB PDB database and UniProt database and saves them to files
+        for use in cryo-EM workflows. Supports single and multiple identifiers (PDB IDs and/or UniProt IDs), and
         creating annotated sequences from ModelAngelo CIF output.
 
         Args:
-            arg (str): PDB ID(s) and options. Can include:
-                pdb_id: Single PDB ID (e.g., "1ABC")
-                --multiple: Process multiple PDB IDs
+            arg (str): Identifier(s) and options. Can include:
+                identifier: Single PDB ID (e.g., "1ABC") or UniProt ID (e.g., "Q8N3Y1")
+                --multiple: Process multiple identifiers (PDB IDs and/or UniProt IDs)
                 --annotate: Create annotated sequences from CIF and FASTA files
                 --output filename: Specify output filename
 
         Usage:
-            fasta <pdb_id> [--output filename]
-            fasta --multiple <pdb_id1> <pdb_id2> ... [--output filename]
+            fasta <identifier> [--output filename]
+            fasta --multiple <id1> <id2> ... [--output filename]
             fasta --annotate <cif_file> <fasta_file> [--output filename]
 
         Example:
-            fasta 1ABC
+            fasta 1ABC                    # PDB ID
+            fasta Q8N3Y1                  # UniProt ID
             fasta 1ABC --output my_protein.fasta
-            fasta --multiple 1ABC 2DEF 3GHI --output combined.fasta
+            fasta --multiple 1ABC Q8N3Y1 P53_HUMAN --output combined.fasta
             fasta --annotate model.cif protein.fasta --output annotations.csv
         """
         self.log_command("fasta", arg)
@@ -751,15 +752,20 @@ All interactions are logged to cryodl.log in the current directory.
             # Parse arguments
             args = arg.split()
             if not args:
-                print("FASTA command - Build FASTA files from PDB IDs using RCSB PDB")
+                print("FASTA command - Build FASTA files from PDB IDs or UniProt IDs using RCSB PDB and UniProt")
                 print()
                 print("Usage:")
-                print("  fasta <pdb_id> [--output filename]")
-                print("  fasta --multiple <pdb_id1> <pdb_id2> ... [--output filename]")
+                print("  fasta <identifier> [--output filename]")
+                print("  fasta --multiple <id1> <id2> ... [--output filename]")
                 print("  fasta --annotate <cif_file> <fasta_file> [--output filename]")
                 print()
+                print("Examples:")
+                print("  fasta 1ABC                    # PDB ID")
+                print("  fasta Q8N3Y1                  # UniProt ID")
+                print("  fasta --multiple 1ABC Q8N3Y1  # Mixed PDB and UniProt IDs")
+                print()
                 print("Use 'fasta --help' for detailed information")
-                self.log_error("Missing PDB ID argument")
+                self.log_error("Missing identifier argument")
                 return
 
             # Check for help first
@@ -800,12 +806,12 @@ All interactions are logged to cryodl.log in the current directory.
 
             elif args[0] == "--multiple":
                 if len(args) < 2:
-                    print("Error: At least one PDB ID required for --multiple option")
-                    self.log_error("Missing PDB IDs for --multiple option")
+                    print("Error: At least one identifier required for --multiple option")
+                    self.log_error("Missing identifiers for --multiple option")
                     return
 
-                # Extract PDB IDs and output file
-                pdb_ids = []
+                # Extract identifiers and output file
+                identifiers = []
                 output_file = "combined_protein.fasta"
 
                 i = 1
@@ -814,20 +820,20 @@ All interactions are logged to cryodl.log in the current directory.
                         output_file = args[i + 1]
                         i += 2
                     else:
-                        pdb_ids.append(args[i].upper())
+                        identifiers.append(args[i].upper())
                         i += 1
 
-                if not pdb_ids:
-                    print("Error: No PDB IDs provided")
-                    self.log_error("No PDB IDs provided for --multiple option")
+                if not identifiers:
+                    print("Error: No identifiers provided")
+                    self.log_error("No identifiers provided for --multiple option")
                     return
 
-                print(f"Processing multiple PDB IDs: {', '.join(pdb_ids)}")
+                print(f"Processing multiple identifiers: {', '.join(identifiers)}")
                 print(f"Output file: {output_file}")
 
                 builder = FastaBuilder()
-                success, message = builder.build_fasta_from_multiple_pdbs(
-                    pdb_ids, output_file
+                success, message = builder.build_fasta_from_multiple_identifiers(
+                    identifiers, output_file
                 )
 
                 if success:
@@ -840,19 +846,29 @@ All interactions are logged to cryodl.log in the current directory.
                 return
 
             else:
-                # Single PDB ID mode
-                pdb_id = args[0].upper()
-                output_file = f"{pdb_id}_protein.fasta"
+                # Single identifier mode (PDB ID or UniProt ID)
+                identifier = args[0].upper()
+                output_file = f"{identifier}_protein.fasta"
 
                 # Check for output file option
                 if len(args) >= 3 and args[1] == "--output":
                     output_file = args[2]
 
-                print(f"Fetching FASTA sequence for PDB ID: {pdb_id}")
+                # Determine ID type for better messaging
+                builder = FastaBuilder()
+                id_type = builder.get_id_type(identifier)
+
+                if id_type == 'pdb':
+                    print(f"Fetching FASTA sequence for PDB ID: {identifier}")
+                elif id_type == 'uniprot':
+                    print(f"Fetching FASTA sequence for UniProt ID: {identifier}")
+                else:
+                    print(f"Warning: Unknown identifier format: {identifier}")
+                    print("Attempting to process anyway...")
+
                 print(f"Output file: {output_file}")
 
-                builder = FastaBuilder()
-                success, message = builder.build_fasta_from_pdb(pdb_id, output_file)
+                success, message = builder.build_fasta_from_identifier(identifier, output_file)
 
                 if success:
                     print(message)
