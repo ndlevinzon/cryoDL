@@ -969,7 +969,7 @@ All interactions are logged to cryodl.log in the current directory.
             output_dir = f"model_angelo_output_{mrc_stem}"
 
             # Build ModelAngelo command
-            model_angelo_cmd = f"{model_angelo_path} -v {mrc_file} -pf {fasta_file} -o {output_dir} --device 0"
+            model_angelo_cmd = f"{model_angelo_path} build -v {mrc_file} -pf {fasta_file} -o {output_dir} --device 0"
 
             if is_local:
                 # Run locally

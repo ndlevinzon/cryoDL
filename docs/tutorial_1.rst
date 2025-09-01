@@ -67,17 +67,40 @@ Once you have your FASTA file ready, you can run Model-Angelo to build models fr
 .. code-block:: text
 
     cryoDL> model-angelo
-    INFO:cryodl_interactive:Command: fasta --multiple 4B2T Q8N3Y1
-    Processing multiple identifiers: 4B2T, Q8N3Y1
-    Output file: combined_protein.fasta
-    INFO:src.build_fasta:Processing PDB ID: 4B2T
-    INFO:src.build_fasta:Processing UniProt ID: Q8N3Y1
-    Successfully created FASTA file: combined_protein.fasta | Successfully processed: PDB:4B2T, UniProt:Q8N3Y1
-    INFO:cryodl_interactive:Output: Successfully created FASTA file: combined_protein.fasta
+    INFO:cryodl_interactive:Command: model_angelo
+    ModelAngelo Setup:
+    --------------------
+    Enter path to .mrc file: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/cryosparc_P195_J59_004_volume_map.mrc
+    Enter path to protein FASTA file: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/combined_protein.fasta
+
+    Job Summary:
+        Job Name: model_angelo_cryosparc_P195_J59_004_volume_map
+        MRC File: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/cryosparc_P195_J59_004_volume_map.mrc
+        FASTA File: /scratch/general/vast/u1116818/fbox/P195_J59_004/r3/combined_protein.fasta
+        Output Directory: model_angelo_output_cryosparc_P195_J59_004_volume_map
+        SLURM Script: model_angelo_cryosparc_P195_J59_004_volume_map.slurm
+        Time Limit: 06:00:00
+        Nodes: 1
+        CPUs per Task: 4
+        Memory: 96G
+        GPUs: 1
+        Partition: notchpeak-gpu
+
+        Submit this job to SLURM? (Y/N):
 
 **What these do:**
 
-Explain the purpose of each command.
+After inputting the required information, cryoDL summarizes the job details, including the paths to the MRC file and FASTA file, output directory, SLURM script name, and resource allocations. You can change any of these parameters in the configuration file if needed.
+You will be prompted to confirm submission to SLURM. You can also choose not to submit the job immediately by entering 'N', in which case the SLURM script will be saved for later submission, or run model-angelo locally with the --local flag (not recommended, as you will likely need more memory than is available by default).
+
+**Using the cryoDL command line:**
+.. code-block:: text
+Submit this job to SLURM? (Y/N): y
+ModelAngelo job submitted successfully. Job ID: 5976006
+INFO:cryodl_interactive:Output: ModelAngelo job submitted successfully. Job ID: 5976006
+SLURM script saved as: model_angelo_cryosparc_P195_J59_004_volume_map.slurm
+Job output will be in: model_angelo_cryosparc_P195_J59_004_volume_map_<job_id>.out
+Job errors will be in: model_angelo_cryosparc_P195_J59_004_volume_map_<job_id>.err
 
 **Expected results:**
 
