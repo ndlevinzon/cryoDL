@@ -120,7 +120,7 @@ class ConfigManager:
             return {
                 "name": "cryoDL",
                 "version": "0.3.0",
-                "description": "Python wrapper for cryo-EM software",
+                "description": "Python Wrapper for Cryo-EM Deep Learning Software Packages",
             }
 
         try:
@@ -133,7 +133,7 @@ class ConfigManager:
                 "name": project_data.get("name", "cryoDL"),
                 "version": project_data.get("version", "0.3.0"),
                 "description": project_data.get(
-                    "description", "Python wrapper for cryo-EM software"
+                    "description", "Python Wrapper for Cryo-EM Deep Learning Software Packages"
                 ),
             }
 

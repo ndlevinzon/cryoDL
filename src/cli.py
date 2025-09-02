@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Interactive CLI shell for cryoDL configuration manager.
+Interactive CLI shell for cryoDL - Python Wrapper for Cryo-EM Deep Learning Software Packages
 """
 
 import argparse
@@ -91,13 +91,13 @@ All interactions are logged to {self.log_file} in the current directory.
 """
             else:
                 return """
-=== cryoDL Interactive Configuration Manager ===
+=== cryoDL Interactive ===
 Type 'help' for available commands, 'quit' to exit.
 All interactions are logged to cryodl.log in the current directory.
 """
         except Exception:
             return """
-=== cryoDL Interactive Configuration Manager ===
+=== cryoDL Interactive ===
 Type 'help' for available commands, 'quit' to exit.
 All interactions are logged to cryodl.log in the current directory.
 """
