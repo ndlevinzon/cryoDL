@@ -19,14 +19,14 @@ Getting Started
 
    .. code-block:: bash
 
-      cryodl
+      $ cryodl
 
    You should see the cryoDL banner and interactive prompt:
 
    .. code-block:: text
 
       ===========================================
-      === cryoDL Interactive Configuration Manager ===
+      === cryoDL Interactive ===
       ===========================================
 
       Type 'help' for available commands, 'quit' to exit.
@@ -95,6 +95,56 @@ File Operations
    # Clear screen
    cryoDL> clear
 
+FASTA Sequence Management
+------------------------
+
+Build FASTA files from PDB IDs:
+
+.. code-block:: bash
+
+   # Single PDB ID
+   cryoDL> fasta 2BG9
+
+   # Multiple PDB IDs
+   cryoDL> fasta --multiple 2BG9 4B2T 1ABC
+
+   # With custom output filename
+   cryoDL> fasta 2BG9 --output my_protein.fasta
+
+Create structure-sequence alignments:
+
+.. code-block:: bash
+
+   # Align CIF structure chains to FASTA sequences
+   cryoDL> fasta --annotate structure.cif sequences.fasta
+
+   # With custom output filename
+   cryoDL> fasta --annotate structure.cif sequences.fasta --output alignment.csv
+
+   # This generates a CSV file with:
+   # - CIF chain IDs
+   # - Best matching FASTA sequence headers
+   # - Sequence similarity scores
+
+Working with ModelAngelo
+-----------------------
+
+Run ModelAngelo locally:
+
+.. code-block:: bash
+
+   cryoDL> model_angelo --local
+
+   # Follow prompts for:
+   # - MRC file path
+   # - FASTA file path
+
+Submit to SLURM:
+
+.. code-block:: bash
+
+   cryoDL> model_angelo
+
 Working with Topaz
 -----------------
 
@@ -137,25 +187,6 @@ Run cross-validation with automatic analysis:
    # 4. Run cross-validation training
    # 5. Automatically analyze results
 
-Working with ModelAngelo
------------------------
-
-Run ModelAngelo locally:
-
-.. code-block:: bash
-
-   cryoDL> model_angelo --local
-
-   # Follow prompts for:
-   # - MRC file path
-   # - FASTA file path
-
-Submit to SLURM:
-
-.. code-block:: bash
-
-   cryoDL> model_angelo
-
 Analysis
 --------
 
@@ -169,37 +200,6 @@ Analyze existing cross-validation results:
    # - Performance plots
    # - Analysis summaries
    # - Recommendations
-
-FASTA Sequence Management
-------------------------
-
-Build FASTA files from PDB IDs:
-
-.. code-block:: bash
-
-   # Single PDB ID
-   cryoDL> fasta 2BG9
-
-   # Multiple PDB IDs
-   cryoDL> fasta --multiple 2BG9 4B2T 1ABC
-
-   # With custom output filename
-   cryoDL> fasta 2BG9 --output my_protein.fasta
-
-Create structure-sequence alignments:
-
-.. code-block:: bash
-
-   # Align CIF structure chains to FASTA sequences
-   cryoDL> fasta --annotate structure.cif sequences.fasta
-
-   # With custom output filename
-   cryoDL> fasta --annotate structure.cif sequences.fasta --output alignment.csv
-
-   # This generates a CSV file with:
-   # - CIF chain IDs
-   # - Best matching FASTA sequence headers
-   # - Sequence similarity scores
 
 SLURM Integration
 ----------------
