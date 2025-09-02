@@ -119,7 +119,7 @@ class ConfigManager:
             self.logger.warning(f"pyproject.toml not found at {pyproject_path}")
             return {
                 "name": "cryoDL",
-                "version": "0.1.0",
+                "version": "0.3.0",
                 "description": "Python wrapper for cryo-EM software",
             }
 
@@ -131,7 +131,7 @@ class ConfigManager:
 
             metadata = {
                 "name": project_data.get("name", "cryoDL"),
-                "version": project_data.get("version", "0.1.0"),
+                "version": project_data.get("version", "0.3.0"),
                 "description": project_data.get(
                     "description", "Python wrapper for cryo-EM software"
                 ),
@@ -144,7 +144,7 @@ class ConfigManager:
             self.logger.error(f"Error reading pyproject.toml: {e}")
             return {
                 "name": "cryoDL",
-                "version": "0.1.0",
+                "version": "0.3.0",
                 "description": "Python wrapper for cryo-EM software",
             }
 
