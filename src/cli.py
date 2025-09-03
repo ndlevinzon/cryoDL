@@ -1425,8 +1425,7 @@ echo "ModelAngelo job completed"
             elif command == "denoise":
                 self._run_topaz_denoise(topaz_path, is_local)
             elif command == "model":
-                print("Topaz model command not yet implemented")
-                self.log_output("Topaz model command not yet implemented")
+                self._run_topaz_model(topaz_path, is_local)
             elif command == "postprocess":
                 print("Topaz postprocess command not yet implemented")
                 self.log_output("Topaz postprocess command not yet implemented")
@@ -1899,6 +1898,278 @@ visualize_denoising_results(
 
         except Exception as e:
             error_msg = f"Error in topaz denoise: {e}"
+            print(error_msg, file=sys.stderr)
+            self.log_error(error_msg)
+
+    def _run_topaz_model(self, topaz_path, is_local):
+        """Run Topaz model training command.
+
+        Executes the Topaz model training workflow to train particle picking models.
+        Can run locally or generate SLURM scripts.
+
+        Args:
+            topaz_path (str): Path to the Topaz executable.
+            is_local (bool): If True, run locally; if False, submit to SLURM.
+
+        Example:
+            shell._run_topaz_model('/usr/local/bin/topaz', True)
+        """
+        try:
+            print("Topaz Model Training Setup:")
+            print("-" * 25)
+
+            # Prompt for input parameters
+            proc_micrographs = input("Enter path to preprocessed micrographs directory: ").strip()
+            if not proc_micrographs:
+                error_msg = "Preprocessed micrographs directory path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Validate micrographs directory exists
+            micrographs_path = Path(proc_micrographs)
+            if not micrographs_path.exists():
+                error_msg = f"Preprocessed micrographs directory not found: {proc_micrographs}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Get particle coordinates file
+            particles_file = input("Enter path to particle coordinates file: ").strip()
+            if not particles_file:
+                error_msg = "Particle coordinates file path is required"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Validate particles file exists
+            particles_path = Path(particles_file)
+            if not particles_path.exists():
+                error_msg = f"Particle coordinates file not found: {particles_file}"
+                print(error_msg, file=sys.stderr)
+                self.log_error(error_msg)
+                return
+
+            # Get output directory
+            output_dir = input(
+                "Enter output directory name (default: topaz_model_output): "
+            ).strip()
+            if not output_dir:
+                output_dir = "topaz_model_output"
+
+            # Get project name for organization
+            project_name = input(
+                "Enter project name (e.g., EMPIAR-10025, default: project): "
+            ).strip()
+            if not project_name:
+                project_name = "project"
+
+            # Get number of particles (N parameter)
+            n_particles = input(
+                "Enter number of particles (N) for training (default: 400): "
+            ).strip()
+            if not n_particles:
+                n_particles = "400"
+            else:
+                try:
+                    int(n_particles)  # Validate it's a number
+                except ValueError:
+                    error_msg = "Number of particles must be a number"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Get batch size
+            batch_size = input(
+                "Enter batch size for training (default: 32): "
+            ).strip()
+            if not batch_size:
+                batch_size = "32"
+            else:
+                try:
+                    int(batch_size)  # Validate it's a number
+                except ValueError:
+                    error_msg = "Batch size must be a number"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+                    return
+
+            # Create output directories
+            model_root = Path(output_dir)
+            model_dir = model_root / "saved_models"
+            data_dir = model_root / "data" / project_name / "topaz"
+
+            if is_local:
+                # Run locally
+                print(f"\nRunning Topaz model training locally:")
+                print(f"Input micrographs: {proc_micrographs}")
+                print(f"Input particles: {particles_file}")
+                print(f"Output directory: {output_dir}")
+                print(f"Project name: {project_name}")
+                print(f"N particles: {n_particles}")
+                print(f"Batch size: {batch_size}")
+
+                # Create directories
+                model_dir.mkdir(parents=True, exist_ok=True)
+                data_dir.mkdir(parents=True, exist_ok=True)
+
+                # Build Topaz train command
+                train_cmd = f"{topaz_path} train -n {n_particles} --num-workers=4 --batch-size {batch_size} --train-images {proc_micrographs} --train-targets {particles_file} --save-prefix {model_dir}/model -o {model_dir}/model_training.txt"
+
+                print(f"Training command: {train_cmd}")
+
+                # Execute training command
+                import subprocess
+
+                try:
+                    result = subprocess.run(
+                        train_cmd, shell=True, capture_output=True, text=True
+                    )
+                    if result.returncode == 0:
+                        success_msg = f"Topaz model training completed successfully. Output in: {model_dir}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                    else:
+                        error_msg = f"Topaz model training failed with return code {result.returncode}"
+                        print(error_msg, file=sys.stderr)
+                        print(f"Error output: {result.stderr}", file=sys.stderr)
+                        self.log_error(error_msg)
+
+                except Exception as e:
+                    error_msg = f"Error running Topaz model training: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+            else:
+                # Generate and submit SLURM job
+                job_name = "topaz_model"
+
+                # Create SLURM script content
+                slurm_script = f"""#!/bin/bash
+#SBATCH --job-name={job_name}
+#SBATCH --nodes={self.config_manager.get('slurm.nodes', 1)}
+#SBATCH --ntasks={self.config_manager.get('slurm.ntasks', 1)}
+#SBATCH --cpus-per-task={self.config_manager.get('slurm.cpus_per_task', 4)}
+#SBATCH --gres=gpu:{self.config_manager.get('slurm.gres_gpu', 1)}
+#SBATCH --time={self.config_manager.get('slurm.time', '06:00:00')}
+#SBATCH --partition={self.config_manager.get('slurm.partition', 'notchpeak-gpu')}
+#SBATCH --qos={self.config_manager.get('slurm.qos', 'notchpeak-gpu')}
+#SBATCH --account={self.config_manager.get('slurm.account', 'notchpeak-gpu')}
+#SBATCH --mem={self.config_manager.get('slurm.mem', '96G')}
+#SBATCH -o {self.config_manager.get('slurm.output', 'slurm-%j.out-%N')}
+#SBATCH -e {self.config_manager.get('slurm.error', 'slurm-%j.err-%N')}
+
+set -euo pipefail
+set -x
+
+module purge
+module load topaz/0.2.5
+
+# Be explicit about threads to avoid oversubscription
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+# CUDA_VISIBLE_DEVICES is set by Slurm; don't hardcode device IDs in commands.
+
+cd "${{SLURM_SUBMIT_DIR}}"
+echo "WORKDIR: ${{SLURM_SUBMIT_DIR}}"
+nvidia-smi || true
+
+# Create directories
+mkdir -p "{model_dir}"
+mkdir -p "{data_dir}"
+
+# Paths
+PROC_MICROS="{proc_micrographs}"
+PROC_ROOT="{output_dir}"
+MODEL_DIR="{model_dir}"
+PROJECT_NAME="{project_name}"
+
+######## Train model
+# --num-workers should match --cpus-per-task
+# Consider setting --batch-size based on GPU memory; default may be conservative.
+srun -u {topaz_path} train \\
+  -n {n_particles} \\
+  --num-workers="${{SLURM_CPUS_PER_TASK}}" \\
+  --batch-size {batch_size} \\
+  --train-images "${{PROC_MICROS}}" \\
+  --train-targets "{particles_file}" \\
+  --save-prefix="${{MODEL_DIR}}/model" \\
+  -o "${{MODEL_DIR}}/model_training.txt"
+
+## make a directory to write the topaz particles to
+mkdir -p data/${{PROJECT_NAME}}/topaz
+
+echo "Topaz model training job completed"
+"""
+
+                # Write SLURM script to file
+                slurm_script_path = f"{job_name}.slurm"
+                with open(slurm_script_path, "w") as f:
+                    f.write(slurm_script)
+
+                # Show job summary and ask for confirmation
+                print(f"\nJob Summary:")
+                print(f"  Job Name: {job_name}")
+                print(f"  Input Micrographs: {proc_micrographs}")
+                print(f"  Input Particles: {particles_file}")
+                print(f"  Output Directory: {output_dir}")
+                print(f"  Project Name: {project_name}")
+                print(f"  N Particles: {n_particles}")
+                print(f"  Batch Size: {batch_size}")
+                print(f"  SLURM Script: {slurm_script_path}")
+                print(f"  Time Limit: {self.config_manager.get('slurm.time', '06:00:00')}")
+                print(f"  Nodes: {self.config_manager.get('slurm.nodes', 1)}")
+                print(f"  CPUs per Task: {self.config_manager.get('slurm.cpus_per_task', 4)}")
+                print(f"  Memory: {self.config_manager.get('slurm.mem', '96G')}")
+                print(f"  GPUs: {self.config_manager.get('slurm.gres_gpu', 1)}")
+                print(f"  Partition: {self.config_manager.get('slurm.partition', 'notchpeak-gpu')}")
+
+                # Ask for confirmation
+                while True:
+                    confirm = (
+                        input("\nSubmit this job to SLURM? (Y/N): ").strip().upper()
+                    )
+                    if confirm in ["Y", "YES", "y", "yes"]:
+                        break
+                    elif confirm in ["N", "NO", "n", "no"]:
+                        print("Job submission cancelled.")
+                        self.log_output("Job submission cancelled by user")
+                        return
+                    else:
+                        print("Please enter Y or N.")
+
+                # Submit job
+                try:
+                    import subprocess
+
+                    result = subprocess.run(
+                        f"sbatch {slurm_script_path}",
+                        shell=True,
+                        capture_output=True,
+                        text=True,
+                    )
+
+                    if result.returncode == 0:
+                        job_id = result.stdout.strip().split()[
+                            -1
+                        ]  # Extract job ID from sbatch output
+                        success_msg = f"Topaz model training job submitted successfully. Job ID: {job_id}"
+                        print(success_msg)
+                        self.log_output(success_msg)
+                        print(f"SLURM script saved as: {slurm_script_path}")
+                        print(f"Job output will be in: slurm-<job_id>.out-<node>")
+                        print(f"Job errors will be in: slurm-<job_id>.err-<node>")
+                    else:
+                        error_msg = f"Failed to submit SLURM job: {result.stderr}"
+                        print(error_msg, file=sys.stderr)
+                        self.log_error(error_msg)
+                except Exception as e:
+                    error_msg = f"Error submitting SLURM job: {e}"
+                    print(error_msg, file=sys.stderr)
+                    self.log_error(error_msg)
+
+        except Exception as e:
+            error_msg = f"Error in topaz model training: {e}"
             print(error_msg, file=sys.stderr)
             self.log_error(error_msg)
 
